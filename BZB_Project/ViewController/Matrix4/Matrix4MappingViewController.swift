@@ -16,6 +16,8 @@ import PopupDialog
 class Matrix4MappingViewController: UIViewController{
     
     @IBOutlet weak var btRecall: UIButton!
+    @IBOutlet weak var btRefresh: UIButton!
+    @IBOutlet weak var btSave: UIButton!
     
     override func viewDidLoad() {
         print("Matrix4MappingViewController-viewDidLoad")

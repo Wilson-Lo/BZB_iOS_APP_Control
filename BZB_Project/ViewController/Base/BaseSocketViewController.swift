@@ -8,12 +8,10 @@
 
 import UIKit
 
-class BaseSocketViewController: UIViewController{
-    
-
+class BaseSocketViewController: BaseViewController{
 
     override func viewDidLoad() {
-       
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,7 +23,5 @@ class BaseSocketViewController: UIViewController{
         
             
     }
-    
-    
-    
+
 }

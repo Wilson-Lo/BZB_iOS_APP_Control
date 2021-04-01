@@ -10,7 +10,6 @@
 		4C333802F0B3016EDB7B500E /* Pods_BZB_ProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C11C67C002452FA5D730B6 /* Pods_BZB_ProjectTests.framework */; };
 		86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2D261468BE007FE620 /* AppDelegate.swift */; };
 		86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2F261468BE007FE620 /* SceneDelegate.swift */; };
-		86320E32261468BE007FE620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E31261468BE007FE620 /* ViewController.swift */; };
 		86320E35261468BE007FE620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86320E33261468BE007FE620 /* Main.storyboard */; };
 		86320E37261468C1007FE620 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86320E36261468C1007FE620 /* Assets.xcassets */; };
 		86320E3A261468C1007FE620 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86320E38261468C1007FE620 /* LaunchScreen.storyboard */; };
@@ -24,6 +23,8 @@
 		86320ED626155852007FE620 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320ED526155852007FE620 /* MainViewController.swift */; };
 		86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EDA26156CF9007FE620 /* SettingsViewController.swift */; };
 		86320EE12615A357007FE620 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EE02615A357007FE620 /* ImageButton.swift */; };
+		86320EEC2615E453007FE620 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EEB2615E453007FE620 /* BaseViewController.swift */; };
+		86320EF52615E7F8007FE620 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EF42615E7F8007FE620 /* UIView.swift */; };
 		9CA02039A380A7DC709D1BCD /* Pods_BZB_Project_BZB_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299F1373CFD636EAED5926D /* Pods_BZB_Project_BZB_ProjectUITests.framework */; };
 		AFE1D58AA2F04BAE3D65BD58 /* Pods_BZB_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C2BE9FA26FA16B49782A008 /* Pods_BZB_Project.framework */; };
 /* End PBXBuildFile section */
@@ -57,7 +58,6 @@
 		86320E2A261468BE007FE620 /* BZB_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BZB_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86320E2D261468BE007FE620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86320E2F261468BE007FE620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		86320E31261468BE007FE620 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		86320E34261468BE007FE620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		86320E36261468C1007FE620 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86320E39261468C1007FE620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,6 +76,8 @@
 		86320ED526155852007FE620 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		86320EDA26156CF9007FE620 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		86320EE02615A357007FE620 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
+		86320EEB2615E453007FE620 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		86320EF42615E7F8007FE620 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		9C6FC59AC0AA853535CE026B /* Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,7 +150,6 @@
 				86320E98261477B4007FE620 /* ViewController */,
 				86320E2D261468BE007FE620 /* AppDelegate.swift */,
 				86320E2F261468BE007FE620 /* SceneDelegate.swift */,
-				86320E31261468BE007FE620 /* ViewController.swift */,
 				86320E33261468BE007FE620 /* Main.storyboard */,
 				86320E36261468C1007FE620 /* Assets.xcassets */,
 				86320E38261468C1007FE620 /* LaunchScreen.storyboard */,
@@ -192,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				86320EB126147A55007FE620 /* GCDTimer.swift */,
+				86320EF42615E7F8007FE620 /* UIView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				86320E9F26147913007FE620 /* BaseSocketViewController.swift */,
+				86320EEB2615E453007FE620 /* BaseViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -496,9 +499,10 @@
 			files = (
 				86320EA026147913007FE620 /* BaseSocketViewController.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
-				86320E32261468BE007FE620 /* ViewController.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
 				86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */,
+				86320EF52615E7F8007FE620 /* UIView.swift in Sources */,
+				86320EEC2615E453007FE620 /* BaseViewController.swift in Sources */,
 				86320EA826147976007FE620 /* Matrix4MappingViewController.swift in Sources */,
 				86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */,
 				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
@@ -684,6 +688,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L57H6UW7SM;
 				INFOPLIST_FILE = BZB_Project/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -704,6 +709,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L57H6UW7SM;
 				INFOPLIST_FILE = BZB_Project/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -16,7 +16,7 @@ import SVProgressHUD
 import SwiftyJSON
 import RSSelectionMenu
 
-class SettingsViewController: ViewController{
+class SettingsViewController: BaseViewController{
     
     
     @IBOutlet weak var btScan: UIButton!
@@ -30,7 +30,6 @@ class SettingsViewController: ViewController{
     var deviceList: Array<Device> = []
     var menu: RSSelectionMenu<String>!
     var menuList: Array<String> = []
-    var alert: UIAlertController!
     
     //device info structure (mac & ip)
     struct Device {
@@ -40,13 +39,13 @@ class SettingsViewController: ViewController{
     
     override func viewDidLoad() {
         print("SettingsViewController-viewDidLoad")
+        super.viewDidLoad()
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         initialUI()
-        super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,17 +79,7 @@ extension SettingsViewController{
     //initial UI
     func initialUI(){
         
-        self.alert = UIAlertController(title: nil, message: "Please wait ...", preferredStyle: .alert)
-        
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            print("it is iphone")
-            
-            break
-        // It's an iPhone
-        case .pad:
-            print("it is ipad")
-            
+        if(!SettingsViewController.isPhone){
             //Scan button
             let widthConstraint = btScan.widthAnchor.constraint(equalToConstant: 30.0)
             let heightConstraint = btScan.heightAnchor.constraint(equalToConstant: 30.0)
@@ -108,12 +97,8 @@ extension SettingsViewController{
             heightBtCheckConstraint.constant = 50
             
             self.textFieldDeviceIP.frame.size.height = 500
-            break
-            
-            
-        @unknown default: break
-        // Uh, oh! What could it be?
         }
+        
     }
     
     func objectInitial(){
@@ -142,13 +127,6 @@ extension SettingsViewController{
         }
         
     }
-    
-    enum UIUserInterfaceIdiom : Int {
-        case unspecified
-        
-        case phone // iPhone and iPod touch style UI
-        case pad   // iPad style UI (also includes macOS Catalyst)
-    }
 }
 
 extension SettingsViewController{
@@ -157,10 +135,20 @@ extension SettingsViewController{
         if(self.textFieldDeviceIP.hasText){
             DispatchQueue.main.async(){
                 self.preferences.set(self.textFieldDeviceIP.text, forKey: CmdHelper.key_server_ip)
-                self.view.makeToast("Save IP successful !", duration: 2.0, position: .bottom)
+                //self.view.makeToast("Save IP successful !", duration: 2.0, position: .bottom)
+                if(SettingsViewController.isPhone){
+                    self.view.showToast(text: "Save IP successful !", font_size: 14.0)
+                }else{
+                    self.view.showToast(text: "Save IP successful !", font_size: 32.0)
+                }
             }
         }else{
-            self.view.makeToast("IP can't not be empty !")
+            if(SettingsViewController.isPhone){
+                self.view.showToast(text: "IP can't not be empty !", font_size: 14.0)
+            }else{
+                self.view.showToast(text: "IP can't not be empty !", font_size: 32.0)
+            }
+           // self.view.makeToast("IP can't not be empty !")
         }
     }
     
@@ -219,68 +207,6 @@ extension SettingsViewController{
         }
     }
     
-    //show waiting dialog
-    public func showLoadingView() {
-        DispatchQueue.main.async() {
-            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.style = UIActivityIndicatorView.Style.gray
-            loadingIndicator.startAnimating();
-            self.alert.view.addSubview(loadingIndicator)
-            self.present(self.alert, animated: true, completion: nil)
-        }
-    }
-    
-    //close waiting dailog
-    public func dismissLoadingView() {
-        DispatchQueue.main.async() {
-            self.dismiss(animated: false, completion: nil)
-        }
-    }
-    
-    //show alert
-    public func showAlert(message: String) {
-        if(!message.isEmpty){
-            
-            switch UIDevice.current.userInterfaceIdiom {
-            case .phone:
-                print("it is iphone")
-                let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                })
-                present(alert, animated: true)
-                break
-     
-            case .pad:
-                print("it is ipad")
-                
-                let attributedStringTitle = NSAttributedString(string: "Warning", attributes: [
-                                                                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 28), //your font here,
-                                                                NSAttributedString.Key.foregroundColor : UIColor.black])
-                
-                let attributedStringMSG = NSAttributedString(string: "\n" + message, attributes: [
-                                                                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 22), //your font here,
-                                                                NSAttributedString.Key.foregroundColor : UIColor.black])
-                
-                let alert = UIAlertController(title: "Warning", message: message,  preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                })
-                alert.setValue(attributedStringTitle, forKey: "attributedTitle")
-                alert.setValue(attributedStringMSG, forKey: "attributedMessage")
-                var height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.13)
-                var width:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.view.frame.width * 0.8)
-                alert.view.addConstraint(height);
-                alert.view.addConstraint(width);
-                present(alert, animated: true, completion: nil)
-                break
-                
-            @unknown default: break
-            // Uh, oh! What could it be?
-            }
-        }
-    }
-    
     //encode udp cmd
     func aesEncodeUDPCmd() -> [Byte]{
         var aes = [Byte]()
@@ -298,7 +224,6 @@ extension SettingsViewController{
     func aesDecode(data: Data) -> [Byte]{
         var aes = [Byte]()
         do {
-            
             let key = "qzy159pkn333rty2"
             //use AES-128-ECB mode
             aes = try AES(key: key.bytes, blockMode: ECB(), padding: .noPadding).decrypt(data.bytes)

@@ -274,7 +274,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uq-wK-DHc">
                                         <rect key="frame" x="0.0" y="0.0" width="215.5" height="81"/>
-                                        <state key="normal" image="save"/>
+                                        <state key="normal" backgroundImage="save"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmc-7F-w5B">
                                         <rect key="frame" x="235.5" y="0.0" width="215.5" height="81"/>
@@ -295,7 +295,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YkC-TY-wEa">
                                         <rect key="frame" x="706.5" y="0.0" width="215.5" height="81"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" image="refresh"/>
+                                        <state key="normal" backgroundImage="refresh"/>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -380,11 +380,13 @@
                     <tabBarItem key="tabBarItem" title="Mapping" id="9hC-Ry-4oX"/>
                     <connections>
                         <outlet property="btRecall" destination="dmc-7F-w5B" id="WC3-MK-6Ik"/>
+                        <outlet property="btRefresh" destination="YkC-TY-wEa" id="e65-fj-8Cx"/>
+                        <outlet property="btSave" destination="7Uq-wK-DHc" id="khp-sd-oq2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XN5-Ym-sa5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-652" y="1377"/>
+            <point key="canvasLocation" x="-632" y="1344"/>
         </scene>
     </scenes>
     <resources>
