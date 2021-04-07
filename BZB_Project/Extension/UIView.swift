@@ -8,7 +8,7 @@
 import UIKit
 extension UIView{
     
-    func showToast(text: String, font_size: CGFloat){
+    func showToast(text: String, font_size: CGFloat, isMenu: Bool){
         
         self.hideToast()
         let toastLb = UILabel()
@@ -34,7 +34,12 @@ extension UIView{
             lbHeight = expectedSize.height
         }
         expectedSize = CGSize(width: lbWidth, height: lbHeight)
-        toastLb.frame = CGRect(x: ((self.bounds.size.width)/2) - ((expectedSize.width + 20)/2), y: self.bounds.height - expectedSize.height - 40 - 20, width: expectedSize.width + 20, height: expectedSize.height + 20)
+        if(isMenu){
+            toastLb.frame = CGRect(x: ((self.bounds.size.width)/2) - ((expectedSize.width + 20)/2), y: self.bounds.height - expectedSize.height - 120, width: expectedSize.width + 20, height: expectedSize.height + 20)
+        }else{
+            toastLb.frame = CGRect(x: ((self.bounds.size.width)/2) - ((expectedSize.width + 20)/2), y: self.bounds.height - expectedSize.height - 40 - 20, width: expectedSize.width + 20, height: expectedSize.height + 20)
+        }
+
         self.addSubview(toastLb)
         
         UIView.animate(withDuration: 1.5, delay: 1.5, animations: {

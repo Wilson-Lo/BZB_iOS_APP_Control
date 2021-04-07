@@ -11,6 +11,8 @@ class BaseViewController: UIViewController{
     
     var alert: UIAlertController!
     static var isPhone: Bool!
+    static var textSizeForPhone = 16
+    static var textSizeForPad = 32
 
     override func viewDidLoad() {
         self.alert = UIAlertController(title: nil, message: "Please wait ...", preferredStyle: .alert)
