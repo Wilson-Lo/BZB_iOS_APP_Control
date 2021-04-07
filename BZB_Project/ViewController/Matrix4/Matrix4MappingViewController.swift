@@ -271,7 +271,7 @@ extension Matrix4MappingViewController{
 }
 
 //TCP Deleage
-extension Matrix4MappingViewController:TcpSocketClientDeleage{
+extension Matrix4MappingViewController : TcpSocketClientDeleage{
     
     func onConnect() {
         print("Matrix4MappingViewController-onConnect")
@@ -401,17 +401,28 @@ extension Matrix4MappingViewController: UICollectionViewDelegateFlowLayout {
     
     ///  設定 CollectionViewCell 的寬、高
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (self.view.frame.size.width - 30) / 2 , height: (self.view.frame.size.width - 30) / 2)
+        if(Matrix4MappingViewController.isPhone){
+            return CGSize(width: (self.view.frame.size.width - 30) / 2 , height: (self.view.frame.size.width - 30) / 2)
+        }else{
+            return CGSize(width: (self.view.frame.size.width - 60) / 2 , height: (self.view.frame.size.width - 170) / 2)
+        }
     }
-    
     
     /// 滑動方向為「垂直」的話即「上下」的間距(預設為重直)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        if(Matrix4MappingViewController.isPhone){
+            return 10
+        }else{
+            return 30
+        }
     }
     
     /// 滑動方向為「垂直」的話即「左右」的間距(預設為重直)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        if(Matrix4MappingViewController.isPhone){
+            return 10
+        }else{
+            return 12
+        }
     }
 }
