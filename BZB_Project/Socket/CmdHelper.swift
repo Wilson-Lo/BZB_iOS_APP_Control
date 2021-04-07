@@ -9,7 +9,7 @@ import Foundation
 
 struct CmdHelper {
     
-    static let key_server_ip = "avx_server_ip"
+    static let key_server_ip = "device_ip"
     static let cmd_fw_version = "0b4d4152444348ff0501bf" //fw version
     
     /******  Matrix  4 x 4 ******/

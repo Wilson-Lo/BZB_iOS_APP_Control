@@ -137,16 +137,16 @@ extension SettingsViewController{
                 self.preferences.set(self.textFieldDeviceIP.text, forKey: CmdHelper.key_server_ip)
                 //self.view.makeToast("Save IP successful !", duration: 2.0, position: .bottom)
                 if(SettingsViewController.isPhone){
-                    self.view.showToast(text: "Save IP successful !", font_size: 14.0)
+                    self.view.showToast(text: "Save IP successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: false)
                 }else{
-                    self.view.showToast(text: "Save IP successful !", font_size: 32.0)
+                    self.view.showToast(text: "Save IP successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: false)
                 }
             }
         }else{
             if(SettingsViewController.isPhone){
-                self.view.showToast(text: "IP can't not be empty !", font_size: 14.0)
+                self.view.showToast(text: "IP can't not be empty !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: false)
             }else{
-                self.view.showToast(text: "IP can't not be empty !", font_size: 32.0)
+                self.view.showToast(text: "IP can't not be empty !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: false)
             }
            // self.view.makeToast("IP can't not be empty !")
         }
@@ -253,12 +253,12 @@ extension SettingsViewController: GCDAsyncUdpSocketDelegate{
     }
     
     func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
-        print("receive")
         if(data != nil){
             
             var deviceInfo = aesDecode(data: data)
             
             if(deviceInfo.count > 0){
+                print("receive")
                 self.deviceList.append(Device(mac: "MAC:" + String(format:"%02X", deviceInfo[21]) + "-" + String(format:"%02X", deviceInfo[22]) + "-" + String(format:"%02X", deviceInfo[23]) + "-" + String(format:"%02X", deviceInfo[24]) + "-" + String(format:"%02X", deviceInfo[25]) + "-" + String(format:"%02X", deviceInfo[26]),ip: String(deviceInfo[27]) + "." + String(deviceInfo[28]) + "." + String(deviceInfo[29]) + "." + String(deviceInfo[30])))
             }
         }

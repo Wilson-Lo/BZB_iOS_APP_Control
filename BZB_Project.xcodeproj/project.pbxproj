@@ -25,6 +25,8 @@
 		86320EE12615A357007FE620 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EE02615A357007FE620 /* ImageButton.swift */; };
 		86320EEC2615E453007FE620 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EEB2615E453007FE620 /* BaseViewController.swift */; };
 		86320EF52615E7F8007FE620 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EF42615E7F8007FE620 /* UIView.swift */; };
+		86320F03261D63A7007FE620 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F02261D63A7007FE620 /* Data.swift */; };
+		86320F09261D9403007FE620 /* MappingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F08261D9402007FE620 /* MappingCollectionViewCell.swift */; };
 		9CA02039A380A7DC709D1BCD /* Pods_BZB_Project_BZB_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299F1373CFD636EAED5926D /* Pods_BZB_Project_BZB_ProjectUITests.framework */; };
 		AFE1D58AA2F04BAE3D65BD58 /* Pods_BZB_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C2BE9FA26FA16B49782A008 /* Pods_BZB_Project.framework */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,8 @@
 		86320EE02615A357007FE620 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		86320EEB2615E453007FE620 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		86320EF42615E7F8007FE620 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		86320F02261D63A7007FE620 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		86320F08261D9402007FE620 /* MappingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingCollectionViewCell.swift; sourceTree = "<group>"; };
 		9C6FC59AC0AA853535CE026B /* Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,8 +196,8 @@
 		86320E99261477D8007FE620 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				86320EB126147A55007FE620 /* GCDTimer.swift */,
 				86320EF42615E7F8007FE620 /* UIView.swift */,
+				86320F02261D63A7007FE620 /* Data.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -201,6 +205,7 @@
 		86320E9A2614789C007FE620 /* Socket */ = {
 			isa = PBXGroup;
 			children = (
+				86320EB126147A55007FE620 /* GCDTimer.swift */,
 				86320EAC261479AB007FE620 /* TcpSocketClient.swift */,
 				86320EB626147CB1007FE620 /* CmdHelper.swift */,
 			);
@@ -241,9 +246,18 @@
 		86320EDF2615A32E007FE620 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				86320F07261D93DD007FE620 /* CollectionViewCell */,
 				86320EE02615A357007FE620 /* ImageButton.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		86320F07261D93DD007FE620 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				86320F08261D9402007FE620 /* MappingCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
 		D0138F6E4AD455EBE4C6E7B0 /* Pods */ = {
@@ -498,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86320EA026147913007FE620 /* BaseSocketViewController.swift in Sources */,
+				86320F09261D9403007FE620 /* MappingCollectionViewCell.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
 				86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */,
@@ -505,6 +520,7 @@
 				86320EEC2615E453007FE620 /* BaseViewController.swift in Sources */,
 				86320EA826147976007FE620 /* Matrix4MappingViewController.swift in Sources */,
 				86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */,
+				86320F03261D63A7007FE620 /* Data.swift in Sources */,
 				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,
