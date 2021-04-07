@@ -361,7 +361,7 @@
                                 </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qxv-i4-JHD">
-                                <rect key="frame" x="0.0" y="220" width="1024" height="981"/>
+                                <rect key="frame" x="0.0" y="220" width="1024" height="994"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BEp-fN-ue6">
                                     <size key="itemSize" width="375" height="350"/>
@@ -386,6 +386,9 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="source_status" text="Source 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0U-jn-p4t" userLabel="source_status">
                                                     <rect key="frame" x="0.0" y="40" width="370" height="280"/>
@@ -393,12 +396,18 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yzi-8O-QLH">
-                                                    <rect key="frame" x="17" y="290.5" width="31" height="14.5"/>
+                                                    <rect key="frame" x="17" y="273.5" width="61.5" height="31.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" systemColor="scrollViewTexturedBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -438,8 +447,8 @@
                             </constraint>
                             <constraint firstItem="Gyr-9s-C6u" firstAttribute="top" secondItem="87c-fl-Dgv" secondAttribute="top" constant="50" id="gF9-by-QnB"/>
                             <constraint firstItem="87c-fl-Dgv" firstAttribute="bottom" secondItem="qxv-i4-JHD" secondAttribute="bottom" constant="528" id="pFN-RI-nqn">
-                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
-                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="35"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="87"/>
                             </constraint>
                             <constraint firstItem="87c-fl-Dgv" firstAttribute="trailing" secondItem="qxv-i4-JHD" secondAttribute="trailing" id="zvm-Kc-jUc"/>
                         </constraints>
@@ -523,7 +532,7 @@
                         <viewLayoutGuide key="safeArea" id="WU6-KG-nf5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="JG7-GA-bve" firstAttribute="top" secondItem="WU6-KG-nf5" secondAttribute="top" constant="218.5" id="QD8-C8-nJu"/>
+                            <constraint firstItem="JG7-GA-bve" firstAttribute="height" secondItem="wKP-9t-NtG" secondAttribute="height" multiplier="0.606881" id="EBy-tL-XMQ"/>
                             <constraint firstItem="JG7-GA-bve" firstAttribute="centerY" secondItem="wKP-9t-NtG" secondAttribute="centerY" id="kF0-OU-oqF"/>
                             <constraint firstItem="JG7-GA-bve" firstAttribute="centerX" secondItem="wKP-9t-NtG" secondAttribute="centerX" id="kXY-GO-iw0"/>
                             <constraint firstItem="JG7-GA-bve" firstAttribute="width" secondItem="wKP-9t-NtG" secondAttribute="width" multiplier="0.6" id="ynj-Ja-5mU"/>
