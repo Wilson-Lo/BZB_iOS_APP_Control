@@ -192,7 +192,6 @@ extension Matrix4MappingViewController{
             
             self.saveMappingMenu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
                 
-                
                 self.showLoadingView()
                 var cmd = ""
                 print(index)
@@ -220,7 +219,18 @@ extension Matrix4MappingViewController{
             let popup = PopupDialog(title: title, message: message, image: nil)
             
             var btArray: Array<CancelButton> = []
-            
+            if(!Matrix4MappingViewController.isPhone){
+                let dialogAppearance = PopupDialogDefaultView.appearance()
+                dialogAppearance.backgroundColor      = .white
+                dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
+            //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+                dialogAppearance.titleTextAlignment   = .center
+                dialogAppearance.messageFont          = .systemFont(ofSize: 26)
+             //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+                
+                let cb = CancelButton.appearance()
+                cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
+            }
             
             
             for i in 0...(self.inputName.count - 1){
@@ -399,7 +409,7 @@ extension Matrix4MappingViewController: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     
-    ///  設定 CollectionViewCell 的寬、高
+    //setup CollectionViewCell width, height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if(Matrix4MappingViewController.isPhone){
             return CGSize(width: (self.view.frame.size.width - 30) / 2 , height: (self.view.frame.size.width - 30) / 2)
