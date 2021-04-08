@@ -39,7 +39,7 @@ class Matrix4MappingViewController: BaseSocketViewController{
     
     override func viewDidDisappear(_ animated: Bool) {
         print("Matrix4MappingViewController-viewDidDisappear")
-        TcpSocketClient.sharedInstance.stopConnect()
+        //  TcpSocketClient.sharedInstance.stopConnect()
         
     }
     
@@ -223,10 +223,10 @@ extension Matrix4MappingViewController{
                 let dialogAppearance = PopupDialogDefaultView.appearance()
                 dialogAppearance.backgroundColor      = .white
                 dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
-            //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+                //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
                 dialogAppearance.titleTextAlignment   = .center
                 dialogAppearance.messageFont          = .systemFont(ofSize: 26)
-             //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+                //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
                 
                 let cb = CancelButton.appearance()
                 cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
@@ -363,7 +363,7 @@ extension Matrix4MappingViewController : TcpSocketClientDeleage{
             
             break
         }
-       self.dismissLoadingView()
+        self.dismissLoadingView()
     }
     
 }
