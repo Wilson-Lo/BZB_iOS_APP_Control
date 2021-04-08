@@ -12,7 +12,7 @@ import RSSelectionMenu
 import Toast_Swift
 import PopupDialog
 
-class Matrix4LearnEDID: BaseSocketViewController{
+class Matrix4LearnEDIDViewController: BaseSocketViewController{
     
     @IBOutlet weak var segmentedType: UISegmentedControl!
     @IBOutlet weak var btEDID: UIButton!
@@ -25,12 +25,12 @@ class Matrix4LearnEDID: BaseSocketViewController{
     var isDefault = true
     
     override func viewDidLoad() {
-        print("Matrix4LearnEDID-viewDidLoad")
+        print("Matrix4LearnEDIDViewController-viewDidLoad")
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("Matrix4LearnEDID-viewWillAppear")
+        print("Matrix4LearnEDIDViewController-viewWillAppear")
         super.viewWillAppear(true)
         self.showLoadingView()
         initialUI()
@@ -39,7 +39,7 @@ class Matrix4LearnEDID: BaseSocketViewController{
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print("Matrix4LearnEDID-viewDidDisappear")
+        print("Matrix4LearnEDIDViewController-viewDidDisappear")
         // TcpSocketClient.sharedInstance.stopConnect()
     }
     
@@ -64,7 +64,7 @@ class Matrix4LearnEDID: BaseSocketViewController{
     }
 }
 
-extension Matrix4LearnEDID{
+extension Matrix4LearnEDIDViewController{
     
     func initialUI(){
         
@@ -145,7 +145,7 @@ extension Matrix4LearnEDID{
 }
 
 //Button Click Event
-extension Matrix4LearnEDID{
+extension Matrix4LearnEDIDViewController{
     
     @IBAction func btShowDeviceList(sender: UIButton) {
         self.showDevicePopMenu()
@@ -174,68 +174,68 @@ extension Matrix4LearnEDID{
         }
         cmd = cmd + self.calCheckSum(data: cmd)
         TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._12_cmd_learn_edid))
-       // self.startCheckFeedbackTimer()
+        // self.startCheckFeedbackTimer()
     }
 }
+
+
+//TCP Deleage
+extension Matrix4LearnEDIDViewController : TcpSocketClientDeleage{
     
-    
-    //TCP Deleage
-    extension Matrix4LearnEDID : TcpSocketClientDeleage{
-        
-        func onConnect() {
-            print("Matrix4LearnEDID-onConnect")
-            TcpSocketClient.sharedInstance.sendCmd(cmd: CmdHelper.cmd_4_x_4_get_io_name, number: UInt8(CmdHelper._5_cmd_get_io_name))
-        }
-        
-        func disConnect(err: String) {
-            print("Matrix4LearnEDID-disConnect ")
-            
-            self.dismissLoadingView()
-        }
-        
-        func onReadData(data: Data, tag: Int) {
-            print("Matrix4LearnEDID-onReadData - \(tag)")
-            
-            switch tag{
-            
-            case CmdHelper._5_cmd_get_io_name:
-                print("Matrix4LearnEDID-_5_cmd_get_io_name")
-                self.parser4IOName(data: data)
-                if(self.inputName.count > 0){
-                    self.btDevice.setTitle(self.inputName[self.userSelectedDeviceIndex], for: .init())
-                }
-                
-                DispatchQueue.main.async(){
-                    if(self.isDefault){
-                        self.btEDID.setTitle(CmdHelper.default_edid[self.userSelectedEDIDIndex], for: .init())
-                    }else{
-                        self.btEDID.setTitle(self.outputName[self.userSelectedEDIDIndex], for: .init())
-                    }
-                }
-                break
-                
-            case CmdHelper._12_cmd_learn_edid:
-                print("Matrix4LearnEDID-_12_cmd_learn_edid")
-                if(data.hexEncodedString().contains("aa")){
-                    if(SettingsViewController.isPhone){
-                        self.view.showToast(text: "Learn EDID Successfully !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
-                    }else{
-                        self.view.showToast(text: "Learn EDID Successfully !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
-                    }
-                }else{
-                    if(SettingsViewController.isPhone){
-                        self.view.showToast(text: "Learn EDID failed !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
-                    }else{
-                        self.view.showToast(text: "Learn EDID failed !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
-                    }
-                }
-                break
-                
-            default:
-                
-                break
-            }
-            self.dismissLoadingView()
-        }
-        
+    func onConnect() {
+        print("Matrix4LearnEDID-onConnect")
+        TcpSocketClient.sharedInstance.sendCmd(cmd: CmdHelper.cmd_4_x_4_get_io_name, number: UInt8(CmdHelper._5_cmd_get_io_name))
     }
+    
+    func disConnect(err: String) {
+        print("Matrix4LearnEDID-disConnect ")
+        
+        self.dismissLoadingView()
+    }
+    
+    func onReadData(data: Data, tag: Int) {
+        print("Matrix4LearnEDID-onReadData - \(tag)")
+        
+        switch tag{
+        
+        case CmdHelper._5_cmd_get_io_name:
+            print("Matrix4LearnEDID-_5_cmd_get_io_name")
+            self.parser4IOName(data: data)
+            if(self.inputName.count > 0){
+                self.btDevice.setTitle(self.inputName[self.userSelectedDeviceIndex], for: .init())
+            }
+            
+            DispatchQueue.main.async(){
+                if(self.isDefault){
+                    self.btEDID.setTitle(CmdHelper.default_edid[self.userSelectedEDIDIndex], for: .init())
+                }else{
+                    self.btEDID.setTitle(self.outputName[self.userSelectedEDIDIndex], for: .init())
+                }
+            }
+            break
+            
+        case CmdHelper._12_cmd_learn_edid:
+            print("Matrix4LearnEDID-_12_cmd_learn_edid")
+            if(data.hexEncodedString().contains("aa")){
+                if(SettingsViewController.isPhone){
+                    self.view.showToast(text: "Learn EDID Successfully !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                }else{
+                    self.view.showToast(text: "Learn EDID Successfully !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                }
+            }else{
+                if(SettingsViewController.isPhone){
+                    self.view.showToast(text: "Learn EDID failed !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                }else{
+                    self.view.showToast(text: "Learn EDID failed !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                }
+            }
+            break
+            
+        default:
+            
+            break
+        }
+        self.dismissLoadingView()
+    }
+    
+}
