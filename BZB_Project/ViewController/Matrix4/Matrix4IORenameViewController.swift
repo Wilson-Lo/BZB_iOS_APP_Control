@@ -16,6 +16,13 @@ class Matrix4IORenameViewController: BaseSocketViewController{
         print("Matrix4IORenameViewController-viewDidLoad")
         super.viewDidLoad()
         self.typeSegment.addTarget(self, action: #selector(segmentedTypeControlChanged(_:)), for: .valueChanged)
+        
+        //Observer mode with IORename4DialogViewController
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadList), name: NSNotification.Name(rawValue: "IORename-reload"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showLoading), name: NSNotification.Name(rawValue: "IORename-showLoading"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(closeLoading), name: NSNotification.Name(rawValue: "IORename-closeLoading"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showSuccessToast), name: NSNotification.Name(rawValue: "IORename-showSuccessToast"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showFailToast), name: NSNotification.Name(rawValue: "IORename-showFailToast"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +42,7 @@ class Matrix4IORenameViewController: BaseSocketViewController{
         
         self.showLoadingView()
         
+        //check device type
         switch sender.selectedSegmentIndex {
             
         case 0://input
@@ -52,23 +60,68 @@ class Matrix4IORenameViewController: BaseSocketViewController{
     }
 }
 
+/**
+ * Observer mode with IORename4DialogViewController
+ */
+extension Matrix4IORenameViewController{
+    
+    @objc func reloadList(notification: NSNotification){
+        print("IORename4ViewController-reloadList")
+        self.collectionView.reloadData()
+    }
+    
+    @objc func showLoading(notification: NSNotification){
+        print("IORename4ViewController-showLoading")
+        self.showLoadingView()
+    }
+    
+    @objc func closeLoading(notification: NSNotification){
+        print("IORename4ViewController-closeLoading")
+        self.dismissLoadingView()
+    }
+    
+    @objc func showSuccessToast(notification: NSNotification){
+        print("IORename4ViewController-showSuccessToast")
+        if(Matrix4IORenameViewController.isPhone){
+            self.view.showToast(text: "Rename successfully !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+        }else{
+            self.view.showToast(text: "Rename successfully !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+        }
+        TcpSocketClient.sharedInstance.delegate = self
+        TcpSocketClient.sharedInstance.startConnect()
+        //self.dismissLoadingView()
+    }
+    
+    @objc func showFailToast(notification: NSNotification){
+        print("IORename4ViewController-showFailToast")
+        if(Matrix4IORenameViewController.isPhone){
+            self.view.showToast(text: "Rename failed !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+        }else{
+            self.view.showToast(text: "Rename failed !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+        }
+        TcpSocketClient.sharedInstance.delegate = self
+        TcpSocketClient.sharedInstance.startConnect()
+        //self.dismissLoadingView()
+    }
+}
+
 extension Matrix4IORenameViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: IORenameDialogViewController.typeName) as! IORenameDialogViewController
-//        vc.modalPresentationStyle = .custom
-//        self.present(vc, animated: true, completion: nil)
-//        IORenameDialogViewController.userSelectedIndex = indexPath.item
-//        IORenameDialogViewController.userSelectedIndex = indexPath.item
-//        if(isIntput){
-//            IORenameDialogViewController.isInput = true
-//            vc.dialogTitle.text =  "Input \(indexPath.item + 1)"
-//            vc.editNewName.text = BaseViewController.inputName[indexPath.item]
-//        }else{
-//            IORenameDialogViewController.isInput = false
-//            vc.dialogTitle.text =  "Output \(indexPath.item + 1)"
-//            vc.editNewName.text = BaseViewController.outputName[indexPath.item]
-//        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: IORename4DialogViewController.typeName) as! IORename4DialogViewController
+        vc.modalPresentationStyle = .custom
+        self.present(vc, animated: true, completion: nil)
+        IORename4DialogViewController.userSelectedIndex = indexPath.item
+        IORename4DialogViewController.userSelectedIndex = indexPath.item
+        if(isIntput){
+            IORename4DialogViewController.isInput = true
+            vc.dialogTitle.text =  "Input \(indexPath.item + 1)"
+            vc.editNewName.text = self.inputName[indexPath.item]
+        }else{
+            IORename4DialogViewController.isInput = false
+            vc.dialogTitle.text =  "Output \(indexPath.item + 1)"
+            vc.editNewName.text = self.outputName[indexPath.item]
+        }
         
     }
 }

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4C333802F0B3016EDB7B500E /* Pods_BZB_ProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C11C67C002452FA5D730B6 /* Pods_BZB_ProjectTests.framework */; };
+		86058080261EFC5600B1E0AF /* IORename4DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605807F261EFC5600B1E0AF /* IORename4DialogViewController.swift */; };
+		8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605808A261EFE7A00B1E0AF /* UIViewController.swift */; };
+		86058090261EFEA300B1E0AF /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605808F261EFEA300B1E0AF /* UIImage.swift */; };
+		8605809D261F01F100B1E0AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605809C261F01F100B1E0AF /* String.swift */; };
 		86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2D261468BE007FE620 /* AppDelegate.swift */; };
 		86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2F261468BE007FE620 /* SceneDelegate.swift */; };
 		86320E35261468BE007FE620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86320E33261468BE007FE620 /* Main.storyboard */; };
@@ -60,6 +64,10 @@
 		49755CF4F67AC5C0749AFE90 /* Pods-BZB_ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-BZB_ProjectTests/Pods-BZB_ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		61AE94648523E41E02ABD32F /* Pods-BZB_Project-BZB_ProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_Project-BZB_ProjectUITests.debug.xcconfig"; path = "Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		77C11C67C002452FA5D730B6 /* Pods_BZB_ProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BZB_ProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8605807F261EFC5600B1E0AF /* IORename4DialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IORename4DialogViewController.swift; sourceTree = "<group>"; };
+		8605808A261EFE7A00B1E0AF /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		8605808F261EFEA300B1E0AF /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		8605809C261F01F100B1E0AF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		86320E2A261468BE007FE620 /* BZB_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BZB_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86320E2D261468BE007FE620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86320E2F261468BE007FE620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +135,14 @@
 				77C11C67C002452FA5D730B6 /* Pods_BZB_ProjectTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8605807E261EFC2B00B1E0AF /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				8605807F261EFC5600B1E0AF /* IORename4DialogViewController.swift */,
+			);
+			path = Dialog;
 			sourceTree = "<group>";
 		};
 		86320E21261468BE007FE620 = {
@@ -204,6 +220,9 @@
 			children = (
 				86320EF42615E7F8007FE620 /* UIView.swift */,
 				86320F02261D63A7007FE620 /* Data.swift */,
+				8605808A261EFE7A00B1E0AF /* UIViewController.swift */,
+				8605808F261EFEA300B1E0AF /* UIImage.swift */,
+				8605809C261F01F100B1E0AF /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -254,6 +273,7 @@
 		86320EDF2615A32E007FE620 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8605807E261EFC2B00B1E0AF /* Dialog */,
 				86320F07261D93DD007FE620 /* CollectionViewCell */,
 				86320EE02615A357007FE620 /* ImageButton.swift */,
 			);
@@ -521,7 +541,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				86320EA026147913007FE620 /* BaseSocketViewController.swift in Sources */,
+				86058090261EFEA300B1E0AF /* UIImage.swift in Sources */,
 				86320F09261D9403007FE620 /* MappingCollectionViewCell.swift in Sources */,
+				86058080261EFC5600B1E0AF /* IORename4DialogViewController.swift in Sources */,
+				8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
 				86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */,
@@ -535,6 +558,7 @@
 				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,
+				8605809D261F01F100B1E0AF /* String.swift in Sources */,
 				86320F0E261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift in Sources */,
 				86320EB226147A55007FE620 /* GCDTimer.swift in Sources */,
 			);

@@ -49,6 +49,23 @@ class BaseViewController: UIViewController{
 
 extension BaseViewController  {
     
+    public func hexStringToStringArray(_ data: String) -> [String]?{
+        let length = data.count
+        if length & 1 != 0 {
+            return nil
+        }
+        var bytes = [String]()
+        bytes.reserveCapacity(length/2)
+        var index = data.startIndex
+        for _ in 0..<length/2 {
+            let nextIndex = data.index(index, offsetBy: 2)
+            var b = data[index..<nextIndex]
+            bytes.append(String(b))
+            index = nextIndex
+        }
+        return bytes
+    }
+    
     enum UIUserInterfaceIdiom : Int {
         case unspecified
         
