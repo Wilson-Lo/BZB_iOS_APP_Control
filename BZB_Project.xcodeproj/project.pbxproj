@@ -12,6 +12,7 @@
 		8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605808A261EFE7A00B1E0AF /* UIViewController.swift */; };
 		86058090261EFEA300B1E0AF /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605808F261EFEA300B1E0AF /* UIImage.swift */; };
 		8605809D261F01F100B1E0AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605809C261F01F100B1E0AF /* String.swift */; };
+		860580A2261F17C500B1E0AF /* Matrix4NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */; };
 		86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2D261468BE007FE620 /* AppDelegate.swift */; };
 		86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2F261468BE007FE620 /* SceneDelegate.swift */; };
 		86320E35261468BE007FE620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86320E33261468BE007FE620 /* Main.storyboard */; };
@@ -68,6 +69,7 @@
 		8605808A261EFE7A00B1E0AF /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		8605808F261EFEA300B1E0AF /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		8605809C261F01F100B1E0AF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4NetworkViewController.swift; sourceTree = "<group>"; };
 		86320E2A261468BE007FE620 /* BZB_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BZB_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86320E2D261468BE007FE620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86320E2F261468BE007FE620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				86320EA726147976007FE620 /* Matrix4MappingViewController.swift */,
 				86320F0D261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift */,
 				86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */,
+				860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */,
 			);
 			path = Matrix4;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
+				860580A2261F17C500B1E0AF /* Matrix4NetworkViewController.swift in Sources */,
 				86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */,
 				86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */,
 				86320EF52615E7F8007FE620 /* UIView.swift in Sources */,

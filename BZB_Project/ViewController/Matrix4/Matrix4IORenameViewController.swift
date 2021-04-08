@@ -16,7 +16,9 @@ class Matrix4IORenameViewController: BaseSocketViewController{
         print("Matrix4IORenameViewController-viewDidLoad")
         super.viewDidLoad()
         self.typeSegment.addTarget(self, action: #selector(segmentedTypeControlChanged(_:)), for: .valueChanged)
-        
+        if(!Matrix4IORenameViewController.isPhone){
+            self.typeSegment.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 32) ], for: .normal)
+        }
         //Observer mode with IORename4DialogViewController
         NotificationCenter.default.addObserver(self, selector: #selector(reloadList), name: NSNotification.Name(rawValue: "IORename-reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLoading), name: NSNotification.Name(rawValue: "IORename-showLoading"), object: nil)

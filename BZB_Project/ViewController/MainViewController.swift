@@ -13,7 +13,7 @@ import RSSelectionMenu
 import Toast_Swift
 import PopupDialog
 
-class MainViewController: UIViewController{
+class MainViewController: BaseViewController{
     
     @IBOutlet weak var btHDMIOverIP: UIButton!
     @IBOutlet weak var btMatrix4: UIButton!
@@ -28,8 +28,7 @@ class MainViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         print("MainViewController-viewDidAppear")
-      
-        
+        TcpSocketClient.sharedInstance.stopConnect()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
