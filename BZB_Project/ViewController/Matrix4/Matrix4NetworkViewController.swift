@@ -43,7 +43,7 @@ class Matrix4NetworkViewController: BaseSocketViewController{
 
 }
 
-
+//TCP Deleage
 extension Matrix4NetworkViewController : TcpSocketClientDeleage{
     
     func onConnect() {

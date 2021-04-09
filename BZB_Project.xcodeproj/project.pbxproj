@@ -13,6 +13,8 @@
 		86058090261EFEA300B1E0AF /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605808F261EFEA300B1E0AF /* UIImage.swift */; };
 		8605809D261F01F100B1E0AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605809C261F01F100B1E0AF /* String.swift */; };
 		860580A2261F17C500B1E0AF /* Matrix4NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */; };
+		860580A7261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860580A6261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift */; };
+		860580AF261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */; };
 		86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2D261468BE007FE620 /* AppDelegate.swift */; };
 		86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2F261468BE007FE620 /* SceneDelegate.swift */; };
 		86320E35261468BE007FE620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86320E33261468BE007FE620 /* Main.storyboard */; };
@@ -35,6 +37,7 @@
 		86320F0E261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F0D261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift */; };
 		86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */; };
 		86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */; };
+		86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86681294262029330034D975 /* MappingRename4DialogViewController.swift */; };
 		9CA02039A380A7DC709D1BCD /* Pods_BZB_Project_BZB_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299F1373CFD636EAED5926D /* Pods_BZB_Project_BZB_ProjectUITests.framework */; };
 		AFE1D58AA2F04BAE3D65BD58 /* Pods_BZB_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C2BE9FA26FA16B49782A008 /* Pods_BZB_Project.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +73,8 @@
 		8605808F261EFEA300B1E0AF /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		8605809C261F01F100B1E0AF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4NetworkViewController.swift; sourceTree = "<group>"; };
+		860580A6261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4MappingRenameViewController.swift; sourceTree = "<group>"; };
+		860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRenameCollectionViewCell.swift; sourceTree = "<group>"; };
 		86320E2A261468BE007FE620 /* BZB_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BZB_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86320E2D261468BE007FE620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86320E2F261468BE007FE620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +103,7 @@
 		86320F0D261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4LearnEDIDViewController.swift; sourceTree = "<group>"; };
 		86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4IORenameViewController.swift; sourceTree = "<group>"; };
 		86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IORenameCollectionViewCell.swift; sourceTree = "<group>"; };
+		86681294262029330034D975 /* MappingRename4DialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRename4DialogViewController.swift; sourceTree = "<group>"; };
 		9C6FC59AC0AA853535CE026B /* Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				8605807F261EFC5600B1E0AF /* IORename4DialogViewController.swift */,
+				86681294262029330034D975 /* MappingRename4DialogViewController.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -253,6 +260,7 @@
 				86320F0D261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift */,
 				86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */,
 				860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */,
+				860580A6261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift */,
 			);
 			path = Matrix4;
 			sourceTree = "<group>";
@@ -288,6 +296,7 @@
 			children = (
 				86320F08261D9402007FE620 /* MappingCollectionViewCell.swift */,
 				86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */,
+				860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -562,8 +571,11 @@
 				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,
+				860580AF261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift in Sources */,
 				8605809D261F01F100B1E0AF /* String.swift in Sources */,
+				860580A7261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift in Sources */,
 				86320F0E261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift in Sources */,
+				86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */,
 				86320EB226147A55007FE620 /* GCDTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

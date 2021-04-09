@@ -30,9 +30,10 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        print("IORename4DialogViewController-viewWillAppear")
         TcpSocketClient.sharedInstance.delegate = self
         TcpSocketClient.sharedInstance.startConnect()
-        print("IORename4DialogViewController-viewWillAppear")
     }
     
     @IBAction func closeBtnPressed(_ sender: Any) {
@@ -41,6 +42,7 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
     
     override func viewDidLoad() {
         print("IORename4DialogViewController-viewDidLoad")
+        super.viewDidLoad()
         self.btCancel.layer.cornerRadius = 6
         editNewName.smartInsertDeleteType = UITextSmartInsertDeleteType.no
         editNewName.delegate = self
