@@ -132,18 +132,26 @@ extension Matrix4IORenameViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return self.inputName.count
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IORenameCollectionViewCell", for: indexPath) as! IORenameCollectionViewCell
         if(isIntput){
             cell.deviceType.text = "Input \(indexPath.item + 1)"
-            cell.deviceName.text = self.inputName[indexPath.item]
             cell.deviceType.backgroundColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
+            if(self.inputName.count == 4){
+                cell.deviceName.text = self.inputName[indexPath.item]
+            }else{
+                cell.deviceName.text = "N/A"
+            }
         }else{
+            if(self.outputName.count == 4){
+                cell.deviceName.text = self.outputName[indexPath.item]
+            }else{
+                cell.deviceName.text = "N/A"
+            }
             cell.deviceType.text = "Output \(indexPath.item + 1)"
-            cell.deviceName.text = self.outputName[indexPath.item]
             cell.deviceType.backgroundColor = UIColor(red: 88/255, green: 177/255, blue: 243/255, alpha: 1)
         }
         return cell

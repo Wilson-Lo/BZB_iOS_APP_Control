@@ -47,6 +47,7 @@ class Matrix4ViewEDIDViewController: BaseSocketViewController{
     //detect edid type (SegmentedControl)
     @objc func typeChanged(_ sender: UISegmentedControl){
         print(sender.selectedSegmentIndex)
+        self.showLoadingView()
         self.edidTextView.text = ""
         if(sender.selectedSegmentIndex == 0){
             self.isInput = true
@@ -94,7 +95,7 @@ extension Matrix4ViewEDIDViewController{
         print("showDeviceListPopMenu")
         
         DispatchQueue.main.async() {
-            
+           // self.showLoadingView()
             
             if(self.isInput){
                 if(self.inputName.count > 0){
@@ -116,10 +117,10 @@ extension Matrix4ViewEDIDViewController{
             var selectedNames: [String] = []
             
             self.menu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
+                self.showLoadingView()
                 selectedNames = selectedItems
                 var cmd = ""
                 self.userSelectedIndex = index
-                self.showLoadingView()
                 
                 if(self.isInput){
                     

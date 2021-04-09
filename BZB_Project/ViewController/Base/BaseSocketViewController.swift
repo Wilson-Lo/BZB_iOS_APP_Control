@@ -117,13 +117,19 @@ extension BaseSocketViewController{
             }
         }
         
-        for i in 0...7{
-            if(i<4){
-                self.outputName.append(tempArray[i])
-            }else{
-                self.inputName.append(tempArray[i])
+        if(tempArray.count == 8){
+            print("temp size == 8")
+            for i in 0...7{
+                if(i<4){
+                    self.outputName.append(tempArray[i])
+                }else{
+                    self.inputName.append(tempArray[i])
+                }
             }
+        }else{
+            print("temp size != 8 , size = \(tempArray.count)")
         }
+    
         tempArray.removeAll()
     }
     

@@ -377,7 +377,7 @@ extension Matrix4MappingViewController : UICollectionViewDelegate{
 extension Matrix4MappingViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.deviceSourceStatus.count
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
