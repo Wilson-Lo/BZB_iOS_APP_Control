@@ -184,6 +184,12 @@
                                     <action selector="sendUDPWithSender:" destination="DbE-LV-pDq" eventType="touchUpInside" id="CFr-M3-WEE"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3Q-Ra-Nap">
+                                <rect key="frame" x="186" y="743" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FrA-PG-9bd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -192,6 +198,7 @@
                             <constraint firstItem="6Pc-hl-TCO" firstAttribute="centerX" secondItem="9pZ-dn-vmu" secondAttribute="centerX" id="EUo-dG-WKc"/>
                             <constraint firstItem="FrA-PG-9bd" firstAttribute="bottom" secondItem="6Pc-hl-TCO" secondAttribute="bottom" constant="36" id="GSw-Vj-Pct"/>
                             <constraint firstItem="6Pc-hl-TCO" firstAttribute="width" secondItem="9pZ-dn-vmu" secondAttribute="width" multiplier="0.837681" id="GUj-C0-4uM"/>
+                            <constraint firstItem="6Pc-hl-TCO" firstAttribute="top" secondItem="B3Q-Ra-Nap" secondAttribute="bottom" constant="28.5" id="ITI-MR-SC5"/>
                             <constraint firstItem="xgE-72-CLN" firstAttribute="width" secondItem="9pZ-dn-vmu" secondAttribute="width" multiplier="0.6343" id="Jq0-BH-PUY"/>
                             <constraint firstItem="coV-oZ-eXO" firstAttribute="leading" secondItem="FrA-PG-9bd" secondAttribute="leading" constant="26" id="RoI-jq-BTa"/>
                             <constraint firstItem="LBb-QY-mcx" firstAttribute="centerY" secondItem="xgE-72-CLN" secondAttribute="centerY" id="TBr-KG-Rng"/>
@@ -199,11 +206,13 @@
                             <constraint firstItem="FrA-PG-9bd" firstAttribute="trailing" secondItem="tbh-Fc-MNs" secondAttribute="trailing" constant="34" id="YMF-m4-AkZ"/>
                             <constraint firstItem="coV-oZ-eXO" firstAttribute="top" secondItem="FrA-PG-9bd" secondAttribute="top" constant="30" id="Yic-js-7t0"/>
                             <constraint firstItem="tbh-Fc-MNs" firstAttribute="top" secondItem="FrA-PG-9bd" secondAttribute="top" constant="31" id="oPM-k0-Pkl"/>
+                            <constraint firstItem="B3Q-Ra-Nap" firstAttribute="centerX" secondItem="9pZ-dn-vmu" secondAttribute="centerX" id="txq-tS-hhQ"/>
                             <constraint firstItem="LBb-QY-mcx" firstAttribute="leading" secondItem="xgE-72-CLN" secondAttribute="trailing" constant="13.5" id="vdD-pF-7X6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ned-9g-IeR"/>
                     <connections>
+                        <outlet property="appVerLabel" destination="B3Q-Ra-Nap" id="SoI-hk-htg"/>
                         <outlet property="btCheck" destination="LBb-QY-mcx" id="BR4-ax-WjR"/>
                         <outlet property="btScan" destination="tbh-Fc-MNs" id="ikU-nL-9cU"/>
                         <outlet property="textFieldDeviceIP" destination="xgE-72-CLN" id="5W5-Yb-Sfc"/>

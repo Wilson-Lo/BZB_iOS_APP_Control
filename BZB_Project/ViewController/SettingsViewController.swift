@@ -22,6 +22,7 @@ class SettingsViewController: BaseViewController{
     @IBOutlet weak var btScan: UIButton!
     @IBOutlet weak var btCheck: UIButton!
     @IBOutlet weak var textFieldDeviceIP: UITextField!
+    @IBOutlet weak var appVerLabel: UILabel!
     
     let preferences = UserDefaults.standard
     var queueUDP: DispatchQueue!
@@ -78,6 +79,11 @@ extension SettingsViewController{
     
     //initial UI
     func initialUI(){
+        
+        //App version
+        let dictionary = Bundle.main.infoDictionary!
+        let appVersion = dictionary["CFBundleShortVersionString"] as! String
+        self.appVerLabel.text = "APP Ver. " + appVersion
         
         if(!SettingsViewController.isPhone){
             //Scan button
