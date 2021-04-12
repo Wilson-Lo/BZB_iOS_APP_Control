@@ -131,7 +131,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cbw-dS-3gq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-654" y="674"/>
+            <point key="canvasLocation" x="-652" y="670"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="uKO-R9-Cva">
@@ -220,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pUb-m5-ZKj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10" y="674"/>
+            <point key="canvasLocation" x="22" y="670"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="19Y-G2-hIq">
@@ -463,7 +463,7 @@
                             <constraint firstItem="87c-fl-Dgv" firstAttribute="trailing" secondItem="qxv-i4-JHD" secondAttribute="trailing" id="zvm-Kc-jUc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Mapping" id="9hC-Ry-4oX"/>
+                    <tabBarItem key="tabBarItem" title="Mapping" image="switch" id="9hC-Ry-4oX"/>
                     <connections>
                         <outlet property="btAll" destination="ZYZ-bV-5oL" id="394-Yv-jST"/>
                         <outlet property="btRecall" destination="dmc-7F-w5B" id="WC3-MK-6Ik"/>
@@ -557,7 +557,7 @@
                             <constraint firstItem="JG7-GA-bve" firstAttribute="width" secondItem="wKP-9t-NtG" secondAttribute="width" multiplier="0.6" id="ynj-Ja-5mU"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Learn EDID" id="2G3-yr-bKy"/>
+                    <tabBarItem key="tabBarItem" title="Learn EDID" image="learn" id="2G3-yr-bKy"/>
                     <navigationItem key="navigationItem" id="t2x-kp-iar"/>
                     <connections>
                         <outlet property="btApply" destination="8u9-dl-YlX" id="ZAy-qx-EOj"/>
@@ -588,7 +588,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="information" translatesAutoresizingMaskIntoConstraints="NO" id="c8T-Iu-OJ5">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view" translatesAutoresizingMaskIntoConstraints="NO" id="c8T-Iu-OJ5">
                                                     <rect key="frame" x="40" y="24" width="32" height="32"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View EDID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Jq-8c-u6i">
@@ -619,7 +619,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="learn edid" translatesAutoresizingMaskIntoConstraints="NO" id="aOc-bC-3qG">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="aOc-bC-3qG">
                                                     <rect key="frame" x="40" y="24" width="32" height="32"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I/O Rename" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEt-UE-H8r">
@@ -650,7 +650,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="power" translatesAutoresizingMaskIntoConstraints="NO" id="xDu-eD-9VS">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="xDu-eD-9VS">
                                                     <rect key="frame" x="40" y="24" width="32" height="32"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mapping Rename" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW2-wj-OzS">
@@ -681,7 +681,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="learn edid" translatesAutoresizingMaskIntoConstraints="NO" id="IgA-ho-kmE">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="internet" translatesAutoresizingMaskIntoConstraints="NO" id="IgA-ho-kmE">
                                                     <rect key="frame" x="40" y="24" width="32" height="32"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dne-7r-QHu">
@@ -713,7 +713,7 @@
                             <outlet property="delegate" destination="eFY-T1-Bsc" id="WBv-Ah-bQV"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="More" id="3eC-SG-kFf"/>
+                    <tabBarItem key="tabBarItem" title="More" image="more" id="3eC-SG-kFf"/>
                     <navigationItem key="navigationItem" title="more" id="Mmf-4R-dly"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oW-qC-jEd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1458,11 +1458,14 @@
         <image name="add" width="32" height="32"/>
         <image name="bzb" width="1128" height="191"/>
         <image name="check" width="32" height="32"/>
-        <image name="information" width="32" height="32"/>
-        <image name="learn edid" width="32" height="32"/>
-        <image name="power" width="32" height="32"/>
+        <image name="edit" width="32" height="32"/>
+        <image name="internet" width="32" height="32"/>
+        <image name="learn" width="32" height="32"/>
+        <image name="more" width="32" height="32"/>
         <image name="refresh" width="32" height="32"/>
         <image name="save" width="32" height="32"/>
+        <image name="switch" width="32" height="32"/>
+        <image name="view" width="32" height="32"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
