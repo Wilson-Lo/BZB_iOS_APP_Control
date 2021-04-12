@@ -35,10 +35,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="Ae1-N1-FZJ">
-                                <rect key="frame" x="83" y="206" width="248" height="538"/>
+                                <rect key="frame" x="83" y="296" width="248" height="358"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVv-6p-Wf2">
-                                        <rect key="frame" x="0.0" y="0.0" width="248" height="98.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="248" height="87.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="HDMI over IP"/>
                                         <variation key="heightClass=regular-widthClass=regular">
@@ -46,7 +46,7 @@
                                         </variation>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TA1-kd-mvP">
-                                        <rect key="frame" x="0.0" y="146.5" width="248" height="98.5"/>
+                                        <rect key="frame" x="0.0" y="135.5" width="248" height="87"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Matrix 4 x 4"/>
                                         <variation key="heightClass=regular-widthClass=regular">
@@ -56,19 +56,8 @@
                                             <segue destination="qO0-Mc-GNj" kind="show" id="hDX-SP-edK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypq-79-kJ7">
-                                        <rect key="frame" x="0.0" y="293" width="248" height="98.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Matrix 8 x 8"/>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                        </variation>
-                                        <connections>
-                                            <segue destination="Lag-Iy-EP7" kind="show" id="LME-IM-shC"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sck-lG-3lN">
-                                        <rect key="frame" x="0.0" y="439.5" width="248" height="98.5"/>
+                                        <rect key="frame" x="0.0" y="270.5" width="248" height="87.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Settings"/>
                                         <variation key="heightClass=regular-widthClass=regular">
@@ -81,13 +70,13 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bzb" translatesAutoresizingMaskIntoConstraints="NO" id="DeA-KS-oDI">
-                                <rect key="frame" x="20.5" y="794" width="373" height="58"/>
+                                <rect key="frame" x="20.5" y="704" width="373" height="148"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ae1-N1-FZJ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="Acx-es-0K7"/>
+                            <constraint firstItem="Ae1-N1-FZJ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.4" id="Acx-es-0K7"/>
                             <constraint firstItem="Ae1-N1-FZJ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.6" id="Vtp-TO-6n5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DeA-KS-oDI" secondAttribute="bottom" constant="41" id="ZXO-9M-fZV">
                                 <variation key="heightClass=regular-widthClass=compact" constant="10"/>
@@ -105,7 +94,6 @@
                     <connections>
                         <outlet property="btHDMIOverIP" destination="kVv-6p-Wf2" id="J0v-LG-Dfj"/>
                         <outlet property="btMatrix4" destination="TA1-kd-mvP" id="2EQ-Nz-h5X"/>
-                        <outlet property="btMatrix8" destination="Ypq-79-kJ7" id="o12-u1-JtP"/>
                         <outlet property="btSetting" destination="sck-lG-3lN" id="hXM-1e-Qny"/>
                     </connections>
                 </viewController>
@@ -484,18 +472,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="JG7-GA-bve">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="JG7-GA-bve">
                                 <rect key="frame" x="83" y="176" width="248" height="544"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QIY-Jf-0Z7">
-                                        <rect key="frame" x="0.0" y="0.0" width="248" height="84.5"/>
-                                        <segments>
-                                            <segment title="Default"/>
-                                            <segment title="From Screen"/>
-                                        </segments>
-                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="920-Zu-aJ4">
+                                        <rect key="frame" x="0.0" y="0.0" width="248" height="99.5"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QIY-Jf-0Z7">
+                                                <rect key="frame" x="26.5" y="34" width="195" height="32"/>
+                                                <segments>
+                                                    <segment title="Default"/>
+                                                    <segment title="From Screen"/>
+                                                </segments>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="QIY-Jf-0Z7" firstAttribute="centerY" secondItem="920-Zu-aJ4" secondAttribute="centerY" id="EFq-Pf-FlW"/>
+                                            <constraint firstItem="QIY-Jf-0Z7" firstAttribute="centerX" secondItem="920-Zu-aJ4" secondAttribute="centerX" id="Gos-zF-5wS"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxz-QA-A4s">
-                                        <rect key="frame" x="0.0" y="115.5" width="248" height="83"/>
+                                        <rect key="frame" x="0.0" y="111.5" width="248" height="99"/>
                                         <state key="normal" title="N/A"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
@@ -504,16 +502,27 @@
                                             <action selector="btShowEDIDListWithSender:" destination="SSs-jb-J34" eventType="touchUpInside" id="8x2-5H-8SC"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="To Device" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n1r-5H-sr1">
-                                        <rect key="frame" x="0.0" y="230.5" width="248" height="83"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                        </variation>
-                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VaA-J0-SJm">
+                                        <rect key="frame" x="0.0" y="222.5" width="248" height="99"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="To Device" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n1r-5H-sr1">
+                                                <rect key="frame" x="24.5" y="32.5" width="199" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                </variation>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="n1r-5H-sr1" firstAttribute="width" secondItem="VaA-J0-SJm" secondAttribute="width" multiplier="0.8" id="9aO-wL-nfL"/>
+                                            <constraint firstItem="n1r-5H-sr1" firstAttribute="centerY" secondItem="VaA-J0-SJm" secondAttribute="centerY" id="Knm-Xe-a66"/>
+                                            <constraint firstItem="n1r-5H-sr1" firstAttribute="centerX" secondItem="VaA-J0-SJm" secondAttribute="centerX" id="she-F6-8xE"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ueq-od-MmD">
-                                        <rect key="frame" x="0.0" y="345.5" width="248" height="83"/>
+                                        <rect key="frame" x="0.0" y="333.5" width="248" height="99"/>
                                         <state key="normal" title="N/A"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
@@ -523,10 +532,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMt-Qt-PYN">
-                                        <rect key="frame" x="0.0" y="460.5" width="248" height="83.5"/>
+                                        <rect key="frame" x="0.0" y="444.5" width="248" height="99.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8u9-dl-YlX">
-                                                <rect key="frame" x="104" y="27" width="40" height="30"/>
+                                                <rect key="frame" x="104" y="35" width="40" height="30"/>
                                                 <state key="normal" title="Apply">
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                 </state>
