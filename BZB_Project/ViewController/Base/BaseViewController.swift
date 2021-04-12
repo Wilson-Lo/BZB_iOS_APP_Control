@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController{
+class BaseViewController : UIViewController{
     
     var alert: UIAlertController!
     static var isPhone: Bool!

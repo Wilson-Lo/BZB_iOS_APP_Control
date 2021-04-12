@@ -37,6 +37,7 @@
 		86320F0E261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F0D261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift */; };
 		86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */; };
 		86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */; };
+		866639F2262453DC002D3CC8 /* Matrix4FWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866639F1262453DC002D3CC8 /* Matrix4FWViewController.swift */; };
 		86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86681294262029330034D975 /* MappingRename4DialogViewController.swift */; };
 		866812BC262037EF0034D975 /* Matrix4ViewEDIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866812BB262037EF0034D975 /* Matrix4ViewEDIDViewController.swift */; };
 		866812E026203D3C0034D975 /* OCFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866812DF26203D3C0034D975 /* OCFile.mm */; };
@@ -106,6 +107,7 @@
 		86320F0D261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4LearnEDIDViewController.swift; sourceTree = "<group>"; };
 		86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4IORenameViewController.swift; sourceTree = "<group>"; };
 		86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IORenameCollectionViewCell.swift; sourceTree = "<group>"; };
+		866639F1262453DC002D3CC8 /* Matrix4FWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4FWViewController.swift; sourceTree = "<group>"; };
 		86681294262029330034D975 /* MappingRename4DialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRename4DialogViewController.swift; sourceTree = "<group>"; };
 		866812BB262037EF0034D975 /* Matrix4ViewEDIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4ViewEDIDViewController.swift; sourceTree = "<group>"; };
 		866812DF26203D3C0034D975 /* OCFile.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OCFile.mm; sourceTree = "<group>"; };
@@ -225,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				86320E9E261478E4007FE620 /* Base */,
-				86320E9D261478C1007FE620 /* Matrix8 */,
 				86320E9C261478B5007FE620 /* Matrix4 */,
 				86320E9B261478A9007FE620 /* ControlBox */,
 				86320ED526155852007FE620 /* MainViewController.swift */,
@@ -272,15 +273,9 @@
 				860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */,
 				860580A6261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift */,
 				866812BB262037EF0034D975 /* Matrix4ViewEDIDViewController.swift */,
+				866639F1262453DC002D3CC8 /* Matrix4FWViewController.swift */,
 			);
 			path = Matrix4;
-			sourceTree = "<group>";
-		};
-		86320E9D261478C1007FE620 /* Matrix8 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Matrix8;
 			sourceTree = "<group>";
 		};
 		86320E9E261478E4007FE620 /* Base */ = {
@@ -594,6 +589,7 @@
 				86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */,
 				86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */,
 				86320F03261D63A7007FE620 /* Data.swift in Sources */,
+				866639F2262453DC002D3CC8 /* Matrix4FWViewController.swift in Sources */,
 				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,
