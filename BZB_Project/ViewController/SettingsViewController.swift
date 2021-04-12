@@ -34,6 +34,7 @@ class SettingsViewController: BaseViewController{
     
     //device info structure (mac & ip)
     struct Device {
+        let name: String
         let mac: String
         let ip: String
     }
@@ -154,7 +155,7 @@ extension SettingsViewController{
             }else{
                 self.view.showToast(text: "IP can't not be empty !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: false)
             }
-           // self.view.makeToast("IP can't not be empty !")
+            // self.view.makeToast("IP can't not be empty !")
         }
     }
     
@@ -180,7 +181,7 @@ extension SettingsViewController{
                         // create menu with data source -> here [String]
                         
                         for deviceInfo in self.deviceList{
-                            self.menuList.append(deviceInfo.mac + "\n" + deviceInfo.ip)
+                            self.menuList.append( deviceInfo.name + "\n" + deviceInfo.mac + "\n" + deviceInfo.ip)
                         }
                         
                         self.menu = RSSelectionMenu(dataSource: self.menuList) { (cell, name, indexPath) in
@@ -265,7 +266,16 @@ extension SettingsViewController: GCDAsyncUdpSocketDelegate{
             
             if(deviceInfo.count > 0){
                 print("receive")
-                self.deviceList.append(Device(mac: "MAC:" + String(format:"%02X", deviceInfo[21]) + "-" + String(format:"%02X", deviceInfo[22]) + "-" + String(format:"%02X", deviceInfo[23]) + "-" + String(format:"%02X", deviceInfo[24]) + "-" + String(format:"%02X", deviceInfo[25]) + "-" + String(format:"%02X", deviceInfo[26]),ip: String(deviceInfo[27]) + "." + String(deviceInfo[28]) + "." + String(deviceInfo[29]) + "." + String(deviceInfo[30])))
+                var deviceName = ""
+                for index in 5...20{
+                    deviceName = deviceName + String(format: "%c", deviceInfo[index])
+                }
+                
+                let result = deviceName.contains("Matrix 4x4 HDR")
+                print(deviceName + " - \(result)")
+                if(result){
+                    self.deviceList.append(Device(name: deviceName, mac: "MAC:" + String(format:"%02X", deviceInfo[21]) + "-" + String(format:"%02X", deviceInfo[22]) + "-" + String(format:"%02X", deviceInfo[23]) + "-" + String(format:"%02X", deviceInfo[24]) + "-" + String(format:"%02X", deviceInfo[25]) + "-" + String(format:"%02X", deviceInfo[26]),ip: String(deviceInfo[27]) + "." + String(deviceInfo[28]) + "." + String(deviceInfo[29]) + "." + String(deviceInfo[30])))
+                }
             }
         }
     }
