@@ -13,7 +13,8 @@ class BaseViewController : UIViewController{
     static var isPhone: Bool!
     static var textSizeForPhone = 16
     static var textSizeForPad = 32
-
+    final let SERVER_PORT = "8080" //Server listening port ( Control Box )
+    
     override func viewDidLoad() {
         self.alert = UIAlertController(title: nil, message: "Please wait ...", preferredStyle: .alert)
         switch UIDevice.current.userInterfaceIdiom {

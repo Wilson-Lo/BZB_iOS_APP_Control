@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework
 ${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework
 ${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework

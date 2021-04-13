@@ -18,7 +18,7 @@ target 'BZB_Project' do
   pod 'SVProgressHUD'
   pod 'SwiftSocket'
   pod 'RSSelectionMenu'
-
+  pod 'Alamofire', '~> 5.2'
 
   target 'BZB_ProjectTests' do
     inherit! :search_paths

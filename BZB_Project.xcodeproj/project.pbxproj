@@ -38,6 +38,9 @@
 		86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */; };
 		86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */; };
 		866639F2262453DC002D3CC8 /* Matrix4FWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866639F1262453DC002D3CC8 /* Matrix4FWViewController.swift */; };
+		866639FA2625766E002D3CC8 /* ControlBoxMappingRXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866639F92625766E002D3CC8 /* ControlBoxMappingRXViewController.swift */; };
+		86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */; };
+		86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */; };
 		86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86681294262029330034D975 /* MappingRename4DialogViewController.swift */; };
 		866812BC262037EF0034D975 /* Matrix4ViewEDIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866812BB262037EF0034D975 /* Matrix4ViewEDIDViewController.swift */; };
 		866812E026203D3C0034D975 /* OCFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866812DF26203D3C0034D975 /* OCFile.mm */; };
@@ -108,6 +111,9 @@
 		86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4IORenameViewController.swift; sourceTree = "<group>"; };
 		86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IORenameCollectionViewCell.swift; sourceTree = "<group>"; };
 		866639F1262453DC002D3CC8 /* Matrix4FWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4FWViewController.swift; sourceTree = "<group>"; };
+		866639F92625766E002D3CC8 /* ControlBoxMappingRXViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingRXViewController.swift; sourceTree = "<group>"; };
+		86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCmdHelper.swift; sourceTree = "<group>"; };
+		86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxRXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86681294262029330034D975 /* MappingRename4DialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRename4DialogViewController.swift; sourceTree = "<group>"; };
 		866812BB262037EF0034D975 /* Matrix4ViewEDIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4ViewEDIDViewController.swift; sourceTree = "<group>"; };
 		866812DF26203D3C0034D975 /* OCFile.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OCFile.mm; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 		86320E2C261468BE007FE620 /* BZB_Project */ = {
 			isa = PBXGroup;
 			children = (
+				86663A0126258C1A002D3CC8 /* HTTP */,
 				866812DE26203D1F0034D975 /* EDID */,
 				86320EDF2615A32E007FE620 /* View */,
 				86320E9A2614789C007FE620 /* Socket */,
@@ -260,6 +267,7 @@
 		86320E9B261478A9007FE620 /* ControlBox */ = {
 			isa = PBXGroup;
 			children = (
+				866639F92625766E002D3CC8 /* ControlBoxMappingRXViewController.swift */,
 			);
 			path = ControlBox;
 			sourceTree = "<group>";
@@ -303,8 +311,17 @@
 				86320F08261D9402007FE620 /* MappingCollectionViewCell.swift */,
 				86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */,
 				860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */,
+				86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		86663A0126258C1A002D3CC8 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */,
+			);
+			path = HTTP;
 			sourceTree = "<group>";
 		};
 		866812DE26203D1F0034D975 /* EDID */ = {
@@ -590,11 +607,14 @@
 				86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */,
 				86320F03261D63A7007FE620 /* Data.swift in Sources */,
 				866639F2262453DC002D3CC8 /* Matrix4FWViewController.swift in Sources */,
+				86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */,
+				866639FA2625766E002D3CC8 /* ControlBoxMappingRXViewController.swift in Sources */,
 				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,
 				860580AF261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift in Sources */,
 				8605809D261F01F100B1E0AF /* String.swift in Sources */,
+				86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */,
 				860580A7261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift in Sources */,
 				86320F0E261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift in Sources */,
 				86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */,

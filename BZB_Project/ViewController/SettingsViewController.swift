@@ -271,9 +271,10 @@ extension SettingsViewController: GCDAsyncUdpSocketDelegate{
                     deviceName = deviceName + String(format: "%c", deviceInfo[index])
                 }
                 
-                let result = deviceName.contains("Matrix 4x4 HDR")
-                print(deviceName + " - \(result)")
-                if(result){
+                let resultA = deviceName.contains("Matrix 4x4 HDR")
+                let resultB = deviceName.contains("Control-Box")
+    
+                if(resultA || resultB){
                     self.deviceList.append(Device(name: deviceName, mac: "MAC:" + String(format:"%02X", deviceInfo[21]) + "-" + String(format:"%02X", deviceInfo[22]) + "-" + String(format:"%02X", deviceInfo[23]) + "-" + String(format:"%02X", deviceInfo[24]) + "-" + String(format:"%02X", deviceInfo[25]) + "-" + String(format:"%02X", deviceInfo[26]),ip: String(deviceInfo[27]) + "." + String(deviceInfo[28]) + "." + String(deviceInfo[29]) + "." + String(deviceInfo[30])))
                 }
             }
