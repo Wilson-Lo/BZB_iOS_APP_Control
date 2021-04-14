@@ -45,6 +45,8 @@
 		866812BC262037EF0034D975 /* Matrix4ViewEDIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866812BB262037EF0034D975 /* Matrix4ViewEDIDViewController.swift */; };
 		866812E026203D3C0034D975 /* OCFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866812DF26203D3C0034D975 /* OCFile.mm */; };
 		866812EA26203D660034D975 /* Edid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866812E826203D660034D975 /* Edid.cpp */; };
+		86BB53A92627089C0044E52D /* ControlBoxMappingTXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53A82627089B0044E52D /* ControlBoxMappingTXViewController.swift */; };
+		86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */; };
 		9CA02039A380A7DC709D1BCD /* Pods_BZB_Project_BZB_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299F1373CFD636EAED5926D /* Pods_BZB_Project_BZB_ProjectUITests.framework */; };
 		AFE1D58AA2F04BAE3D65BD58 /* Pods_BZB_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C2BE9FA26FA16B49782A008 /* Pods_BZB_Project.framework */; };
 /* End PBXBuildFile section */
@@ -121,6 +123,8 @@
 		866812E826203D660034D975 /* Edid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Edid.cpp; sourceTree = "<group>"; };
 		866812E926203D660034D975 /* Edid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Edid.hpp; sourceTree = "<group>"; };
 		86681315262040DC0034D975 /* BZB_Project-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BZB_Project-Bridging-Header.h"; sourceTree = "<group>"; };
+		86BB53A82627089B0044E52D /* ControlBoxMappingTXViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingTXViewController.swift; sourceTree = "<group>"; };
+		86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxTXCollectionViewCell.swift; sourceTree = "<group>"; };
 		9C6FC59AC0AA853535CE026B /* Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -268,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				866639F92625766E002D3CC8 /* ControlBoxMappingRXViewController.swift */,
+				86BB53A82627089B0044E52D /* ControlBoxMappingTXViewController.swift */,
 			);
 			path = ControlBox;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */,
 				860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */,
 				86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */,
+				86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 				866812E026203D3C0034D975 /* OCFile.mm in Sources */,
 				866812BC262037EF0034D975 /* Matrix4ViewEDIDViewController.swift in Sources */,
 				86058080261EFC5600B1E0AF /* IORename4DialogViewController.swift in Sources */,
+				86BB53A92627089C0044E52D /* ControlBoxMappingTXViewController.swift in Sources */,
 				8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
@@ -613,6 +620,7 @@
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,
 				860580AF261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift in Sources */,
+				86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */,
 				8605809D261F01F100B1E0AF /* String.swift in Sources */,
 				86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */,
 				860580A7261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift in Sources */,

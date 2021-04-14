@@ -41,7 +41,7 @@ class ControlBoxMappingRXViewController : BaseViewController{
     override func viewDidLoad() {
         print("ControlBoxMappingRXViewController-viewDidLoad")
         super.viewDidLoad()
-        initialUI()
+        self.initialUI()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
     }
     
@@ -240,7 +240,7 @@ extension ControlBoxMappingRXViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxRXCollectionViewCell", for: indexPath) as! ControlBoxRXCollectionViewCell
         cell.deviceName.text = self.rxList[indexPath.item].name
-        cell.pinText.text = self.rxList[indexPath.item].group_id
+        cell.groupIDText.text = self.rxList[indexPath.item].group_id
         cell.ipText.text = self.rxList[indexPath.item].ip
         if(self.rxList[indexPath.item].alive != "y"){
             cell.deviceName.backgroundColor = UIColor.red
@@ -456,5 +456,4 @@ extension ControlBoxMappingRXViewController {
             }
         }
     }
-    
 }
