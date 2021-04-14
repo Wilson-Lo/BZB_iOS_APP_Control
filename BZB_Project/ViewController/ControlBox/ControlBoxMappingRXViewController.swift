@@ -2,7 +2,8 @@
 //  ControlBoxMappingViewController.swift
 //  BZB_Project
 //
-//  Created by GoMax on 2021/4/13.
+//  Created by Wilson on 2021/03/31.
+//  Copyright © 2021 GoMax. All rights reserved.
 //
 
 import UIKit
@@ -12,6 +13,7 @@ import Toast_Swift
 import SwiftSocket
 import SwiftyJSON
 import Alamofire
+import PopupDialog
 
 class ControlBoxMappingRXViewController : BaseViewController{
     
@@ -21,7 +23,10 @@ class ControlBoxMappingRXViewController : BaseViewController{
     var rxList: Array<Device> = []
     var txList: Array<Device> = []
     
-    //device info structure (mac & ip)
+    @IBOutlet weak var btRefresh: UIButton!
+    @IBOutlet weak var btSearch: UIButton!
+    
+    //device info structure
     struct Device {
         let name: String
         let ip: String
@@ -33,6 +38,7 @@ class ControlBoxMappingRXViewController : BaseViewController{
     override func viewDidLoad() {
         print("ControlBoxMappingRXViewController-viewDidLoad")
         super.viewDidLoad()
+        initialUI()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
     }
     
@@ -40,6 +46,7 @@ class ControlBoxMappingRXViewController : BaseViewController{
         super.viewWillAppear(true)
         print("ControlBoxMappingRXViewController-viewWillAppear")
         self.queueHTTP.async {
+            self.showLoadingView()
             var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
             if(device_ip != nil){
                 self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._1_cmd_get_node_info)
@@ -47,20 +54,58 @@ class ControlBoxMappingRXViewController : BaseViewController{
                 
             }
         }
-        
+    
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         print("ControlBoxMappingRXViewController-viewDidDisappear")
         
     }
-    
+
 }
 
 extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("click")
+        let title = "\n"+self.rxList[indexPath.item].name
+        let message = ""
         
+        // Create the dialog,
+        let popup = PopupDialog(title: title, message: message, image: nil)
+        
+        var btArray: Array<CancelButton> = []
+        if(!Matrix4MappingViewController.isPhone){
+            let dialogAppearance = PopupDialogDefaultView.appearance()
+            dialogAppearance.backgroundColor      = .white
+            dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
+            //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+            dialogAppearance.titleTextAlignment   = .center
+            dialogAppearance.messageFont          = .systemFont(ofSize: 26)
+            //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+            
+            let cb = CancelButton.appearance()
+            cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
+        }
+        
+        btArray.append(CancelButton(title: "On") {
+          
+        })
+        
+        btArray.append(CancelButton(title: "Off") {
+          
+        })
+        
+        btArray.append(CancelButton(title: "Switch Channel") {
+          
+        })
+        
+        btArray.append(CancelButton(title: "Blink Red Light") {
+          
+        })
+
+        popup.addButtons(btArray)
+        
+        self.present(popup, animated: true, completion: nil)
     }
 }
 
@@ -76,6 +121,7 @@ extension ControlBoxMappingRXViewController : UICollectionViewDataSource{
         cell.deviceName.text = self.rxList[indexPath.item].name
         cell.pinText.text = self.rxList[indexPath.item].group_id
         cell.ipText.text = self.rxList[indexPath.item].ip
+        cell.deviceName.backgroundColor = UIColor.red
         //        }
         //        cell.index.text = "Mapping \(indexPath.item+1)"
         return cell
@@ -117,6 +163,47 @@ extension ControlBoxMappingRXViewController: UICollectionViewDelegateFlowLayout 
     }
 }
 
+extension ControlBoxMappingRXViewController{
+    
+    func initialUI(){
+        if(ControlBoxMappingRXViewController.isPhone){
+            print("is phone")
+            //Refresh button
+            let widthBtRefresh = btRefresh.widthAnchor.constraint(equalToConstant: 30.0)
+            let heightBtRefresh = btRefresh.heightAnchor.constraint(equalToConstant: 30.0)
+            NSLayoutConstraint.activate([widthBtRefresh, heightBtRefresh])
+            widthBtRefresh.constant = 40
+            heightBtRefresh.constant = 40
+            
+            //Search button
+            let widthBtSearch = btSearch.widthAnchor.constraint(equalToConstant: 30.0)
+            let heightBtSearch = btSearch.heightAnchor.constraint(equalToConstant: 30.0)
+            NSLayoutConstraint.activate([widthBtSearch, heightBtSearch])
+            widthBtSearch.constant = 40
+            heightBtSearch.constant = 40
+    
+        }else{
+            print("is pad")
+            //Refresh button
+            let widthBtRefresh = btRefresh.widthAnchor.constraint(equalToConstant: 30.0)
+            let heightBtRefresh = btRefresh.heightAnchor.constraint(equalToConstant: 30.0)
+            NSLayoutConstraint.activate([widthBtRefresh, heightBtRefresh])
+            //change button size to 50x50
+            widthBtRefresh.constant = 80
+            heightBtRefresh.constant = 80
+            
+            //Search button
+            let widthBtSearch = btSearch.widthAnchor.constraint(equalToConstant: 30.0)
+            let heightBtSearch = btSearch.heightAnchor.constraint(equalToConstant: 30.0)
+            NSLayoutConstraint.activate([widthBtSearch, heightBtSearch])
+            widthBtSearch.constant = 80
+            heightBtSearch.constant = 80
+        }
+    }
+    
+    
+}
+
 extension ControlBoxMappingRXViewController {
     
     //send HTTP GET method
@@ -154,35 +241,45 @@ extension ControlBoxMappingRXViewController {
                         }
                     }
                     self.collectionView.reloadData()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.dismiss(animated: false, completion: nil)
+                    }
                     break
                     
                 case HTTPCmdHelper._2_cmd_search_get_node_info:
                     print("_2_cmd_search_get_node_info")
-                    self.rxList.removeAll()
-                    self.txList.removeAll()
                     print(self.searchText.text)
-                    if let deviceList = json.array {
-                        for deviceObject in deviceList {
-                            let ip = deviceObject["ip"].stringValue
-                            let name = deviceObject["host_name"].stringValue
-                            let pin = deviceObject["pin"].stringValue
-                            let alive = deviceObject["alive"].boolValue
-                            let group_id = deviceObject["id"].stringValue
-                            if(deviceObject["type"].stringValue != "r"){
-                                print("t")
-                                self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
-                            }else{
-                                print("r")
-                                self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
+                    if(self.searchText.text!.length > 0){
+                        self.rxList.removeAll()
+                        self.txList.removeAll()
+                        if let deviceList = json.array {
+                            for deviceObject in deviceList {
+                                let ip = deviceObject["ip"].stringValue
+                                let name = deviceObject["host_name"].stringValue
+                                let pin = deviceObject["pin"].stringValue
+                                let alive = deviceObject["alive"].boolValue
+                                let group_id = deviceObject["id"].stringValue
+                                if(deviceObject["type"].stringValue != "r"){
+                                    self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
+                                }else{
+                                    if(name.contains(self.searchText.text!)){
+                                        self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
+                                    }
+                                }
+                                print(ip, name, pin)
                             }
-                            print(ip, name, pin)
                         }
+                        self.collectionView.reloadData()
                     }
-                    self.collectionView.reloadData()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.dismiss(animated: false, completion: nil)
+                    }
                     break
                     
                 default:
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.dismiss(animated: false, completion: nil)
+                    }
                     break
                 }
                 
@@ -190,20 +287,40 @@ extension ControlBoxMappingRXViewController {
                 
             case .failure(let error):
                 debugPrint("HTTP GET request failed")
-                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.dismiss(animated: false, completion: nil)
+                }
                 break
             }
         }
     }
 }
 
+//Button click event
 extension ControlBoxMappingRXViewController {
     
     @IBAction func btSearch(sender: UIButton) {
         self.queueHTTP.async {
+            self.showLoadingView()
             var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
             if(device_ip != nil){
                 self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._2_cmd_search_get_node_info)
+            }else{
+                
+            }
+        }
+    }
+    
+    @IBAction func btRefresh(sender: UIButton) {
+        self.queueHTTP.async {
+            self.showLoadingView()
+            DispatchQueue.main.async() {
+                self.searchText.text = ""
+            }
+      
+            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+            if(device_ip != nil){
+                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._1_cmd_get_node_info)
             }else{
                 
             }

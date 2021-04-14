@@ -2,8 +2,8 @@
 //  MappingRenameDialogViewController.swift
 //  GoMaxMatrix
 //
-//  Created by 啟發電子 on 2020/7/1.
-//  Copyright © 2020 gomax. All rights reserved.
+//  Created by Wilson on 2021/03/31.
+//  Copyright © 2021 GoMax. All rights reserved.
 //
 
 import Foundation
@@ -29,8 +29,6 @@ class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldD
         print("MappingRename4DialogViewController-viewWillAppear")
         TcpSocketClient.sharedInstance.delegate = self
         TcpSocketClient.sharedInstance.startConnect()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
     }
        
     @IBAction func closeBtnPressed(_ sender: Any) {
@@ -66,11 +64,6 @@ class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldD
         TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._8_cmd_set_mapping_name))
         //  self.startCheckFeedbackTimer()
       
-    }
-    
-    @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
     }
 }
 

@@ -1525,6 +1525,16 @@
                                                     <action selector="btSearchWithSender:" destination="tgp-CG-A0O" eventType="touchUpInside" id="4eI-up-R0M"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn2-nd-xM0">
+                                                <rect key="frame" x="353" y="22" width="32" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="l0Y-Fi-PYL"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="refresh"/>
+                                                <connections>
+                                                    <action selector="btRefreshWithSender:" destination="tgp-CG-A0O" eventType="touchUpInside" id="dRp-iG-BuR"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -1532,6 +1542,8 @@
                                             <constraint firstItem="GmL-6h-RHs" firstAttribute="top" secondItem="gQC-fE-ebz" secondAttribute="top" id="Kne-AX-70q"/>
                                             <constraint firstItem="gQC-fE-ebz" firstAttribute="centerY" secondItem="fei-WT-eOj" secondAttribute="centerY" id="Pub-MT-Buj"/>
                                             <constraint firstItem="GmL-6h-RHs" firstAttribute="leading" secondItem="gQC-fE-ebz" secondAttribute="trailing" constant="12.666666666666657" id="VMm-zp-k7c"/>
+                                            <constraint firstAttribute="trailing" secondItem="hn2-nd-xM0" secondAttribute="trailing" constant="0.33333333333331439" id="a7W-zV-oow"/>
+                                            <constraint firstItem="hn2-nd-xM0" firstAttribute="top" secondItem="fei-WT-eOj" secondAttribute="top" constant="22" id="fh1-tB-QqD"/>
                                             <constraint firstItem="gQC-fE-ebz" firstAttribute="leading" secondItem="fei-WT-eOj" secondAttribute="leadingMargin" id="uag-4L-iDs"/>
                                             <constraint firstItem="gQC-fE-ebz" firstAttribute="bottom" secondItem="GmL-6h-RHs" secondAttribute="bottom" id="zCS-dG-A8C"/>
                                         </constraints>
@@ -1561,7 +1573,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="output_name" text="N/A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfX-FY-93s" userLabel="output_name">
                                                     <rect key="frame" x="0.0" y="0.0" width="370" height="40"/>
-                                                    <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                    <color key="backgroundColor" red="0.21823701938115553" green="0.55672022239449093" blue="0.31732103935060346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="NO4-wc-5Sj"/>
                                                     </constraints>
@@ -1660,6 +1672,8 @@
                     <tabBarItem key="tabBarItem" title="RX" id="uP6-WF-aEO"/>
                     <navigationItem key="navigationItem" id="Nb6-mV-LK7"/>
                     <connections>
+                        <outlet property="btRefresh" destination="hn2-nd-xM0" id="gtm-l0-W7r"/>
+                        <outlet property="btSearch" destination="GmL-6h-RHs" id="bz3-7o-765"/>
                         <outlet property="collectionView" destination="B6t-fr-HUC" id="alC-9t-5Mu"/>
                         <outlet property="searchText" destination="gQC-fE-ebz" id="0JU-aw-qvv"/>
                     </connections>
