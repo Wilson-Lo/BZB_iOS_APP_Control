@@ -179,8 +179,8 @@ extension ControlBoxMappingRXViewController{
             let widthBtSearch = btSearch.widthAnchor.constraint(equalToConstant: 30.0)
             let heightBtSearch = btSearch.heightAnchor.constraint(equalToConstant: 30.0)
             NSLayoutConstraint.activate([widthBtSearch, heightBtSearch])
-            widthBtSearch.constant = 40
-            heightBtSearch.constant = 40
+            widthBtSearch.constant = 38
+            heightBtSearch.constant = 38
     
         }else{
             print("is pad")
