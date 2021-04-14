@@ -30,7 +30,7 @@ class ControlBoxMappingRXViewController : BaseViewController{
     struct Device {
         let name: String
         let ip: String
-        let alive: Bool
+        let alive: String
         let pin: String
         let group_id: String
     }
@@ -54,20 +54,20 @@ class ControlBoxMappingRXViewController : BaseViewController{
                 
             }
         }
-    
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         print("ControlBoxMappingRXViewController-viewDidDisappear")
         
     }
-
+    
 }
 
 extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("click")
-        let title = "\n"+self.rxList[indexPath.item].name
+        let title = "\n" + self.rxList[indexPath.item].name
         let message = ""
         
         // Create the dialog,
@@ -88,21 +88,99 @@ extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
         }
         
         btArray.append(CancelButton(title: "On") {
-          
+            self.queueHTTP.async {
+                self.showLoadingView()
+                var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                if(device_ip != nil){
+                    
+                    var data  = ["ip": self.rxList[indexPath.item].ip,"value":"echo 0 > /sys/devices/platform/display/screen_off"]
+                    
+                    AF.upload(multipartFormData: { (multiFormData) in
+                        for (key, value) in data {
+                            multiFormData.append(Data(value.utf8), withName: key)
+                        }
+                    }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
+                        switch response.result {
+                        case .success(let JSON):
+                            print("response is :\(response)")
+                            
+                        case .failure(_):
+                            print("fail")
+                        }
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.dismiss(animated: false, completion: nil)
+                    }
+                }else{
+                    
+                }
+            }
         })
         
         btArray.append(CancelButton(title: "Off") {
-          
+            self.queueHTTP.async {
+                self.showLoadingView()
+                var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                if(device_ip != nil){
+                    
+                    var data  = ["ip": self.rxList[indexPath.item].ip,"value":"echo 1 > /sys/devices/platform/display/screen_off"]
+                    
+                    AF.upload(multipartFormData: { (multiFormData) in
+                        for (key, value) in data {
+                            multiFormData.append(Data(value.utf8), withName: key)
+                        }
+                    }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
+                        switch response.result {
+                        case .success(let JSON):
+                            print("response is :\(response)")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                                self.dismiss(animated: false, completion: nil)
+                            }
+                        case .failure(_):
+                            print("fail")
+                        }
+                    }
+                }else{
+                    
+                }
+            }
         })
         
         btArray.append(CancelButton(title: "Switch Channel") {
-          
+            
         })
         
         btArray.append(CancelButton(title: "Blink Red Light") {
-          
+            self.queueHTTP.async {
+                self.showLoadingView()
+                var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                if(device_ip != nil){
+                    
+                    var data  = ["ip": self.rxList[indexPath.item].ip,"value":"echo 2 > /sys/devices/platform/ast1500_led.2/leds:button_link/N_Led"]
+                    
+                    AF.upload(multipartFormData: { (multiFormData) in
+                        for (key, value) in data {
+                            multiFormData.append(Data(value.utf8), withName: key)
+                        }
+                    }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
+                        switch response.result {
+                        case .success(let JSON):
+                            print("response is :\(response)")
+                        case .failure(_):
+                            print("fail")
+                        }
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                        self.dismiss(animated: false, completion: nil)
+                    }
+                }else{
+                    
+                }
+            }
         })
-
+        
         popup.addButtons(btArray)
         
         self.present(popup, animated: true, completion: nil)
@@ -117,13 +195,14 @@ extension ControlBoxMappingRXViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxRXCollectionViewCell", for: indexPath) as! ControlBoxRXCollectionViewCell
-        //        if(self.mappingName.count > 3){
         cell.deviceName.text = self.rxList[indexPath.item].name
         cell.pinText.text = self.rxList[indexPath.item].group_id
         cell.ipText.text = self.rxList[indexPath.item].ip
-        cell.deviceName.backgroundColor = UIColor.red
-        //        }
-        //        cell.index.text = "Mapping \(indexPath.item+1)"
+        if(self.rxList[indexPath.item].alive != "y"){
+            cell.deviceName.backgroundColor = UIColor.red
+        }else{
+            cell.deviceName.backgroundColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
+        }
         return cell
     }
 }
@@ -181,7 +260,7 @@ extension ControlBoxMappingRXViewController{
             NSLayoutConstraint.activate([widthBtSearch, heightBtSearch])
             widthBtSearch.constant = 38
             heightBtSearch.constant = 38
-    
+            
         }else{
             print("is pad")
             //Refresh button
@@ -228,7 +307,7 @@ extension ControlBoxMappingRXViewController {
                             let ip = deviceObject["ip"].stringValue
                             let name = deviceObject["host_name"].stringValue
                             let pin = deviceObject["pin"].stringValue
-                            let alive = deviceObject["alive"].boolValue
+                            let alive = deviceObject["alive"].stringValue
                             let group_id = deviceObject["id"].stringValue
                             if(deviceObject["type"].stringValue != "r"){
                                 print("t")
@@ -257,7 +336,7 @@ extension ControlBoxMappingRXViewController {
                                 let ip = deviceObject["ip"].stringValue
                                 let name = deviceObject["host_name"].stringValue
                                 let pin = deviceObject["pin"].stringValue
-                                let alive = deviceObject["alive"].boolValue
+                                let alive = deviceObject["alive"].stringValue
                                 let group_id = deviceObject["id"].stringValue
                                 if(deviceObject["type"].stringValue != "r"){
                                     self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
@@ -294,6 +373,7 @@ extension ControlBoxMappingRXViewController {
             }
         }
     }
+    
 }
 
 //Button click event
@@ -317,7 +397,7 @@ extension ControlBoxMappingRXViewController {
             DispatchQueue.main.async() {
                 self.searchText.text = ""
             }
-      
+            
             var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
             if(device_ip != nil){
                 self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._1_cmd_get_node_info)

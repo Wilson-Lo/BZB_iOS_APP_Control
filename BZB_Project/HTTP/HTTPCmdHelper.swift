@@ -11,10 +11,10 @@ struct HTTPCmdHelper {
     
     /******  Command  ******/
     static let cmd_get_node_info = "/api/node_info"
-  
+    static let cmd_send_cmd = "/api/ast_sendcmd"
     
     /******  Command number  ******/
     static let _1_cmd_get_node_info = 101
     static let _2_cmd_search_get_node_info = 102
-    
+    static let _3_cmd_red_light = 103
 }
