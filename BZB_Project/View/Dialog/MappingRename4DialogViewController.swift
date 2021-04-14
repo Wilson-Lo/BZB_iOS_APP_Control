@@ -22,8 +22,6 @@ class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldD
         editNewName.smartInsertDeleteType = UITextSmartInsertDeleteType.no
         editNewName.delegate = self
         self.btCancel.layer.cornerRadius = 6
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-            view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,11 +29,8 @@ class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldD
         print("MappingRename4DialogViewController-viewWillAppear")
         TcpSocketClient.sharedInstance.delegate = self
         TcpSocketClient.sharedInstance.startConnect()
-    }
-    
-   @objc func dismissKeyboard() {
-           //Causes the view (or one of its embedded text fields) to resign the first responder status.
-           view.endEditing(true)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
     }
        
     @IBAction func closeBtnPressed(_ sender: Any) {
@@ -71,6 +66,11 @@ class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldD
         TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._8_cmd_set_mapping_name))
         //  self.startCheckFeedbackTimer()
       
+    }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 }
 

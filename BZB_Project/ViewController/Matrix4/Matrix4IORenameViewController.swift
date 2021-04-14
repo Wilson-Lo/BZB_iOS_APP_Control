@@ -109,6 +109,7 @@ extension Matrix4IORenameViewController{
 
 extension Matrix4IORenameViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("click~~~")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: IORename4DialogViewController.typeName) as! IORename4DialogViewController
         vc.modalPresentationStyle = .custom

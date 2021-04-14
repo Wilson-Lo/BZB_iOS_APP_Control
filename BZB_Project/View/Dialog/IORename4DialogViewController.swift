@@ -19,11 +19,6 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
     
     @IBOutlet weak var btCancel: UIButton!
     
-    @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
-    }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // self.dismiss(animated: true, completion: nil)
@@ -34,6 +29,8 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
         print("IORename4DialogViewController-viewWillAppear")
         TcpSocketClient.sharedInstance.delegate = self
         TcpSocketClient.sharedInstance.startConnect()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func closeBtnPressed(_ sender: Any) {
@@ -46,8 +43,6 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
         self.btCancel.layer.cornerRadius = 6
         editNewName.smartInsertDeleteType = UITextSmartInsertDeleteType.no
         editNewName.delegate = self
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
     }
     
     
@@ -99,6 +94,11 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
         TcpSocketClient.sharedInstance.delegate = self
         TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._6_cmd_set_io_name))
         //  self.startCheckFeedbackTimer()
+    }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
 }

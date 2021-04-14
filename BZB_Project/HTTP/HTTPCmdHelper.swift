@@ -15,5 +15,6 @@ struct HTTPCmdHelper {
     
     /******  Command number  ******/
     static let _1_cmd_get_node_info = 101
+    static let _2_cmd_search_get_node_info = 102
     
 }

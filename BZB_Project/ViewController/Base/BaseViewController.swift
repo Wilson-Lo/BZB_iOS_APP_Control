@@ -33,22 +33,25 @@ class BaseViewController : UIViewController{
             break
         // Uh, oh! What could it be?
         }
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-      
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        
+       
             
     }
 
+    
 }
 
 
 extension BaseViewController  {
+    
+
     
     public func hexStringToStringArray(_ data: String) -> [String]?{
         let length = data.count

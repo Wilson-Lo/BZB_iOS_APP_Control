@@ -15,7 +15,7 @@ import Alamofire
 
 class ControlBoxMappingRXViewController : BaseViewController{
     
-    
+    @IBOutlet weak var searchText: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
     var queueHTTP: DispatchQueue!
     var rxList: Array<Device> = []
@@ -117,7 +117,6 @@ extension ControlBoxMappingRXViewController: UICollectionViewDelegateFlowLayout 
     }
 }
 
-
 extension ControlBoxMappingRXViewController {
     
     //send HTTP GET method
@@ -157,6 +156,31 @@ extension ControlBoxMappingRXViewController {
                     self.collectionView.reloadData()
                     break
                     
+                case HTTPCmdHelper._2_cmd_search_get_node_info:
+                    print("_2_cmd_search_get_node_info")
+                    self.rxList.removeAll()
+                    self.txList.removeAll()
+                    print(self.searchText.text)
+                    if let deviceList = json.array {
+                        for deviceObject in deviceList {
+                            let ip = deviceObject["ip"].stringValue
+                            let name = deviceObject["host_name"].stringValue
+                            let pin = deviceObject["pin"].stringValue
+                            let alive = deviceObject["alive"].boolValue
+                            let group_id = deviceObject["id"].stringValue
+                            if(deviceObject["type"].stringValue != "r"){
+                                print("t")
+                                self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
+                            }else{
+                                print("r")
+                                self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
+                            }
+                            print(ip, name, pin)
+                        }
+                    }
+                    self.collectionView.reloadData()
+                    break
+                    
                 default:
                     
                     break
@@ -171,4 +195,19 @@ extension ControlBoxMappingRXViewController {
             }
         }
     }
+}
+
+extension ControlBoxMappingRXViewController {
+    
+    @IBAction func btSearch(sender: UIButton) {
+        self.queueHTTP.async {
+            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+            if(device_ip != nil){
+                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._2_cmd_search_get_node_info)
+            }else{
+                
+            }
+        }
+    }
+    
 }

@@ -42,12 +42,12 @@ class SettingsViewController: BaseViewController{
     override func viewDidLoad() {
         print("SettingsViewController-viewDidLoad")
         super.viewDidLoad()
+        initialUI()
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        initialUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
