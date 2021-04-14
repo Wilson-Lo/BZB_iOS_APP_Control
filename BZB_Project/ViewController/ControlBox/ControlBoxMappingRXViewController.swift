@@ -19,9 +19,12 @@ class ControlBoxMappingRXViewController : BaseViewController{
     
     @IBOutlet weak var searchText: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
+    
     var queueHTTP: DispatchQueue!
     var rxList: Array<Device> = []
     var txList: Array<Device> = []
+    var txMenu: RSSelectionMenu<String>!
+    var txNameForUI: Array<String> = []
     
     @IBOutlet weak var btRefresh: UIButton!
     @IBOutlet weak var btSearch: UIButton!
@@ -149,6 +152,47 @@ extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
         
         btArray.append(CancelButton(title: "Switch Channel") {
             
+            DispatchQueue.main.async() {
+                
+                self.txMenu = RSSelectionMenu(dataSource: self.txNameForUI) { (cell, name, indexPath) in
+                    cell.textLabel?.text = name
+                }
+                
+                self.txMenu.title = "Select TX"
+                
+                // provide selected items
+                var selectedNames: [String] = []
+                
+                self.txMenu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
+                  
+                    self.queueHTTP.async {
+                        self.showLoadingView()
+                        var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                        if(device_ip != nil){
+                            print(self.txList[index].group_id + "-" + self.rxList[indexPath.item].ip)
+                            var data  = ["ip": self.rxList[indexPath.item].ip,"switch_id":self.txList[index].group_id,"switch_type":"z"]
+                            AF.upload(multipartFormData: { (multiFormData) in
+                                for (key, value) in data {
+                                    multiFormData.append(Data(value.utf8), withName: key)
+                                }
+                            }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_switch_group_id).responseJSON { response in
+                                switch response.result {
+                                case .success(let JSON):
+                                    print("response is :\(response)")
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                                        self.dismiss(animated: false, completion: nil)
+                                    }
+                                case .failure(_):
+                                    print("fail")
+                                }
+                            }
+                        }else{
+                            
+                        }
+                    }
+                }
+                self.txMenu.show(from: self)
+            }
         })
         
         btArray.append(CancelButton(title: "Blink Red Light") {
@@ -302,6 +346,8 @@ extension ControlBoxMappingRXViewController {
                     print("_1_cmd_get_node_info")
                     self.rxList.removeAll()
                     self.txList.removeAll()
+                    self.txNameForUI.removeAll()
+                    
                     if let deviceList = json.array {
                         for deviceObject in deviceList {
                             let ip = deviceObject["ip"].stringValue
@@ -310,10 +356,11 @@ extension ControlBoxMappingRXViewController {
                             let alive = deviceObject["alive"].stringValue
                             let group_id = deviceObject["id"].stringValue
                             if(deviceObject["type"].stringValue != "r"){
-                                print("t")
                                 self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
+                                if(alive != "r"){
+                                    self.txNameForUI.append(name)
+                                }
                             }else{
-                                print("r")
                                 self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
                             }
                             print(ip, name, pin)
@@ -340,6 +387,9 @@ extension ControlBoxMappingRXViewController {
                                 let group_id = deviceObject["id"].stringValue
                                 if(deviceObject["type"].stringValue != "r"){
                                     self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
+                                    if(alive != "r"){
+                                        self.txNameForUI.append(name)
+                                    }
                                 }else{
                                     if(name.contains(self.searchText.text!)){
                                         self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
