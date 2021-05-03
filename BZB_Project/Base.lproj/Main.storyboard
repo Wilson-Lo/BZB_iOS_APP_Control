@@ -1551,8 +1551,8 @@
                                     <constraint firstAttribute="height" constant="81" id="LiC-LJ-IjE"/>
                                 </constraints>
                             </stackView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B6t-fr-HUC">
-                                <rect key="frame" x="0.0" y="208" width="414" height="595"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B6t-fr-HUC">
+                                <rect key="frame" x="-6" y="204" width="414" height="595"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1zT-7p-APX">
                                     <size key="itemSize" width="375" height="350"/>
@@ -1666,7 +1666,7 @@
                             <constraint firstItem="Zcg-dy-HAs" firstAttribute="top" secondItem="ddh-rv-hjZ" secondAttribute="top" constant="20" id="qaW-Nj-zDL"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="RX" id="uP6-WF-aEO"/>
+                    <tabBarItem key="tabBarItem" title="RX" image="screen" id="uP6-WF-aEO"/>
                     <navigationItem key="navigationItem" id="Nb6-mV-LK7"/>
                     <connections>
                         <outlet property="btRefresh" destination="hn2-nd-xM0" id="gtm-l0-W7r"/>
@@ -1849,7 +1849,7 @@
                             <constraint firstItem="L6h-dQ-0aG" firstAttribute="width" secondItem="LpX-bj-c9S" secondAttribute="width" multiplier="0.9" id="x8y-Cm-jaz"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="TX" id="jqP-WX-PRD"/>
+                    <tabBarItem key="tabBarItem" title="TX" image="music-player" id="jqP-WX-PRD"/>
                     <navigationItem key="navigationItem" id="bhE-ue-lJS"/>
                     <connections>
                         <outlet property="btRefresh" destination="SvN-EO-en8" id="rfh-f1-VAC"/>
@@ -1873,9 +1873,11 @@
         <image name="learn" width="32" height="32"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="more" width="32" height="32"/>
+        <image name="music-player" width="32" height="32"/>
         <image name="play" width="32" height="32"/>
         <image name="refresh" width="32" height="32"/>
         <image name="save" width="32" height="32"/>
+        <image name="screen" width="32" height="32"/>
         <image name="switch" width="32" height="32"/>
         <image name="view" width="32" height="32"/>
         <systemColor name="darkTextColor">

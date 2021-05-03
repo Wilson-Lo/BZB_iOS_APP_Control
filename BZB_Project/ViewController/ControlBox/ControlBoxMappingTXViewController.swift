@@ -20,7 +20,6 @@ class ControlBoxMappingTXViewController : BaseViewController{
     var rxList: Array<Device> = []
     var txList: Array<Device> = []
     var txMenu: RSSelectionMenu<String>!
-    var txNameForUI: Array<String> = []
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchText: UITextField!
@@ -52,7 +51,7 @@ class ControlBoxMappingTXViewController : BaseViewController{
             if(device_ip != nil){
                 self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._1_cmd_get_node_info)
             }else{
-
+                
             }
         }
     }
@@ -136,6 +135,70 @@ extension ControlBoxMappingTXViewController {
     }
 }
 
+extension ControlBoxMappingTXViewController : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("click")
+        let title = "\n" + self.txList[indexPath.item].name
+        let message = ""
+        
+        // Create the dialog,
+        let popup = PopupDialog(title: title, message: message, image: nil)
+        
+        var btArray: Array<CancelButton> = []
+        if(!ControlBoxMappingTXViewController.isPhone){
+            let dialogAppearance = PopupDialogDefaultView.appearance()
+            dialogAppearance.backgroundColor      = .white
+            dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
+            //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+            dialogAppearance.titleTextAlignment   = .center
+            dialogAppearance.messageFont          = .systemFont(ofSize: 26)
+            //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+            
+            let cb = CancelButton.appearance()
+            cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
+        }
+        
+        btArray.append(CancelButton(title: "Switch for All RX") {
+            
+        })
+        
+        btArray.append(CancelButton(title: "Blink Red Light") {
+            self.queueHTTP.async {
+                self.showLoadingView()
+                var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                if(device_ip != nil){
+                    
+                    var data  = ["ip": self.txList[indexPath.item].ip,"value":"cat /sys/devices/platform/ast1500_led.2/leds:button_link/N_Led"]
+                    
+                    AF.upload(multipartFormData: { (multiFormData) in
+                        for (key, value) in data {
+                            multiFormData.append(Data(value.utf8), withName: key)
+                        }
+                    }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
+                        switch response.result {
+                        case .success(let JSON):
+                            print("response is :\(response)")
+                        case .failure(_):
+                            print("fail")
+                        }
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                        self.dismiss(animated: false, completion: nil)
+                    }
+                }else{
+                    
+                }
+            }
+        })
+        
+        popup.addButtons(btArray)
+        
+        self.present(popup, animated: true, completion: nil)
+    }
+}
+
+
 extension ControlBoxMappingTXViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -210,7 +273,6 @@ extension ControlBoxMappingTXViewController{
                     print("_1_cmd_get_node_info")
                     self.rxList.removeAll()
                     self.txList.removeAll()
-                    self.txNameForUI.removeAll()
                     
                     if let deviceList = json.array {
                         for deviceObject in deviceList {
@@ -221,9 +283,7 @@ extension ControlBoxMappingTXViewController{
                             let group_id = deviceObject["id"].stringValue
                             if(deviceObject["type"].stringValue != "r"){
                                 self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
-                                if(alive != "r"){
-                                    self.txNameForUI.append(name)
-                                }
+                                
                             }else{
                                 self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
                             }
@@ -250,14 +310,11 @@ extension ControlBoxMappingTXViewController{
                                 let alive = deviceObject["alive"].stringValue
                                 let group_id = deviceObject["id"].stringValue
                                 if(deviceObject["type"].stringValue != "r"){
-                                    self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
-                                    if(alive != "r"){
-                                        self.txNameForUI.append(name)
+                                    if(name.contains(self.searchText.text!)){
+                                        self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
                                     }
                                 }else{
-                                    if(name.contains(self.searchText.text!)){
-                                        self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
-                                    }
+                                    self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
                                 }
                                 print(ip, name, pin)
                             }
