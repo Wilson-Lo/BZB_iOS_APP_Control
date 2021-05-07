@@ -22,7 +22,8 @@ class ControlBoxMappingRXViewController : BaseViewController{
     
     var queueHTTP: DispatchQueue!
     var rxList: Array<Device> = []
-    var txList: Array<Device> = []
+    var txAllList: Array<Device> = []
+    var txOnlineList: Array<Device> = []
     var txMenu: RSSelectionMenu<String>!
     var txNameForUI: Array<String> = []
     
@@ -170,8 +171,8 @@ extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
                         self.showLoadingView()
                         var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
                         if(device_ip != nil){
-                            print(self.txList[index].group_id + "-" + self.rxList[indexPath.item].ip)
-                            var data  = ["ip": self.rxList[indexPath.item].ip,"switch_id":self.txList[index].group_id,"switch_type":"z"]
+                            print(self.txAllList[index].group_id + "-" + self.rxList[indexPath.item].ip)
+                            var data  = ["ip": self.rxList[indexPath.item].ip,"switch_id":self.txOnlineList[index].group_id,"switch_type":"z"]
                             AF.upload(multipartFormData: { (multiFormData) in
                                 for (key, value) in data {
                                     multiFormData.append(Data(value.utf8), withName: key)
@@ -180,9 +181,16 @@ extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
                                 switch response.result {
                                 case .success(let JSON):
                                     print("response is :\(response)")
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                         self.dismiss(animated: false, completion: nil)
                                     }
+                                    if(BaseViewController.isPhone){
+                                        self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                                    }else{
+                                        self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                                    }
+                                    
+                                    self.refresh()
                                 case .failure(_):
                                     print("fail")
                                 }
@@ -246,7 +254,7 @@ extension ControlBoxMappingRXViewController : UICollectionViewDataSource{
         
         var isHasTX:Bool = false
         
-        for txObject in self.txList {
+        for txObject in self.txAllList {
             if(self.rxList[indexPath.item].group_id == txObject.group_id){
                 cell.txNameText.text = txObject.name
                 isHasTX = true
@@ -366,8 +374,9 @@ extension ControlBoxMappingRXViewController {
                 case HTTPCmdHelper._1_cmd_get_node_info:
                     print("_1_cmd_get_node_info")
                     self.rxList.removeAll()
-                    self.txList.removeAll()
+                    self.txAllList.removeAll()
                     self.txNameForUI.removeAll()
+                    self.txOnlineList.removeAll()
                     
                     if let deviceList = json.array {
                         for deviceObject in deviceList {
@@ -377,8 +386,9 @@ extension ControlBoxMappingRXViewController {
                             let alive = deviceObject["alive"].stringValue
                             let group_id = deviceObject["id"].stringValue
                             if(deviceObject["type"].stringValue != "r"){
-                                self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
+                                self.txAllList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
                                 if(alive == "y"){
+                                    self.txOnlineList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
                                     self.txNameForUI.append(name)
                                 }
                             }else{
@@ -398,7 +408,7 @@ extension ControlBoxMappingRXViewController {
                     print(self.searchText.text)
                     if(self.searchText.text!.length > 0){
                         self.rxList.removeAll()
-                        self.txList.removeAll()
+                        self.txAllList.removeAll()
                         if let deviceList = json.array {
                             for deviceObject in deviceList {
                                 let ip = deviceObject["ip"].stringValue
@@ -407,8 +417,9 @@ extension ControlBoxMappingRXViewController {
                                 let alive = deviceObject["alive"].stringValue
                                 let group_id = deviceObject["id"].stringValue
                                 if(deviceObject["type"].stringValue != "r"){
-                                    self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
+                                    self.txAllList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
                                     if(alive == "y"){
+                                        self.txOnlineList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
                                         self.txNameForUI.append(name)
                                     }
                                 }else{
@@ -457,19 +468,8 @@ extension ControlBoxMappingRXViewController {
 //Button click event
 extension ControlBoxMappingRXViewController {
     
-    @IBAction func btSearch(sender: UIButton) {
-        self.queueHTTP.async {
-            self.showLoadingView()
-            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
-            if(device_ip != nil){
-                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._2_cmd_search_get_node_info)
-            }else{
-                
-            }
-        }
-    }
     
-    @IBAction func btRefresh(sender: UIButton) {
+    func refresh(){
         self.queueHTTP.async {
             self.showLoadingView()
             DispatchQueue.main.async() {
@@ -483,5 +483,23 @@ extension ControlBoxMappingRXViewController {
                 
             }
         }
+        
+    }
+    
+    
+    @IBAction func btSearch(sender: UIButton) {
+        self.queueHTTP.async {
+            self.showLoadingView()
+            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+            if(device_ip != nil){
+                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._2_cmd_search_get_node_info)
+            }else{
+                
+            }
+        }
+    }
+    
+    @IBAction func btRefresh(sender: UIButton) {
+        refresh()
     }
 }
