@@ -109,6 +109,7 @@ extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
                             
                         case .failure(_):
                             print("fail")
+                            self.dismissLoadingView()
                         }
                     }
                     
@@ -164,7 +165,7 @@ extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
                 var selectedNames: [String] = []
                 
                 self.txMenu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
-                  
+                    
                     self.queueHTTP.async {
                         self.showLoadingView()
                         var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
@@ -242,6 +243,21 @@ extension ControlBoxMappingRXViewController : UICollectionViewDataSource{
         cell.deviceName.text = self.rxList[indexPath.item].name
         cell.groupIDText.text = self.rxList[indexPath.item].group_id
         cell.ipText.text = self.rxList[indexPath.item].ip
+        
+        var isHasTX:Bool = false
+        
+        for txObject in self.txList {
+            if(self.rxList[indexPath.item].group_id == txObject.group_id){
+                cell.txNameText.text = txObject.name
+                isHasTX = true
+                break
+            }
+        }
+        
+        if(!isHasTX){
+            cell.txNameText.text = "N/A"
+        }
+        
         if(self.rxList[indexPath.item].alive != "y"){
             cell.deviceName.backgroundColor = UIColor.red
         }else{
@@ -261,7 +277,7 @@ extension ControlBoxMappingRXViewController: UICollectionViewDelegateFlowLayout 
     //setup CollectionViewCell width, height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if(ControlBoxMappingRXViewController.isPhone){
-            return CGSize(width: (self.view.frame.size.width - 30) , height: (self.view.frame.size.width - 30) / 2)
+            return CGSize(width: (self.view.frame.size.width - 30) , height: (self.view.frame.size.width) / 1.5)
         }else{
             return CGSize(width: (self.view.frame.size.width - 60) / 2 , height: (self.view.frame.size.width - 170) / 2)
         }
@@ -331,7 +347,12 @@ extension ControlBoxMappingRXViewController {
     
     //send HTTP GET method
     public func sendHTTPGET(ip:String, cmd: String, cmdNumber: Int){
-        AF.request("http://" + ip + ":" + self.SERVER_PORT + cmd, method: .get).response{ response in
+        
+        
+        AF.request("http://" + ip + ":" + self.SERVER_PORT + cmd, method: .get){ urlRequest in
+            urlRequest.timeoutInterval = 5
+            urlRequest.allowsExpensiveNetworkAccess = false
+        }.response{ response in
             debugPrint(response)
             
             switch response.result{
@@ -357,7 +378,7 @@ extension ControlBoxMappingRXViewController {
                             let group_id = deviceObject["id"].stringValue
                             if(deviceObject["type"].stringValue != "r"){
                                 self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
-                                if(alive != "r"){
+                                if(alive == "y"){
                                     self.txNameForUI.append(name)
                                 }
                             }else{
@@ -387,7 +408,7 @@ extension ControlBoxMappingRXViewController {
                                 let group_id = deviceObject["id"].stringValue
                                 if(deviceObject["type"].stringValue != "r"){
                                     self.txList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
-                                    if(alive != "r"){
+                                    if(alive == "y"){
                                         self.txNameForUI.append(name)
                                     }
                                 }else{
@@ -418,6 +439,13 @@ extension ControlBoxMappingRXViewController {
                 debugPrint("HTTP GET request failed")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.dismiss(animated: false, completion: nil)
+                    
+                    if(BaseViewController.isPhone){
+                        self.view.showToast(text: "Can't connect to device !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                    }else{
+                        self.view.showToast(text: "Can't connect to device !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                    }
+        
                 }
                 break
             }

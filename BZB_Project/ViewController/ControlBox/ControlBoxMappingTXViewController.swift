@@ -258,7 +258,10 @@ extension ControlBoxMappingTXViewController{
     
     //send HTTP GET method
     public func sendHTTPGET(ip:String, cmd: String, cmdNumber: Int){
-        AF.request("http://" + ip + ":" + self.SERVER_PORT + cmd, method: .get).response{ response in
+        AF.request("http://" + ip + ":" + self.SERVER_PORT + cmd, method: .get){ urlRequest in
+            urlRequest.timeoutInterval = 5
+            urlRequest.allowsExpensiveNetworkAccess = false
+        }.response{ response in
             debugPrint(response)
             
             switch response.result{
@@ -339,6 +342,13 @@ extension ControlBoxMappingTXViewController{
                 debugPrint("HTTP GET request failed")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.dismiss(animated: false, completion: nil)
+                    
+                    if(BaseViewController.isPhone){
+                        self.view.showToast(text: "Can't connect to device !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                    }else{
+                        self.view.showToast(text: "Can't connect to device !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                    }
+        
                 }
                 break
             }
