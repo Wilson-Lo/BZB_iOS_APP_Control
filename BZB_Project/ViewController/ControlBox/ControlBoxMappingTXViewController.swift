@@ -294,7 +294,7 @@ extension ControlBoxMappingTXViewController{
                         }
                     }
                     self.collectionView.reloadData()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
                     }
                     break
@@ -324,13 +324,13 @@ extension ControlBoxMappingTXViewController{
                         }
                         self.collectionView.reloadData()
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
                     }
                     break
                     
                 default:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
                     }
                     break
@@ -340,7 +340,7 @@ extension ControlBoxMappingTXViewController{
                 
             case .failure(let error):
                 debugPrint("HTTP GET request failed")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.dismiss(animated: false, completion: nil)
                     
                     if(BaseViewController.isPhone){

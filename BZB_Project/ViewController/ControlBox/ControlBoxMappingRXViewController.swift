@@ -114,7 +114,7 @@ extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
                         }
                     }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
                     }
                 }else{
@@ -139,7 +139,7 @@ extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
                         switch response.result {
                         case .success(let JSON):
                             print("response is :\(response)")
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 self.dismiss(animated: false, completion: nil)
                             }
                         case .failure(_):
@@ -181,15 +181,15 @@ extension ControlBoxMappingRXViewController : UICollectionViewDelegate {
                                 switch response.result {
                                 case .success(let JSON):
                                     print("response is :\(response)")
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                                         self.dismiss(animated: false, completion: nil)
+                                        if(BaseViewController.isPhone){
+                                            self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                                        }else{
+                                            self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                                        }
                                     }
-                                    if(BaseViewController.isPhone){
-                                        self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
-                                    }else{
-                                        self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
-                                    }
-                                    
+                                  
                                     self.refresh()
                                 case .failure(_):
                                     print("fail")
@@ -398,7 +398,7 @@ extension ControlBoxMappingRXViewController {
                         }
                     }
                     self.collectionView.reloadData()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
                     }
                     break
@@ -432,13 +432,13 @@ extension ControlBoxMappingRXViewController {
                         }
                         self.collectionView.reloadData()
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
                     }
                     break
                     
                 default:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
                     }
                     break
@@ -448,7 +448,7 @@ extension ControlBoxMappingRXViewController {
                 
             case .failure(let error):
                 debugPrint("HTTP GET request failed")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.dismiss(animated: false, completion: nil)
                     
                     if(BaseViewController.isPhone){
@@ -471,7 +471,7 @@ extension ControlBoxMappingRXViewController {
     
     func refresh(){
         self.queueHTTP.async {
-            self.showLoadingView()
+           
             DispatchQueue.main.async() {
                 self.searchText.text = ""
             }
@@ -500,6 +500,19 @@ extension ControlBoxMappingRXViewController {
     }
     
     @IBAction func btRefresh(sender: UIButton) {
-        refresh()
+        self.queueHTTP.async {
+           
+            DispatchQueue.main.async() {
+                self.showLoadingView()
+                self.searchText.text = ""
+            }
+            
+            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+            if(device_ip != nil){
+                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._1_cmd_get_node_info)
+            }else{
+                
+            }
+        }
     }
 }
