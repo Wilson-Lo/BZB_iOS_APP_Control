@@ -284,6 +284,7 @@ extension ControlBoxMappingRXViewController: UICollectionViewDelegateFlowLayout 
     
     //setup CollectionViewCell width, height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
         if(ControlBoxMappingRXViewController.isPhone){
             return CGSize(width: (self.view.frame.size.width - 30) , height: (self.view.frame.size.width) / 1.5)
         }else{

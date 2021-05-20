@@ -1673,7 +1673,7 @@
                             <constraint firstItem="Zcg-dy-HAs" firstAttribute="top" secondItem="ddh-rv-hjZ" secondAttribute="top" constant="20" id="qaW-Nj-zDL"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="RX" image="screen" id="uP6-WF-aEO"/>
+                    <tabBarItem key="tabBarItem" title="Info" image="info.circle" catalog="system" id="uP6-WF-aEO"/>
                     <navigationItem key="navigationItem" id="Nb6-mV-LK7"/>
                     <connections>
                         <outlet property="btRefresh" destination="hn2-nd-xM0" id="gtm-l0-W7r"/>
@@ -1684,7 +1684,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0CE-gm-Ie7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="929" y="-294"/>
+            <point key="canvasLocation" x="906" y="-313"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="eLz-yt-Ge6">
@@ -1973,6 +1973,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ul-ui-6YG">
                                                 <rect key="frame" x="105.5" y="0.0" width="162" height="30"/>
                                                 <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="btPresetWithSender:" destination="Yzz-S6-rAt" eventType="touchUpInside" id="4I7-je-CgR"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebp-bz-fGP">
                                                 <rect key="frame" x="267.5" y="0.0" width="105.5" height="30"/>
@@ -2040,22 +2043,22 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bho-5f-OcX">
                                 <rect key="frame" x="20.5" y="287" width="373" height="511"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="r9M-UX-MAU">
-                                    <size key="itemSize" width="373" height="77"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="r9M-UX-MAU">
+                                    <size key="itemSize" width="365" height="77"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="v02-bO-yD3">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="77"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="ControlBoxPresetCollectionViewCell" reuseIdentifier="ControlBoxPresetCollectionViewCell" id="v02-bO-yD3" customClass="ControlBoxPresetCollectionViewCell" customModule="BZB_Project" customModuleProvider="target">
+                                        <rect key="frame" x="4" y="0.0" width="365" height="77"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pUy-Xs-fbz">
-                                            <rect key="frame" x="0.0" y="0.0" width="373" height="77"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="365" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuX-AN-Yyx">
-                                                    <rect key="frame" x="166" y="28.5" width="41.5" height="20.5"/>
+                                                    <rect key="frame" x="162" y="28.5" width="41.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2068,19 +2071,28 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" systemColor="systemGray6Color"/>
                                             <constraints>
+                                                <constraint firstItem="KmW-HR-oq8" firstAttribute="leading" secondItem="pUy-Xs-fbz" secondAttribute="leading" id="6f3-eg-Dnh"/>
                                                 <constraint firstItem="KmW-HR-oq8" firstAttribute="centerY" secondItem="pUy-Xs-fbz" secondAttribute="centerY" id="BKD-za-bLi"/>
                                                 <constraint firstItem="KmW-HR-oq8" firstAttribute="height" secondItem="pUy-Xs-fbz" secondAttribute="height" id="KJX-KC-p9d"/>
                                                 <constraint firstItem="tuX-AN-Yyx" firstAttribute="centerY" secondItem="pUy-Xs-fbz" secondAttribute="centerY" id="RB7-Ts-6AV"/>
-                                                <constraint firstItem="KmW-HR-oq8" firstAttribute="leading" secondItem="pUy-Xs-fbz" secondAttribute="leadingMargin" id="cIG-Ze-HTn"/>
                                                 <constraint firstItem="KmW-HR-oq8" firstAttribute="width" secondItem="pUy-Xs-fbz" secondAttribute="width" multiplier="0.1" id="m1G-p6-rTd"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KmW-HR-oq8" secondAttribute="trailing" constant="20" symbolic="YES" id="qbr-gw-8sb"/>
                                                 <constraint firstItem="tuX-AN-Yyx" firstAttribute="centerX" secondItem="pUy-Xs-fbz" secondAttribute="centerX" id="yXN-Rl-qtE"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="373" height="77"/>
+                                        <size key="customSize" width="365" height="77"/>
+                                        <connections>
+                                            <outlet property="indexLable" destination="KmW-HR-oq8" id="I02-Qz-aGr"/>
+                                            <outlet property="nameLabel" destination="tuX-AN-Yyx" id="7Cv-Nn-GSE"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Yzz-S6-rAt" id="4cf-1I-1xB"/>
+                                    <outlet property="delegate" destination="Yzz-S6-rAt" id="yaM-rq-l1x"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6nC-w9-frl"/>
@@ -2096,7 +2108,7 @@
                             <constraint firstItem="bho-5f-OcX" firstAttribute="centerX" secondItem="aDT-zb-BGG" secondAttribute="centerX" id="phf-gI-AY5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="9tH-jG-UjL"/>
+                    <tabBarItem key="tabBarItem" title="Video Wall" image="square.grid.2x2.fill" catalog="system" id="9tH-jG-UjL"/>
                     <connections>
                         <outlet property="btApply" destination="sxW-I6-hHt" id="kiR-FY-nhS"/>
                         <outlet property="btPreset" destination="2Ul-ui-6YG" id="qZc-Zf-Vte"/>
@@ -2300,6 +2312,7 @@
         <image name="check" width="32" height="32"/>
         <image name="edit" width="32" height="32"/>
         <image name="fw" width="32" height="32"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="internet" width="32" height="32"/>
         <image name="learn" width="32" height="32"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
@@ -2308,7 +2321,7 @@
         <image name="play" width="32" height="32"/>
         <image name="refresh" width="32" height="32"/>
         <image name="save" width="32" height="32"/>
-        <image name="screen" width="32" height="32"/>
+        <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
         <image name="switch" width="32" height="32"/>
         <image name="view" width="32" height="32"/>
         <namedColor name="AccentColor">

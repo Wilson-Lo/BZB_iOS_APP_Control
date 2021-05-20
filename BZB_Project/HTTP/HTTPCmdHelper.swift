@@ -20,4 +20,6 @@ struct HTTPCmdHelper {
     static let _2_cmd_search_get_node_info = 102
     static let _3_cmd_red_light = 103
     static let _4_cmd_video_wall_preset = 104
+    static let _5_cmd_video_wall_preset = 105
 }
+
