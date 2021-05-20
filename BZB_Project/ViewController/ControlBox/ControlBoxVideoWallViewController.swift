@@ -27,6 +27,8 @@ class ControlBoxVideoWallViewController : BaseViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     var presetNameForUI: Array<String> = []
     var presetDataList: Array<Device> = []
+    var selectedPresetIndex = 1
+    var queueHTTP: DispatchQueue!
     
     //preset rx device structure
     struct Device {
@@ -42,7 +44,9 @@ class ControlBoxVideoWallViewController : BaseViewController{
     override func viewDidLoad() {
         print("ControlBoxVideoWallViewController-viewDidLoad")
         super.viewDidLoad()
+        self.selectedPresetIndex = 1
         initialUI()
+        self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +62,7 @@ class ControlBoxVideoWallViewController : BaseViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         print("ControlBoxVideoWallViewController-viewWillDisappear")
-       
+        
     }
     
 }
@@ -96,8 +100,8 @@ extension ControlBoxVideoWallViewController{
 extension ControlBoxVideoWallViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("click")
-      
-       
+        
+        
     }
 }
 
@@ -169,10 +173,46 @@ extension ControlBoxVideoWallViewController {
             var selectedNames: [String] = []
             
             presetMenu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
-                
+                self.btPreset.setTitle(self.presetNameForUI[index] , for: .normal)
+                self.selectedPresetIndex = (index + 1)
+                var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                if(device_ip != nil){
+                    self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_video_wall_preset, cmdNumber: HTTPCmdHelper._4_cmd_video_wall_preset)
+                }else{
+                    
+                }
             }
             
             presetMenu.show(from: self)
+        }
+    }
+    
+    @IBAction func btReset(sender: UIButton) {
+        
+        self.queueHTTP.async {
+            for deviceObject in self.presetDataList {
+                var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                if(device_ip != nil){
+                    
+                    var data  = ["mac": deviceObject.mac, "vwh": "1", "vwv": "1", "vwp": "1", "vwl":"0", "vwr":"0", "vwu":"0", "vwb":"0"]
+                    
+                    AF.upload(multipartFormData: { (multiFormData) in
+                        for (key, value) in data {
+                            multiFormData.append(Data(value.utf8), withName: key)
+                        }
+                    }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_set_video_wall).responseJSON { response in
+                        switch response.result {
+                        case .success(let JSON):
+                            print("response is :\(response)")
+                        case .failure(_):
+                            print("fail")
+                        }
+                    }
+                }else{
+                    
+                }
+                
+            }
         }
     }
 }
@@ -211,11 +251,11 @@ extension ControlBoxVideoWallViewController{
                             let name = deviceObject["name"].stringValue
                             self.presetNameForUI.append(name)
                             
-                            if(index == "1"){
+                            if(index ==  String(self.selectedPresetIndex)){
                                 self.labelRow.text = row
                                 self.labelCol.text = col
                                 self.btPreset.setTitle(name, for: .normal)
-                            
+                                
                                 if let rxList = deviceObject["rx_list"].array {
                                     for rxObject in rxList {
                                         let mac = rxObject["mac"].stringValue
