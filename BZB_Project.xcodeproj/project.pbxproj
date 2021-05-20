@@ -47,6 +47,7 @@
 		866812EA26203D660034D975 /* Edid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866812E826203D660034D975 /* Edid.cpp */; };
 		86BB53A92627089C0044E52D /* ControlBoxMappingTXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53A82627089B0044E52D /* ControlBoxMappingTXViewController.swift */; };
 		86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */; };
+		86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */; };
 		9CA02039A380A7DC709D1BCD /* Pods_BZB_Project_BZB_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299F1373CFD636EAED5926D /* Pods_BZB_Project_BZB_ProjectUITests.framework */; };
 		AFE1D58AA2F04BAE3D65BD58 /* Pods_BZB_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C2BE9FA26FA16B49782A008 /* Pods_BZB_Project.framework */; };
 /* End PBXBuildFile section */
@@ -125,6 +126,7 @@
 		86681315262040DC0034D975 /* BZB_Project-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BZB_Project-Bridging-Header.h"; sourceTree = "<group>"; };
 		86BB53A82627089B0044E52D /* ControlBoxMappingTXViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingTXViewController.swift; sourceTree = "<group>"; };
 		86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxTXCollectionViewCell.swift; sourceTree = "<group>"; };
+		86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVideoWallViewController.swift; sourceTree = "<group>"; };
 		9C6FC59AC0AA853535CE026B /* Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -273,6 +275,7 @@
 			children = (
 				866639F92625766E002D3CC8 /* ControlBoxMappingRXViewController.swift */,
 				86BB53A82627089B0044E52D /* ControlBoxMappingTXViewController.swift */,
+				86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */,
 			);
 			path = ControlBox;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				86320EA826147976007FE620 /* Matrix4MappingViewController.swift in Sources */,
 				86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */,
 				86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */,
+				86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */,
 				86320F03261D63A7007FE620 /* Data.swift in Sources */,
 				866639F2262453DC002D3CC8 /* Matrix4FWViewController.swift in Sources */,
 				86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */,
