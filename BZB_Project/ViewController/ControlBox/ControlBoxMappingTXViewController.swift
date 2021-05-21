@@ -2,7 +2,8 @@
 //  ControlBoxMappingTXViewController.swift
 //  BZB_Project
 //
-//  Created by GoMax on 2021/4/14.
+//  Created by Wilson on 2021/03/31.
+//  Copyright © 2021 GoMax. All rights reserved.
 //
 
 import UIKit

@@ -2,7 +2,8 @@
 //  ControllerBoxVideoWallViewController.swift
 //  BZB_Project
 //
-//  Created by GoMax on 2021/5/20.
+//  Created by Wilson on 2021/05/20.
+//  Copyright © 2021 GoMax. All rights reserved.
 //
 
 import Foundation
@@ -32,6 +33,8 @@ class ControlBoxVideoWallViewController : BaseViewController{
     
     //preset rx device structure
     struct Device {
+        let row: String
+        let col: String
         let name: String
         let pos: String
         let mac: String
@@ -187,7 +190,44 @@ extension ControlBoxVideoWallViewController {
         }
     }
     
-    @IBAction func btReset(sender: UIButton) {
+    @IBAction func btApply(sender: UIButton) {
+        
+        self.queueHTTP.async {
+            for deviceObject in self.presetDataList {
+                var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                if(device_ip != nil){
+                    
+                    var data  = ["mac": deviceObject.mac, "vwh": deviceObject.col, "vwv": deviceObject.row, "vwp": deviceObject.pos, "vwl":deviceObject.hs_shift, "vwr":deviceObject.he_shift, "vwu":deviceObject.vs_shift, "vwb":deviceObject.ve_shift]
+                    
+                    AF.upload(multipartFormData: { (multiFormData) in
+                        for (key, value) in data {
+                            multiFormData.append(Data(value.utf8), withName: key)
+                        }
+                    }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_set_video_wall).responseJSON { response in
+                        switch response.result {
+                        case .success(let JSON):
+                            print("response is :\(response)")
+                        case .failure(_):
+                            print("fail")
+                        }
+                    }
+                }else{
+                    
+                }
+                
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if(BaseViewController.isPhone){
+                    self.view.showToast(text: "Apply successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                }else{
+                    self.view.showToast(text: "Apply successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                }
+            }
+            
+        }
+    }
+    
+    @IBAction func btDisabled(sender: UIButton) {
         
         self.queueHTTP.async {
             for deviceObject in self.presetDataList {
@@ -210,6 +250,14 @@ extension ControlBoxVideoWallViewController {
                     }
                 }else{
                     
+                }
+                
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if(BaseViewController.isPhone){
+                    self.view.showToast(text: "Disabled successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                }else{
+                    self.view.showToast(text: "Disabled successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
                 }
                 
             }
@@ -260,13 +308,22 @@ extension ControlBoxVideoWallViewController{
                                     for rxObject in rxList {
                                         let mac = rxObject["mac"].stringValue
                                         debugPrint("mac = " + mac)
-                                        self.presetDataList.append(Device(name: "",pos: rxObject["pos"].stringValue, mac: rxObject["mac"].stringValue, he_shift: rxObject["mac"].stringValue, ve_shift: rxObject["ve_shift"].stringValue, vs_shift: rxObject["vs_shift"].stringValue, hs_shift: rxObject["hs_shift"].stringValue))
+                                        self.presetDataList.append(Device(row: row, col:col, name: "", pos: rxObject["pos"].stringValue, mac: rxObject["mac"].stringValue, he_shift: rxObject["mac"].stringValue, ve_shift: rxObject["ve_shift"].stringValue, vs_shift: rxObject["vs_shift"].stringValue, hs_shift: rxObject["hs_shift"].stringValue))
                                     }
                                 }
                                 self.collectionView.reloadData()
                             }
                         }
                     }
+                    
+                    if(!(self.presetDataList.count > 0)){
+                        if(BaseViewController.isPhone){
+                            self.view.showToast(text: "This preset didn't set any RX !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                        }else{
+                            self.view.showToast(text: "This preset didn't set any RX !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                        }
+                    }
+                    
                     break
                     
                 default:
