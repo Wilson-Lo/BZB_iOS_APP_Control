@@ -267,6 +267,9 @@ extension ControlBoxMappingViewController : UICollectionViewDelegate {
             
             btArray.append(CancelButton(title: "Switch for All RX") {
                 
+                self.showLoadingView()
+                self.recursiveSwitchAllRX(currentIndex: 0, txGroupId: self.txAllList[indexPath.item].group_id)
+                
             })
             
             btArray.append(CancelButton(title: "Blink Red Light") {
@@ -306,6 +309,54 @@ extension ControlBoxMappingViewController : UICollectionViewDelegate {
         }
     }
 }
+
+extension ControlBoxMappingViewController{
+    
+    func recursiveSwitchAllRX(currentIndex : Int, txGroupId : String){
+        
+        if(currentIndex <= (self.rxList.count - 1)){
+            
+            if(self.rxList[currentIndex].alive == "y"){
+                self.queueHTTP.async {
+                    var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                    if(device_ip != nil){
+                        var data  = ["ip": self.rxList[currentIndex].ip,"switch_id":txGroupId,"switch_type":"z"]
+                        AF.upload(multipartFormData: { (multiFormData) in
+                            for (key, value) in data {
+                                multiFormData.append(Data(value.utf8), withName: key)
+                            }
+                        }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_switch_group_id).responseJSON { response in
+                            switch response.result {
+                            case .success(let JSON):
+                                print("response is :\(response)")
+                                if((currentIndex + 1) > (self.rxList.count - 1 )){
+                                    self.showToast(context: "Switch all RX finish !")
+                                    self.refresh()
+                                }else{
+                                    self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
+                                }
+                            case .failure(_):
+                                print("fail")
+                                if((currentIndex + 1) > (self.rxList.count - 1 )){
+                                    self.showToast(context: "Switch all RX finish !")
+                                    self.refresh()
+                                }else{
+                                    self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
+                                }
+                            }
+                        }
+                    }else{
+                        
+                    }
+                }
+            }
+            
+            
+        }
+    }
+}
+
+
 
 
 extension ControlBoxMappingViewController : UICollectionViewDataSource{

@@ -101,6 +101,15 @@ extension BaseViewController  {
         }
     }
     
+    //show toast
+    public func showToast(context: String){
+        if(BaseViewController.isPhone){
+            self.view.showToast(text: context, font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+        }else{
+            self.view.showToast(text: context, font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+        }
+    }
+    
     
     //show alert
     public func showAlert(message: String) {
