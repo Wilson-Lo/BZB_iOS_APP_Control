@@ -50,6 +50,7 @@ class ControlBoxVideoWallViewController : BaseViewController{
         self.selectedPresetIndex = 1
         initialUI()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +120,7 @@ extension ControlBoxVideoWallViewController : UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxPresetCollectionViewCell", for: indexPath) as! ControlBoxPresetCollectionViewCell
         
         cell.indexLable.text = self.presetDataList[indexPath.item].pos
-        cell.nameLabel.text = self.presetDataList[indexPath.item].mac
+        cell.nameLabel.text = self.presetDataList[indexPath.item].name
         
         return cell
     }
@@ -255,9 +256,9 @@ extension ControlBoxVideoWallViewController {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 if(BaseViewController.isPhone){
-                    self.view.showToast(text: "Disabled successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                    self.view.showToast(text: "Reset successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
                 }else{
-                    self.view.showToast(text: "Disabled successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                    self.view.showToast(text: "Reset successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
                 }
                 
             }
@@ -308,7 +309,7 @@ extension ControlBoxVideoWallViewController{
                                     for rxObject in rxList {
                                         let mac = rxObject["mac"].stringValue
                                         debugPrint("mac = " + mac)
-                                        self.presetDataList.append(Device(row: row, col:col, name: "", pos: rxObject["pos"].stringValue, mac: rxObject["mac"].stringValue, he_shift: rxObject["mac"].stringValue, ve_shift: rxObject["ve_shift"].stringValue, vs_shift: rxObject["vs_shift"].stringValue, hs_shift: rxObject["hs_shift"].stringValue))
+                                        self.presetDataList.append(Device(row: row, col:col, name: rxObject["name"].stringValue, pos: rxObject["pos"].stringValue, mac: rxObject["mac"].stringValue, he_shift: rxObject["mac"].stringValue, ve_shift: rxObject["ve_shift"].stringValue, vs_shift: rxObject["vs_shift"].stringValue, hs_shift: rxObject["hs_shift"].stringValue))
                                     }
                                 }
                                 self.collectionView.reloadData()

@@ -41,7 +41,7 @@ class BaseViewController : UIViewController{
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
        
             
@@ -137,4 +137,5 @@ extension BaseViewController  {
             
         }
     }
+
 }

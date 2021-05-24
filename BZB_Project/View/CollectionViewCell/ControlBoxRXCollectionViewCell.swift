@@ -10,15 +10,11 @@ import UIKit
 
 class ControlBoxRXCollectionViewCell: UICollectionViewCell {
     
-
-    @IBOutlet weak var groupIDText: UITextField!
-
-    @IBOutlet weak var ipText: UITextField!
-    @IBOutlet weak var txNameText: UITextField!
-    //    @IBOutlet weak var ipText: UITextField!
-//    @IBOutlet weak var groupIDText: UITextField!
+    
     @IBOutlet weak var deviceName: UILabel!
-    // @IBOutlet weak var deviceName: UILabel!
+    @IBOutlet weak var ipText: UITextField!
+    @IBOutlet weak var groupIDText: UITextField!
+    @IBOutlet weak var txNameText: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()

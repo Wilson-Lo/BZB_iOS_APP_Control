@@ -41,7 +41,7 @@ class ControlBoxMappingRXViewController : BaseViewController{
     
     override func viewDidLoad() {
         print("ControlBoxMappingRXViewController-viewDidLoad")
-        super.viewDidLoad()
+      
         self.initialUI()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
     }
