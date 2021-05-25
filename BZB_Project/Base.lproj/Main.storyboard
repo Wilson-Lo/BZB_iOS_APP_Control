@@ -507,7 +507,7 @@
                                         <rect key="frame" x="0.0" y="444.66666666666663" width="248.66666666666666" height="99.333333333333371"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8u9-dl-YlX">
-                                                <rect key="frame" x="104.33333333333331" y="34.666666666666742" width="39.999999999999986" height="30"/>
+                                                <rect key="frame" x="104.33333333333333" y="34.666666666666742" width="39.999999999999986" height="30"/>
                                                 <state key="normal" title="Apply">
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                 </state>
@@ -1530,7 +1530,7 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gQC-fE-ebz">
-                                                <rect key="frame" x="112" y="24" width="223.66666666666663" height="34"/>
+                                                <rect key="frame" x="111.99999999999999" y="24" width="223.66666666666663" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -1914,7 +1914,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lTf-RQ-0tq">
-                                <rect key="frame" x="223.66666666666663" y="124" width="124.33333333333334" height="34"/>
+                                <rect key="frame" x="223.66666666666666" y="124" width="124.33333333333334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -2038,7 +2038,7 @@
                                                 <rect key="frame" x="98.333333333333314" y="0.0" width="78" height="30"/>
                                                 <color key="backgroundColor" name="AccentColor"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Apply"/>
+                                                <state key="normal" title="Enable"/>
                                                 <connections>
                                                     <action selector="btApplyWithSender:" destination="Yzz-S6-rAt" eventType="touchUpInside" id="TOh-Uv-zcZ"/>
                                                 </connections>
@@ -2047,7 +2047,7 @@
                                                 <rect key="frame" x="196.33333333333334" y="0.0" width="78.000000000000028" height="30"/>
                                                 <color key="backgroundColor" red="0.85799321439999998" green="0.41852889970000001" blue="0.39501171349999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Reset"/>
+                                                <state key="normal" title="Disable"/>
                                                 <connections>
                                                     <action selector="btDisabledWithSender:" destination="Yzz-S6-rAt" eventType="touchUpInside" id="eIU-RE-VpV"/>
                                                 </connections>
@@ -2174,7 +2174,7 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hnt-hX-Hmm">
-                                                <rect key="frame" x="112" y="24" width="223.66666666666663" height="34"/>
+                                                <rect key="frame" x="111.99999999999999" y="24" width="223.66666666666663" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>

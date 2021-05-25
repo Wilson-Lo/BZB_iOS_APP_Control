@@ -219,9 +219,9 @@ extension ControlBoxVideoWallViewController {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 if(BaseViewController.isPhone){
-                    self.view.showToast(text: "Apply successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                    self.view.showToast(text: "Enable successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
                 }else{
-                    self.view.showToast(text: "Apply successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                    self.view.showToast(text: "Enable successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
                 }
             }
             
@@ -256,9 +256,9 @@ extension ControlBoxVideoWallViewController {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 if(BaseViewController.isPhone){
-                    self.view.showToast(text: "Reset successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                    self.view.showToast(text: "Disable successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
                 }else{
-                    self.view.showToast(text: "Reset successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                    self.view.showToast(text: "Disable successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
                 }
                 
             }
