@@ -21,13 +21,16 @@ class DeviceListViewController: BaseViewController{
     let db = DBHelper()
     var deviceList: Array<DeviceDataObject>!
     var queueDB: DispatchQueue!
+    let preferences = UserDefaults.standard
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         print("DeviceListViewController-viewDidLoad")
         setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         print("DeviceListViewController-viewWillAppear")
         self.queueDB.async {
             self.deviceList = self.db.read()
@@ -49,16 +52,9 @@ class DeviceListViewController: BaseViewController{
 extension DeviceListViewController{
     
     func setupUI(){
-        
         self.queueDB = DispatchQueue(label: "com.bzb.db", qos: DispatchQoS.userInitiated)
-        
-        
         self.navigationController?.navigationBar.barTintColor = .black
-        //        self.collectionView.layer.cornerRadius = 10
-        //        self.collectionView.layer.borderWidth = 1
-        //        self.collectionView.layer.borderColor = UIColor.black.cgColor
     }
-    
     
     @IBAction func btAdd(sender: UIButton) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -93,9 +89,28 @@ extension DeviceListViewController : UICollectionViewDelegate {
         //        }
         
         btArray.append(CancelButton(title: "Go to device") {
+            
+            self.queueDB.async {
+                self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
+            }
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
-            self.navigationController!.pushViewController(nextViewController, animated: true)
+            
+            switch(self.deviceList[indexPath.item].type){
+            
+            case self.DEVICE_CONTROL_BOX:
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
+                self.navigationController!.pushViewController(nextViewController, animated: true)
+                break
+                
+            case self.DEVICE_MATRIX_4_X_4_HDR:
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
+                self.navigationController!.pushViewController(nextViewController, animated: true)
+                break
+                
+            default:
+                
+                break
+            }
         })
         
         btArray.append(CancelButton(title: "Delete") {
@@ -109,9 +124,9 @@ extension DeviceListViewController : UICollectionViewDelegate {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.collectionView.reloadData()
                 }
+                self.showToast(context: "Delete successful !")
             }else{
-                
-                
+                self.showToast(context: "Delete failed !")
             }
         })
         

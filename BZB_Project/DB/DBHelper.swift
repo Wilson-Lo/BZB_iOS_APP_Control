@@ -16,7 +16,6 @@ class DBHelper{
     var path : String = "BZBDevicesDataBase.sqlite"
     var tableName = "BZBDevices"
     
-    
     init() {
         self.db = createDB()
         self.createTable()

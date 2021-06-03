@@ -124,10 +124,12 @@ extension SettingsViewController{
         if(self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!) > 0){
             var feedback = self.db.insert(type: self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!), ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceType.text!)
             if(feedback){
-                
+                self.showToast(context: "Add successfull !")
             }else{
-                
+                self.showToast(context: "Add failed !")
             }
+        }else{
+            self.showToast(context: "Please scan device first !")
         }
     }
 }
