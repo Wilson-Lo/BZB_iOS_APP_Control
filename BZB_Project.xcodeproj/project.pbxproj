@@ -22,7 +22,6 @@
 		86320E45261468C2007FE620 /* BZB_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E44261468C2007FE620 /* BZB_ProjectTests.swift */; };
 		86320E50261468C2007FE620 /* BZB_ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E4F261468C2007FE620 /* BZB_ProjectUITests.swift */; };
 		86320EA026147913007FE620 /* BaseSocketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E9F26147913007FE620 /* BaseSocketViewController.swift */; };
-		86320EA826147976007FE620 /* Matrix4MappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EA726147976007FE620 /* Matrix4MappingViewController.swift */; };
 		86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EAC261479AB007FE620 /* TcpSocketClient.swift */; };
 		86320EB226147A55007FE620 /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EB126147A55007FE620 /* GCDTimer.swift */; };
 		86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EB626147CB1007FE620 /* CmdHelper.swift */; };
@@ -47,6 +46,7 @@
 		86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */; };
 		86CCB3E82668AFC400CCA0F3 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */; };
 		86CCB4032668B6F700CCA0F3 /* DeviceDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */; };
+		86CCB4712668E19800CCA0F3 /* Matrix4MappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4702668E19800CCA0F3 /* Matrix4MappingViewController.swift */; };
 		86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */; };
 		86D8C67826565D20001E801B /* ControlBoxPresetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */; };
 		86D8C67D265794F6001E801B /* ControlBoxMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */; };
@@ -100,7 +100,6 @@
 		86320E4F261468C2007FE620 /* BZB_ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BZB_ProjectUITests.swift; sourceTree = "<group>"; };
 		86320E51261468C2007FE620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86320E9F26147913007FE620 /* BaseSocketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSocketViewController.swift; sourceTree = "<group>"; };
-		86320EA726147976007FE620 /* Matrix4MappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4MappingViewController.swift; sourceTree = "<group>"; };
 		86320EAC261479AB007FE620 /* TcpSocketClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcpSocketClient.swift; sourceTree = "<group>"; };
 		86320EB126147A55007FE620 /* GCDTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
 		86320EB626147CB1007FE620 /* CmdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdHelper.swift; sourceTree = "<group>"; };
@@ -128,6 +127,7 @@
 		86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxTXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataObject.swift; sourceTree = "<group>"; };
+		86CCB4702668E19800CCA0F3 /* Matrix4MappingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix4MappingViewController.swift; sourceTree = "<group>"; };
 		86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVideoWallViewController.swift; sourceTree = "<group>"; };
 		86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxPresetCollectionViewCell.swift; sourceTree = "<group>"; };
 		86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingViewController.swift; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 		86320E9C261478B5007FE620 /* Matrix4 */ = {
 			isa = PBXGroup;
 			children = (
-				86320EA726147976007FE620 /* Matrix4MappingViewController.swift */,
+				86CCB4702668E19800CCA0F3 /* Matrix4MappingViewController.swift */,
 				86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */,
 				860580A6261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift */,
 			);
@@ -633,12 +633,12 @@
 				86D8C67D265794F6001E801B /* ControlBoxMappingViewController.swift in Sources */,
 				86B921EA26676B7600FAB568 /* DeviceListViewController.swift in Sources */,
 				86320EEC2615E453007FE620 /* BaseViewController.swift in Sources */,
-				86320EA826147976007FE620 /* Matrix4MappingViewController.swift in Sources */,
 				86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */,
 				86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */,
 				86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */,
 				86320F03261D63A7007FE620 /* Data.swift in Sources */,
 				86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */,
+				86CCB4712668E19800CCA0F3 /* Matrix4MappingViewController.swift in Sources */,
 				866639FA2625766E002D3CC8 /* ControlBoxMappingRXViewController.swift in Sources */,
 				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
