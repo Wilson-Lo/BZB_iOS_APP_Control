@@ -46,7 +46,7 @@
 		86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */; };
 		86CCB3E82668AFC400CCA0F3 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */; };
 		86CCB4032668B6F700CCA0F3 /* DeviceDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */; };
-		86CCB4712668E19800CCA0F3 /* Matrix4MappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4702668E19800CCA0F3 /* Matrix4MappingViewController.swift */; };
+		86CCB4822668E25100CCA0F3 /* Matrix4MappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */; };
 		86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */; };
 		86D8C67826565D20001E801B /* ControlBoxPresetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */; };
 		86D8C67D265794F6001E801B /* ControlBoxMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */; };
@@ -127,7 +127,7 @@
 		86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxTXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataObject.swift; sourceTree = "<group>"; };
-		86CCB4702668E19800CCA0F3 /* Matrix4MappingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix4MappingViewController.swift; sourceTree = "<group>"; };
+		86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4MappingViewController.swift; sourceTree = "<group>"; };
 		86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVideoWallViewController.swift; sourceTree = "<group>"; };
 		86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxPresetCollectionViewCell.swift; sourceTree = "<group>"; };
 		86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingViewController.swift; sourceTree = "<group>"; };
@@ -290,9 +290,9 @@
 		86320E9C261478B5007FE620 /* Matrix4 */ = {
 			isa = PBXGroup;
 			children = (
-				86CCB4702668E19800CCA0F3 /* Matrix4MappingViewController.swift */,
 				86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */,
 				860580A6261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift */,
+				86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */,
 			);
 			path = Matrix4;
 			sourceTree = "<group>";
@@ -638,7 +638,7 @@
 				86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */,
 				86320F03261D63A7007FE620 /* Data.swift in Sources */,
 				86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */,
-				86CCB4712668E19800CCA0F3 /* Matrix4MappingViewController.swift in Sources */,
+				86CCB4822668E25100CCA0F3 /* Matrix4MappingViewController.swift in Sources */,
 				866639FA2625766E002D3CC8 /* ControlBoxMappingRXViewController.swift in Sources */,
 				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
