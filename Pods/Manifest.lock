@@ -8,6 +8,9 @@ PODS:
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
   - RSSelectionMenu (7.1.2)
+  - sqlite3 (3.35.5):
+    - sqlite3/common (= 3.35.5)
+  - sqlite3/common (3.35.5)
   - SVProgressHUD (2.2.5)
   - SwiftSocket (2.0.2)
   - SwiftyJSON (4.3.0)
@@ -21,6 +24,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - PopupDialog (~> 1.1)
   - RSSelectionMenu
+  - sqlite3
   - SVProgressHUD
   - SwiftSocket
   - SwiftyJSON (~> 4.0)
@@ -36,6 +40,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - PopupDialog
     - RSSelectionMenu
+    - sqlite3
     - SVProgressHUD
     - SwiftSocket
     - SwiftyJSON
@@ -50,11 +55,12 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   RSSelectionMenu: f803d0936e074b2fdac2c41bf1d0a5b0c7fdc3e1
+  sqlite3: 75da32fd4e3574f6c38566a9f0114cfe792c8db5
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: b6ecb49d5ef3519d22ad15b96d4b91816a897dc2
+PODFILE CHECKSUM: dc2d05c6f9bfe643a0b86fdc5bec1a84953a07bf
 
 COCOAPODS: 1.10.1

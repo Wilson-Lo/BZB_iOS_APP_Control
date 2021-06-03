@@ -18,8 +18,8 @@ target 'BZB_Project' do
   pod 'SVProgressHUD'
   pod 'SwiftSocket'
   pod 'RSSelectionMenu'
-  pod 'Alamofire', '~> 5.2'
-
+  pod 'Alamofire', '~> 5.2'  
+  pod 'sqlite3'
   target 'BZB_ProjectTests' do
     inherit! :search_paths
     # Pods for testing

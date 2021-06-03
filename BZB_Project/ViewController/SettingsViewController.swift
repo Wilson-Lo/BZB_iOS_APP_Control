@@ -20,9 +20,10 @@ class SettingsViewController: BaseViewController{
     
     
     @IBOutlet weak var btScan: UIButton!
-    @IBOutlet weak var btCheck: UIButton!
     @IBOutlet weak var textFieldDeviceIP: UITextField!
+    @IBOutlet weak var textFieldDeviceType: UITextField!
     @IBOutlet weak var appVerLabel: UILabel!
+    @IBOutlet weak var btADD: UIButton!
     
     let preferences = UserDefaults.standard
     var queueUDP: DispatchQueue!
@@ -31,7 +32,7 @@ class SettingsViewController: BaseViewController{
     var deviceList: Array<Device> = []
     var menu: RSSelectionMenu<String>!
     var menuList: Array<String> = []
-    
+    let db = DBHelper()
     //device info structure (mac & ip)
     struct Device {
         let name: String
@@ -71,6 +72,10 @@ extension SettingsViewController{
     //initial UI
     func initialUI(){
         
+        self.btADD.layer.cornerRadius = 5
+        self.btADD.layer.borderWidth = 1
+        self.btADD.layer.borderColor = UIColor.black.cgColor
+        
         //App version
         let dictionary = Bundle.main.infoDictionary!
         let appVersion = dictionary["CFBundleShortVersionString"] as! String
@@ -85,15 +90,8 @@ extension SettingsViewController{
             widthConstraint.constant = 50
             heightConstraint.constant = 50
             
-            //Check button
-            let widthBtCheckConstraint = btCheck.widthAnchor.constraint(equalToConstant: 30.0)
-            let heightBtCheckConstraint = btCheck.heightAnchor.constraint(equalToConstant: 30.0)
-            NSLayoutConstraint.activate([widthBtCheckConstraint, heightBtCheckConstraint])
-            //change button size to 50x50
-            widthBtCheckConstraint.constant = 50
-            heightBtCheckConstraint.constant = 50
-            
             self.textFieldDeviceIP.frame.size.height = 500
+            self.textFieldDeviceType.frame.size.height = 500
         }
         
     }
@@ -117,12 +115,20 @@ extension SettingsViewController{
             self.udpSendSocket.enableBroadcast()
         }
         
-        DispatchQueue.main.async(){
-            if(self.preferences.value(forKey: CmdHelper.key_server_ip) != nil){
-                self.textFieldDeviceIP.text = self.preferences.value(forKey: CmdHelper.key_server_ip) as! String
+    }
+    
+    @IBAction func btAdd(sender: UIButton) {
+        
+        var type = 0;
+        
+        if(self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!) > 0){
+            var feedback = self.db.insert(type: self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!), ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceType.text!)
+            if(feedback){
+                
+            }else{
+                
             }
         }
-        
     }
 }
 
@@ -185,6 +191,7 @@ extension SettingsViewController{
                             
                             let selectedDevice   = self.deviceList[index]
                             self.textFieldDeviceIP.text = selectedDevice.ip
+                            self.textFieldDeviceType.text = selectedDevice.name
                             self.preferences.set(selectedDevice.ip, forKey: CmdHelper.key_server_ip)
                         }
                         self.menu.show(from: self)
@@ -263,7 +270,7 @@ extension SettingsViewController: GCDAsyncUdpSocketDelegate{
                 
                 let resultA = deviceName.contains("Matrix 4x4 HDR")
                 let resultB = deviceName.contains("Control-Box")
-    
+                
                 if(resultA || resultB){
                     self.deviceList.append(Device(name: deviceName, mac: String(format:"%02X", deviceInfo[21]) + "-" + String(format:"%02X", deviceInfo[22]) + "-" + String(format:"%02X", deviceInfo[23]) + "-" + String(format:"%02X", deviceInfo[24]) + "-" + String(format:"%02X", deviceInfo[25]) + "-" + String(format:"%02X", deviceInfo[26]),ip: String(deviceInfo[27]) + "." + String(deviceInfo[28]) + "." + String(deviceInfo[29]) + "." + String(deviceInfo[30])))
                 }

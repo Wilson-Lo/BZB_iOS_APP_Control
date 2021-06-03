@@ -33,7 +33,7 @@ class BaseViewController : UIViewController{
             break
         // Uh, oh! What could it be?
         }
-      
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,12 +41,12 @@ class BaseViewController : UIViewController{
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
-       
-            
+        
+        
     }
-
+    
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -56,7 +56,7 @@ class BaseViewController : UIViewController{
 
 extension BaseViewController  {
     
-
+    
     
     public func hexStringToStringArray(_ data: String) -> [String]?{
         let length = data.count
@@ -146,5 +146,29 @@ extension BaseViewController  {
             
         }
     }
-
+    
+    /**
+     *  Get Device Type Number By Name
+     */
+    func getDeviceTypeNumberByName(deviceName: String) -> Int{
+        
+        var type = 0
+        
+        switch(deviceName){
+        
+        case "Control-Box":
+            type = 1
+            break
+            
+        case "Matrix 4x4":
+            type = 2
+            break
+            
+        default:
+            
+            break
+        }
+        return type
+    }
+    
 }
