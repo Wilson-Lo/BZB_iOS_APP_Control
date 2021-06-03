@@ -86,6 +86,7 @@ class DBHelper{
             while sqlite3_step(statement) == SQLITE_ROW {
                 
                 let device = DeviceDataObject()
+                device.id = Int(sqlite3_column_int(statement, 0))
                 device.type = Int(sqlite3_column_int(statement, 1))
                 device.ip = String(describing: String(cString: sqlite3_column_text(statement, 2)))
                 device.name = String(describing: String(cString: sqlite3_column_text(statement, 3)))
@@ -94,5 +95,21 @@ class DBHelper{
         }
         
         return deviceList
+    }
+    
+    func delete(id : Int) -> Bool{
+        let query = "DELETE FROM " + self.tableName + " where id = \(id)"
+        var statement : OpaquePointer? = nil
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK{
+            if sqlite3_step(statement) == SQLITE_DONE {
+                print("Data delete success")
+                return true
+            }else {
+                print("Data is not deleted in table")
+                return false
+            }
+        }else{
+            return false
+        }
     }
 }

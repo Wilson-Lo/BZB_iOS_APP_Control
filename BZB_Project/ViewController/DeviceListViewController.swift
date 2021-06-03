@@ -6,6 +6,14 @@
 //
 
 import UIKit
+import RSSelectionMenu
+import CryptoKit
+import CryptoSwift
+import Foundation
+import Toast_Swift
+import SVProgressHUD
+import RSSelectionMenu
+import PopupDialog
 
 class DeviceListViewController: BaseViewController{
     
@@ -63,9 +71,52 @@ extension DeviceListViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("click")
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
-        self.navigationController!.pushViewController(nextViewController, animated: true)
+        
+        let title = "\n Select Action"
+        let message = ""
+        
+        // Create the dialog,
+        let popup = PopupDialog(title: title, message: message, image: nil)
+        
+        var btArray: Array<CancelButton> = []
+        //        if(!DeviceListViewController.isPhone){
+        //            let dialogAppearance = PopupDialogDefaultView.appearance()
+        //            dialogAppearance.backgroundColor      = .white
+        //            dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
+        //            //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+        //            dialogAppearance.titleTextAlignment   = .center
+        //            dialogAppearance.messageFont          = .systemFont(ofSize: 26)
+        //            //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+        //
+        //            let cb = CancelButton.appearance()
+        //            cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
+        //        }
+        
+        btArray.append(CancelButton(title: "Go to device") {
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
+            self.navigationController!.pushViewController(nextViewController, animated: true)
+        })
+        
+        btArray.append(CancelButton(title: "Delete") {
+            var feedback = self.db.delete(id: self.deviceList[indexPath.item].id!)
+            
+            if(feedback){
+                self.queueDB.async {
+                    self.deviceList = self.db.read()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.collectionView.reloadData()
+                }
+            }else{
+                
+                
+            }
+        })
+        
+        popup.addButtons(btArray)
+        self.present(popup, animated: true, completion: nil)
     }
 }
 

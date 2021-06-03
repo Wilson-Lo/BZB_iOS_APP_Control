@@ -8,7 +8,8 @@
 
 import Foundation
 
-class DeviceDataObject: Codable{    
+class DeviceDataObject: Codable{
+    var id: Int?
     var type : Int?
     var ip: String?
     var name: String?
