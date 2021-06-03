@@ -12,7 +12,6 @@
 		8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605808A261EFE7A00B1E0AF /* UIViewController.swift */; };
 		86058090261EFEA300B1E0AF /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605808F261EFEA300B1E0AF /* UIImage.swift */; };
 		8605809D261F01F100B1E0AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605809C261F01F100B1E0AF /* String.swift */; };
-		860580A2261F17C500B1E0AF /* Matrix4NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */; };
 		860580A7261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860580A6261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift */; };
 		860580AF261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */; };
 		86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2D261468BE007FE620 /* AppDelegate.swift */; };
@@ -34,15 +33,12 @@
 		86320EF52615E7F8007FE620 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EF42615E7F8007FE620 /* UIView.swift */; };
 		86320F03261D63A7007FE620 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F02261D63A7007FE620 /* Data.swift */; };
 		86320F09261D9403007FE620 /* MappingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F08261D9402007FE620 /* MappingCollectionViewCell.swift */; };
-		86320F0E261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F0D261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift */; };
 		86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */; };
 		86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */; };
-		866639F2262453DC002D3CC8 /* Matrix4FWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866639F1262453DC002D3CC8 /* Matrix4FWViewController.swift */; };
 		866639FA2625766E002D3CC8 /* ControlBoxMappingRXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866639F92625766E002D3CC8 /* ControlBoxMappingRXViewController.swift */; };
 		86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */; };
 		86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */; };
 		86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86681294262029330034D975 /* MappingRename4DialogViewController.swift */; };
-		866812BC262037EF0034D975 /* Matrix4ViewEDIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866812BB262037EF0034D975 /* Matrix4ViewEDIDViewController.swift */; };
 		866812E026203D3C0034D975 /* OCFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866812DF26203D3C0034D975 /* OCFile.mm */; };
 		866812EA26203D660034D975 /* Edid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866812E826203D660034D975 /* Edid.cpp */; };
 		86B921EA26676B7600FAB568 /* DeviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B921E926676B7600FAB568 /* DeviceListViewController.swift */; };
@@ -88,7 +84,6 @@
 		8605808A261EFE7A00B1E0AF /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		8605808F261EFEA300B1E0AF /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		8605809C261F01F100B1E0AF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4NetworkViewController.swift; sourceTree = "<group>"; };
 		860580A6261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4MappingRenameViewController.swift; sourceTree = "<group>"; };
 		860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRenameCollectionViewCell.swift; sourceTree = "<group>"; };
 		86320E2A261468BE007FE620 /* BZB_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BZB_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,15 +111,12 @@
 		86320EF42615E7F8007FE620 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		86320F02261D63A7007FE620 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		86320F08261D9402007FE620 /* MappingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingCollectionViewCell.swift; sourceTree = "<group>"; };
-		86320F0D261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4LearnEDIDViewController.swift; sourceTree = "<group>"; };
 		86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4IORenameViewController.swift; sourceTree = "<group>"; };
 		86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IORenameCollectionViewCell.swift; sourceTree = "<group>"; };
-		866639F1262453DC002D3CC8 /* Matrix4FWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4FWViewController.swift; sourceTree = "<group>"; };
 		866639F92625766E002D3CC8 /* ControlBoxMappingRXViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingRXViewController.swift; sourceTree = "<group>"; };
 		86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCmdHelper.swift; sourceTree = "<group>"; };
 		86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxRXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86681294262029330034D975 /* MappingRename4DialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRename4DialogViewController.swift; sourceTree = "<group>"; };
-		866812BB262037EF0034D975 /* Matrix4ViewEDIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4ViewEDIDViewController.swift; sourceTree = "<group>"; };
 		866812DF26203D3C0034D975 /* OCFile.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OCFile.mm; sourceTree = "<group>"; };
 		866812E726203D570034D975 /* OCFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCFile.h; sourceTree = "<group>"; };
 		866812E826203D660034D975 /* Edid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Edid.cpp; sourceTree = "<group>"; };
@@ -299,12 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				86320EA726147976007FE620 /* Matrix4MappingViewController.swift */,
-				86320F0D261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift */,
 				86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */,
-				860580A1261F17C500B1E0AF /* Matrix4NetworkViewController.swift */,
 				860580A6261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift */,
-				866812BB262037EF0034D975 /* Matrix4ViewEDIDViewController.swift */,
-				866639F1262453DC002D3CC8 /* Matrix4FWViewController.swift */,
 			);
 			path = Matrix4;
 			sourceTree = "<group>";
@@ -631,7 +619,6 @@
 				86058090261EFEA300B1E0AF /* UIImage.swift in Sources */,
 				86320F09261D9403007FE620 /* MappingCollectionViewCell.swift in Sources */,
 				866812E026203D3C0034D975 /* OCFile.mm in Sources */,
-				866812BC262037EF0034D975 /* Matrix4ViewEDIDViewController.swift in Sources */,
 				86058080261EFC5600B1E0AF /* IORename4DialogViewController.swift in Sources */,
 				86BB53A92627089C0044E52D /* ControlBoxMappingTXViewController.swift in Sources */,
 				86CCB4032668B6F700CCA0F3 /* DeviceDataObject.swift in Sources */,
@@ -640,7 +627,6 @@
 				8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
-				860580A2261F17C500B1E0AF /* Matrix4NetworkViewController.swift in Sources */,
 				86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */,
 				86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */,
 				86320EF52615E7F8007FE620 /* UIView.swift in Sources */,
@@ -652,7 +638,6 @@
 				86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */,
 				86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */,
 				86320F03261D63A7007FE620 /* Data.swift in Sources */,
-				866639F2262453DC002D3CC8 /* Matrix4FWViewController.swift in Sources */,
 				86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */,
 				866639FA2625766E002D3CC8 /* ControlBoxMappingRXViewController.swift in Sources */,
 				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
@@ -664,7 +649,6 @@
 				86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */,
 				86B921EF26676DBA00FAB568 /* ListCollectionViewCell.swift in Sources */,
 				860580A7261FF56C00B1E0AF /* Matrix4MappingRenameViewController.swift in Sources */,
-				86320F0E261DAA9B007FE620 /* Matrix4LearnEDIDViewController.swift in Sources */,
 				86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */,
 				86320EB226147A55007FE620 /* GCDTimer.swift in Sources */,
 				866812EA26203D660034D975 /* Edid.cpp in Sources */,
