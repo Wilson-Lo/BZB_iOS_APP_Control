@@ -13,9 +13,11 @@ import PopupDialog
 
 class Matrix4MappingViewController: BaseSocketViewController{
     
-
+    @IBOutlet weak var btRefresh: UIButton!
+    @IBOutlet weak var btSave: UIButton!
+    @IBOutlet weak var btRecall: UIButton!
+    @IBOutlet weak var btAll: UIButton!
     @IBOutlet weak var collectionInput: UICollectionView!
-    
     @IBOutlet weak var collectionOutput: UICollectionView!
     
     var saveMappingMenu: RSSelectionMenu<String>!
@@ -24,7 +26,7 @@ class Matrix4MappingViewController: BaseSocketViewController{
     override func viewDidLoad() {
         print("Matrix4MappingViewController-viewDidLoad")
         super.viewDidLoad()
-        
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,78 +48,83 @@ class Matrix4MappingViewController: BaseSocketViewController{
 extension Matrix4MappingViewController{
     
     func initialUI(){
+        
         if(Matrix4MappingViewController.isPhone){
             print("is phone")
             //Refresh button
-//            let widthBtRefresh = btRefresh.widthAnchor.constraint(equalToConstant: 30.0)
-//            let heightBtRefresh = btRefresh.heightAnchor.constraint(equalToConstant: 30.0)
-//            NSLayoutConstraint.activate([widthBtRefresh, heightBtRefresh])
-//            widthBtRefresh.constant = 50
-//            heightBtRefresh.constant = 50
-//
-//            //Save button
-//            let widthBtSave = btSave.widthAnchor.constraint(equalToConstant: 30.0)
-//            let heightBtSave = btSave.heightAnchor.constraint(equalToConstant: 30.0)
-//            NSLayoutConstraint.activate([widthBtSave, heightBtSave])
-//            widthBtSave.constant = 50
-//            heightBtSave.constant = 50
-//
-//            //Recall button
-//            let widthBtRecall = btRecall.widthAnchor.constraint(equalToConstant: 30.0)
-//            let heightBtRecall = btRecall.heightAnchor.constraint(equalToConstant: 30.0)
-//            NSLayoutConstraint.activate([widthBtRecall, heightBtRecall])
-//            widthBtRecall.constant = 80
-//            heightBtRecall.constant = 56
-//            self.btRecall.layer.cornerRadius = 5
-//            self.btRecall.layer.borderWidth = 1
-//            self.btRecall.layer.borderColor = UIColor.black.cgColor
-//
-//            //All button
-//            let widthBtAll = btAll.widthAnchor.constraint(equalToConstant: 30.0)
-//            let heightBtAll = btAll.heightAnchor.constraint(equalToConstant: 30.0)
-//            NSLayoutConstraint.activate([widthBtAll, heightBtAll])
-//            widthBtAll.constant = 80
-//            heightBtAll.constant = 56
-//            self.btAll.layer.cornerRadius = 5
-//            self.btAll.layer.borderWidth = 1
-//            self.btAll.layer.borderColor = UIColor.black.cgColor
-//
+            //            let widthBtRefresh = btRefresh.widthAnchor.constraint(equalToConstant: 30.0)
+            //            let heightBtRefresh = btRefresh.heightAnchor.constraint(equalToConstant: 30.0)
+            //            NSLayoutConstraint.activate([widthBtRefresh, heightBtRefresh])
+            //            widthBtRefresh.constant = 50
+            //            heightBtRefresh.constant = 50
+            self.btRefresh.layer.cornerRadius = 5
+            self.btRefresh.layer.borderWidth = 1
+            self.btRefresh.layer.borderColor = UIColor.black.cgColor
+            
+            //Save button
+            //            let widthBtSave = btSave.widthAnchor.constraint(equalToConstant: 30.0)
+            //            let heightBtSave = btSave.heightAnchor.constraint(equalToConstant: 30.0)
+            //            NSLayoutConstraint.activate([widthBtSave, heightBtSave])
+            //            widthBtSave.constant = 50
+            //            heightBtSave.constant = 50
+            self.btSave.layer.cornerRadius = 5
+            self.btSave.layer.borderWidth = 1
+            self.btSave.layer.borderColor = UIColor.black.cgColor
+            
+            //Recall button
+            //            let widthBtRecall = btRecall.widthAnchor.constraint(equalToConstant: 30.0)
+            //            let heightBtRecall = btRecall.heightAnchor.constraint(equalToConstant: 30.0)
+            //            NSLayoutConstraint.activate([widthBtRecall, heightBtRecall])
+            
+            self.btRecall.layer.cornerRadius = 5
+            self.btRecall.layer.borderWidth = 1
+            self.btRecall.layer.borderColor = UIColor.black.cgColor
+            
+            //All button
+            //            let widthBtAll = btAll.widthAnchor.constraint(equalToConstant: 30.0)
+            //            let heightBtAll = btAll.heightAnchor.constraint(equalToConstant: 30.0)
+            //            NSLayoutConstraint.activate([widthBtAll, heightBtAll])
+            
+            self.btAll.layer.cornerRadius = 5
+            self.btAll.layer.borderWidth = 1
+            self.btAll.layer.borderColor = UIColor.black.cgColor
+            
         }else{
             print("is pad")
             //Refresh button
-//            let widthBtRefresh = btRefresh.widthAnchor.constraint(equalToConstant: 30.0)
-//            let heightBtRefresh = btRefresh.heightAnchor.constraint(equalToConstant: 30.0)
-//            NSLayoutConstraint.activate([widthBtRefresh, heightBtRefresh])
-//            //change button size to 50x50
-//            widthBtRefresh.constant = 80
-//            heightBtRefresh.constant = 80
-//
-//            //Save button
-//            let widthBtSave = btSave.widthAnchor.constraint(equalToConstant: 30.0)
-//            let heightBtSave = btSave.heightAnchor.constraint(equalToConstant: 30.0)
-//            NSLayoutConstraint.activate([widthBtSave, heightBtSave])
-//            widthBtSave.constant = 80
-//            heightBtSave.constant = 80
-//
-//            //Recall button
-//            let widthBtRecall = btRecall.widthAnchor.constraint(equalToConstant: 30.0)
-//            let heightBtRecall = btRecall.heightAnchor.constraint(equalToConstant: 30.0)
-//            NSLayoutConstraint.activate([widthBtRecall, heightBtRecall])
-//            widthBtRecall.constant = 120
-//            heightBtRecall.constant = 80
-//            self.btRecall.layer.cornerRadius = 5
-//            self.btRecall.layer.borderWidth = 1
-//            self.btRecall.layer.borderColor = UIColor.black.cgColor
-//
-//            //All button
-//            let widthBtAll = btAll.widthAnchor.constraint(equalToConstant: 30.0)
-//            let heightBtAll = btAll.heightAnchor.constraint(equalToConstant: 30.0)
-//            NSLayoutConstraint.activate([widthBtAll, heightBtAll])
-//            widthBtAll.constant = 120
-//            heightBtAll.constant = 80
-//            self.btAll.layer.cornerRadius = 5
-//            self.btAll.layer.borderWidth = 1
-//            self.btAll.layer.borderColor = UIColor.black.cgColor
+            //            let widthBtRefresh = btRefresh.widthAnchor.constraint(equalToConstant: 30.0)
+            //            let heightBtRefresh = btRefresh.heightAnchor.constraint(equalToConstant: 30.0)
+            //            NSLayoutConstraint.activate([widthBtRefresh, heightBtRefresh])
+            //            //change button size to 50x50
+            //            widthBtRefresh.constant = 80
+            //            heightBtRefresh.constant = 80
+            //
+            //            //Save button
+            //            let widthBtSave = btSave.widthAnchor.constraint(equalToConstant: 30.0)
+            //            let heightBtSave = btSave.heightAnchor.constraint(equalToConstant: 30.0)
+            //            NSLayoutConstraint.activate([widthBtSave, heightBtSave])
+            //            widthBtSave.constant = 80
+            //            heightBtSave.constant = 80
+            //
+            //            //Recall button
+            //            let widthBtRecall = btRecall.widthAnchor.constraint(equalToConstant: 30.0)
+            //            let heightBtRecall = btRecall.heightAnchor.constraint(equalToConstant: 30.0)
+            //            NSLayoutConstraint.activate([widthBtRecall, heightBtRecall])
+            //            widthBtRecall.constant = 120
+            //            heightBtRecall.constant = 80
+            //            self.btRecall.layer.cornerRadius = 5
+            //            self.btRecall.layer.borderWidth = 1
+            //            self.btRecall.layer.borderColor = UIColor.black.cgColor
+            //
+            //            //All button
+            //            let widthBtAll = btAll.widthAnchor.constraint(equalToConstant: 30.0)
+            //            let heightBtAll = btAll.heightAnchor.constraint(equalToConstant: 30.0)
+            //            NSLayoutConstraint.activate([widthBtAll, heightBtAll])
+            //            widthBtAll.constant = 120
+            //            heightBtAll.constant = 80
+            //            self.btAll.layer.cornerRadius = 5
+            //            self.btAll.layer.borderWidth = 1
+            //            self.btAll.layer.borderColor = UIColor.black.cgColor
         }
     }
 }
@@ -131,7 +138,7 @@ extension Matrix4MappingViewController{
     }
     
     @IBAction func btSetAll(sender: UIButton) {
-        self.showSourcePopMenu(screenName: "All screen", screenNumber: 0, isSetAll: true)
+        self.showOutputPopMenu(screenName: "All screen", screenNumber: 0, isSetAll: true)
     }
     
     @IBAction func btRefresh(sender: UIButton) {
@@ -205,77 +212,125 @@ extension Matrix4MappingViewController{
         }
     }
     
-    func showSourcePopMenu(screenName: String, screenNumber: Int, isSetAll: Bool){
+    func showInputPopMenu(inputName: String, inputIndex: Int){
         
         
         if((self.inputName.count > 0) && (self.outputName.count > 0)){
             
-            let title = screenName
-            let message = "Select source to " + screenName.lowercased()
+            let title = inputName
+            let message = "Select " + inputName.lowercased() + " to Output"
             
             // Create the dialog,
             let popup = PopupDialog(title: title, message: message, image: nil)
             
             var btArray: Array<CancelButton> = []
-            if(!Matrix4MappingViewController.isPhone){
-                let dialogAppearance = PopupDialogDefaultView.appearance()
-                dialogAppearance.backgroundColor      = .white
-                dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
-                //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
-                dialogAppearance.titleTextAlignment   = .center
-                dialogAppearance.messageFont          = .systemFont(ofSize: 26)
-                //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
-                
-                let cb = CancelButton.appearance()
-                cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
-            }
+//            if(!Matrix4MappingViewController.isPhone){
+//                let dialogAppearance = PopupDialogDefaultView.appearance()
+//                dialogAppearance.backgroundColor      = .white
+//                dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
+//                //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+//                dialogAppearance.titleTextAlignment   = .center
+//                dialogAppearance.messageFont          = .systemFont(ofSize: 26)
+//                //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+//
+//                let cb = CancelButton.appearance()
+//                cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
+//            }
             
             
-            for i in 0...(self.inputName.count - 1){
-                btArray.append(CancelButton(title: self.inputName[i]) {
+            for i in 0...(self.outputName.count - 1){
+                btArray.append(CancelButton(title: self.outputName[i]) {
                     self.showLoadingView()
                     var cmd = ""
-                    
-                    if(isSetAll){
-                        cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "0\(i+1)0\(i+1)0\(i+1)0\(i+1)"
-                        cmd = cmd + self.calCheckSum(data: cmd)
-                        TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._9_cmd_set_all_mapping))
-                    }else{
-                        cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(screenNumber)0\(i+1)"
-                        cmd = cmd + self.calCheckSum(data: cmd)
-                        TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
-                    }
-                    
-                    //  self.startCheckFeedbackTimer()
-                }
-                )
-            }
-            
-            btArray.append(CancelButton(title: "Mute") {
-                self.showLoadingView()
-                var cmd = ""
-                if(isSetAll){
-                    cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "00000000"
-                    cmd = cmd + self.calCheckSum(data: cmd)
-                    TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._9_cmd_set_all_mapping))
-                }else{
-                    cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(screenNumber)00"
+
+                    cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(i+1)0\(inputIndex)"
                     cmd = cmd + self.calCheckSum(data: cmd)
                     TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
                 }
-                // self.startCheckFeedbackTimer()
+                )
+            }
+//
+        
+        
+        popup.addButtons(btArray)
+        
+        self.present(popup, animated: true, completion: nil)
+    }else{
+    self.view.makeToast("Please reconnect to device first !")
+    }
+}
+
+func showOutputPopMenu(screenName: String, screenNumber: Int, isSetAll: Bool){
+    
+    
+    if((self.inputName.count > 0) && (self.outputName.count > 0)){
+        
+        let title = screenName
+        let message = "Select source to " + screenName.lowercased()
+        
+        // Create the dialog,
+        let popup = PopupDialog(title: title, message: message, image: nil)
+        
+        var btArray: Array<CancelButton> = []
+        if(!Matrix4MappingViewController.isPhone){
+            let dialogAppearance = PopupDialogDefaultView.appearance()
+            dialogAppearance.backgroundColor      = .white
+            dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
+            //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+            dialogAppearance.titleTextAlignment   = .center
+            dialogAppearance.messageFont          = .systemFont(ofSize: 26)
+            //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+            
+            let cb = CancelButton.appearance()
+            cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
+        }
+        
+        
+        for i in 0...(self.inputName.count - 1){
+            btArray.append(CancelButton(title: self.inputName[i]) {
+                self.showLoadingView()
+                var cmd = ""
+                
+                if(isSetAll){
+                    cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "0\(i+1)0\(i+1)0\(i+1)0\(i+1)"
+                    cmd = cmd + self.calCheckSum(data: cmd)
+                    TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._9_cmd_set_all_mapping))
+                }else{
+                    cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(screenNumber)0\(i+1)"
+                    cmd = cmd + self.calCheckSum(data: cmd)
+                    TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
+                }
+                
+                //  self.startCheckFeedbackTimer()
             }
             )
-            
-            
-            popup.addButtons(btArray)
-            
-            self.present(popup, animated: true, completion: nil)
-        }else{
-            self.view.makeToast("Please reconnect to device first !")
         }
+        
+        btArray.append(CancelButton(title: "Mute") {
+            self.showLoadingView()
+            var cmd = ""
+            if(isSetAll){
+                cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "00000000"
+                cmd = cmd + self.calCheckSum(data: cmd)
+                TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._9_cmd_set_all_mapping))
+            }else{
+                cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(screenNumber)00"
+                cmd = cmd + self.calCheckSum(data: cmd)
+                TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
+            }
+            // self.startCheckFeedbackTimer()
+        }
+        )
+        
+        
+        popup.addButtons(btArray)
+        
+        self.present(popup, animated: true, completion: nil)
+    }else{
+        self.view.makeToast("Please reconnect to device first !")
     }
-    
+}
+
 }
 
 //TCP Deleage
@@ -313,7 +368,7 @@ extension Matrix4MappingViewController : TcpSocketClientDeleage{
                         print("status \(sourceNumber)")
                         self.deviceSourceStatus.append(sourceNumber)
                     }
-               //     self.collectionView.reloadData()
+                    //     self.collectionView.reloadData()
                     self.collectionInput.reloadData()
                     self.collectionOutput.reloadData()
                 }else{
@@ -373,10 +428,10 @@ extension Matrix4MappingViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("click")
         if collectionView == self.collectionInput {
-         
+            self.showInputPopMenu(inputName: self.inputName[indexPath.item], inputIndex: (indexPath.item+1))
         }
         else {
-            self.showSourcePopMenu(screenName: self.outputName[indexPath.item], screenNumber: (indexPath.item+1), isSetAll: false)
+            self.showOutputPopMenu(screenName: self.outputName[indexPath.item], screenNumber: (indexPath.item+1), isSetAll: false)
         }
     }
 }
@@ -404,15 +459,15 @@ extension Matrix4MappingViewController : UICollectionViewDataSource{
             cell.labelIndex.text = "No." + String(indexPath.item + 1)
             cell.labelOutputName.text = self.outputName[indexPath.item]
             if((self.inputName.count > 0) && (self.outputName.count > 0)){
-               // cell.labelStatus.text = self.outputName[indexPath.item]
+                // cell.labelStatus.text = self.outputName[indexPath.item]
                 
                 if(self.deviceSourceStatus[indexPath.item] > 100){
                     cell.labelStatus.text = "Mute"
-                  //  cell.outputName.backgroundColor = UIColor.red
+                    //  cell.outputName.backgroundColor = UIColor.red
                 }
                 else{
                     cell.labelStatus.text = self.inputName[self.deviceSourceStatus[indexPath.item]-1]
-                  //  cell.outputName.backgroundColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
+                    //  cell.outputName.backgroundColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
                 }
             }
             return cell
@@ -430,13 +485,13 @@ extension Matrix4MappingViewController: UICollectionViewDelegateFlowLayout {
     
     //setup CollectionViewCell width, height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-      
-            if(Matrix4MappingViewController.isPhone){
-                return CGSize(width: (self.view.frame.size.width) / 4.8 , height: (self.view.frame.size.width) / 4)
-            }else{
-                return CGSize(width: (self.view.frame.size.width - 60) / 2 , height: (self.view.frame.size.width - 170) / 2)
-            }
-       
+        
+        if(Matrix4MappingViewController.isPhone){
+            return CGSize(width: (self.view.frame.size.width) / 4.8 , height: (self.view.frame.size.width) / 4)
+        }else{
+            return CGSize(width: (self.view.frame.size.width - 60) / 2 , height: (self.view.frame.size.width - 170) / 2)
+        }
+        
         
     }
     

@@ -8,7 +8,7 @@
 
 
 import Foundation
-import SQLite3
+import sqlite3
 
 class DBHelper{
     
@@ -22,11 +22,15 @@ class DBHelper{
     }
     
     func createDB() -> OpaquePointer? {
-        let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathExtension(path)
+        let fileURL = try! FileManager.default
+            .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            .appendingPathComponent(path)
+        
+//        let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathExtension(path)
         
         var db : OpaquePointer? = nil
         
-        if sqlite3_open(filePath.path, &db) != SQLITE_OK {
+        if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
             print("There is error in creating DB")
             return nil
         }else {

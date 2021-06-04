@@ -140,7 +140,7 @@ extension Matrix4IORenameViewController : UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IORenameCollectionViewCell", for: indexPath) as! IORenameCollectionViewCell
         if(isIntput){
             cell.deviceType.text = "Input \(indexPath.item + 1)"
-            cell.deviceType.backgroundColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
+          //  cell.deviceType.backgroundColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
             if(self.inputName.count == 4){
                 cell.deviceName.text = self.inputName[indexPath.item]
             }else{
@@ -153,7 +153,7 @@ extension Matrix4IORenameViewController : UICollectionViewDataSource {
                 cell.deviceName.text = "N/A"
             }
             cell.deviceType.text = "Output \(indexPath.item + 1)"
-            cell.deviceType.backgroundColor = UIColor(red: 88/255, green: 177/255, blue: 243/255, alpha: 1)
+           // cell.deviceType.backgroundColor = UIColor(red: 88/255, green: 177/255, blue: 243/255, alpha: 1)
         }
         return cell
     }
