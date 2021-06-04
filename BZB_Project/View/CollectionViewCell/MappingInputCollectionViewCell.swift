@@ -1,18 +1,18 @@
 //
-//  MappingCollectionViewCell.swift
+//  MappingInputCollectionViewCell.swift
 //  BZB_Project
 //
-//  Created by GoMax on 2021/4/7.
+//  Created by GoMax on 2021/6/4.
 //
 
 import Foundation
 import UIKit
 
-class MappingCollectionViewCell: UICollectionViewCell {
+class MappingInputCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var outputName: UILabel!
-    @IBOutlet weak var sourceStatus: UILabel!
-    @IBOutlet weak var outputIndex: UILabel!
+
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelIndex: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
