@@ -25,7 +25,6 @@
 		86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EAC261479AB007FE620 /* TcpSocketClient.swift */; };
 		86320EB226147A55007FE620 /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EB126147A55007FE620 /* GCDTimer.swift */; };
 		86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EB626147CB1007FE620 /* CmdHelper.swift */; };
-		86320ED626155852007FE620 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320ED526155852007FE620 /* MainViewController.swift */; };
 		86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EDA26156CF9007FE620 /* SettingsViewController.swift */; };
 		86320EE12615A357007FE620 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EE02615A357007FE620 /* ImageButton.swift */; };
 		86320EEC2615E453007FE620 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320EEB2615E453007FE620 /* BaseViewController.swift */; };
@@ -104,7 +103,6 @@
 		86320EAC261479AB007FE620 /* TcpSocketClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcpSocketClient.swift; sourceTree = "<group>"; };
 		86320EB126147A55007FE620 /* GCDTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
 		86320EB626147CB1007FE620 /* CmdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdHelper.swift; sourceTree = "<group>"; };
-		86320ED526155852007FE620 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		86320EDA26156CF9007FE620 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		86320EE02615A357007FE620 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		86320EEB2615E453007FE620 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -250,7 +248,6 @@
 				86320E9E261478E4007FE620 /* Base */,
 				86320E9C261478B5007FE620 /* Matrix4 */,
 				86320E9B261478A9007FE620 /* ControlBox */,
-				86320ED526155852007FE620 /* MainViewController.swift */,
 				86320EDA26156CF9007FE620 /* SettingsViewController.swift */,
 			);
 			path = ViewController;
@@ -643,7 +640,6 @@
 				86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */,
 				86CCB4822668E25100CCA0F3 /* Matrix4MappingViewController.swift in Sources */,
 				866639FA2625766E002D3CC8 /* ControlBoxMappingRXViewController.swift in Sources */,
-				86320ED626155852007FE620 /* MainViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,
 				860580AF261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift in Sources */,
