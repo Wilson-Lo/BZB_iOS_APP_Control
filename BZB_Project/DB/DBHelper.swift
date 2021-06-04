@@ -100,6 +100,23 @@ class DBHelper{
         return deviceList
     }
     
+    func queryByIP(ip : String) -> Bool{
+      
+        let query = "SELECT * FROM " + self.tableName + ";"
+        var statement : OpaquePointer? = nil
+        var feedback = false
+        
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK{
+            while sqlite3_step(statement) == SQLITE_ROW {
+                if(ip == String(describing: String(cString: sqlite3_column_text(statement, 2)))){
+                    feedback = true
+                    break
+                }
+            }
+        }
+        return feedback
+    }
+    
     func delete(id : Int) -> Bool{
         let query = "DELETE FROM " + self.tableName + " where id = \(id)"
         var statement : OpaquePointer? = nil

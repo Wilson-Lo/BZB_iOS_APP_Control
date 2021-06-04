@@ -10,10 +10,9 @@ import UIKit
 
 class ControlBoxTXCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var deviceName: UILabel!
-    @IBOutlet weak var groupIDText: UITextField!
-    @IBOutlet weak var ipText: UITextField!
-    
+  
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelStatus: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

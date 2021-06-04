@@ -121,15 +121,20 @@ extension SettingsViewController{
         
         var type = 0;
         
-        if(self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!) > 0){
-            var feedback = self.db.insert(type: self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!), ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceType.text!)
-            if(feedback){
-                self.showToast(context: "Add successfull !")
+        var feedback = self.db.queryByIP(ip: self.textFieldDeviceIP.text!)
+        if(!feedback){
+            if(self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!) > 0){
+                var feedback = self.db.insert(type: self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!), ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceType.text!)
+                if(feedback){
+                    self.showToast(context: "Add successfull !")
+                }else{
+                    self.showToast(context: "Add failed !")
+                }
             }else{
-                self.showToast(context: "Add failed !")
+                self.showToast(context: "Please scan device first !")
             }
         }else{
-            self.showToast(context: "Please scan device first !")
+            self.showToast(context: "This IP is exist !")
         }
     }
 }

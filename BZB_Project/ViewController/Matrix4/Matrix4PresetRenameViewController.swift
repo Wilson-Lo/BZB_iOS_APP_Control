@@ -7,16 +7,16 @@
 
 import UIKit
 
-class Matrix4MappingRenameViewController: BaseSocketViewController{
+class Matrix4PresetRenameViewController: BaseSocketViewController{
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
-        print("Matrix4MappingRenameViewController-viewDidLoad")
+        print("Matrix4PresetRenameViewController-viewDidLoad")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("Matrix4MappingRenameViewController-viewDidLoad")
+        print("Matrix4PresetRenameViewController-viewDidLoad")
         TcpSocketClient.sharedInstance.delegate = self
         TcpSocketClient.sharedInstance.startConnect()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadList), name: NSNotification.Name(rawValue: "reload"), object: nil)
@@ -27,30 +27,30 @@ class Matrix4MappingRenameViewController: BaseSocketViewController{
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print("Matrix4MappingRenameViewController-viewDidLoad")
+        print("Matrix4PresetRenameViewController-viewDidLoad")
         
     }
     
     @objc func reloadList(notification: NSNotification){
-        print("Matrix4MappingRenameViewController-reloadList")
+        print("Matrix4PresetRenameViewController-reloadList")
         //load data here
         self.collectionView.reloadData()
     }
     
     @objc func showLoading(notification: NSNotification){
-        print("Matrix4MappingRenameViewController-showLoading")
+        print("Matrix4PresetRenameViewController-showLoading")
         //load data here
         self.showLoadingView()
     }
     
     @objc func closeLoading(notification: NSNotification){
-        print("Matrix4MappingRenameViewController-closeLoading")
+        print("Matrix4PresetRenameViewController-closeLoading")
         //load data here
         self.dismissLoadingView()
     }
     
     @objc func showSuccessToast(notification: NSNotification){
-        print("Matrix4MappingRenameViewController-showSuccessToast")
+        print("Matrix4PresetRenameViewController-showSuccessToast")
         //load data here
         self.view.makeToast("Rename successfully")
         TcpSocketClient.sharedInstance.delegate = self
@@ -58,13 +58,13 @@ class Matrix4MappingRenameViewController: BaseSocketViewController{
     }
     
     @objc func showFailToast(notification: NSNotification){
-        print("Matrix4MappingRenameViewController-showFailToast")
+        print("Matrix4PresetRenameViewController-showFailToast")
         //load data here
         self.view.makeToast("Rename failed")
     }
 }
 
-extension Matrix4MappingRenameViewController : UICollectionViewDelegate {
+extension Matrix4PresetRenameViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("click")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -77,7 +77,7 @@ extension Matrix4MappingRenameViewController : UICollectionViewDelegate {
     }
 }
 
-extension Matrix4MappingRenameViewController : UICollectionViewDataSource{
+extension Matrix4PresetRenameViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 8
@@ -88,12 +88,12 @@ extension Matrix4MappingRenameViewController : UICollectionViewDataSource{
         if(self.mappingName.count > 3){
             cell.name.text = self.mappingName[indexPath.item]
         }
-        cell.index.text = "Mapping \(indexPath.item+1)"
+        cell.index.text = "Preset \(indexPath.item+1)"
         return cell
     }
 }
 
-extension Matrix4MappingRenameViewController: UICollectionViewDelegateFlowLayout {
+extension Matrix4PresetRenameViewController: UICollectionViewDelegateFlowLayout {
     
     /// 設定 Collection View 距離 Super View上、下、左、下間的距離
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -129,25 +129,25 @@ extension Matrix4MappingRenameViewController: UICollectionViewDelegateFlowLayout
 }
 
 //TCP Deleage
-extension Matrix4MappingRenameViewController : TcpSocketClientDeleage{
+extension Matrix4PresetRenameViewController : TcpSocketClientDeleage{
     
     func onConnect() {
-        print("Matrix4MappingRenameViewController-onConnect")
+        print("Matrix4PresetRenameViewController-onConnect")
         TcpSocketClient.sharedInstance.sendCmd(cmd: CmdHelper.cmd_4_x_4_get_mapping_name, number:UInt8(CmdHelper._7_cmd_get_mapping_name))
     }
     
     func disConnect(err: String) {
-        print("Matrix4MappingRenameViewController-disConnect")
+        print("Matrix4PresetRenameViewController-disConnect")
         
     }
     
     func onReadData(data: Data, tag: Int) {
-        print("Matrix4MappingRenameViewController-onReadData")
+        print("Matrix4PresetRenameViewController-onReadData")
         switch tag{
         
         
         case CmdHelper._7_cmd_get_mapping_name:
-            print("Matrix4MappingViewController-_7_cmd_get_mapping_name")
+            print("Matrix4PresetRenameViewController-_7_cmd_get_mapping_name")
             self.parserMappingName(data: data)
             self.collectionView.reloadData()
             break

@@ -87,16 +87,16 @@ extension ControlBoxVideoWallViewController{
         self.btReset.layer.borderWidth = 1
         self.btReset.layer.borderColor = UIColor.black.cgColor
         
-        if(ControlBoxMappingRXViewController.isPhone){
-            print("is phone")
-            
-            
-            
-        }else{
-            print("is pad")
-            
-            
-        }
+//        if(ControlBoxMappingRXViewController.isPhone){
+//            print("is phone")
+//
+//
+//
+//        }else{
+//            print("is pad")
+//
+//
+//        }
     }
     
 }
@@ -135,11 +135,11 @@ extension ControlBoxVideoWallViewController: UICollectionViewDelegateFlowLayout 
     
     //setup CollectionViewCell width, height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if(ControlBoxMappingTXViewController.isPhone){
+       // if(ControlBoxMappingTXViewController.isPhone){
             return CGSize(width: (self.view.frame.size.width - 50) , height: (self.view.frame.size.width) / 5)
-        }else{
+       // }else{
             return CGSize(width: (self.view.frame.size.width - 60) / 2 , height: (self.view.frame.size.width - 170) / 2)
-        }
+       // }
     }
     
     /// 滑動方向為「垂直」的話即「上下」的間距(預設為重直)

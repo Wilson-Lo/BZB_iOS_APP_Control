@@ -11,10 +11,9 @@ import UIKit
 class ControlBoxRXCollectionViewCell: UICollectionViewCell {
     
     
-    @IBOutlet weak var deviceName: UILabel!
-    @IBOutlet weak var ipText: UITextField!
-    @IBOutlet weak var groupIDText: UITextField!
-    @IBOutlet weak var txNameText: UITextField!
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelTXName: UILabel!
+    @IBOutlet weak var labelStatus: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
