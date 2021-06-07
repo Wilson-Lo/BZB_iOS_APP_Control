@@ -34,6 +34,7 @@
 		86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */; };
 		86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */; };
 		8643BA012669B9DB00150087 /* MappingInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */; };
+		8643BA6F266DF43100150087 /* ControlBoxVideoWallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */; };
 		86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */; };
 		86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */; };
 		86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86681294262029330034D975 /* MappingRename4DialogViewController.swift */; };
@@ -110,6 +111,7 @@
 		86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4IORenameViewController.swift; sourceTree = "<group>"; };
 		86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IORenameCollectionViewCell.swift; sourceTree = "<group>"; };
 		8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVideoWallCollectionViewCell.swift; sourceTree = "<group>"; };
 		86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCmdHelper.swift; sourceTree = "<group>"; };
 		86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxRXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86681294262029330034D975 /* MappingRename4DialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRename4DialogViewController.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */,
 				86B921EE26676DBA00FAB568 /* ListCollectionViewCell.swift */,
 				8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */,
+				8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
 				86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */,
 				86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */,
+				8643BA6F266DF43100150087 /* ControlBoxVideoWallCollectionViewCell.swift in Sources */,
 				86320EF52615E7F8007FE620 /* UIView.swift in Sources */,
 				86D8C67D265794F6001E801B /* ControlBoxMappingViewController.swift in Sources */,
 				86B921EA26676B7600FAB568 /* DeviceListViewController.swift in Sources */,

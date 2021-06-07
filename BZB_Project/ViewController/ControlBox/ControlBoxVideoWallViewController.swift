@@ -20,12 +20,19 @@ import PopupDialog
 class ControlBoxVideoWallViewController : BaseViewController{
     
     
-    @IBOutlet weak var btPreset: UIButton!
+    @IBOutlet weak var collectionViewVideoWall: UICollectionView!
+    @IBOutlet weak var collectionViewVideoWallContent: UICollectionView!
+    
     @IBOutlet weak var labelRow: UITextField!
     @IBOutlet weak var labelCol: UITextField!
-    @IBOutlet weak var btApply: UIButton!
-    @IBOutlet weak var btReset: UIButton!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var btPreset: UIButton!
+    @IBOutlet weak var btDisable: UIButton!
+    @IBOutlet weak var btEnable: UIButton!
+    @IBOutlet weak var btTX: UIButton!
+    
+    var currentTotalVideoWallSize = 0
+    var currentRowVideoWallSize = 0
+    var currentColVideoWallSize = 0
     var presetNameForUI: Array<String> = []
     var presetDataList: Array<Device> = []
     var selectedPresetIndex = 1
@@ -79,24 +86,28 @@ extension ControlBoxVideoWallViewController{
         self.btPreset.layer.borderWidth = 1
         self.btPreset.layer.borderColor = UIColor.black.cgColor
         
-        self.btApply.layer.cornerRadius = 5
-        self.btApply.layer.borderWidth = 1
-        self.btApply.layer.borderColor = UIColor.black.cgColor
+        self.btEnable.layer.cornerRadius = 5
+        self.btEnable.layer.borderWidth = 1
+        self.btEnable.layer.borderColor = UIColor.black.cgColor
         
-        self.btReset.layer.cornerRadius = 5
-        self.btReset.layer.borderWidth = 1
-        self.btReset.layer.borderColor = UIColor.black.cgColor
+        self.btDisable.layer.cornerRadius = 5
+        self.btDisable.layer.borderWidth = 1
+        self.btDisable.layer.borderColor = UIColor.black.cgColor
         
-//        if(ControlBoxMappingRXViewController.isPhone){
-//            print("is phone")
-//
-//
-//
-//        }else{
-//            print("is pad")
-//
-//
-//        }
+        self.btTX.layer.cornerRadius = 5
+        self.btTX.layer.borderWidth = 1
+        self.btTX.layer.borderColor = UIColor.black.cgColor
+        
+        //        if(ControlBoxMappingRXViewController.isPhone){
+        //            print("is phone")
+        //
+        //
+        //
+        //        }else{
+        //            print("is pad")
+        //
+        //
+        //        }
     }
     
 }
@@ -113,16 +124,40 @@ extension ControlBoxVideoWallViewController : UICollectionViewDelegate {
 extension ControlBoxVideoWallViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.presetDataList.count
+        
+        if collectionView == self.collectionViewVideoWall {
+            print("currentTotalVideoWallSize = " +  String(self.currentTotalVideoWallSize))
+            
+            return self.currentTotalVideoWallSize
+        }
+        else {
+            return self.currentTotalVideoWallSize
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxPresetCollectionViewCell", for: indexPath) as! ControlBoxPresetCollectionViewCell
         
-        cell.indexLable.text = self.presetDataList[indexPath.item].pos
-        cell.nameLabel.text = self.presetDataList[indexPath.item].name
-        
-        return cell
+        if collectionView == self.collectionViewVideoWall {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxVideoWallCollectionViewCell", for: indexPath) as! ControlBoxVideoWallCollectionViewCell
+            cell.labelIndex.text = String(indexPath.item + 1) + "."
+            
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxPresetCollectionViewCell", for: indexPath) as! ControlBoxPresetCollectionViewCell
+            
+            cell.indexLable.text = String(indexPath.item + 1) + "."
+            cell.nameLabel.text = ""
+            
+            for object in self.presetDataList{
+                if(Int(object.pos)! == (indexPath.item + 1)){
+                    cell.nameLabel.text = object.name
+                    break
+                }
+            }
+            
+            return cell
+        }
     }
 }
 
@@ -135,17 +170,18 @@ extension ControlBoxVideoWallViewController: UICollectionViewDelegateFlowLayout 
     
     //setup CollectionViewCell width, height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-       // if(ControlBoxMappingTXViewController.isPhone){
+        if collectionView == self.collectionViewVideoWall {
+            return CGSize(width: (self.collectionViewVideoWall.frame.size.width) / (CGFloat(self.currentColVideoWallSize) + CGFloat(self.currentColVideoWallSize) * 0.2), height: (self.collectionViewVideoWall.frame.size.height) / (CGFloat(self.currentRowVideoWallSize) + CGFloat(self.currentRowVideoWallSize) * 0.3))
+            
+        }else{
             return CGSize(width: (self.view.frame.size.width - 50) , height: (self.view.frame.size.width) / 5)
-       // }else{
-            return CGSize(width: (self.view.frame.size.width - 60) / 2 , height: (self.view.frame.size.width - 170) / 2)
-       // }
+        }
     }
     
     /// 滑動方向為「垂直」的話即「上下」的間距(預設為重直)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if(ControlBoxVideoWallViewController.isPhone){
-            return 20
+            return 10
         }else{
             return 30
         }
@@ -154,7 +190,7 @@ extension ControlBoxVideoWallViewController: UICollectionViewDelegateFlowLayout 
     /// 滑動方向為「垂直」的話即「左右」的間距(預設為重直)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if(ControlBoxVideoWallViewController.isPhone){
-            return 10
+            return 5
         }else{
             return 12
         }
@@ -304,7 +340,9 @@ extension ControlBoxVideoWallViewController{
                                 self.labelRow.text = row
                                 self.labelCol.text = col
                                 self.btPreset.setTitle(name, for: .normal)
-                                
+                                self.currentTotalVideoWallSize = Int(row)! * Int(col)!
+                                self.currentRowVideoWallSize = Int(row)!
+                                self.currentColVideoWallSize = Int(col)!
                                 if let rxList = deviceObject["rx_list"].array {
                                     for rxObject in rxList {
                                         let mac = rxObject["mac"].stringValue
@@ -312,18 +350,20 @@ extension ControlBoxVideoWallViewController{
                                         self.presetDataList.append(Device(row: row, col:col, name: rxObject["name"].stringValue, pos: rxObject["pos"].stringValue, mac: rxObject["mac"].stringValue, he_shift: rxObject["mac"].stringValue, ve_shift: rxObject["ve_shift"].stringValue, vs_shift: rxObject["vs_shift"].stringValue, hs_shift: rxObject["hs_shift"].stringValue))
                                     }
                                 }
-                                self.collectionView.reloadData()
+                              
+                                self.collectionViewVideoWall.reloadData()
+                                self.collectionViewVideoWallContent.reloadData()
                             }
                         }
                     }
                     
-                    if(!(self.presetDataList.count > 0)){
-                        if(BaseViewController.isPhone){
-                            self.view.showToast(text: "This preset didn't set any RX !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
-                        }else{
-                            self.view.showToast(text: "This preset didn't set any RX !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
-                        }
-                    }
+//                    if(!(self.presetDataList.count > 0)){
+//                        if(BaseViewController.isPhone){
+//                            self.view.showToast(text: "This preset didn't set any RX !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+//                        }else{
+//                            self.view.showToast(text: "This preset didn't set any RX !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+//                        }
+//                    }
                     
                     break
                     
