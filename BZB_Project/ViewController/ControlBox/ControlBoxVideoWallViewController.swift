@@ -23,20 +23,24 @@ class ControlBoxVideoWallViewController : BaseViewController{
     @IBOutlet weak var collectionViewVideoWall: UICollectionView!
     @IBOutlet weak var collectionViewVideoWallContent: UICollectionView!
     
-    @IBOutlet weak var labelRow: UITextField!
-    @IBOutlet weak var labelCol: UITextField!
     @IBOutlet weak var btPreset: UIButton!
     @IBOutlet weak var btDisable: UIButton!
     @IBOutlet weak var btEnable: UIButton!
     @IBOutlet weak var btTX: UIButton!
     
-    var currentTotalVideoWallSize = 0
-    var currentRowVideoWallSize = 0
-    var currentColVideoWallSize = 0
+    var txMenu: RSSelectionMenu<String>!
+    var currentTotalVideoWallSize = 0 //Total video wall counts in current preset
+    var currentRowVideoWallSize = 0 //Row counts in current preset
+    var currentColVideoWallSize = 0 //Col counts in current preset
+    var currentPresetTXMac = "" //TX mac address user select import than in preset
+    var currentPresetTXGroupID = "" //TX group ID user select import than in preset
     var presetNameForUI: Array<String> = []
     var presetDataList: Array<Device> = []
+    var txListForUI: Array<String> = []
     var selectedPresetIndex = 1
     var queueHTTP: DispatchQueue!
+    var rxIPProtocol = [String : RXDevice]() // [ mac & RXDevice ]
+    var txDeviceProtocol = [String : TXDevice]() // [ mac & TXDevice ]
     
     //preset rx device structure
     struct Device {
@@ -49,6 +53,21 @@ class ControlBoxVideoWallViewController : BaseViewController{
         let ve_shift: String
         let vs_shift: String
         let hs_shift: String
+    }
+    
+    //device info structure
+    struct TXDevice {
+        let name: String
+        let mac: String
+        let alive: String
+        let group_id: String
+    }
+    
+    //device info structure
+    struct RXDevice {
+        let name: String
+        let ip: String
+        let alive: String
     }
     
     override func viewDidLoad() {
@@ -65,7 +84,11 @@ class ControlBoxVideoWallViewController : BaseViewController{
         super.viewWillAppear(true)
         var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
         if(device_ip != nil){
-            self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_video_wall_preset, cmdNumber: HTTPCmdHelper._4_cmd_video_wall_preset)
+            
+            self.queueHTTP.async {
+                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._1_cmd_get_node_info)
+            }
+            
         }else{
             
         }
@@ -229,6 +252,10 @@ extension ControlBoxVideoWallViewController {
     
     @IBAction func btApply(sender: UIButton) {
         
+        DispatchQueue.main.async() {
+            self.showLoadingView()
+        }
+        
         self.queueHTTP.async {
             for deviceObject in self.presetDataList {
                 var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
@@ -248,19 +275,18 @@ extension ControlBoxVideoWallViewController {
                             print("fail")
                         }
                     }
-                }else{
                     
-                }
-                
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                if(BaseViewController.isPhone){
-                    self.view.showToast(text: "Enable successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
-                }else{
-                    self.view.showToast(text: "Enable successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
                 }
             }
             
+            if(self.currentPresetTXGroupID.length > 0){
+                self.recursiveSwitchAllRX(currentIndex: 0, txGroupId: self.currentPresetTXGroupID)
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.dismissLoadingView()
+                self.showToast(context: "Enable successful !")
+            }
         }
     }
     
@@ -300,6 +326,100 @@ extension ControlBoxVideoWallViewController {
             }
         }
     }
+    
+    @IBAction func btPresetTX(sender: UIButton) {
+        
+        DispatchQueue.main.async() {
+            
+            self.txMenu = RSSelectionMenu(dataSource: self.txListForUI) { (cell, name, indexPath) in
+                cell.textLabel?.text = name
+            }
+            
+            self.txMenu.title = "Select TX"
+            
+            // provide selected items
+            var selectedNames: [String] = []
+            
+            self.txMenu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
+                
+                for (e, txObject) in self.txDeviceProtocol  {
+                    
+                    if(txObject.name == self.txListForUI[index]){
+                        self.currentPresetTXGroupID = txObject.group_id
+                        break
+                    }
+                }
+                self.btTX.setTitle(self.txListForUI[index], for: .normal)
+            }
+            self.txMenu.show(from: self)
+        }
+        
+    }
+}
+
+extension ControlBoxVideoWallViewController{
+    
+    func recursiveSwitchAllRX(currentIndex : Int, txGroupId : String){
+        print("recursiveSwitchAllRX - \(currentIndex)" )
+        if(currentIndex <= (self.presetDataList.count - 1)){
+            
+            self.queueHTTP.async {
+                var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                if(device_ip != nil){
+                    
+                    if(self.rxIPProtocol[self.presetDataList[currentIndex].mac] != nil){
+                        if(self.rxIPProtocol[self.presetDataList[currentIndex].mac]!.alive != "n" ){
+                            var data  = ["ip": self.rxIPProtocol[self.presetDataList[currentIndex].mac]!.ip,"switch_id":self.currentPresetTXGroupID,"switch_type":"z"]
+                            
+                            AF.upload(multipartFormData: { (multiFormData) in
+                                for (key, value) in data {
+                                    multiFormData.append(Data(value.utf8), withName: key)
+                                }
+                            }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_switch_group_id).responseJSON { response in
+                                switch response.result {
+                                case .success(let JSON):
+                                    print("recursive response is :\(response)")
+                                    
+                                    if((currentIndex + 1) > (self.presetDataList.count - 1 )){
+                                        
+                                    }else{
+                                        self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
+                                    }
+                                    
+                                case .failure(_):
+                                    
+                                    print("recursive fail")
+                                    
+                                    if((currentIndex + 1) > (self.presetDataList.count - 1 )){
+                                        
+                                    }else{
+                                        self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
+                                    }
+                                }
+                            }
+                            
+                        }else{
+                            if((currentIndex + 1) > (self.presetDataList.count - 1 )){
+                                
+                            }else{
+                                self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
+                            }
+                        }
+                    }else{
+                        
+                        if((currentIndex + 1) > (self.presetDataList.count - 1 )){
+                            
+                        }else{
+                            self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
+                        }
+                        
+                    }
+                    
+                }
+            }
+            
+        }
+    }
 }
 
 extension ControlBoxVideoWallViewController{
@@ -320,7 +440,39 @@ extension ControlBoxVideoWallViewController{
                 debugPrint(json)
                 switch(cmdNumber){
                 
-                
+                case HTTPCmdHelper._1_cmd_get_node_info:
+                    debugPrint("_1_cmd_get_node_info")
+                    self.txDeviceProtocol.removeAll()
+                    self.txListForUI.removeAll()
+                    self.rxIPProtocol.removeAll()
+                    
+                    if let deviceList = json.array {
+                        for deviceObject in deviceList {
+                            
+                            let name = deviceObject["host_name"].stringValue
+                            let mac = deviceObject["mac"].stringValue
+                            let ip = deviceObject["ip"].stringValue
+                            let alive = deviceObject["alive"].stringValue
+                            let group_id = deviceObject["id"].stringValue
+                            
+                            if(deviceObject["type"].stringValue != "r"){
+                                self.txDeviceProtocol[mac] = TXDevice(name: name, mac: mac, alive: alive, group_id: group_id)
+                                self.txListForUI.append(name)
+                            }else{
+                                self.rxIPProtocol[mac] = RXDevice(name: name, ip: ip, alive: alive)
+                            }
+                        }
+                    }
+                    
+                    self.queueHTTP.async {
+                        var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                        if(device_ip != nil){
+                            self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_video_wall_preset, cmdNumber: HTTPCmdHelper._4_cmd_video_wall_preset)
+                        }
+                    }
+                    break
+                    
+                    
                 case HTTPCmdHelper._4_cmd_video_wall_preset:
                     debugPrint("_4_cmd_video_wall_preset")
                     self.presetDataList.removeAll()
@@ -337,8 +489,7 @@ extension ControlBoxVideoWallViewController{
                             self.presetNameForUI.append(name)
                             
                             if(index ==  String(self.selectedPresetIndex)){
-                                self.labelRow.text = row
-                                self.labelCol.text = col
+                                self.currentPresetTXMac = tx_mac
                                 self.btPreset.setTitle(name, for: .normal)
                                 self.currentTotalVideoWallSize = Int(row)! * Int(col)!
                                 self.currentRowVideoWallSize = Int(row)!
@@ -346,25 +497,24 @@ extension ControlBoxVideoWallViewController{
                                 if let rxList = deviceObject["rx_list"].array {
                                     for rxObject in rxList {
                                         let mac = rxObject["mac"].stringValue
-                                        debugPrint("mac = " + mac)
                                         self.presetDataList.append(Device(row: row, col:col, name: rxObject["name"].stringValue, pos: rxObject["pos"].stringValue, mac: rxObject["mac"].stringValue, he_shift: rxObject["mac"].stringValue, ve_shift: rxObject["ve_shift"].stringValue, vs_shift: rxObject["vs_shift"].stringValue, hs_shift: rxObject["hs_shift"].stringValue))
                                     }
                                 }
-                              
+                                
                                 self.collectionViewVideoWall.reloadData()
                                 self.collectionViewVideoWallContent.reloadData()
+                                
+                                if(self.txDeviceProtocol.count > 0){
+                                    if(self.txDeviceProtocol[self.currentPresetTXMac] != nil){
+                                        self.currentPresetTXGroupID = self.txDeviceProtocol[self.currentPresetTXMac]!.group_id
+                                        self.btTX.setTitle(self.txDeviceProtocol[self.currentPresetTXMac]?.name, for: .normal)
+                                    }else{
+                                        self.btTX.setTitle("N/A", for: .normal)
+                                    }
+                                }
                             }
                         }
                     }
-                    
-//                    if(!(self.presetDataList.count > 0)){
-//                        if(BaseViewController.isPhone){
-//                            self.view.showToast(text: "This preset didn't set any RX !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
-//                        }else{
-//                            self.view.showToast(text: "This preset didn't set any RX !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
-//                        }
-//                    }
-                    
                     break
                     
                 default:

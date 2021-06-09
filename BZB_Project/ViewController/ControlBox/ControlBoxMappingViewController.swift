@@ -349,7 +349,6 @@ extension ControlBoxMappingViewController{
                                 print("recursive response is :\(response)")
                                 if((currentIndex + 1) > (self.rxList.count - 1 )){
                                     self.showToast(context: "Switch all RX finish !")
-                                    //  self.refresh()
                                 }else{
                                     self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
                                 }
@@ -357,7 +356,6 @@ extension ControlBoxMappingViewController{
                                 print("recursive fail")
                                 if((currentIndex + 1) > (self.rxList.count - 1 )){
                                     self.showToast(context: "Switch all RX finish !")
-                                    // self.refresh()
                                 }else{
                                     self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
                                 }
@@ -367,9 +365,13 @@ extension ControlBoxMappingViewController{
                         
                     }
                 }
+            }else{
+                if((currentIndex + 1) > (self.rxList.count - 1 )){
+                    self.showToast(context: "Switch all RX finish !")
+                }else{
+                    self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
+                }
             }
-            
-            
         }
     }
 }
