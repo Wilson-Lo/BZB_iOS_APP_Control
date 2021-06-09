@@ -52,17 +52,19 @@ class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldD
     @IBAction func saveMappingName(sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
       //  NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showLoading"), object: nil)
-        self.mappingName[MappingRename4DialogViewController.userSelectedMappingIndex] = editNewName.text!
-        var temp = ""
-        for i in 0...(self.mappingName.count - 1){
-            temp = temp + "0\(self.mappingName[i].length + 1)" + self.mappingName[i].toHexEncodedString()
+        if(self.mappingName.count > 0){
+            self.mappingName[MappingRename4DialogViewController.userSelectedMappingIndex] = editNewName.text!
+            var temp = ""
+            for i in 0...(self.mappingName.count - 1){
+                temp = temp + "0\(self.mappingName[i].length + 1)" + self.mappingName[i].toHexEncodedString()
+            }
+            
+            var cmd = ""
+            cmd = CmdHelper.cmd_4_x_4_set_mapping_name + String((temp.length/2), radix: 16) + temp
+            TcpSocketClient.sharedInstance.delegate = self
+            TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._8_cmd_set_mapping_name))
+            //  self.startCheckFeedbackTimer()
         }
-        
-        var cmd = ""
-        cmd = CmdHelper.cmd_4_x_4_set_mapping_name + String((temp.length/2), radix: 16) + temp
-        TcpSocketClient.sharedInstance.delegate = self
-        TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._8_cmd_set_mapping_name))
-        //  self.startCheckFeedbackTimer()
       
     }
 }
@@ -79,7 +81,7 @@ extension MappingRename4DialogViewController:TcpSocketClientDeleage{
     
     func disConnect(err: String) {
         print("MappingRename4DialogViewController-disConnect")
-        self.dismissLoadingView()
+       // self.dismissLoadingView()
        // self.view.makeToast(err)
     }
     

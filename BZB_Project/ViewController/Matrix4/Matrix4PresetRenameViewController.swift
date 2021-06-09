@@ -17,6 +17,7 @@ class Matrix4PresetRenameViewController: BaseSocketViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         print("Matrix4PresetRenameViewController-viewDidLoad")
+       // self.showLoadingView()
         TcpSocketClient.sharedInstance.delegate = self
         TcpSocketClient.sharedInstance.startConnect()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadList), name: NSNotification.Name(rawValue: "reload"), object: nil)
@@ -73,7 +74,9 @@ extension Matrix4PresetRenameViewController : UICollectionViewDelegate {
         self.present(vc, animated: true, completion: nil)
         MappingRename4DialogViewController.userSelectedMappingIndex = indexPath.item
         vc.dialogTitle.text =  "Mapping \(indexPath.item + 1)"
-        vc.editNewName.text = self.mappingName[indexPath.item]
+        if(indexPath.item < self.mappingName.count){
+            vc.editNewName.text = self.mappingName[indexPath.item]
+        }
     }
 }
 
@@ -138,7 +141,10 @@ extension Matrix4PresetRenameViewController : TcpSocketClientDeleage{
     
     func disConnect(err: String) {
         print("Matrix4PresetRenameViewController-disConnect")
-        
+        DispatchQueue.main.async() {
+            self.showToast(context: "Can't connect to device !")
+         //   self.dismissLoadingView()
+        }
     }
     
     func onReadData(data: Data, tag: Int) {

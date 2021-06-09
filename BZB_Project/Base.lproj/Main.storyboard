@@ -761,7 +761,7 @@
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="source_status" text="N/A" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOw-aV-adX" userLabel="source_status">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="source_status" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOw-aV-adX" userLabel="source_status">
                                                     <rect key="frame" x="0.0" y="40" width="370" height="280"/>
                                                     <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -956,7 +956,7 @@
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="source_status" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zT3-bp-OtI" userLabel="name">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="source_status" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zT3-bp-OtI" userLabel="name">
                                                     <rect key="frame" x="0.0" y="40" width="370" height="280"/>
                                                     <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>

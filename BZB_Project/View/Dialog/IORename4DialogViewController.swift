@@ -80,13 +80,18 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
         
         var temp = ""
         
-        for i in 0...(self.outputName.count - 1){
-            temp = temp + "0\(self.outputName[i].length + 1)" + self.outputName[i].toHexEncodedString()
+        if(self.outputName.count > 0 ){
+            for i in 0...(self.outputName.count - 1){
+                temp = temp + "0\(self.outputName[i].length + 1)" + self.outputName[i].toHexEncodedString()
+            }
         }
         
-        for i in 0...(self.inputName.count - 1){
-            temp = temp + "0\(self.inputName[i].length + 1)" + self.inputName[i].toHexEncodedString()
+        if(self.inputName.count > 0 ){
+            for i in 0...(self.inputName.count - 1){
+                temp = temp + "0\(self.inputName[i].length + 1)" + self.inputName[i].toHexEncodedString()
+            }
         }
+        
         
         var cmd = CmdHelper.cmd_4_x_4_set_io_name + String((temp.length/2), radix: 16) + temp
         TcpSocketClient.sharedInstance.delegate = self
@@ -105,7 +110,7 @@ extension IORename4DialogViewController : TcpSocketClientDeleage{
     
     func disConnect(err: String) {
         print("IORename4DialogViewController-disConnect")
-        self.dismissLoadingView()
+       // self.dismissLoadingView()
         self.view.makeToast(err)
     }
     

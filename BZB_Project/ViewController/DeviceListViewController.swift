@@ -32,8 +32,7 @@ class DeviceListViewController: BaseViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("DeviceListViewController-viewWillAppear")
-        
-        self.showLoadingView()
+    
         self.queueDB.async {
             self.deviceList = self.db.read()
         }
@@ -42,7 +41,7 @@ class DeviceListViewController: BaseViewController{
     override func viewDidAppear(_ animated: Bool) {
         print("DeviceListViewController-viewDidAppear")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             if(self.deviceList != nil){
                 if(self.deviceList.count > 0){
                     self.collectionView.reloadData()
@@ -50,7 +49,6 @@ class DeviceListViewController: BaseViewController{
                     self.showToast(context: "Didn't register any devices !")
                 }
             }
-            self.dismissLoadingView()
         }
     }
     
@@ -130,20 +128,20 @@ extension DeviceListViewController : UICollectionViewDelegate {
                 self.showLoadingView()
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 if(feedback){
                     self.queueDB.async {
                         self.deviceList.removeAll()
                         self.deviceList = self.db.read()
                     }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.collectionView.reloadData()
                         self.dismissLoadingView()
                         self.showToast(context: "Delete successful !")
                     }
                 }else{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.showToast(context: "Delete failed !")
                         self.dismissLoadingView()
                     }

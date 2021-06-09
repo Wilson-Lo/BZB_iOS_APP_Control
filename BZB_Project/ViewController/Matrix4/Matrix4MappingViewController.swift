@@ -34,6 +34,7 @@ class Matrix4MappingViewController: BaseSocketViewController{
         super.viewWillAppear(true)
         initialUI()
         TcpSocketClient.sharedInstance.delegate = self
+       // self.showLoadingView()
         TcpSocketClient.sharedInstance.startConnect()
     }
     
@@ -343,8 +344,10 @@ extension Matrix4MappingViewController : TcpSocketClientDeleage{
     
     func disConnect(err: String) {
         print("Matrix4MappingViewController-disConnect ")
-        
-        self.dismissLoadingView()
+        DispatchQueue.main.async() {
+            self.showToast(context: "Can't connect to device !")
+            self.dismissLoadingView()
+        }
     }
     
     func onReadData(data: Data, tag: Int) {

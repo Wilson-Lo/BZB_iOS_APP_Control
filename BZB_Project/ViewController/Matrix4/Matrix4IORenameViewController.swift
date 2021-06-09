@@ -30,6 +30,7 @@ class Matrix4IORenameViewController: BaseSocketViewController{
     override func viewWillAppear(_ animated: Bool) {
         print("Matrix4IORenameViewController-viewWillAppear")
         super.viewWillAppear(true)
+       // self.showLoadingView()
         TcpSocketClient.sharedInstance.delegate = self
         TcpSocketClient.sharedInstance.startConnect()
     }
@@ -119,11 +120,15 @@ extension Matrix4IORenameViewController : UICollectionViewDelegate {
         if(isIntput){
             IORename4DialogViewController.isInput = true
             vc.dialogTitle.text =  "Input \(indexPath.item + 1)"
-            vc.editNewName.text = self.inputName[indexPath.item]
+            if(indexPath.item < self.inputName.count){
+                vc.editNewName.text = self.inputName[indexPath.item]
+            }
         }else{
             IORename4DialogViewController.isInput = false
             vc.dialogTitle.text =  "Output \(indexPath.item + 1)"
-            vc.editNewName.text = self.outputName[indexPath.item]
+            if(indexPath.item < self.outputName.count){
+                vc.editNewName.text = self.outputName[indexPath.item]
+            }
         }
         
     }
@@ -144,13 +149,13 @@ extension Matrix4IORenameViewController : UICollectionViewDataSource {
             if(self.inputName.count == 4){
                 cell.deviceName.text = self.inputName[indexPath.item]
             }else{
-                cell.deviceName.text = "N/A"
+                cell.deviceName.text = ""
             }
         }else{
             if(self.outputName.count == 4){
                 cell.deviceName.text = self.outputName[indexPath.item]
             }else{
-                cell.deviceName.text = "N/A"
+                cell.deviceName.text = ""
             }
             cell.deviceType.text = "Output \(indexPath.item + 1)"
            // cell.deviceType.backgroundColor = UIColor(red: 88/255, green: 177/255, blue: 243/255, alpha: 1)
@@ -206,8 +211,10 @@ extension Matrix4IORenameViewController : TcpSocketClientDeleage{
     
     func disConnect(err: String) {
         print("Matrix4IORenameViewController-disConnect ")
-        
-        self.dismissLoadingView()
+        DispatchQueue.main.async() {
+            self.showToast(context: "Can't connect to device !")
+            self.dismissLoadingView()
+        }
     }
     
     func onReadData(data: Data, tag: Int) {
