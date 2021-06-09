@@ -119,48 +119,48 @@ extension SettingsViewController{
     
     @IBAction func btAdd(sender: UIButton) {
         
+        DispatchQueue.main.async() {
+            self.showLoadingView()
+        }
+        
         var type = 0;
         
-        var feedback = self.db.queryByIP(ip: self.textFieldDeviceIP.text!)
-        if(!feedback){
-            if(self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!) > 0){
-                var feedback = self.db.insert(type: self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!), ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceType.text!)
-                if(feedback){
-                    self.showToast(context: "Add successfull !")
-                }else{
-                    self.showToast(context: "Add failed !")
-                }
-            }else{
-                self.showToast(context: "Please scan device first !")
+        var dbSize = self.db.getDBSize()
+        print("db size = \(dbSize)")
+        
+        if(dbSize >= 10){
+            self.showToast(context: "Can only store up to 20 devices !")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.dismissLoadingView()
             }
         }else{
-            self.showToast(context: "This IP is exist !")
+            var feedback = false
+            var ip = self.textFieldDeviceIP.text!
+            self.queueUDP.async {
+                feedback = self.db.queryByIP(ip:ip)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if(!feedback){
+                    if(self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!) > 0){
+                        var feedback = self.db.insert(type: self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!), ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceType.text!)
+                        if(feedback){
+                            self.showToast(context: "Add successfull !")
+                        }else{
+                            self.showToast(context: "Add failed !")
+                        }
+                    }else{
+                        self.showToast(context: "Please scan device first !")
+                    }
+                }else{
+                    self.showToast(context: "This IP is exist !")
+                }
+                self.dismissLoadingView()
+            }
         }
     }
 }
 
 extension SettingsViewController{
-    
-    @IBAction func saveIP(sender: UIButton) {
-        if(self.textFieldDeviceIP.hasText){
-            DispatchQueue.main.async(){
-                self.preferences.set(self.textFieldDeviceIP.text, forKey: CmdHelper.key_server_ip)
-                //self.view.makeToast("Save IP successful !", duration: 2.0, position: .bottom)
-                if(SettingsViewController.isPhone){
-                    self.view.showToast(text: "Save IP successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: false)
-                }else{
-                    self.view.showToast(text: "Save IP successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: false)
-                }
-            }
-        }else{
-            if(SettingsViewController.isPhone){
-                self.view.showToast(text: "IP can't not be empty !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: false)
-            }else{
-                self.view.showToast(text: "IP can't not be empty !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: false)
-            }
-            // self.view.makeToast("IP can't not be empty !")
-        }
-    }
     
     @IBAction func sendUDP(sender: UIButton) {
         

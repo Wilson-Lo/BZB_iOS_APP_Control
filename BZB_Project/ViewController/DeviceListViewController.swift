@@ -32,6 +32,8 @@ class DeviceListViewController: BaseViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("DeviceListViewController-viewWillAppear")
+        
+        self.showLoadingView()
         self.queueDB.async {
             self.deviceList = self.db.read()
         }
@@ -40,10 +42,15 @@ class DeviceListViewController: BaseViewController{
     override func viewDidAppear(_ animated: Bool) {
         print("DeviceListViewController-viewDidAppear")
         
-        if(self.deviceList != nil){
-            if(self.deviceList.count > 0){
-                self.collectionView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            if(self.deviceList != nil){
+                if(self.deviceList.count > 0){
+                    self.collectionView.reloadData()
+                }else{
+                    self.showToast(context: "Didn't register any devices !")
+                }
             }
+            self.dismissLoadingView()
         }
     }
     
@@ -66,8 +73,7 @@ extension DeviceListViewController{
 extension DeviceListViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("click")
-        
+        print("click ")
         let title = "\n Select Action"
         let message = ""
         
@@ -114,19 +120,34 @@ extension DeviceListViewController : UICollectionViewDelegate {
         })
         
         btArray.append(CancelButton(title: "Delete") {
-            var feedback = self.db.delete(id: self.deviceList[indexPath.item].id!)
             
-            if(feedback){
-                self.queueDB.async {
-                    self.deviceList = self.db.read()
+            var feedback = false
+            self.queueDB.async {
+                feedback = self.db.delete(id: self.deviceList[indexPath.item].id!)
+            }
+    
+            DispatchQueue.main.async() {
+                self.showLoadingView()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if(feedback){
+                    self.queueDB.async {
+                        self.deviceList.removeAll()
+                        self.deviceList = self.db.read()
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.collectionView.reloadData()
+                        self.dismissLoadingView()
+                        self.showToast(context: "Delete successful !")
+                    }
+                }else{
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.showToast(context: "Delete failed !")
+                        self.dismissLoadingView()
+                    }
                 }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.collectionView.reloadData()
-                }
-                self.showToast(context: "Delete successful !")
-            }else{
-                self.showToast(context: "Delete failed !")
             }
         })
         
@@ -148,8 +169,10 @@ extension DeviceListViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCollectionViewCell", for: indexPath) as! ListCollectionViewCell
-        cell.labelName.text = self.deviceList[indexPath.item].name
-        cell.labelIP.text = self.deviceList[indexPath.item].ip
+        if(indexPath.item < self.deviceList.count){
+            cell.labelName.text = self.deviceList[indexPath.item].name
+            cell.labelIP.text = self.deviceList[indexPath.item].ip
+        }
         return cell
     }
 }
