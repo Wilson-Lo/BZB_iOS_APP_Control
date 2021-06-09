@@ -1132,8 +1132,8 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewk-U5-Ob9">
-                                <rect key="frame" x="309" y="31" width="32" height="32"/>
-                                <state key="normal" backgroundImage="add"/>
+                                <rect key="frame" x="296" y="31" width="45" height="37.5"/>
+                                <state key="normal" backgroundImage="radar"/>
                                 <connections>
                                     <action selector="sendUDPWithSender:" destination="EvX-d5-hYa" eventType="touchUpInside" id="r93-hu-Vor"/>
                                 </connections>
@@ -1176,6 +1176,8 @@
                             <constraint firstItem="7wv-PD-cYz" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="cTv-3f-3PE"/>
                             <constraint firstItem="Qq6-Nc-yuF" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="h0s-na-eVg"/>
                             <constraint firstItem="Rt8-5v-Wv1" firstAttribute="bottom" secondItem="O2g-cy-O56" secondAttribute="bottom" constant="36" id="lcq-hJ-FVt"/>
+                            <constraint firstItem="ewk-U5-Ob9" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.056" id="neV-nH-uf0"/>
+                            <constraint firstItem="ewk-U5-Ob9" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.12" id="qGY-T9-eo6"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="t0D-Yb-ene"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="txl-GO-vl3"/>
                         </constraints>
@@ -1191,7 +1193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="War-wt-yVu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-600" y="-930"/>
+            <point key="canvasLocation" x="-600.79999999999995" y="-930.58470764617698"/>
         </scene>
         <!--ControlBoxVideoWallViewController-->
         <scene sceneID="Oex-Qj-CM9">
@@ -1214,11 +1216,11 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="331" height="30"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNC-oy-IVW">
-                                                                <rect key="frame" x="0.0" y="0.0" width="93.5" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="110.5" height="30"/>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esX-Ei-6Ak">
-                                                                <rect key="frame" x="93.5" y="0.0" width="144" height="30"/>
-                                                                <state key="normal" title="Button">
+                                                                <rect key="frame" x="110.5" y="0.0" width="110" height="30"/>
+                                                                <state key="normal" title="N/A">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
@@ -1226,7 +1228,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0b-RK-18h">
-                                                                <rect key="frame" x="237.5" y="0.0" width="93.5" height="30"/>
+                                                                <rect key="frame" x="220.5" y="0.0" width="110.5" height="30"/>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -1460,6 +1462,7 @@
         <image name="edit" width="32" height="32"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="pip.fill" catalog="system" width="128" height="96"/>
+        <image name="radar" width="64" height="64"/>
         <image name="rectangle.grid.2x2" catalog="system" width="128" height="99"/>
         <image name="save" width="32" height="32"/>
         <image name="square.grid.3x3.fill" catalog="system" width="128" height="112"/>
