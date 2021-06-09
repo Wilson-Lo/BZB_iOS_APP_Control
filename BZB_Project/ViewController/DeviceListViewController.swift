@@ -138,7 +138,12 @@ extension DeviceListViewController : UICollectionViewDelegate {
 extension DeviceListViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  self.deviceList.count
+        if(self.deviceList != nil){
+            return  self.deviceList.count
+        }else{
+            self.collectionView.reloadData()
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
