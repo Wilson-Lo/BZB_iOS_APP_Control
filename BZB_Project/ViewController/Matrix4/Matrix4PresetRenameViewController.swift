@@ -108,7 +108,7 @@ extension Matrix4PresetRenameViewController: UICollectionViewDelegateFlowLayout 
         if(Matrix4MappingViewController.isPhone){
             return CGSize(width: (self.view.frame.size.width - 30) / 2 , height: (self.view.frame.size.width - 30) / 2)
         }else{
-            return CGSize(width: (self.view.frame.size.width - 60) / 2 , height: (self.view.frame.size.width - 170) / 2)
+            return CGSize(width: (self.view.frame.size.width) / 2.2 , height: (self.view.frame.size.height) / 8)
         }
     }
     

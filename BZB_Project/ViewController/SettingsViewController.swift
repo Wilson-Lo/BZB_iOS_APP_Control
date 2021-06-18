@@ -83,12 +83,12 @@ extension SettingsViewController{
         
         if(!SettingsViewController.isPhone){
             //Scan button
-            let widthConstraint = btScan.widthAnchor.constraint(equalToConstant: 30.0)
+            let widthConstraint = self.btScan.widthAnchor.constraint(equalToConstant: 30.0)
             let heightConstraint = btScan.heightAnchor.constraint(equalToConstant: 30.0)
             NSLayoutConstraint.activate([widthConstraint, heightConstraint])
             //change button size to 50x50
-            widthConstraint.constant = 50
-            heightConstraint.constant = 50
+            widthConstraint.constant = 10
+            heightConstraint.constant = 10
             
             self.textFieldDeviceIP.frame.size.height = 500
             self.textFieldDeviceType.frame.size.height = 500

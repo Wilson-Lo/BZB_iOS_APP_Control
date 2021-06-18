@@ -126,11 +126,11 @@ extension BaseViewController  {
             }else{
                 
                 let attributedStringTitle = NSAttributedString(string: "Warning", attributes: [
-                                                                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 28), //your font here,
+                                                                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24), //your font here,
                                                                 NSAttributedString.Key.foregroundColor : UIColor.black])
                 
                 let attributedStringMSG = NSAttributedString(string: "\n" + message, attributes: [
-                                                                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 22), //your font here,
+                                                                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20), //your font here,
                                                                 NSAttributedString.Key.foregroundColor : UIColor.black])
                 
                 let alert = UIAlertController(title: "Warning", message: message,  preferredStyle: .alert)

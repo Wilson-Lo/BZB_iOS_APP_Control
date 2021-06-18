@@ -32,7 +32,7 @@ class DeviceListViewController: BaseViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("DeviceListViewController-viewWillAppear")
-    
+        
         self.queueDB.async {
             self.deviceList = self.db.read()
         }
@@ -79,18 +79,18 @@ extension DeviceListViewController : UICollectionViewDelegate {
         let popup = PopupDialog(title: title, message: message, image: nil)
         
         var btArray: Array<CancelButton> = []
-        //        if(!DeviceListViewController.isPhone){
-        //            let dialogAppearance = PopupDialogDefaultView.appearance()
-        //            dialogAppearance.backgroundColor      = .white
-        //            dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
-        //            //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
-        //            dialogAppearance.titleTextAlignment   = .center
-        //            dialogAppearance.messageFont          = .systemFont(ofSize: 26)
-        //            //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
-        //
-        //            let cb = CancelButton.appearance()
-        //            cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
-        //        }
+        if(!DeviceListViewController.isPhone){
+            let dialogAppearance = PopupDialogDefaultView.appearance()
+            dialogAppearance.backgroundColor      = .white
+            dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
+            //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+            dialogAppearance.titleTextAlignment   = .center
+            dialogAppearance.messageFont          = .systemFont(ofSize: 20)
+            //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+            
+            let cb = CancelButton.appearance()
+            cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
+        }
         
         btArray.append(CancelButton(title: "Go to device") {
             
@@ -123,7 +123,7 @@ extension DeviceListViewController : UICollectionViewDelegate {
             self.queueDB.async {
                 feedback = self.db.delete(id: self.deviceList[indexPath.item].id!)
             }
-    
+            
             DispatchQueue.main.async() {
                 self.showLoadingView()
             }
@@ -184,16 +184,22 @@ extension DeviceListViewController: UICollectionViewDelegateFlowLayout {
     
     //setup CollectionViewCell width, height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: (self.view.frame.size.width - 30) , height: (self.view.frame.size.width) / 5.6)
-        
+        if(DeviceListViewController.isPhone){
+            return CGSize(width: (self.view.frame.size.width - 30) , height: (self.view.frame.size.width) / 5.6)
+        }else{
+            return CGSize(width: (self.view.frame.size.width * 0.8) , height: (self.view.frame.size.height) / 12)
+        }
     }
     
     /// 滑動方向為「垂直」的話即「上下」的間距(預設為重直)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 10
-        
+        if(DeviceListViewController.isPhone){
+            return 10
+        }else{
+            return 24
+        }
+       
     }
     
     /// 滑動方向為「垂直」的話即「左右」的間距(預設為重直)

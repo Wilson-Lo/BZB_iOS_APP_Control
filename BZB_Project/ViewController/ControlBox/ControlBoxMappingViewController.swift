@@ -97,14 +97,14 @@ extension ControlBoxMappingViewController : UICollectionViewDelegate {
                 if(!ControlBoxMappingViewController.isPhone){
                     let dialogAppearance = PopupDialogDefaultView.appearance()
                     dialogAppearance.backgroundColor      = .white
-                    dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
+                    dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
                     //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
                     dialogAppearance.titleTextAlignment   = .center
-                    dialogAppearance.messageFont          = .systemFont(ofSize: 26)
+                    dialogAppearance.messageFont          = .systemFont(ofSize: 20)
                     //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
                     
                     let cb = CancelButton.appearance()
-                    cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
+                    cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
                 }
                 
                 btArray.append(CancelButton(title: "On") {
@@ -279,14 +279,14 @@ extension ControlBoxMappingViewController : UICollectionViewDelegate {
                 if(!ControlBoxMappingViewController.isPhone){
                     let dialogAppearance = PopupDialogDefaultView.appearance()
                     dialogAppearance.backgroundColor      = .white
-                    dialogAppearance.titleFont            = .boldSystemFont(ofSize: 32)
+                    dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
                     //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
                     dialogAppearance.titleTextAlignment   = .center
-                    dialogAppearance.messageFont          = .systemFont(ofSize: 26)
+                    dialogAppearance.messageFont          = .systemFont(ofSize: 20)
                     //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
                     
                     let cb = CancelButton.appearance()
-                    cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 26)!
+                    cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
                 }
                 
                 btArray.append(CancelButton(title: "Switch for All RX") {
@@ -498,14 +498,14 @@ extension ControlBoxMappingViewController: UICollectionViewDelegateFlowLayout {
             if(ControlBoxMappingViewController.isPhone){
                 return CGSize(width: (self.view.frame.size.width)/4 , height: (self.view.frame.size.width) / 4)
             }else{
-                return CGSize(width: (self.view.frame.size.width - 60) / 2 , height: (self.view.frame.size.width - 170) / 2)
+                return CGSize(width: (self.view.frame.size.width) / 5 , height: (self.view.frame.size.height) / 8)
             }
         }
         else {
             if(ControlBoxMappingViewController.isPhone){
                 return CGSize(width: (self.view.frame.size.width)/4 , height: (self.view.frame.size.width) / 4)
             }else{
-                return CGSize(width: (self.view.frame.size.width - 60) / 2 , height: (self.view.frame.size.width - 170) / 2)
+                return CGSize(width: (self.view.frame.size.width) / 5 , height: (self.view.frame.size.height) / 8)
             }
         }
         

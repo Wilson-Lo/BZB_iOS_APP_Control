@@ -197,7 +197,12 @@ extension ControlBoxVideoWallViewController: UICollectionViewDelegateFlowLayout 
             return CGSize(width: (self.collectionViewVideoWall.frame.size.width) / (CGFloat(self.currentColVideoWallSize) + CGFloat(self.currentColVideoWallSize) * 0.2), height: (self.collectionViewVideoWall.frame.size.height) / (CGFloat(self.currentRowVideoWallSize) + CGFloat(self.currentRowVideoWallSize) * 0.3))
             
         }else{
-            return CGSize(width: (self.view.frame.size.width - 50) , height: (self.view.frame.size.width) / 5)
+            if(ControlBoxVideoWallViewController.isPhone){
+                return CGSize(width: (self.view.frame.size.width - 50) , height: (self.view.frame.size.width) / 5)
+            }else{
+                return CGSize(width: (self.view.frame.size.width) * 0.8 , height: (self.view.frame.size.height) / 8)
+            }
+         
         }
     }
     
