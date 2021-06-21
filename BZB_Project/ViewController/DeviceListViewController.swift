@@ -17,6 +17,8 @@ import PopupDialog
 
 class DeviceListViewController: BaseViewController{
     
+    @IBOutlet weak var btAddHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var btAddWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     let db = DBHelper()
     var deviceList: Array<DeviceDataObject>!
@@ -59,6 +61,28 @@ extension DeviceListViewController{
     func setupUI(){
         self.queueDB = DispatchQueue(label: "com.bzb.db", qos: DispatchQoS.userInitiated)
         self.navigationController?.navigationBar.barTintColor = .black
+        
+        if(DeviceListViewController.isPhone){
+            //bt add size
+            let newbtScanHeightConstraint = btAddHeightConstraint.constraintWithMultiplier(0.0479911)
+            self.view.removeConstraint(btAddHeightConstraint)
+            self.view.addConstraint(newbtScanHeightConstraint)
+           // self.view.layoutIfNeeded()
+            let newbtScanWidthConstraint = btAddWidthConstraint.constraintWithMultiplier(0.103865)
+            self.view.removeConstraint(btAddWidthConstraint)
+            self.view.addConstraint(newbtScanWidthConstraint)
+            self.view.layoutIfNeeded()
+        }else{
+            //bt add size
+            let newbtScanHeightConstraint = btAddHeightConstraint.constraintWithMultiplier(0.032)
+            self.view.removeConstraint(btAddHeightConstraint)
+            self.view.addConstraint(newbtScanHeightConstraint)
+            //self.view.layoutIfNeeded()
+            let newbtScanWidthConstraint = btAddWidthConstraint.constraintWithMultiplier(0.058)
+            self.view.removeConstraint(btAddWidthConstraint)
+            self.view.addConstraint(newbtScanWidthConstraint)
+            self.view.layoutIfNeeded()
+        }
     }
     
     @IBAction func btAdd(sender: UIButton) {

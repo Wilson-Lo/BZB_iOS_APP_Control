@@ -19,6 +19,9 @@ import RSSelectionMenu
 class SettingsViewController: BaseViewController{
     
     
+    @IBOutlet weak var btScanHeightConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var btScanWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var btScan: UIButton!
     @IBOutlet weak var textFieldDeviceIP: UITextField!
     @IBOutlet weak var textFieldDeviceType: UITextField!
@@ -26,7 +29,8 @@ class SettingsViewController: BaseViewController{
     @IBOutlet weak var btADD: UIButton!
     
     let preferences = UserDefaults.standard
-    var queueUDP: DispatchQueue!
+    var queueReceiveUDP: DispatchQueue!
+    var queueSendUDP: DispatchQueue!
     var udpSendSocket: UDPClient!
     var udpReceiveSocket: GCDAsyncUdpSocket!
     var deviceList: Array<Device> = []
@@ -54,7 +58,7 @@ class SettingsViewController: BaseViewController{
     
     override func viewDidDisappear(_ animated: Bool) {
         print("SettingsViewController-viewDidDisappear")
-        self.queueUDP.async {
+        self.queueReceiveUDP.async {
             
             if(self.udpSendSocket != nil){
                 self.udpSendSocket.close()
@@ -76,6 +80,28 @@ extension SettingsViewController{
         self.btADD.layer.borderWidth = 1
         self.btADD.layer.borderColor = UIColor.black.cgColor
         
+        if(SettingsViewController.isPhone){
+            //bt scan size
+            let newbtScanHeightConstraint = btScanHeightConstraint.constraintWithMultiplier(0.05)
+            self.view.removeConstraint(btScanHeightConstraint)
+            self.view.addConstraint(newbtScanHeightConstraint)
+           // self.view.layoutIfNeeded()
+            let newbtScanWidthConstraint = btScanWidthConstraint.constraintWithMultiplier(0.12)
+            self.view.removeConstraint(btScanWidthConstraint)
+            self.view.addConstraint(newbtScanWidthConstraint)
+            self.view.layoutIfNeeded()
+        }else{
+            //bt scan size
+            let newbtScanHeightConstraint = btScanHeightConstraint.constraintWithMultiplier(0.05)
+            self.view.removeConstraint(btScanHeightConstraint)
+            self.view.addConstraint(newbtScanHeightConstraint)
+            //self.view.layoutIfNeeded()
+            let newbtScanWidthConstraint = btScanWidthConstraint.constraintWithMultiplier(0.08)
+            self.view.removeConstraint(btScanWidthConstraint)
+            self.view.addConstraint(newbtScanWidthConstraint)
+            self.view.layoutIfNeeded()
+        }
+
         //App version
         let dictionary = Bundle.main.infoDictionary!
         let appVersion = dictionary["CFBundleShortVersionString"] as! String
@@ -97,11 +123,11 @@ extension SettingsViewController{
     }
     
     func objectInitial(){
-        self.queueUDP = DispatchQueue(label: "com.bzb.udp", qos: DispatchQoS.userInitiated)
-        
+        self.queueReceiveUDP = DispatchQueue(label: "com.bzb.receive.udp", qos: DispatchQoS.userInitiated)
+        self.queueReceiveUDP = DispatchQueue(label: "com.bzb.send.udp", qos: DispatchQoS.userInitiated)
         self.udpReceiveSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
         
-        self.queueUDP.async {
+        self.queueReceiveUDP.async {
             do {
                 self.udpReceiveSocket.setIPv4Enabled(true)
                 self.udpReceiveSocket.setIPv6Enabled(false)
@@ -136,7 +162,7 @@ extension SettingsViewController{
         }else{
             var feedback = false
             var ip = self.textFieldDeviceIP.text!
-            self.queueUDP.async {
+            self.queueReceiveUDP.async {
                 feedback = self.db.queryByIP(ip:ip)
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

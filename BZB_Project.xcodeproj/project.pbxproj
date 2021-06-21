@@ -40,6 +40,7 @@
 		86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86681294262029330034D975 /* MappingRename4DialogViewController.swift */; };
 		866812E026203D3C0034D975 /* OCFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866812DF26203D3C0034D975 /* OCFile.mm */; };
 		866812EA26203D660034D975 /* Edid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866812E826203D660034D975 /* Edid.cpp */; };
+		86B2820426808B82007BCE4C /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B2820326808B82007BCE4C /* NSLayoutConstraint.swift */; };
 		86B921EA26676B7600FAB568 /* DeviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B921E926676B7600FAB568 /* DeviceListViewController.swift */; };
 		86B921EF26676DBA00FAB568 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B921EE26676DBA00FAB568 /* ListCollectionViewCell.swift */; };
 		86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */; };
@@ -120,6 +121,7 @@
 		866812E826203D660034D975 /* Edid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Edid.cpp; sourceTree = "<group>"; };
 		866812E926203D660034D975 /* Edid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Edid.hpp; sourceTree = "<group>"; };
 		86681315262040DC0034D975 /* BZB_Project-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BZB_Project-Bridging-Header.h"; sourceTree = "<group>"; };
+		86B2820326808B82007BCE4C /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		86B921E926676B7600FAB568 /* DeviceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewController.swift; sourceTree = "<group>"; };
 		86B921EE26676DBA00FAB568 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxTXCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				8605808A261EFE7A00B1E0AF /* UIViewController.swift */,
 				8605808F261EFEA300B1E0AF /* UIImage.swift */,
 				8605809C261F01F100B1E0AF /* String.swift */,
+				86B2820326808B82007BCE4C /* NSLayoutConstraint.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				86B921EA26676B7600FAB568 /* DeviceListViewController.swift in Sources */,
 				86320EEC2615E453007FE620 /* BaseViewController.swift in Sources */,
 				86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */,
+				86B2820426808B82007BCE4C /* NSLayoutConstraint.swift in Sources */,
 				86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */,
 				86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */,
 				86320F03261D63A7007FE620 /* Data.swift in Sources */,
