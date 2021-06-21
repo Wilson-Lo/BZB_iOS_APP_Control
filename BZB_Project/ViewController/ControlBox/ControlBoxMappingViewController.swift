@@ -178,6 +178,9 @@ extension ControlBoxMappingViewController : UICollectionViewDelegate {
                     DispatchQueue.main.async() {
                         
                         self.txMenu = RSSelectionMenu(dataSource: self.txNameForUI) { (cell, name, indexPath) in
+                            if(!ControlBoxMappingViewController.isPhone){
+                                cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
+                            }
                             cell.textLabel?.text = name
                         }
                         

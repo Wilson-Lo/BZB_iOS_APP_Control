@@ -215,6 +215,9 @@ extension SettingsViewController{
                         
                         self.menu = RSSelectionMenu(dataSource: self.menuList) { (cell, name, indexPath) in
                             cell.textLabel?.text = name
+                            if(!SettingsViewController.isPhone){
+                                cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
+                            }
                         }
                         // provide selected items
                         self.menu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in

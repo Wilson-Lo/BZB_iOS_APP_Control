@@ -110,6 +110,9 @@ extension Matrix4MappingViewController{
         DispatchQueue.main.async() {
             
             self.saveMappingMenu = RSSelectionMenu(dataSource: self.mappingName) { (cell, name, indexPath) in
+                if(!Matrix4MappingViewController.isPhone){
+                    cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
+                }
                 cell.textLabel?.text = name
             }
             
@@ -140,6 +143,9 @@ extension Matrix4MappingViewController{
         DispatchQueue.main.async() {
             
             self.saveMappingMenu = RSSelectionMenu(dataSource: self.mappingName) { (cell, name, indexPath) in
+                if(!Matrix4MappingViewController.isPhone){
+                    cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
+                }
                 cell.textLabel?.text = name
             }
             

@@ -232,6 +232,9 @@ extension ControlBoxVideoWallViewController {
         DispatchQueue.main.async() {
             
             var presetMenu = RSSelectionMenu(dataSource: self.presetNameForUI) { (cell, name, indexPath) in
+                if(!ControlBoxVideoWallViewController.isPhone){
+                    cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
+                }
                 cell.textLabel?.text = name
             }
             
@@ -337,6 +340,9 @@ extension ControlBoxVideoWallViewController {
         DispatchQueue.main.async() {
             
             self.txMenu = RSSelectionMenu(dataSource: self.txListForUI) { (cell, name, indexPath) in
+                if(!ControlBoxVideoWallViewController.isPhone){
+                    cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
+                }
                 cell.textLabel?.text = name
             }
             

@@ -78,7 +78,7 @@ extension DeviceListViewController{
             self.view.removeConstraint(btAddHeightConstraint)
             self.view.addConstraint(newbtScanHeightConstraint)
             //self.view.layoutIfNeeded()
-            let newbtScanWidthConstraint = btAddWidthConstraint.constraintWithMultiplier(0.058)
+            let newbtScanWidthConstraint = btAddWidthConstraint.constraintWithMultiplier(0.052)
             self.view.removeConstraint(btAddWidthConstraint)
             self.view.addConstraint(newbtScanWidthConstraint)
             self.view.layoutIfNeeded()
