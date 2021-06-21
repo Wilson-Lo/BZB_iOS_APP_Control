@@ -87,10 +87,20 @@ extension BaseViewController  {
     //show waiting dialog
     public func showLoadingView() {
         DispatchQueue.main.async() {
-            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            var loadingIndicator :UIActivityIndicatorView!
+            if(!BaseViewController.isPhone){
+                loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: -32, y: -12, width: 120, height: 80))
+                let messageAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 24)!, NSAttributedString.Key.foregroundColor: UIColor.black]
+                let messageString = NSAttributedString(string: "Please wait ...", attributes: messageAttributes)
+                self.alert.setValue(messageString, forKey: "attributedMessage")
+            }else{
+                loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            }
+            
             loadingIndicator.hidesWhenStopped = true
             loadingIndicator.style = UIActivityIndicatorView.Style.gray
             loadingIndicator.startAnimating();
+     
             self.alert.view.addSubview(loadingIndicator)
             self.present(self.alert, animated: true, completion: nil)
         }
