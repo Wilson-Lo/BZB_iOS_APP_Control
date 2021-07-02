@@ -17,6 +17,7 @@ import PopupDialog
 
 class DeviceListViewController: BaseViewController{
     
+    var gradientLayer: CAGradientLayer!
     @IBOutlet weak var btAddHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var btAddWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -34,7 +35,7 @@ class DeviceListViewController: BaseViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("DeviceListViewController-viewWillAppear")
-        
+        createGradientLayer()
         self.queueDB.async {
             self.deviceList = self.db.read()
         }
@@ -58,6 +59,25 @@ class DeviceListViewController: BaseViewController{
 
 extension DeviceListViewController{
     
+    func createGradientLayer() {
+        
+        let bgView = UIView(frame: self.collectionView.bounds)
+        
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.frame
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.1607843137, green: 0.2196078431, blue: 0.3058823529, alpha: 1).cgColor ,#colorLiteral(red: 0.05882352941, green: 0.09803921569, blue: 0.137254902, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        bgView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.collectionView?.backgroundView = bgView
+    }
+    
     func setupUI(){
         self.queueDB = DispatchQueue(label: "com.bzb.db", qos: DispatchQoS.userInitiated)
         self.navigationController?.navigationBar.barTintColor = .black
@@ -67,7 +87,7 @@ extension DeviceListViewController{
             let newbtScanHeightConstraint = btAddHeightConstraint.constraintWithMultiplier(0.0479911)
             self.view.removeConstraint(btAddHeightConstraint)
             self.view.addConstraint(newbtScanHeightConstraint)
-           // self.view.layoutIfNeeded()
+            // self.view.layoutIfNeeded()
             let newbtScanWidthConstraint = btAddWidthConstraint.constraintWithMultiplier(0.103865)
             self.view.removeConstraint(btAddWidthConstraint)
             self.view.addConstraint(newbtScanWidthConstraint)
@@ -95,86 +115,174 @@ extension DeviceListViewController{
 extension DeviceListViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         print("click ")
-        let title = "\n Select Action"
-        let message = ""
         
-        // Create the dialog,
-        let popup = PopupDialog(title: title, message: message, image: nil)
         
-        var btArray: Array<CancelButton> = []
-        if(!DeviceListViewController.isPhone){
-            let dialogAppearance = PopupDialogDefaultView.appearance()
-            dialogAppearance.backgroundColor      = .white
-            dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
-            //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
-            dialogAppearance.titleTextAlignment   = .center
-            dialogAppearance.messageFont          = .systemFont(ofSize: 20)
-            //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+        if(self.deviceList[indexPath.item].type != self.DEVICE_CUSTOMER){
             
-            let cb = CancelButton.appearance()
-            cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
-        }
-        
-        btArray.append(CancelButton(title: "Go to device") {
+            let title = "\n Select Action"
+            let message = ""
             
-            self.queueDB.async {
-                self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
-            }
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            // Create the dialog,
+            let popup = PopupDialog(title: title, message: message, image: nil)
             
-            switch(self.deviceList[indexPath.item].type){
-            
-            case self.DEVICE_CONTROL_BOX:
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
-                self.navigationController!.pushViewController(nextViewController, animated: true)
-                break
+            var btArray: Array<CancelButton> = []
+            if(!DeviceListViewController.isPhone){
+                let dialogAppearance = PopupDialogDefaultView.appearance()
+                dialogAppearance.backgroundColor      = .white
+                dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
+                //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+                dialogAppearance.titleTextAlignment   = .center
+                dialogAppearance.messageFont          = .systemFont(ofSize: 20)
+                //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
                 
-            case self.DEVICE_MATRIX_4_X_4_HDR:
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
-                self.navigationController!.pushViewController(nextViewController, animated: true)
-                break
+                let cb = CancelButton.appearance()
+                cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
+            }
+            
+            btArray.append(CancelButton(title: "Go to device") {
                 
-            default:
+                self.queueDB.async {
+                    self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
+                }
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 
-                break
-            }
-        })
-        
-        btArray.append(CancelButton(title: "Delete") {
-            
-            var feedback = false
-            self.queueDB.async {
-                feedback = self.db.delete(id: self.deviceList[indexPath.item].id!)
-            }
-            
-            DispatchQueue.main.async() {
-                self.showLoadingView()
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                if(feedback){
-                    self.queueDB.async {
-                        self.deviceList.removeAll()
-                        self.deviceList = self.db.read()
-                    }
+                switch(self.deviceList[indexPath.item].type){
+                
+                case self.DEVICE_CONTROL_BOX:
+                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
+                    self.navigationController!.pushViewController(nextViewController, animated: true)
+                    break
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.collectionView.reloadData()
-                        self.dismissLoadingView()
-                        self.showToast(context: "Delete successful !")
-                    }
-                }else{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.showToast(context: "Delete failed !")
-                        self.dismissLoadingView()
+                case self.DEVICE_MATRIX_4_X_4_HDR:
+                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
+                    self.navigationController!.pushViewController(nextViewController, animated: true)
+                    break
+                    
+                default:
+                    
+                    break
+                }
+            })
+            
+            btArray.append(CancelButton(title: "Delete") {
+                
+                var feedback = false
+                self.queueDB.async {
+                    feedback = self.db.delete(id: self.deviceList[indexPath.item].id!)
+                }
+                
+                DispatchQueue.main.async() {
+                    self.showLoadingView()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    if(feedback){
+                        self.queueDB.async {
+                            self.deviceList.removeAll()
+                            self.deviceList = self.db.read()
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.collectionView.reloadData()
+                            self.dismissLoadingView()
+                            self.showToast(context: "Delete successful !")
+                        }
+                    }else{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.showToast(context: "Delete failed !")
+                            self.dismissLoadingView()
+                        }
                     }
                 }
+            })
+            
+            popup.addButtons(btArray)
+            self.present(popup, animated: true, completion: nil)
+            
+        }else{
+            
+            let title = "\n Select Action"
+            let message = ""
+            
+            // Create the dialog,
+            let popup = PopupDialog(title: title, message: message, image: nil)
+            
+            var btArray: Array<CancelButton> = []
+            if(!DeviceListViewController.isPhone){
+                let dialogAppearance = PopupDialogDefaultView.appearance()
+                dialogAppearance.backgroundColor      = .white
+                dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
+                //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+                dialogAppearance.titleTextAlignment   = .center
+                dialogAppearance.messageFont          = .systemFont(ofSize: 20)
+                //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+                
+                let cb = CancelButton.appearance()
+                cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
             }
-        })
-        
-        popup.addButtons(btArray)
-        self.present(popup, animated: true, completion: nil)
+            
+            btArray.append(CancelButton(title: "Go to Control-Box") {
+                
+                self.queueDB.async {
+                    self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
+                }
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
+                
+                self.navigationController!.pushViewController(nextViewController, animated: true)
+            })
+            
+            btArray.append(CancelButton(title: "Go to Matrix 4x4 HDR") {
+                
+                self.queueDB.async {
+                    self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
+                }
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
+                self.navigationController!.pushViewController(nextViewController, animated: true)
+            })
+            
+            btArray.append(CancelButton(title: "Delete") {
+                
+                var feedback = false
+                self.queueDB.async {
+                    feedback = self.db.delete(id: self.deviceList[indexPath.item].id!)
+                }
+                
+                DispatchQueue.main.async() {
+                    self.showLoadingView()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    if(feedback){
+                        self.queueDB.async {
+                            self.deviceList.removeAll()
+                            self.deviceList = self.db.read()
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.collectionView.reloadData()
+                            self.dismissLoadingView()
+                            self.showToast(context: "Delete successful !")
+                        }
+                    }else{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.showToast(context: "Delete failed !")
+                            self.dismissLoadingView()
+                        }
+                    }
+                }
+            })
+            
+            popup.addButtons(btArray)
+            self.present(popup, animated: true, completion: nil)
+            
+            
+        }
     }
 }
 
@@ -219,17 +327,19 @@ extension DeviceListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         if(DeviceListViewController.isPhone){
-            return 10
+            return 18
         }else{
             return 24
         }
-       
+        
     }
     
     /// 滑動方向為「垂直」的話即「左右」的間距(預設為重直)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return 12
-        
+        if(DeviceListViewController.isPhone){
+            return 20
+        }else{
+            return 26
+        }
     }
 }

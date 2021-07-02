@@ -11,6 +11,7 @@ class BaseViewController : UIViewController{
     
     var DEVICE_CONTROL_BOX = 1
     var DEVICE_MATRIX_4_X_4_HDR = 2
+    var DEVICE_CUSTOMER = 3
     var alert: UIAlertController!
     static var isPhone: Bool!
     static var textSizeForPhone = 16
@@ -177,7 +178,7 @@ extension BaseViewController  {
             break
             
         default:
-            
+            type = self.DEVICE_CUSTOMER
             break
         }
         return type

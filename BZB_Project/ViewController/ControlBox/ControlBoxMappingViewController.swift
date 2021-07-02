@@ -19,15 +19,17 @@ import PopupDialog
 
 class ControlBoxMappingViewController : BaseViewController{
     
-    @IBOutlet weak var btRefresh: UIButton!
-    @IBOutlet weak var collectionRX: UICollectionView!
+
+
     @IBOutlet weak var collectionTX: UICollectionView!
+    @IBOutlet weak var collectionRX: UICollectionView!
     var queueHTTP: DispatchQueue!
     var rxList: Array<Device> = []
     var txAllList: Array<Device> = []
     var txOnlineList: Array<Device> = []
     var txMenu: RSSelectionMenu<String>!
     var txNameForUI: Array<String> = []
+    var gradientLayer: CAGradientLayer!
     
     //device info structure
     struct Device {
@@ -42,13 +44,15 @@ class ControlBoxMappingViewController : BaseViewController{
         print("ControlBoxMappingViewController-viewDidLoad")
         super.viewDidLoad()
         setupUI()
+       
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("ControlBoxMappingViewController-viewWillAppear")
-        
+        createTXGradientLayer()
+        createRXGradientLayer()
         self.queueHTTP.async {
             self.showLoadingView()
             var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
@@ -74,9 +78,54 @@ extension ControlBoxMappingViewController{
         self.tabBarController?.tabBar.tintColor = UIColor.white
         self.tabBarController?.tabBar.barTintColor = UIColor.black
         
-        self.btRefresh.layer.cornerRadius = 5
-        self.btRefresh.layer.borderWidth = 1
-        self.btRefresh.layer.borderColor = UIColor.black.cgColor
+//        self.btRefresh.layer.cornerRadius = 5
+//        self.btRefresh.layer.borderWidth = 1
+//        self.btRefresh.layer.borderColor = UIColor.black.cgColor
+    }
+    
+    
+    func createTXGradientLayer() {
+        
+        
+        let bgView = UIView(frame: self.collectionTX.bounds)
+      
+        gradientLayer = CAGradientLayer()
+
+        gradientLayer.frame = self.view.frame
+
+       // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.155182302, green: 0.207787931, blue: 0.2941000462, alpha: 1).cgColor ,#colorLiteral(red: 0.09019607843, green: 0.1254901961, blue: 0.1882352941, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        bgView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.collectionTX?.backgroundView = bgView
+        
+      
+    }
+    
+    func createRXGradientLayer() {
+        
+        
+        let bgView = UIView(frame: self.collectionRX.bounds)
+      
+        gradientLayer = CAGradientLayer()
+
+        gradientLayer.frame = self.view.frame
+
+       // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.168627451, green: 0.2078431373, blue: 0.2745098039, alpha: 1).cgColor ,#colorLiteral(red: 0.1098039216, green: 0.1333333333, blue: 0.1764705882, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        bgView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.collectionRX?.backgroundView = bgView
+        
+      
     }
 }
 

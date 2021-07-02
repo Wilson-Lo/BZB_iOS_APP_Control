@@ -20,7 +20,6 @@ class SettingsViewController: BaseViewController{
     
     
     @IBOutlet weak var btScanHeightConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var btScanWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var btScan: UIButton!
     @IBOutlet weak var textFieldDeviceIP: UITextField!
@@ -120,6 +119,10 @@ extension SettingsViewController{
             self.textFieldDeviceType.frame.size.height = 500
         }
         
+        //setup keyboard type only allow number
+        self.textFieldDeviceIP.keyboardType = .decimalPad
+        self.textFieldDeviceIP.placeholder = "Device IP"
+        self.textFieldDeviceType.placeholder = "Device Name"
     }
     
     func objectInitial(){
@@ -143,17 +146,48 @@ extension SettingsViewController{
         
     }
     
+    func verifyWholeIP(test: String) -> Bool {
+        let pattern_2 = "(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})"
+        let regexText_2 = NSPredicate(format: "SELF MATCHES %@", pattern_2)
+        let result_2 = regexText_2.evaluate(with: test)
+        return result_2
+    }
+    
     @IBAction func btAdd(sender: UIButton) {
         
         DispatchQueue.main.async() {
             self.showLoadingView()
         }
         
-        var type = 0;
+        if(!(self.textFieldDeviceType.text!.count > 0)){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.dismissLoadingView()
+                self.showToast(context: "Device Name can't be empty !")
+            }
+            return
+        }
         
+        if(!(self.textFieldDeviceIP.text!.count > 0)){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.dismissLoadingView()
+                self.showToast(context: "Device IP can't be empty !")
+            }
+            return
+        }
+        
+        if(!verifyWholeIP(test: self.textFieldDeviceIP.text!)){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.dismissLoadingView()
+                self.showToast(context: "IP Address format not correct !")
+            }
+            return
+        }
+        
+        var type = 0;
+
         var dbSize = self.db.getDBSize()
         print("db size = \(dbSize)")
-        
+
         if(dbSize >= 10){
             self.showToast(context: "Can only store up to 20 devices !")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -175,7 +209,7 @@ extension SettingsViewController{
                             self.showToast(context: "Add failed !")
                         }
                     }else{
-                        self.showToast(context: "Please scan device first !")
+                       self.showToast(context: "Please check device info again !")
                     }
                 }else{
                     self.showToast(context: "This IP is exist !")

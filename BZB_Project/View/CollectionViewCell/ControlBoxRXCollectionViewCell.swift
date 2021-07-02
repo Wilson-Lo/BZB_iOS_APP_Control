@@ -11,9 +11,11 @@ import UIKit
 class ControlBoxRXCollectionViewCell: UICollectionViewCell {
     
     
+    
     @IBOutlet weak var labelName: UILabel!
-    @IBOutlet weak var labelTXName: UILabel!
     @IBOutlet weak var labelStatus: UILabel!
+    @IBOutlet weak var labelTXName: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -11,8 +11,8 @@ import UIKit
 class ControlBoxTXCollectionViewCell: UICollectionViewCell {
 
   
-    @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelStatus: UILabel!
+    @IBOutlet weak var labelName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
