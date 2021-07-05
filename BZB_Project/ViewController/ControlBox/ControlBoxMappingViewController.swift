@@ -19,8 +19,6 @@ import PopupDialog
 
 class ControlBoxMappingViewController : BaseViewController{
     
-
-
     @IBOutlet weak var collectionTX: UICollectionView!
     @IBOutlet weak var collectionRX: UICollectionView!
     var queueHTTP: DispatchQueue!
@@ -30,6 +28,7 @@ class ControlBoxMappingViewController : BaseViewController{
     var txMenu: RSSelectionMenu<String>!
     var txNameForUI: Array<String> = []
     var gradientLayer: CAGradientLayer!
+    var updateTimer: Timer?
     
     //device info structure
     struct Device {
@@ -43,18 +42,22 @@ class ControlBoxMappingViewController : BaseViewController{
     override func viewDidLoad() {
         print("ControlBoxMappingViewController-viewDidLoad")
         super.viewDidLoad()
-        setupUI()
-       
+        self.setupUI()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("ControlBoxMappingViewController-viewWillAppear")
-        createTXGradientLayer()
-        createRXGradientLayer()
-        self.queueHTTP.async {
+        DispatchQueue.main.async() {
             self.showLoadingView()
+        }
+        
+        //inital background color
+        self.createTXGradientLayer()
+        self.createRXGradientLayer()
+        
+        self.queueHTTP.async {
             var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
             if(device_ip != nil){
                 self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._1_cmd_get_node_info)
@@ -62,11 +65,15 @@ class ControlBoxMappingViewController : BaseViewController{
                 self.dismissLoadingView()
             }
         }
+        
+        //update device status timer, every 8 seconds
+        self.updateTimer = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(updateDevice), userInfo: nil, repeats: true)
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
         print("ControlBoxMappingViewController-viewWillDisappear")
+        self.updateTimer?.invalidate()
     }
     
 }
@@ -77,55 +84,55 @@ extension ControlBoxMappingViewController{
         UINavigationBar.appearance().barTintColor = UIColor.black
         self.tabBarController?.tabBar.tintColor = UIColor.white
         self.tabBarController?.tabBar.barTintColor = UIColor.black
-        
-//        self.btRefresh.layer.cornerRadius = 5
-//        self.btRefresh.layer.borderWidth = 1
-//        self.btRefresh.layer.borderColor = UIColor.black.cgColor
     }
     
-    
+    //init TX area background color
     func createTXGradientLayer() {
-        
-        
         let bgView = UIView(frame: self.collectionTX.bounds)
-      
+        
         gradientLayer = CAGradientLayer()
-
+        
         gradientLayer.frame = self.view.frame
-
-       // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
         gradientLayer.colors = [#colorLiteral(red: 0.155182302, green: 0.207787931, blue: 0.2941000462, alpha: 1).cgColor ,#colorLiteral(red: 0.09019607843, green: 0.1254901961, blue: 0.1882352941, alpha: 1).cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-
+        
         gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
         
         bgView.layer.insertSublayer(gradientLayer, at: 0)
         
         self.collectionTX?.backgroundView = bgView
-        
-      
     }
     
+    //init RX area background color
     func createRXGradientLayer() {
-        
-        
         let bgView = UIView(frame: self.collectionRX.bounds)
-      
+        
         gradientLayer = CAGradientLayer()
-
+        
         gradientLayer.frame = self.view.frame
-
-       // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
         gradientLayer.colors = [#colorLiteral(red: 0.168627451, green: 0.2078431373, blue: 0.2745098039, alpha: 1).cgColor ,#colorLiteral(red: 0.1098039216, green: 0.1333333333, blue: 0.1764705882, alpha: 1).cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-
+        
         gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
         
         bgView.layer.insertSublayer(gradientLayer, at: 0)
         
         self.collectionRX?.backgroundView = bgView
-        
-      
+    }
+    
+    //update device request
+    @objc func updateDevice(){
+        print("updateDevice")
+        self.queueHTTP.async {
+            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+            if(device_ip != nil){
+                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._6_cmd_get_node_info_without_loading)
+            }
+        }
     }
 }
 
@@ -442,12 +449,10 @@ extension ControlBoxMappingViewController{
 extension ControlBoxMappingViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+    
         if collectionView == self.collectionTX {
             return self.txAllList.count
-        }
-        
-        else {
+        }else {
             return self.rxList.count
         }
     }
@@ -459,7 +464,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxTXCollectionViewCell", for: indexPath) as! ControlBoxTXCollectionViewCell
             
             cell.labelName.text = self.txAllList[indexPath.item].name
-            
+
             if(self.txAllList[indexPath.item].alive != "y"){
                 cell.labelStatus.text = "Off-line"
                 //cell.labelStatus.tintColor = UIColor.red
@@ -467,28 +472,6 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                 cell.labelStatus.text = "On-line"
                 // cell.labelStatus.tintColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
             }
-            //            cell.groupIDText.text = self.rxList[indexPath.item].group_id
-            //            cell.ipText.text = self.rxList[indexPath.item].ip
-            
-            //            var isHasTX:Bool = false
-            //
-            //            for txObject in self.txAllList {
-            //                if(self.rxList[indexPath.item].group_id == txObject.group_id){
-            //                    cell.txNameText.text = txObject.name
-            //                    isHasTX = true
-            //                    break
-            //                }
-            //            }
-            //
-            //            if(!isHasTX){
-            //                cell.txNameText.text = "N/A"
-            //            }
-            //
-            //            if(self.rxList[indexPath.item].alive != "y"){
-            //                cell.deviceName.backgroundColor = UIColor.red
-            //            }else{
-            //                cell.deviceName.backgroundColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
-            //            }
             return cell
         }
         
@@ -497,9 +480,9 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxRXCollectionViewCell", for: indexPath) as! ControlBoxRXCollectionViewCell
             
             cell.labelName.text = self.rxList[indexPath.item].name
-            
+
             var isHasTX:Bool = false
-            
+
             for txObject in self.txAllList {
                 if(self.rxList[indexPath.item].group_id == txObject.group_id){
                     cell.labelTXName.text = txObject.name
@@ -507,11 +490,11 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                     break
                 }
             }
-            
+
             if(!isHasTX){
                 cell.labelTXName.text = "N/A"
             }
-            
+
             if(self.rxList[indexPath.item].alive != "y"){
                 cell.labelStatus.text = "Off-line"
                 //cell.labelStatus.tintColor = UIColor.red
@@ -519,17 +502,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                 cell.labelStatus.text = "On-line"
                 // cell.labelStatus.tintColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
             }
-            //            print(indexPath.item)
-            //            if(self.txAllList.count > 0){
-            //                cell.deviceName.text = self.txAllList[indexPath.item].name
-            //                cell.groupIDText.text = self.txAllList[indexPath.item].group_id
-            //                cell.ipText.text = self.txAllList[indexPath.item].ip
-            //                if(self.txAllList[indexPath.item].alive != "y"){
-            //                    cell.deviceName.backgroundColor = UIColor.red
-            //                }else{
-            //                    cell.deviceName.backgroundColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
-            //                }
-            //            }
+       
             return cell
         }
         
@@ -597,43 +570,17 @@ extension ControlBoxMappingViewController {
             switch response.result{
             
             case .success(let value):
+                
                 let json = JSON(value)
+                print(json.type)
                 
                 // debugPrint(json)
                 switch(cmdNumber){
                 
                 case HTTPCmdHelper._1_cmd_get_node_info:
                     print("_1_cmd_get_node_info")
-                    self.rxList.removeAll()
-                    self.txAllList.removeAll()
-                    self.txNameForUI.removeAll()
-                    self.txOnlineList.removeAll()
                     
-                    if let deviceList = json.array {
-                        for deviceObject in deviceList {
-                            let ip = deviceObject["ip"].stringValue
-                            let name = deviceObject["host_name"].stringValue
-                            let pin = deviceObject["pin"].stringValue
-                            let alive = deviceObject["alive"].stringValue
-                            let group_id = deviceObject["id"].stringValue
-                            if(deviceObject["type"].stringValue != "r"){
-                                self.txAllList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
-                                if(alive == "y"){
-                                    self.txOnlineList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
-                                    self.txNameForUI.append(name)
-                                }
-                                
-                            }else{
-                                self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
-                            }
-                            print(ip, name, pin)
-                        }
-                    }
-                    
-                    self.collectionTX.reloadData()
-                    self.collectionRX.reloadData()
-                    //                    self.collectionRX.reloadData()
-                    //                    self.collectionTX.reloadData()
+                    self.handleGetDevice(json: json)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
@@ -679,6 +626,11 @@ extension ControlBoxMappingViewController {
                     }
                     break
                     
+                case HTTPCmdHelper._6_cmd_get_node_info_without_loading:
+                    print("_6_cmd_get_node_info_without_loading")
+                    self.handleGetDevice(json: json)
+                    break
+                    
                 default:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
@@ -709,6 +661,47 @@ extension ControlBoxMappingViewController {
 
 //Button click event
 extension ControlBoxMappingViewController {
+    
+    // Handle get device json & update UI
+    func handleGetDevice(json: JSON){
+        
+        self.rxList.removeAll()
+        self.txAllList.removeAll()
+        self.txNameForUI.removeAll()
+        self.txOnlineList.removeAll()
+        
+        if let deviceList = json.array {
+            for deviceObject in deviceList {
+                let ip = deviceObject["ip"].stringValue
+                let name = deviceObject["host_name"].stringValue
+                let pin = deviceObject["pin"].stringValue
+                let alive = deviceObject["alive"].stringValue
+                let group_id = deviceObject["id"].stringValue
+                if(deviceObject["type"].stringValue != "r"){
+                    self.txAllList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
+                    if(alive == "y"){
+                        self.txOnlineList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id))
+                        self.txNameForUI.append(name)
+                    }
+                    
+                }else{
+                    self.rxList.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id))
+                }
+                print(ip, name, pin)
+            }
+        }
+        self.txNameForUI.sorted()
+        
+        self.txOnlineList = self.txOnlineList.sorted { (lhs, rhs) -> Bool in
+            return (lhs.name, lhs.ip, lhs.alive, lhs.pin, lhs.group_id) > (rhs.name, rhs.ip, rhs.alive, rhs.pin, rhs.group_id)
+        }
+       
+        self.txAllList = self.txAllList.sorted { (lhs, rhs) -> Bool in
+            return (lhs.name, lhs.ip, lhs.alive, lhs.pin, lhs.group_id) > (rhs.name, rhs.ip, rhs.alive, rhs.pin, rhs.group_id)
+        }
+        self.collectionTX.reloadData()
+        self.collectionRX.reloadData()
+    }
     
     
     func refresh(){

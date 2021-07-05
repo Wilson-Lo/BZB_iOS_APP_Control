@@ -224,10 +224,11 @@ extension DeviceListViewController : UICollectionViewDelegate {
             }
             
             btArray.append(CancelButton(title: "Go to Control-Box") {
-                
                 self.queueDB.async {
+                    print("control ip = \(self.deviceList[indexPath.item].ip)")
                     self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
                 }
+                
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
@@ -236,10 +237,11 @@ extension DeviceListViewController : UICollectionViewDelegate {
             })
             
             btArray.append(CancelButton(title: "Go to Matrix 4x4 HDR") {
-                
+                print("Matrix ip = \(self.deviceList[indexPath.item].ip)")
                 self.queueDB.async {
                     self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
                 }
+                
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController

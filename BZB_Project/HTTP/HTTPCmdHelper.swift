@@ -22,5 +22,6 @@ struct HTTPCmdHelper {
     static let _3_cmd_red_light = 103
     static let _4_cmd_video_wall_preset = 104
     static let _5_cmd_set_video_wall = 105
+    static let _6_cmd_get_node_info_without_loading = 106
 }
 
