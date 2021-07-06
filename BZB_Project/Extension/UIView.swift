@@ -39,7 +39,7 @@ extension UIView{
         }else{
             toastLb.frame = CGRect(x: ((self.bounds.size.width)/2) - ((expectedSize.width + 20)/2), y: self.bounds.height - expectedSize.height - 40 - 20, width: expectedSize.width + 20, height: expectedSize.height + 20)
         }
-
+        
         self.addSubview(toastLb)
         
         UIView.animate(withDuration: 1.5, delay: 1.5, animations: {
@@ -55,5 +55,16 @@ extension UIView{
                 view.removeFromSuperview()
             }
         }
+    }
+    
+    func addGradientBackground(firstColor: UIColor, secondColor: UIColor){
+        clipsToBounds = true
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor]
+        gradientLayer.frame = self.bounds
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+        print(gradientLayer.frame)
+        self.layer.insertSublayer(gradientLayer, at: 0)
     }
 }

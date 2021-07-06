@@ -111,11 +111,11 @@ extension ControlBoxVideoWallViewController{
         
         self.btEnable.layer.cornerRadius = 5
         self.btEnable.layer.borderWidth = 1
-        self.btEnable.layer.borderColor = UIColor.black.cgColor
-        
+//        self.btEnable.layer.borderColor = UIColor.black.cgColor
+//
         self.btDisable.layer.cornerRadius = 5
         self.btDisable.layer.borderWidth = 1
-        self.btDisable.layer.borderColor = UIColor.black.cgColor
+//        self.btDisable.layer.borderColor = UIColor.black.cgColor
         
         self.btTX.layer.cornerRadius = 5
         self.btTX.layer.borderWidth = 1
@@ -163,13 +163,12 @@ extension ControlBoxVideoWallViewController : UICollectionViewDataSource{
         
         if collectionView == self.collectionViewVideoWall {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxVideoWallCollectionViewCell", for: indexPath) as! ControlBoxVideoWallCollectionViewCell
-            cell.labelIndex.text = String(indexPath.item + 1) + "."
-            
+            cell.labelIndex.text = String(indexPath.item + 1)
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxPresetCollectionViewCell", for: indexPath) as! ControlBoxPresetCollectionViewCell
             
-            cell.indexLable.text = String(indexPath.item + 1) + "."
+            cell.indexLable.text = String(indexPath.item + 1)
             cell.nameLabel.text = ""
             
             for object in self.presetDataList{
@@ -178,7 +177,6 @@ extension ControlBoxVideoWallViewController : UICollectionViewDataSource{
                     break
                 }
             }
-            
             return cell
         }
     }

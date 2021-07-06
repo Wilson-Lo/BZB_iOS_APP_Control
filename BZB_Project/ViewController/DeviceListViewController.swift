@@ -17,6 +17,7 @@ import PopupDialog
 
 class DeviceListViewController: BaseViewController{
     
+    @IBOutlet var mainView: UIView!
     var gradientLayer: CAGradientLayer!
     @IBOutlet weak var btAddHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var btAddWidthConstraint: NSLayoutConstraint!
@@ -35,7 +36,8 @@ class DeviceListViewController: BaseViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("DeviceListViewController-viewWillAppear")
-        createGradientLayer()
+        self.createGradientLayer()
+        //self.createMainGradientLayer()
         self.queueDB.async {
             self.deviceList = self.db.read()
         }
@@ -59,6 +61,21 @@ class DeviceListViewController: BaseViewController{
 
 extension DeviceListViewController{
     
+    func createMainGradientLayer() {
+        
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.frame
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.1803921569, green: 0.2431372549, blue: 0.337254902, alpha: 1).cgColor ,#colorLiteral(red: 0.05882352941, green: 0.09803921569, blue: 0.137254902, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        self.mainView.layer.addSublayer(gradientLayer)
+    }
+    
     func createGradientLayer() {
         
         let bgView = UIView(frame: self.collectionView.bounds)
@@ -68,7 +85,7 @@ extension DeviceListViewController{
         gradientLayer.frame = self.view.frame
         
         // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
-        gradientLayer.colors = [#colorLiteral(red: 0.1607843137, green: 0.2196078431, blue: 0.3058823529, alpha: 1).cgColor ,#colorLiteral(red: 0.05882352941, green: 0.09803921569, blue: 0.137254902, alpha: 1).cgColor]
+        gradientLayer.colors = [#colorLiteral(red: 0.1803921569, green: 0.2431372549, blue: 0.337254902, alpha: 1).cgColor ,#colorLiteral(red: 0.03529411765, green: 0.05882352941, blue: 0.09803921569, alpha: 1).cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         
         gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
@@ -80,7 +97,7 @@ extension DeviceListViewController{
     
     func setupUI(){
         self.queueDB = DispatchQueue(label: "com.bzb.db", qos: DispatchQoS.userInitiated)
-        self.navigationController?.navigationBar.barTintColor = .black
+        self.navigationController?.navigationBar.barTintColor = UIColor(cgColor: #colorLiteral(red: 0.08523575506, green: 0.1426764978, blue: 0.2388794571, alpha: 1).cgColor )
         
         if(DeviceListViewController.isPhone){
             //bt add size
