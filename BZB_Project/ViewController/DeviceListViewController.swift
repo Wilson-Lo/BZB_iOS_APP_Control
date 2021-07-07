@@ -30,14 +30,21 @@ class DeviceListViewController: BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         print("DeviceListViewController-viewDidLoad")
-        setupUI()
+        self.setupUI()
+        
+        //scan device
+        NotificationCenter.default.addObserver(self, selector: #selector(goToDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_go_to_device), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_delete_device), object: nil)
+        
+        //custom device
+        NotificationCenter.default.addObserver(self, selector: #selector(goToCustomDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_go_to_custom_device), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteCustomDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_delete_custom_device), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("DeviceListViewController-viewWillAppear")
         self.createGradientLayer()
-        //self.createMainGradientLayer()
         self.queueDB.async {
             self.deviceList = self.db.read()
         }
@@ -127,6 +134,141 @@ extension DeviceListViewController{
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SettingsViewController") as! UIViewController
         self.navigationController!.pushViewController(nextViewController, animated: true)
     }
+    
+    /**
+     * Recevie ui_event_go_to_device NSNotification
+     */
+    @objc func goToDevice(notification: NSNotification){
+        print("DeviceListViewController - ui_event_go_to_device")
+        
+        self.queueDB.async {
+            self.preferences.set(self.deviceList[DeviceListDialogViewController.userSelectedDeviceIndex].ip, forKey: CmdHelper.key_server_ip)
+        }
+        
+        DispatchQueue.main.async() {
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            
+            switch(DeviceListDialogViewController.userSelectedDeviceType){
+            
+            case self.DEVICE_CONTROL_BOX:
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
+                self.navigationController!.pushViewController(nextViewController, animated: true)
+                break
+                
+            case self.DEVICE_MATRIX_4_X_4_HDR:
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
+                self.navigationController!.pushViewController(nextViewController, animated: true)
+                break
+                
+            default:
+                
+                break
+            }
+        }
+    }
+    
+    @objc func goToCustomDevice(notification: NSNotification){
+        print("DeviceListViewController - ui_event_go_to_device")
+        
+        self.queueDB.async {
+            self.preferences.set(self.deviceList[CustomDeviceListDialogViewController.userSelectedDeviceIndex].ip, forKey: CmdHelper.key_server_ip)
+        }
+        
+        DispatchQueue.main.async() {
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            
+            switch(CustomDeviceListDialogViewController.userSelectedDeviceType){
+            
+            case self.DEVICE_CONTROL_BOX:
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
+                self.navigationController!.pushViewController(nextViewController, animated: true)
+                break
+                
+            case self.DEVICE_MATRIX_4_X_4_HDR:
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
+                self.navigationController!.pushViewController(nextViewController, animated: true)
+                break
+                
+            default:
+                
+                break
+            }
+        }
+    }
+    
+    /**
+     * Recevie ui_event_delete_device NSNotification
+     */
+    @objc func deleteDevice(notification: NSNotification){
+        
+        print("DeviceListViewController - ui_event_delete_device")
+        
+        var feedback = false
+        self.queueDB.async {
+            feedback = self.db.delete(id: self.deviceList[DeviceListDialogViewController.userSelectedDeviceIndex].id!)
+        }
+        
+        DispatchQueue.main.async() {
+            self.showLoadingView()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if(feedback){
+                self.queueDB.async {
+                    self.deviceList.removeAll()
+                    self.deviceList = self.db.read()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.collectionView.reloadData()
+                    self.dismissLoadingView()
+                    self.showToast(context: "Delete successful !")
+                }
+            }else{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.showToast(context: "Delete failed !")
+                    self.dismissLoadingView()
+                }
+            }
+        }
+    }
+    
+    /**
+     * Recevie ui_event_delete_custom_device NSNotification
+     */
+    @objc func deleteCustomDevice(notification: NSNotification){
+        
+        print("DeviceListViewController - ui_event_delete_custom_device")
+        
+        var feedback = false
+        self.queueDB.async {
+            feedback = self.db.delete(id: self.deviceList[CustomDeviceListDialogViewController.userSelectedDeviceIndex].id!)
+        }
+        
+        DispatchQueue.main.async() {
+            self.showLoadingView()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if(feedback){
+                self.queueDB.async {
+                    self.deviceList.removeAll()
+                    self.deviceList = self.db.read()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.collectionView.reloadData()
+                    self.dismissLoadingView()
+                    self.showToast(context: "Delete successful !")
+                }
+            }else{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.showToast(context: "Delete failed !")
+                    self.dismissLoadingView()
+                }
+            }
+        }
+    }
 }
 
 extension DeviceListViewController : UICollectionViewDelegate {
@@ -135,172 +277,37 @@ extension DeviceListViewController : UICollectionViewDelegate {
         
         print("click ")
         
-        
         if(self.deviceList[indexPath.item].type != self.DEVICE_CUSTOMER){
             
-            let title = "\n Select Action"
-            let message = ""
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: DeviceListDialogViewController.typeName) as! DeviceListDialogViewController
+            vc.modalPresentationStyle = .custom
+            self.present(vc, animated: true, completion: nil)
             
-            // Create the dialog,
-            let popup = PopupDialog(title: title, message: message, image: nil)
+            DeviceListDialogViewController.userSelectedDeviceIndex = indexPath.item
             
-            var btArray: Array<CancelButton> = []
-            if(!DeviceListViewController.isPhone){
-                let dialogAppearance = PopupDialogDefaultView.appearance()
-                dialogAppearance.backgroundColor      = .white
-                dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
-                //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
-                dialogAppearance.titleTextAlignment   = .center
-                dialogAppearance.messageFont          = .systemFont(ofSize: 20)
-                //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+            switch(self.deviceList[indexPath.item].type){
+            
+            case self.DEVICE_CONTROL_BOX:
+                DeviceListDialogViewController.userSelectedDeviceType = self.DEVICE_CONTROL_BOX
+                break
                 
-                let cb = CancelButton.appearance()
-                cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
+            case self.DEVICE_MATRIX_4_X_4_HDR:
+                DeviceListDialogViewController.userSelectedDeviceType = self.DEVICE_MATRIX_4_X_4_HDR
+                break
+                
+            default:
+                
+                break
             }
-            
-            btArray.append(CancelButton(title: "Go to device") {
-                
-                self.queueDB.async {
-                    self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
-                }
-                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                
-                switch(self.deviceList[indexPath.item].type){
-                
-                case self.DEVICE_CONTROL_BOX:
-                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
-                    self.navigationController!.pushViewController(nextViewController, animated: true)
-                    break
-                    
-                case self.DEVICE_MATRIX_4_X_4_HDR:
-                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
-                    self.navigationController!.pushViewController(nextViewController, animated: true)
-                    break
-                    
-                default:
-                    
-                    break
-                }
-            })
-            
-            btArray.append(CancelButton(title: "Delete") {
-                
-                var feedback = false
-                self.queueDB.async {
-                    feedback = self.db.delete(id: self.deviceList[indexPath.item].id!)
-                }
-                
-                DispatchQueue.main.async() {
-                    self.showLoadingView()
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    if(feedback){
-                        self.queueDB.async {
-                            self.deviceList.removeAll()
-                            self.deviceList = self.db.read()
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            self.collectionView.reloadData()
-                            self.dismissLoadingView()
-                            self.showToast(context: "Delete successful !")
-                        }
-                    }else{
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            self.showToast(context: "Delete failed !")
-                            self.dismissLoadingView()
-                        }
-                    }
-                }
-            })
-            
-            popup.addButtons(btArray)
-            self.present(popup, animated: true, completion: nil)
             
         }else{
             
-            let title = "\n Select Action"
-            let message = ""
-            
-            // Create the dialog,
-            let popup = PopupDialog(title: title, message: message, image: nil)
-            
-            var btArray: Array<CancelButton> = []
-            if(!DeviceListViewController.isPhone){
-                let dialogAppearance = PopupDialogDefaultView.appearance()
-                dialogAppearance.backgroundColor      = .white
-                dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
-                //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
-                dialogAppearance.titleTextAlignment   = .center
-                dialogAppearance.messageFont          = .systemFont(ofSize: 20)
-                //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
-                
-                let cb = CancelButton.appearance()
-                cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
-            }
-            
-            btArray.append(CancelButton(title: "Go to Control-Box") {
-                self.queueDB.async {
-                    print("control ip = \(self.deviceList[indexPath.item].ip)")
-                    self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
-                }
-                
-                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
-                
-                self.navigationController!.pushViewController(nextViewController, animated: true)
-            })
-            
-            btArray.append(CancelButton(title: "Go to Matrix 4x4 HDR") {
-                print("Matrix ip = \(self.deviceList[indexPath.item].ip)")
-                self.queueDB.async {
-                    self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
-                }
-                
-                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
-                self.navigationController!.pushViewController(nextViewController, animated: true)
-            })
-            
-            btArray.append(CancelButton(title: "Delete") {
-                
-                var feedback = false
-                self.queueDB.async {
-                    feedback = self.db.delete(id: self.deviceList[indexPath.item].id!)
-                }
-                
-                DispatchQueue.main.async() {
-                    self.showLoadingView()
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    if(feedback){
-                        self.queueDB.async {
-                            self.deviceList.removeAll()
-                            self.deviceList = self.db.read()
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            self.collectionView.reloadData()
-                            self.dismissLoadingView()
-                            self.showToast(context: "Delete successful !")
-                        }
-                    }else{
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            self.showToast(context: "Delete failed !")
-                            self.dismissLoadingView()
-                        }
-                    }
-                }
-            })
-            
-            popup.addButtons(btArray)
-            self.present(popup, animated: true, completion: nil)
-            
-            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: CustomDeviceListDialogViewController.typeName) as! CustomDeviceListDialogViewController
+            vc.modalPresentationStyle = .custom
+            self.present(vc, animated: true, completion: nil)
+            CustomDeviceListDialogViewController.userSelectedDeviceIndex = indexPath.item
         }
     }
 }

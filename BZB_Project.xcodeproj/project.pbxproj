@@ -45,6 +45,9 @@
 		86B921EA26676B7600FAB568 /* DeviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B921E926676B7600FAB568 /* DeviceListViewController.swift */; };
 		86B921EF26676DBA00FAB568 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B921EE26676DBA00FAB568 /* ListCollectionViewCell.swift */; };
 		86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */; };
+		86C496B52694566E00D83378 /* DeviceListDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B42694566E00D83378 /* DeviceListDialogViewController.swift */; };
+		86C496B7269478A500D83378 /* UIEventHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B6269478A500D83378 /* UIEventHelper.swift */; };
+		86C496B9269546E900D83378 /* CustomDeviceListDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B8269546E800D83378 /* CustomDeviceListDialogViewController.swift */; };
 		86CCB3E82668AFC400CCA0F3 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */; };
 		86CCB4032668B6F700CCA0F3 /* DeviceDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */; };
 		86CCB4822668E25100CCA0F3 /* Matrix4MappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */; };
@@ -127,6 +130,9 @@
 		86B921E926676B7600FAB568 /* DeviceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewController.swift; sourceTree = "<group>"; };
 		86B921EE26676DBA00FAB568 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxTXCollectionViewCell.swift; sourceTree = "<group>"; };
+		86C496B42694566E00D83378 /* DeviceListDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListDialogViewController.swift; sourceTree = "<group>"; };
+		86C496B6269478A500D83378 /* UIEventHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEventHelper.swift; sourceTree = "<group>"; };
+		86C496B8269546E800D83378 /* CustomDeviceListDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDeviceListDialogViewController.swift; sourceTree = "<group>"; };
 		86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataObject.swift; sourceTree = "<group>"; };
 		86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4MappingViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +185,9 @@
 			children = (
 				8605807F261EFC5600B1E0AF /* IORename4DialogViewController.swift */,
 				86681294262029330034D975 /* MappingRename4DialogViewController.swift */,
+				86C496B42694566E00D83378 /* DeviceListDialogViewController.swift */,
+				86C496B6269478A500D83378 /* UIEventHelper.swift */,
+				86C496B8269546E800D83378 /* CustomDeviceListDialogViewController.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -628,9 +637,12 @@
 				86D8C67826565D20001E801B /* ControlBoxPresetCollectionViewCell.swift in Sources */,
 				8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
+				86C496B9269546E900D83378 /* CustomDeviceListDialogViewController.swift in Sources */,
+				86C496B52694566E00D83378 /* DeviceListDialogViewController.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
 				86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */,
 				86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */,
+				86C496B7269478A500D83378 /* UIEventHelper.swift in Sources */,
 				8643BA6F266DF43100150087 /* ControlBoxVideoWallCollectionViewCell.swift in Sources */,
 				86320EF52615E7F8007FE620 /* UIView.swift in Sources */,
 				86D8C67D265794F6001E801B /* ControlBoxMappingViewController.swift in Sources */,
