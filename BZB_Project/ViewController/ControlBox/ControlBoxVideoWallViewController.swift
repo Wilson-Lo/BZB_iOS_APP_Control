@@ -76,7 +76,7 @@ class ControlBoxVideoWallViewController : BaseViewController{
         self.selectedPresetIndex = 1
         initialUI()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
-        
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {

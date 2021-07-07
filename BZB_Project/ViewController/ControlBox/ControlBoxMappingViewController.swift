@@ -44,6 +44,9 @@ class ControlBoxMappingViewController : BaseViewController{
         super.viewDidLoad()
         self.setupUI()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
+        //tx device
+        NotificationCenter.default.addObserver(self, selector: #selector(txBlinkRedLight(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_tx_blink_red_light), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(txSwitchAll(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_tx_switch_all), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,6 +134,61 @@ extension ControlBoxMappingViewController{
             var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
             if(device_ip != nil){
                 self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._6_cmd_get_node_info_without_loading)
+            }
+        }
+    }
+    
+    /**
+     * TX  ui_tx_blink_red_light NSNotification
+     */
+    @objc func txBlinkRedLight(notification: NSNotification){
+        print("ControlBoxMappingViewController - ui_tx_blink_red_light")
+        
+        DispatchQueue.main.async() {
+            self.showLoadingView()
+        }
+        
+        self.queueHTTP.async {
+            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+            if(device_ip != nil){
+                
+                var data  = ["ip": ASpeedTXDialogViewController.deviceIP, "value":"cat /sys/devices/platform/ast1500_led.2/leds:button_link/N_Led"]
+                
+                AF.upload(multipartFormData: { (multiFormData) in
+                    for (key, value) in data {
+                        multiFormData.append(Data(value.utf8), withName: key)
+                    }
+                }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
+                    switch response.result {
+                    case .success(let JSON):
+                        print("response is :\(response)")
+                    case .failure(_):
+                        print("fail")
+                    }
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                    self.dismiss(animated: false, completion: nil)
+                }
+            }
+        }
+    }
+    
+    /**
+     * TX  ui_tx_switch_all NSNotification
+     */
+    @objc func txSwitchAll(notification: NSNotification){
+        print("ControlBoxMappingViewController - ui_tx_switch_all")
+        
+        DispatchQueue.main.async() {
+            self.showLoadingView()
+        }
+        self.recursiveSwitchAllRX(currentIndex: 0, txGroupId: ASpeedTXDialogViewController.deviceGroupId)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.dismiss(animated: false, completion: nil)
+            self.showToast(context: "Switch for All RX finish!")
+            self.queueHTTP.async {
+                self.refresh()
             }
         }
     }
@@ -328,69 +386,14 @@ extension ControlBoxMappingViewController : UICollectionViewDelegate {
         else {
             
             if(self.txAllList[indexPath.item].alive != "n"){
-                let title = "\n" + self.txAllList[indexPath.item].name
-                let message = ""
                 
-                // Create the dialog,
-                let popup = PopupDialog(title: title, message: message, image: nil)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: ASpeedTXDialogViewController.typeName) as! ASpeedTXDialogViewController
+                vc.modalPresentationStyle = .custom
+                self.present(vc, animated: true, completion: nil)
+                ASpeedTXDialogViewController.deviceIP = self.txAllList[indexPath.item].ip
+                ASpeedTXDialogViewController.deviceGroupId = self.txAllList[indexPath.item].group_id
                 
-                var btArray: Array<CancelButton> = []
-                if(!ControlBoxMappingViewController.isPhone){
-                    let dialogAppearance = PopupDialogDefaultView.appearance()
-                    dialogAppearance.backgroundColor      = .white
-                    dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
-                    //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
-                    dialogAppearance.titleTextAlignment   = .center
-                    dialogAppearance.messageFont          = .systemFont(ofSize: 20)
-                    //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
-                    
-                    let cb = CancelButton.appearance()
-                    cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
-                }
-                
-                btArray.append(CancelButton(title: "Switch for All RX") {
-                    self.showLoadingView()
-                    self.recursiveSwitchAllRX(currentIndex: 0, txGroupId: self.txAllList[indexPath.item].group_id)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        self.dismiss(animated: false, completion: nil)
-                        self.showToast(context: "Switch for All RX finish!")
-                        self.queueHTTP.async {
-                            self.refresh()
-                        }
-                    }
-                })
-                
-                btArray.append(CancelButton(title: "Blink Red Light") {
-                    self.queueHTTP.async {
-                        self.showLoadingView()
-                        var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
-                        if(device_ip != nil){
-                            
-                            var data  = ["ip": self.txAllList[indexPath.item].ip,"value":"cat /sys/devices/platform/ast1500_led.2/leds:button_link/N_Led"]
-                            
-                            AF.upload(multipartFormData: { (multiFormData) in
-                                for (key, value) in data {
-                                    multiFormData.append(Data(value.utf8), withName: key)
-                                }
-                            }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
-                                switch response.result {
-                                case .success(let JSON):
-                                    print("response is :\(response)")
-                                case .failure(_):
-                                    print("fail")
-                                }
-                            }
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
-                                self.dismiss(animated: false, completion: nil)
-                            }
-                        }else{
-                            
-                        }
-                    }
-                })
-                popup.addButtons(btArray)
-                self.present(popup, animated: true, completion: nil)
             }else{
                 self.showToast(context: "This device is off-line !")
             }
@@ -449,7 +452,7 @@ extension ControlBoxMappingViewController{
 extension ControlBoxMappingViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
+        
         if collectionView == self.collectionTX {
             return self.txAllList.count
         }else {
@@ -464,7 +467,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxTXCollectionViewCell", for: indexPath) as! ControlBoxTXCollectionViewCell
             
             cell.labelName.text = self.txAllList[indexPath.item].name
-
+            
             if(self.txAllList[indexPath.item].alive != "y"){
                 cell.labelStatus.text = "Off-line"
                 //cell.labelStatus.tintColor = UIColor.red
@@ -480,9 +483,9 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxRXCollectionViewCell", for: indexPath) as! ControlBoxRXCollectionViewCell
             
             cell.labelName.text = self.rxList[indexPath.item].name
-
+            
             var isHasTX:Bool = false
-
+            
             for txObject in self.txAllList {
                 if(self.rxList[indexPath.item].group_id == txObject.group_id){
                     cell.labelTXName.text = txObject.name
@@ -490,11 +493,11 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                     break
                 }
             }
-
+            
             if(!isHasTX){
                 cell.labelTXName.text = "N/A"
             }
-
+            
             if(self.rxList[indexPath.item].alive != "y"){
                 cell.labelStatus.text = "Off-line"
                 //cell.labelStatus.tintColor = UIColor.red
@@ -502,7 +505,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                 cell.labelStatus.text = "On-line"
                 // cell.labelStatus.tintColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
             }
-       
+            
             return cell
         }
         
@@ -695,7 +698,7 @@ extension ControlBoxMappingViewController {
         self.txOnlineList = self.txOnlineList.sorted { (lhs, rhs) -> Bool in
             return (lhs.name, lhs.ip, lhs.alive, lhs.pin, lhs.group_id) > (rhs.name, rhs.ip, rhs.alive, rhs.pin, rhs.group_id)
         }
-       
+        
         self.txAllList = self.txAllList.sorted { (lhs, rhs) -> Bool in
             return (lhs.name, lhs.ip, lhs.alive, lhs.pin, lhs.group_id) > (rhs.name, rhs.ip, rhs.alive, rhs.pin, rhs.group_id)
         }
