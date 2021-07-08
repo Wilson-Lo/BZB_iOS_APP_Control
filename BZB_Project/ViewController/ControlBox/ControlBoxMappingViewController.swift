@@ -47,6 +47,11 @@ class ControlBoxMappingViewController : BaseViewController{
         //tx device
         NotificationCenter.default.addObserver(self, selector: #selector(txBlinkRedLight(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_tx_blink_red_light), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(txSwitchAll(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_tx_switch_all), object: nil)
+        
+        //rx device
+        NotificationCenter.default.addObserver(self, selector: #selector(rxSwitchChannel(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_rx_switch_channel), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rxBlinkRedLight(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_rx_blink_red_light), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rxMute(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_rx_mute), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -192,6 +197,146 @@ extension ControlBoxMappingViewController{
             }
         }
     }
+    
+    /**
+     * RX  ui_tx_switch_all NSNotification
+     */
+    @objc func rxSwitchChannel(notification: NSNotification){
+        print("ControlBoxMappingViewController - ui_rx_switch_channel")
+        
+        DispatchQueue.main.async() {
+            
+            self.txMenu = RSSelectionMenu(dataSource: self.txNameForUI) { (cell, name, indexPath) in
+                if(!ControlBoxMappingViewController.isPhone){
+                    cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
+                }
+                cell.textLabel?.text = name
+            }
+            
+            self.txMenu.title = "Select TX"
+            
+            // provide selected items
+            var selectedNames: [String] = []
+            
+            self.txMenu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
+                
+                self.queueHTTP.async {
+                    self.showLoadingView()
+                    var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                    if(device_ip != nil){
+                        print(self.txAllList[index].group_id + "-" + ASpeedRXDialogViewController.deviceIP)
+                        var data  = ["ip": ASpeedRXDialogViewController.deviceIP,"switch_id":self.txOnlineList[index].group_id,"switch_type":"z"]
+                        AF.upload(multipartFormData: { (multiFormData) in
+                            for (key, value) in data {
+                                multiFormData.append(Data(value.utf8), withName: key)
+                            }
+                        }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_switch_group_id).responseJSON { response in
+                            switch response.result {
+                            case .success(let JSON):
+                                print("response is :\(response)")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                    if(BaseViewController.isPhone){
+                                        self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                                    }else{
+                                        self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                                    }
+                                }
+                                self.refresh()
+                            case .failure(_):
+                                print("fail")
+                                self.showToast(context: "Switch channel failed !")
+                            }
+                        }
+                        
+                    }
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.dismiss(animated: false, completion: nil)
+                }
+            }
+            self.txMenu.show(from: self)
+        }
+    }
+    
+    /**
+     * RX  ui_tx_switch_all NSNotification
+     */
+    @objc func rxBlinkRedLight(notification: NSNotification){
+        
+        DispatchQueue.main.async() {
+            self.showLoadingView()
+        }
+        
+        self.queueHTTP.async {
+            
+            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+            if(device_ip != nil){
+                
+                var data  = ["ip": ASpeedRXDialogViewController.deviceIP,"value":"echo 2 > /sys/devices/platform/ast1500_led.2/leds:button_link/N_Led"]
+                
+                AF.upload(multipartFormData: { (multiFormData) in
+                    for (key, value) in data {
+                        multiFormData.append(Data(value.utf8), withName: key)
+                    }
+                }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
+                    switch response.result {
+                    case .success(let JSON):
+                        print("response is :\(response)")
+                    case .failure(_):
+                        print("fail")
+                    }
+                }
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+            self.dismiss(animated: false, completion: nil)
+        }
+    }
+    
+    /**
+     * RX  ui_tx_switch_all NSNotification
+     */
+    @objc func rxMute(notification: NSNotification){
+        self.queueHTTP.async {
+            self.showLoadingView()
+            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+            if(device_ip != nil){
+                
+                var vaule = ""
+                
+                if(ASpeedRXDialogViewController.isMute){
+                    vaule = "echo 1 > /sys/devices/platform/display/screen_off"
+                }else{
+                    vaule = "echo 0 > /sys/devices/platform/display/screen_off"
+                }
+                
+                var data  = ["ip": ASpeedRXDialogViewController.deviceIP,"value": vaule]
+                
+                AF.upload(multipartFormData: { (multiFormData) in
+                    for (key, value) in data {
+                        multiFormData.append(Data(value.utf8), withName: key)
+                    }
+                }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
+                    switch response.result {
+                    case .success(let JSON):
+                        print("response is :\(response)")
+                        DispatchQueue.main.async {
+                            self.showToast(context: "Successful !")
+                        }
+                    case .failure(_):
+                        print("fail")
+                        self.showToast(context: "Failed !")
+                    }
+                }
+            }
+            
+            //            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            //                self.dismiss(animated: false, completion: nil)
+            //            }
+        }
+    }
 }
 
 extension ControlBoxMappingViewController : UICollectionViewDelegate {
@@ -199,201 +344,26 @@ extension ControlBoxMappingViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == self.collectionRX {
-            
             if(self.rxList[indexPath.item].alive != "n"){
-                let title = "\n" + self.rxList[indexPath.item].name
-                let message = ""
-                
-                // Create the dialog,
-                let popup = PopupDialog(title: title, message: message, image: nil)
-                
-                var btArray: Array<CancelButton> = []
-                if(!ControlBoxMappingViewController.isPhone){
-                    let dialogAppearance = PopupDialogDefaultView.appearance()
-                    dialogAppearance.backgroundColor      = .white
-                    dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
-                    //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
-                    dialogAppearance.titleTextAlignment   = .center
-                    dialogAppearance.messageFont          = .systemFont(ofSize: 20)
-                    //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
-                    
-                    let cb = CancelButton.appearance()
-                    cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
-                }
-                
-                btArray.append(CancelButton(title: "On") {
-                    self.queueHTTP.async {
-                        self.showLoadingView()
-                        var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
-                        if(device_ip != nil){
-                            
-                            var data  = ["ip": self.rxList[indexPath.item].ip,"value":"echo 0 > /sys/devices/platform/display/screen_off"]
-                            
-                            AF.upload(multipartFormData: { (multiFormData) in
-                                for (key, value) in data {
-                                    multiFormData.append(Data(value.utf8), withName: key)
-                                }
-                            }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
-                                switch response.result {
-                                case .success(let JSON):
-                                    print("response is :\(response)")
-                                    DispatchQueue.main.async {
-                                        self.showToast(context: "Turn on successful !")
-                                    }
-                                case .failure(_):
-                                    print("fail")
-                                    self.showToast(context: "Turn on failed !")
-                                }
-                            }
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                self.dismiss(animated: false, completion: nil)
-                            }
-                        }else{
-                            
-                        }
-                    }
-                })
-                
-                btArray.append(CancelButton(title: "Off") {
-                    self.queueHTTP.async {
-                        self.showLoadingView()
-                        var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
-                        if(device_ip != nil){
-                            
-                            var data  = ["ip": self.rxList[indexPath.item].ip,"value":"echo 1 > /sys/devices/platform/display/screen_off"]
-                            
-                            AF.upload(multipartFormData: { (multiFormData) in
-                                for (key, value) in data {
-                                    multiFormData.append(Data(value.utf8), withName: key)
-                                }
-                            }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
-                                switch response.result {
-                                case .success(let JSON):
-                                    print("response is :\(response)")
-                                    self.showToast(context: "Turn off successful !")
-                                case .failure(_):
-                                    print("fail")
-                                    self.showToast(context: "Turn off failed !")
-                                }
-                            }
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                self.dismiss(animated: false, completion: nil)
-                            }
-                        }else{
-                            
-                        }
-                    }
-                })
-                
-                btArray.append(CancelButton(title: "Switch Channel") {
-                    
-                    DispatchQueue.main.async() {
-                        
-                        self.txMenu = RSSelectionMenu(dataSource: self.txNameForUI) { (cell, name, indexPath) in
-                            if(!ControlBoxMappingViewController.isPhone){
-                                cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
-                            }
-                            cell.textLabel?.text = name
-                        }
-                        
-                        self.txMenu.title = "Select TX"
-                        
-                        // provide selected items
-                        var selectedNames: [String] = []
-                        
-                        self.txMenu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
-                            
-                            self.queueHTTP.async {
-                                self.showLoadingView()
-                                var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
-                                if(device_ip != nil){
-                                    print(self.txAllList[index].group_id + "-" + self.rxList[indexPath.item].ip)
-                                    var data  = ["ip": self.rxList[indexPath.item].ip,"switch_id":self.txOnlineList[index].group_id,"switch_type":"z"]
-                                    AF.upload(multipartFormData: { (multiFormData) in
-                                        for (key, value) in data {
-                                            multiFormData.append(Data(value.utf8), withName: key)
-                                        }
-                                    }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_switch_group_id).responseJSON { response in
-                                        switch response.result {
-                                        case .success(let JSON):
-                                            print("response is :\(response)")
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                                if(BaseViewController.isPhone){
-                                                    self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
-                                                }else{
-                                                    self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
-                                                }
-                                            }
-                                            self.refresh()
-                                        case .failure(_):
-                                            print("fail")
-                                            self.showToast(context: "Switch channel failed !")
-                                        }
-                                    }
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                        self.dismiss(animated: false, completion: nil)
-                                    }
-                                }else{
-                                    
-                                }
-                            }
-                        }
-                        self.txMenu.show(from: self)
-                    }
-                })
-                
-                btArray.append(CancelButton(title: "Blink Red Light") {
-                    self.queueHTTP.async {
-                        self.showLoadingView()
-                        var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
-                        if(device_ip != nil){
-                            
-                            var data  = ["ip": self.rxList[indexPath.item].ip,"value":"echo 2 > /sys/devices/platform/ast1500_led.2/leds:button_link/N_Led"]
-                            
-                            AF.upload(multipartFormData: { (multiFormData) in
-                                for (key, value) in data {
-                                    multiFormData.append(Data(value.utf8), withName: key)
-                                }
-                            }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_send_cmd).responseJSON { response in
-                                switch response.result {
-                                case .success(let JSON):
-                                    print("response is :\(response)")
-                                case .failure(_):
-                                    print("fail")
-                                }
-                            }
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
-                                self.dismiss(animated: false, completion: nil)
-                            }
-                        }else{
-                            
-                        }
-                    }
-                })
-                
-                popup.addButtons(btArray)
-                
-                self.present(popup, animated: true, completion: nil)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: ASpeedRXDialogViewController.typeName) as! ASpeedRXDialogViewController
+                vc.modalPresentationStyle = .custom
+                self.present(vc, animated: true, completion: nil)
+                ASpeedRXDialogViewController.deviceIP = self.rxList[indexPath.item].ip
+                ASpeedRXDialogViewController.deviceGroupId = self.rxList[indexPath.item].group_id
+                ASpeedRXDialogViewController.deviceName = self.rxList[indexPath.item].name
             }else{
                 self.showToast(context: "This device is off-line !")
             }
-            
-        }
-        else {
-            
+        }else{
             if(self.txAllList[indexPath.item].alive != "n"){
-                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: ASpeedTXDialogViewController.typeName) as! ASpeedTXDialogViewController
                 vc.modalPresentationStyle = .custom
                 self.present(vc, animated: true, completion: nil)
                 ASpeedTXDialogViewController.deviceIP = self.txAllList[indexPath.item].ip
                 ASpeedTXDialogViewController.deviceGroupId = self.txAllList[indexPath.item].group_id
-                
+                ASpeedTXDialogViewController.deviceName = self.txAllList[indexPath.item].name
             }else{
                 self.showToast(context: "This device is off-line !")
             }

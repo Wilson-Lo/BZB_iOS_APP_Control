@@ -18,4 +18,6 @@ struct UIEventHelper {
     static let ui_rx_blink_red_light = "ui_rx_blink_red_light"
     static let ui_tx_blink_red_light = "ui_tx_blink_red_light"
     static let ui_tx_switch_all = "ui_tx_switch_all"
+    static let ui_rx_switch_channel = "ui_rx_switch_channel"
+    static let ui_rx_mute = "ui_rx_mute"
 }

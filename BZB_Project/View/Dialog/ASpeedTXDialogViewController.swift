@@ -10,13 +10,15 @@ import UIKit
 
 class ASpeedTXDialogViewController: BaseViewController {
     
-    
+ 
+    @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var dialog: UIView!
     @IBOutlet weak var btSwitchAll: UIButton!
     @IBOutlet weak var btBlinkredLight: UIButton!
     @IBOutlet weak var dialogHeight: NSLayoutConstraint!
     static var deviceIP = ""
     static var deviceGroupId = ""
+    static var deviceName = ""
     
     override func viewDidLoad() {
         print("ASpeedTXDialogViewController-viewDidLoad")
@@ -25,6 +27,7 @@ class ASpeedTXDialogViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         print("ASpeedTXDialogViewController-viewWillAppear")
+        labelName.text = ASpeedTXDialogViewController.deviceName
     }
     
 }
@@ -35,7 +38,11 @@ extension ASpeedTXDialogViewController{
     func setupUI(){
         
         if(UIScreen.main.bounds.height < 700){
-            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.24)
+            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.26)
+            self.view.removeConstraint(dialogHeight)
+            self.view.addConstraint(newDialogHeightConstraint)
+        }else{
+            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.2)
             self.view.removeConstraint(dialogHeight)
             self.view.addConstraint(newDialogHeightConstraint)
         }

@@ -49,6 +49,7 @@
 		86C496B7269478A500D83378 /* UIEventHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B6269478A500D83378 /* UIEventHelper.swift */; };
 		86C496B9269546E900D83378 /* CustomDeviceListDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B8269546E800D83378 /* CustomDeviceListDialogViewController.swift */; };
 		86C496BB26957D5100D83378 /* ASpeedTXDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496BA26957D5000D83378 /* ASpeedTXDialogViewController.swift */; };
+		86C496BD26959BDA00D83378 /* ASpeedRXDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496BC26959BDA00D83378 /* ASpeedRXDialogViewController.swift */; };
 		86CCB3E82668AFC400CCA0F3 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */; };
 		86CCB4032668B6F700CCA0F3 /* DeviceDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */; };
 		86CCB4822668E25100CCA0F3 /* Matrix4MappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */; };
@@ -135,6 +136,7 @@
 		86C496B6269478A500D83378 /* UIEventHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEventHelper.swift; sourceTree = "<group>"; };
 		86C496B8269546E800D83378 /* CustomDeviceListDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDeviceListDialogViewController.swift; sourceTree = "<group>"; };
 		86C496BA26957D5000D83378 /* ASpeedTXDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASpeedTXDialogViewController.swift; sourceTree = "<group>"; };
+		86C496BC26959BDA00D83378 /* ASpeedRXDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASpeedRXDialogViewController.swift; sourceTree = "<group>"; };
 		86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataObject.swift; sourceTree = "<group>"; };
 		86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4MappingViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				86C496B6269478A500D83378 /* UIEventHelper.swift */,
 				86C496B8269546E800D83378 /* CustomDeviceListDialogViewController.swift */,
 				86C496BA26957D5000D83378 /* ASpeedTXDialogViewController.swift */,
+				86C496BC26959BDA00D83378 /* ASpeedRXDialogViewController.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */,
 				8605809D261F01F100B1E0AF /* String.swift in Sources */,
 				86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */,
+				86C496BD26959BDA00D83378 /* ASpeedRXDialogViewController.swift in Sources */,
 				8643BA012669B9DB00150087 /* MappingInputCollectionViewCell.swift in Sources */,
 				86B921EF26676DBA00FAB568 /* ListCollectionViewCell.swift in Sources */,
 				86C496BB26957D5100D83378 /* ASpeedTXDialogViewController.swift in Sources */,
