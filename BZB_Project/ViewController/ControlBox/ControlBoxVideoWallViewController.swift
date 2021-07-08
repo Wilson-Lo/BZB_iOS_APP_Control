@@ -22,12 +22,13 @@ class ControlBoxVideoWallViewController : BaseViewController{
     
     @IBOutlet weak var collectionViewVideoWall: UICollectionView!
     @IBOutlet weak var collectionViewVideoWallContent: UICollectionView!
-    
+    @IBOutlet weak var stackViewTop: UIStackView!
     @IBOutlet weak var btPreset: UIButton!
     @IBOutlet weak var btDisable: UIButton!
     @IBOutlet weak var btEnable: UIButton!
     @IBOutlet weak var btTX: UIButton!
     
+    var gradientLayer: CAGradientLayer!
     var txMenu: RSSelectionMenu<String>!
     var currentTotalVideoWallSize = 0 //Total video wall counts in current preset
     var currentRowVideoWallSize = 0 //Row counts in current preset
@@ -75,8 +76,10 @@ class ControlBoxVideoWallViewController : BaseViewController{
         super.viewDidLoad()
         self.selectedPresetIndex = 1
         initialUI()
+        createVideoWallAreaGradientLayer()
+        createVideoWallConAtentreaGradientLayer()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
-    
+        self.navigationController?.navigationBar.barTintColor = UIColor(cgColor: #colorLiteral(red: 0.08523575506, green: 0.1426764978, blue: 0.2388794571, alpha: 1).cgColor )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,35 +107,51 @@ class ControlBoxVideoWallViewController : BaseViewController{
 extension ControlBoxVideoWallViewController{
     
     func initialUI(){
-        
-        self.btPreset.layer.cornerRadius = 5
-        self.btPreset.layer.borderWidth = 1
-        self.btPreset.layer.borderColor = UIColor.black.cgColor
-        
-        self.btEnable.layer.cornerRadius = 5
+        self.btPreset.layer.cornerRadius = 10
+        self.btEnable.layer.cornerRadius = 10
+        self.btDisable.layer.cornerRadius = 10
         self.btEnable.layer.borderWidth = 1
-//        self.btEnable.layer.borderColor = UIColor.black.cgColor
-//
-        self.btDisable.layer.cornerRadius = 5
-        self.btDisable.layer.borderWidth = 1
-//        self.btDisable.layer.borderColor = UIColor.black.cgColor
-        
-        self.btTX.layer.cornerRadius = 5
-        self.btTX.layer.borderWidth = 1
-        self.btTX.layer.borderColor = UIColor.black.cgColor
-        
-        //        if(ControlBoxMappingRXViewController.isPhone){
-        //            print("is phone")
-        //
-        //
-        //
-        //        }else{
-        //            print("is pad")
-        //
-        //
-        //        }
+        self.btEnable.layer.borderColor = UIColor.white.cgColor
+        self.btTX.layer.cornerRadius = 10
     }
     
+    //init TX area background color
+    func createVideoWallAreaGradientLayer() {
+        let bgView = UIView(frame: self.collectionViewVideoWall.bounds)
+        
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.frame
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.155182302, green: 0.207787931, blue: 0.2941000462, alpha: 1).cgColor ,#colorLiteral(red: 0.09019607843, green: 0.1254901961, blue: 0.1882352941, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        bgView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.collectionViewVideoWall?.backgroundView = bgView
+    }
+    
+    
+    func createVideoWallConAtentreaGradientLayer() {
+        let bgView = UIView(frame: self.collectionViewVideoWallContent.bounds)
+        
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.frame
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.155182302, green: 0.207787931, blue: 0.2941000462, alpha: 1).cgColor ,#colorLiteral(red: 0.09019607843, green: 0.1254901961, blue: 0.1882352941, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        bgView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.collectionViewVideoWallContent?.backgroundView = bgView
+    }
 }
 
 extension ControlBoxVideoWallViewController : UICollectionViewDelegate {
