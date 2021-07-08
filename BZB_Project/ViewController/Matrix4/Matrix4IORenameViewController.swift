@@ -120,14 +120,14 @@ extension Matrix4IORenameViewController : UICollectionViewDelegate {
         if(isIntput){
             IORename4DialogViewController.isInput = true
             vc.dialogTitle.text =  "Input \(indexPath.item + 1)"
-            if(indexPath.item < self.inputName.count){
-                vc.editNewName.text = self.inputName[indexPath.item]
+            if(indexPath.item < Matrix4IORenameViewController.inputName.count){
+                vc.editNewName.text = Matrix4IORenameViewController.inputName[indexPath.item]
             }
         }else{
             IORename4DialogViewController.isInput = false
             vc.dialogTitle.text =  "Output \(indexPath.item + 1)"
-            if(indexPath.item < self.outputName.count){
-                vc.editNewName.text = self.outputName[indexPath.item]
+            if(indexPath.item < Matrix4IORenameViewController.outputName.count){
+                vc.editNewName.text = Matrix4IORenameViewController.outputName[indexPath.item]
             }
         }
         
@@ -146,14 +146,14 @@ extension Matrix4IORenameViewController : UICollectionViewDataSource {
         if(isIntput){
             cell.deviceType.text = "Input \(indexPath.item + 1)"
           //  cell.deviceType.backgroundColor = UIColor(red: 55/255, green: 142/255, blue: 87/255, alpha: 1)
-            if(self.inputName.count == 4){
-                cell.deviceName.text = self.inputName[indexPath.item]
+            if(Matrix4IORenameViewController.inputName.count == 4){
+                cell.deviceName.text = Matrix4IORenameViewController.inputName[indexPath.item]
             }else{
                 cell.deviceName.text = ""
             }
         }else{
-            if(self.outputName.count == 4){
-                cell.deviceName.text = self.outputName[indexPath.item]
+            if(Matrix4IORenameViewController.outputName.count == 4){
+                cell.deviceName.text = Matrix4IORenameViewController.outputName[indexPath.item]
             }else{
                 cell.deviceName.text = ""
             }
@@ -225,7 +225,7 @@ extension Matrix4IORenameViewController : TcpSocketClientDeleage{
         case CmdHelper._5_cmd_get_io_name:
             print("Matrix4IORenameViewController-_5_cmd_get_io_name")
             self.parser4IOName(data: data)
-            print("I/O count \(self.inputName.count)")
+            print("I/O count \(Matrix4IORenameViewController.inputName.count)")
             self.collectionView.reloadData()
             break
             

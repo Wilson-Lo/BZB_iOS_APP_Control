@@ -63,16 +63,16 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
        // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "IORename-showLoading"), object: nil)
         
         if(IORename4DialogViewController.isInput){
-            if(self.inputName.count > 0){
+            if(IORename4DialogViewController.inputName.count > 0){
                 print("IORename4DialogViewController input")
-                self.inputName[IORename4DialogViewController.userSelectedIndex] = editNewName.text!
+                IORename4DialogViewController.inputName[IORename4DialogViewController.userSelectedIndex] = editNewName.text!
             }else{
                 
             }
         }else{
-            if(self.inputName.count > 0){
+            if(IORename4DialogViewController.inputName.count > 0){
                 print("IORename4DialogViewController output")
-                self.outputName[IORename4DialogViewController.userSelectedIndex] = editNewName.text!
+                IORename4DialogViewController.outputName[IORename4DialogViewController.userSelectedIndex] = editNewName.text!
             }else{
                 
             }
@@ -80,15 +80,15 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
         
         var temp = ""
         
-        if(self.outputName.count > 0 ){
-            for i in 0...(self.outputName.count - 1){
-                temp = temp + "0\(self.outputName[i].length + 1)" + self.outputName[i].toHexEncodedString()
+        if(IORename4DialogViewController.outputName.count > 0 ){
+            for i in 0...(IORename4DialogViewController.outputName.count - 1){
+                temp = temp + "0\(IORename4DialogViewController.outputName[i].length + 1)" + IORename4DialogViewController.outputName[i].toHexEncodedString()
             }
         }
         
-        if(self.inputName.count > 0 ){
-            for i in 0...(self.inputName.count - 1){
-                temp = temp + "0\(self.inputName[i].length + 1)" + self.inputName[i].toHexEncodedString()
+        if(IORename4DialogViewController.inputName.count > 0 ){
+            for i in 0...(IORename4DialogViewController.inputName.count - 1){
+                temp = temp + "0\(IORename4DialogViewController.inputName[i].length + 1)" + IORename4DialogViewController.inputName[i].toHexEncodedString()
             }
         }
         

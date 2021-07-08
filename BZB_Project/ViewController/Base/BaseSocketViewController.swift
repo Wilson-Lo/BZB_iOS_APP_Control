@@ -10,9 +10,9 @@ import UIKit
 
 class BaseSocketViewController: BaseViewController{
     
-    var inputName: Array<String> = []
-    var outputName: Array<String> = []
-    var mappingName: Array<String> = []
+    static var inputName: Array<String> = []
+    static var outputName: Array<String> = []
+     var mappingName: Array<String> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,8 +98,8 @@ extension BaseSocketViewController{
      */
     public func parser4IOName(data: Data){
         print("BaseViewController-parserIOName")
-        self.inputName.removeAll()
-        self.outputName.removeAll()
+        BaseSocketViewController.inputName.removeAll()
+        BaseSocketViewController.outputName.removeAll()
         
         var feedbackData = self.hexStringToStringArray(data.hexEncodedString())
         print("data = " + data.hexEncodedString())
@@ -123,9 +123,9 @@ extension BaseSocketViewController{
             print("temp size == 8")
             for i in 0...7{
                 if(i<4){
-                    self.outputName.append(tempArray[i])
+                    BaseSocketViewController.outputName.append(tempArray[i])
                 }else{
-                    self.inputName.append(tempArray[i])
+                    BaseSocketViewController.inputName.append(tempArray[i])
                 }
             }
         }else{
