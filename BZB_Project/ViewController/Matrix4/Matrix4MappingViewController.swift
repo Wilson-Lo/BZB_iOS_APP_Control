@@ -20,19 +20,21 @@ class Matrix4MappingViewController: BaseSocketViewController{
     @IBOutlet weak var collectionInput: UICollectionView!
     @IBOutlet weak var collectionOutput: UICollectionView!
     
+    var gradientLayer: CAGradientLayer!
     var saveMappingMenu: RSSelectionMenu<String>!
     var deviceSourceStatus: Array<Int> = []
     
     override func viewDidLoad() {
         print("Matrix4MappingViewController-viewDidLoad")
         super.viewDidLoad()
-      
+        initialUI()
+        createInputGradientLayer()
+        createOutputGradientLayer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("Matrix4MappingViewController-viewWillAppear")
         super.viewWillAppear(true)
-        initialUI()
         TcpSocketClient.sharedInstance.delegate = self
        // self.showLoadingView()
         TcpSocketClient.sharedInstance.startConnect()
@@ -48,23 +50,61 @@ class Matrix4MappingViewController: BaseSocketViewController{
 
 extension Matrix4MappingViewController{
     
+    //init Input area background color
+    func createInputGradientLayer() {
+        let bgView = UIView(frame: self.collectionInput.bounds)
+        
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.frame
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.155182302, green: 0.207787931, blue: 0.2941000462, alpha: 1).cgColor ,#colorLiteral(red: 0.09019607843, green: 0.1254901961, blue: 0.1882352941, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        bgView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.collectionInput?.backgroundView = bgView
+    }
+    
+    //init Ouput area background color
+    func createOutputGradientLayer() {
+        let bgView = UIView(frame: self.collectionOutput.bounds)
+        
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.frame
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.155182302, green: 0.207787931, blue: 0.2941000462, alpha: 1).cgColor ,#colorLiteral(red: 0.09019607843, green: 0.1254901961, blue: 0.1882352941, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        bgView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.collectionOutput?.backgroundView = bgView
+    }
+    
     func initialUI(){
         
         self.btRefresh.layer.cornerRadius = 5
         self.btRefresh.layer.borderWidth = 1
-        self.btRefresh.layer.borderColor = UIColor.black.cgColor
+        self.btRefresh.layer.borderColor = UIColor.white.cgColor
         
         self.btSave.layer.cornerRadius = 5
         self.btSave.layer.borderWidth = 1
-        self.btSave.layer.borderColor = UIColor.black.cgColor
+        self.btSave.layer.borderColor = UIColor.white.cgColor
         
         self.btRecall.layer.cornerRadius = 5
         self.btRecall.layer.borderWidth = 1
-        self.btRecall.layer.borderColor = UIColor.black.cgColor
+        self.btRecall.layer.borderColor = UIColor.white.cgColor
         
         self.btAll.layer.cornerRadius = 5
         self.btAll.layer.borderWidth = 1
-        self.btAll.layer.borderColor = UIColor.black.cgColor
+        self.btAll.layer.borderColor = UIColor.white.cgColor
         
         
         if(Matrix4MappingViewController.isPhone){
