@@ -19,6 +19,7 @@ import RSSelectionMenu
 class SettingsViewController: BaseViewController{
     
     
+    @IBOutlet var uiView: UIView!
     @IBOutlet weak var btScanHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var btScanWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var btScan: UIButton!
@@ -26,7 +27,7 @@ class SettingsViewController: BaseViewController{
     @IBOutlet weak var textFieldDeviceType: UITextField!
     @IBOutlet weak var appVerLabel: UILabel!
     @IBOutlet weak var btADD: UIButton!
-    
+    var gradientLayer: CAGradientLayer!
     let preferences = UserDefaults.standard
     var queueReceiveUDP: DispatchQueue!
     var queueSendUDP: DispatchQueue!
@@ -47,6 +48,18 @@ class SettingsViewController: BaseViewController{
         print("SettingsViewController-viewDidLoad")
         super.viewDidLoad()
         initialUI()
+        let bgView = UIView(frame: self.uiView.bounds)
+        
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.frame
+        
+        gradientLayer.colors = [#colorLiteral(red: 0.1803921569, green: 0.2431372549, blue: 0.337254902, alpha: 1).cgColor ,#colorLiteral(red: 0.03529411765, green: 0.05882352941, blue: 0.09803921569, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        self.uiView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {

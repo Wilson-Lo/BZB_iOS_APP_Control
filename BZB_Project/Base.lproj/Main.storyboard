@@ -352,10 +352,11 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="XAe-Ow-esV">
-                                <rect key="frame" x="20.666666666666657" y="64" width="372.66666666666674" height="30"/>
+                                <rect key="frame" x="20.666666666666657" y="64" width="372.66666666666674" height="34"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBE-I9-thk">
-                                        <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -367,7 +368,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfg-ZO-bFi">
-                                        <rect key="frame" x="96.333333333333314" y="0.0" width="84" height="30"/>
+                                        <rect key="frame" x="96.333333333333314" y="0.0" width="84" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Recall">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -379,7 +381,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JfY-uh-RwZ">
-                                        <rect key="frame" x="192.33333333333334" y="0.0" width="84.000000000000028" height="30"/>
+                                        <rect key="frame" x="192.33333333333334" y="0.0" width="84.000000000000028" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="All">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -391,7 +394,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IA7-Xm-mug">
-                                        <rect key="frame" x="288.33333333333331" y="0.0" width="84.333333333333314" height="30"/>
+                                        <rect key="frame" x="288.33333333333331" y="0.0" width="84.333333333333314" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Refresh">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -435,7 +439,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sDJ-a1-Jo4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1065.217391304348" y="1400.8928571428571"/>
+            <point key="canvasLocation" x="-1070" y="1401"/>
         </scene>
         <!--more-->
         <scene sceneID="jhd-jH-M1e">
@@ -459,8 +463,8 @@
                                                     <rect key="frame" x="40" y="24" width="32" height="32"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I/O Rename" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEt-UE-H8r">
-                                                    <rect key="frame" x="92" y="30.666666666666671" width="83.666666666666686" height="19"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="92" y="29.333333333333329" width="92.666666666666686" height="21.666666666666671"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=regular">
@@ -490,8 +494,8 @@
                                                     <rect key="frame" x="40" y="24" width="32" height="32"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preset Rename" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW2-wj-OzS">
-                                                    <rect key="frame" x="92" y="30.666666666666671" width="110" height="19"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <rect key="frame" x="92" y="29.333333333333329" width="121.66666666666669" height="21.666666666666671"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=regular">
@@ -523,7 +527,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oW-qC-jEd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-400" y="1401"/>
+            <point key="canvasLocation" x="-397" y="1401"/>
         </scene>
         <!--Matrix4IORenameViewController-->
         <scene sceneID="YPl-N8-PIH">
@@ -856,7 +860,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device and your iOS Phone must be located in the same network." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2g-cy-O56">
                                 <rect key="frame" x="33.666666666666657" y="792.33333333333337" width="346.66666666666674" height="33.666666666666629"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <color key="textColor" systemColor="systemGray6Color"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -875,7 +879,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wv-PD-cYz">
                                 <rect key="frame" x="186.66666666666666" y="743.33333333333337" width="41" height="20.666666666666629"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -890,9 +894,10 @@
                                 </variation>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTd-k3-7TA">
-                                <rect key="frame" x="165.66666666666666" y="516" width="82.666666666666657" height="30"/>
+                                <rect key="frame" x="75.666666666666657" y="516" width="262.66666666666674" height="36"/>
+                                <color key="backgroundColor" red="0.13725490196078433" green="0.6470588235294118" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="ADD">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" systemColor="tertiarySystemBackgroundColor"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -908,7 +913,7 @@
                             <constraint firstItem="ewk-U5-Ob9" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.149533" id="0vM-cB-owc"/>
                             <constraint firstItem="ewk-U5-Ob9" firstAttribute="top" secondItem="Rt8-5v-Wv1" secondAttribute="top" constant="31" id="1Rs-iW-eKQ"/>
                             <constraint firstItem="O2g-cy-O56" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.837681" id="6cS-VS-Jdm"/>
-                            <constraint firstItem="JTd-k3-7TA" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.2" id="85t-ba-sY4"/>
+                            <constraint firstItem="JTd-k3-7TA" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="85t-ba-sY4"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="top" secondItem="cGP-Pc-VYa" secondAttribute="bottom" constant="51" id="BpG-9E-hXQ"/>
                             <constraint firstItem="O2g-cy-O56" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="Ory-gt-eot"/>
                             <constraint firstItem="Rt8-5v-Wv1" firstAttribute="trailing" secondItem="ewk-U5-Ob9" secondAttribute="trailing" constant="34" id="QMH-4a-Vfr"/>
@@ -923,6 +928,7 @@
                             <constraint firstItem="ewk-U5-Ob9" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.06" id="neV-nH-uf0"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="t0D-Yb-ene"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="txl-GO-vl3"/>
+                            <constraint firstItem="JTd-k3-7TA" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.04" id="xfU-8b-lN4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xCF-M7-Xfg"/>
@@ -934,6 +940,7 @@
                         <outlet property="btScanWidthConstraint" destination="0vM-cB-owc" id="Zaw-kY-Rdi"/>
                         <outlet property="textFieldDeviceIP" destination="cGP-Pc-VYa" id="3NU-Uc-EL5"/>
                         <outlet property="textFieldDeviceType" destination="Qq6-Nc-yuF" id="fVW-hg-G8E"/>
+                        <outlet property="uiView" destination="Upq-YY-P50" id="utv-N7-FIu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="War-wt-yVu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1236,7 +1243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAo-kk-Keb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="454" y="-206"/>
+            <point key="canvasLocation" x="451" y="-206"/>
         </scene>
         <!--ControlBoxMappingViewController-->
         <scene sceneID="5g7-nB-w6f">
@@ -1448,7 +1455,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXo-Km-XmS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-306" y="-207"/>
+            <point key="canvasLocation" x="-267" y="-206"/>
         </scene>
         <!--Device List Dialog View Controller-->
         <scene sceneID="zQV-Ss-4uA">
@@ -2295,11 +2302,17 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
