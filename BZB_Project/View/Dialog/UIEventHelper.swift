@@ -21,4 +21,6 @@ struct UIEventHelper {
     static let ui_rx_switch_channel = "ui_rx_switch_channel"
     static let ui_rx_mute = "ui_rx_mute"
     static let ui_matrix4_switch_from_input = "ui_matrix4_switch_from_input"
+    static let ui_matrix4_switch_from_output = "ui_matrix4_switch_from_output"
+    static let ui_matrix4_mute_from_output = "ui_matrix4_mute_from_output"
 }

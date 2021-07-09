@@ -32,6 +32,8 @@ class Matrix4MappingViewController: BaseSocketViewController{
         createInputGradientLayer()
         createOutputGradientLayer()
         NotificationCenter.default.addObserver(self, selector: #selector(switchFromInput(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_matrix4_switch_from_input), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchFromOutput(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_matrix4_switch_from_output), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(muteFromOutput(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_matrix4_mute_from_output), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,7 +133,33 @@ extension Matrix4MappingViewController{
         self.queueHTTP.async {
             var cmd = ""
             cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(Matrix4InputDialogViewController.outputIndex)0\(Matrix4InputDialogViewController.inputIndex + 1)"
-            print(cmd)
+            cmd = cmd + self.calCheckSum(data: cmd)
+            TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
+        }
+    }
+    
+    /**
+     *  ui_matrix4_switch_from_output NSNotification
+     */
+    @objc func switchFromOutput(notification: NSNotification){
+        print("Matrix4MappingViewController - ui_matrix4_switch_from_output")
+        self.queueHTTP.async {
+            var cmd = ""
+            cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(Matrix4OutputDialogViewController.outputIndex+1)0\(Matrix4OutputDialogViewController.inputIndex)"
+            cmd = cmd + self.calCheckSum(data: cmd)
+            TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
+        }
+    }
+    
+    
+    /**
+     *  ui_matrix4_mute_from_output NSNotification
+     */
+    @objc func muteFromOutput(notification: NSNotification){
+        print("Matrix4MappingViewController - ui_matrix4_mute_from_output")
+        self.queueHTTP.async {
+            var cmd = ""
+            cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(Matrix4OutputDialogViewController.outputIndex + 1)00"
             cmd = cmd + self.calCheckSum(data: cmd)
             TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
         }
@@ -410,7 +438,12 @@ extension Matrix4MappingViewController : UICollectionViewDelegate{
             self.present(vc, animated: true, completion: nil)
             Matrix4InputDialogViewController.inputIndex = indexPath.item
         }else{
-            self.showOutputPopMenu(screenName: Matrix4MappingViewController.outputName[indexPath.item], screenNumber: (indexPath.item+1), isSetAll: false)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: Matrix4OutputDialogViewController.typeName) as! Matrix4OutputDialogViewController
+            vc.modalPresentationStyle = .custom
+            self.present(vc, animated: true, completion: nil)
+            Matrix4OutputDialogViewController.outputIndex = indexPath.item
+          //  self.showOutputPopMenu(screenName: Matrix4MappingViewController.outputName[indexPath.item], screenNumber: (indexPath.item+1), isSetAll: false)
         }
     }
 }
