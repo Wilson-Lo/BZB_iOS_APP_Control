@@ -40,6 +40,7 @@
 		86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86681294262029330034D975 /* MappingRename4DialogViewController.swift */; };
 		866812E026203D3C0034D975 /* OCFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866812DF26203D3C0034D975 /* OCFile.mm */; };
 		866812EA26203D660034D975 /* Edid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866812E826203D660034D975 /* Edid.cpp */; };
+		869B2F672697F13100F2B58B /* Matrix4AllDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869B2F662697F13100F2B58B /* Matrix4AllDialogViewController.swift */; };
 		86ADBDAF268D88BD00BE1983 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ADBDAE268D88BD00BE1983 /* UIColor.swift */; };
 		86B2820426808B82007BCE4C /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B2820326808B82007BCE4C /* NSLayoutConstraint.swift */; };
 		86B921EA26676B7600FAB568 /* DeviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B921E926676B7600FAB568 /* DeviceListViewController.swift */; };
@@ -129,6 +130,7 @@
 		866812E826203D660034D975 /* Edid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Edid.cpp; sourceTree = "<group>"; };
 		866812E926203D660034D975 /* Edid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Edid.hpp; sourceTree = "<group>"; };
 		86681315262040DC0034D975 /* BZB_Project-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BZB_Project-Bridging-Header.h"; sourceTree = "<group>"; };
+		869B2F662697F13100F2B58B /* Matrix4AllDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4AllDialogViewController.swift; sourceTree = "<group>"; };
 		86ADBDAE268D88BD00BE1983 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		86B2820326808B82007BCE4C /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		86B921E926676B7600FAB568 /* DeviceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				86C496BC26959BDA00D83378 /* ASpeedRXDialogViewController.swift */,
 				86C496BE2696D0F300D83378 /* Matrix4InputDialogViewController.swift */,
 				86C496C02697181500D83378 /* Matrix4OutputDialogViewController.swift */,
+				869B2F662697F13100F2B58B /* Matrix4AllDialogViewController.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */,
 				86320F03261D63A7007FE620 /* Data.swift in Sources */,
 				86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */,
+				869B2F672697F13100F2B58B /* Matrix4AllDialogViewController.swift in Sources */,
 				86CCB4822668E25100CCA0F3 /* Matrix4MappingViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,

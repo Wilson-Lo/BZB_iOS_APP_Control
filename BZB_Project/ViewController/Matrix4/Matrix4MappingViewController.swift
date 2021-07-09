@@ -31,9 +31,11 @@ class Matrix4MappingViewController: BaseSocketViewController{
         initialUI()
         createInputGradientLayer()
         createOutputGradientLayer()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(switchFromInput(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_matrix4_switch_from_input), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(switchFromOutput(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_matrix4_switch_from_output), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(muteFromOutput(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_matrix4_mute_from_output), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchFromAll(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_matrix4_switch_from_all), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,6 +153,25 @@ extension Matrix4MappingViewController{
         }
     }
     
+    /**
+     *  ui_matrix4_switch_from_all NSNotification
+     */
+    @objc func switchFromAll(notification: NSNotification){
+        print("Matrix4MappingViewController - ui_matrix4_switch_from_all")
+        self.queueHTTP.async {
+            var cmd = ""
+            if(Matrix4AllDialogViewController.inputIndex > 4){
+                cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "00000000"
+            }else{
+                var inputIndex = Matrix4AllDialogViewController.inputIndex
+                cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "0\(inputIndex)0\(inputIndex)0\(inputIndex)0\(inputIndex)"
+            }
+            print(cmd)
+            cmd = cmd + self.calCheckSum(data: cmd)
+            TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._9_cmd_set_all_mapping))
+        }
+    }
+    
     
     /**
      *  ui_matrix4_mute_from_output NSNotification
@@ -175,7 +196,12 @@ extension Matrix4MappingViewController{
     }
     
     @IBAction func btSetAll(sender: UIButton) {
-        self.showOutputPopMenu(screenName: "All screen", screenNumber: 0, isSetAll: true)
+        //self.showOutputPopMenu(screenName: "All screen", screenNumber: 0, isSetAll: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: Matrix4AllDialogViewController.typeName) as! Matrix4AllDialogViewController
+        vc.modalPresentationStyle = .custom
+        self.present(vc, animated: true, completion: nil)
+    //    Matrix4InputDialogViewController.inputIndex = indexPath.item
     }
     
     @IBAction func btRefresh(sender: UIButton) {
@@ -259,79 +285,79 @@ extension Matrix4MappingViewController{
         }
     }
     
-    func showOutputPopMenu(screenName: String, screenNumber: Int, isSetAll: Bool){
-        
-        
-        if((Matrix4MappingViewController.inputName.count > 0) && (Matrix4MappingViewController.outputName.count > 0)){
-            
-            let title = screenName
-            let message = "Select source to " + screenName.lowercased()
-            
-            // Create the dialog,
-            let popup = PopupDialog(title: title, message: message, image: nil)
-            
-            var btArray: Array<CancelButton> = []
-            if(!Matrix4MappingViewController.isPhone){
-                let dialogAppearance = PopupDialogDefaultView.appearance()
-                dialogAppearance.backgroundColor      = .white
-                dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
-                //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
-                dialogAppearance.titleTextAlignment   = .center
-                dialogAppearance.messageFont          = .systemFont(ofSize: 20)
-                //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
-                
-                let cb = CancelButton.appearance()
-                cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
-            }
-            
-            
-            for i in 0...(Matrix4MappingViewController.inputName.count - 1){
-                btArray.append(CancelButton(title: Matrix4MappingViewController.inputName[i]) {
-                    self.showLoadingView()
-                    var cmd = ""
-                    
-                    if(isSetAll){
-                        cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "0\(i+1)0\(i+1)0\(i+1)0\(i+1)"
-                        print(cmd)
-                        cmd = cmd + self.calCheckSum(data: cmd)
-                        
-                        TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._9_cmd_set_all_mapping))
-                    }else{
-                        cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(screenNumber)0\(i+1)"
-                        print(cmd)
-                        cmd = cmd + self.calCheckSum(data: cmd)
-                        TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
-                    }
-                    
-                    //  self.startCheckFeedbackTimer()
-                }
-                )
-            }
-            
-            btArray.append(CancelButton(title: "Mute") {
-                self.showLoadingView()
-                var cmd = ""
-                if(isSetAll){
-                    cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "00000000"
-                    cmd = cmd + self.calCheckSum(data: cmd)
-                    TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._9_cmd_set_all_mapping))
-                }else{
-                    cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(screenNumber)00"
-                    cmd = cmd + self.calCheckSum(data: cmd)
-                    TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
-                }
-                // self.startCheckFeedbackTimer()
-            }
-            )
-            
-            
-            popup.addButtons(btArray)
-            
-            self.present(popup, animated: true, completion: nil)
-        }else{
-            self.view.makeToast("Please reconnect to device first !")
-        }
-    }
+//    func showOutputPopMenu(screenName: String, screenNumber: Int, isSetAll: Bool){
+//
+//
+//        if((Matrix4MappingViewController.inputName.count > 0) && (Matrix4MappingViewController.outputName.count > 0)){
+//
+//            let title = screenName
+//            let message = "Select source to " + screenName.lowercased()
+//
+//            // Create the dialog,
+//            let popup = PopupDialog(title: title, message: message, image: nil)
+//
+//            var btArray: Array<CancelButton> = []
+//            if(!Matrix4MappingViewController.isPhone){
+//                let dialogAppearance = PopupDialogDefaultView.appearance()
+//                dialogAppearance.backgroundColor      = .white
+//                dialogAppearance.titleFont            = .boldSystemFont(ofSize: 24)
+//                //    dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+//                dialogAppearance.titleTextAlignment   = .center
+//                dialogAppearance.messageFont          = .systemFont(ofSize: 20)
+//                //   dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+//
+//                let cb = CancelButton.appearance()
+//                cb.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 20)!
+//            }
+//
+//
+//            for i in 0...(Matrix4MappingViewController.inputName.count - 1){
+//                btArray.append(CancelButton(title: Matrix4MappingViewController.inputName[i]) {
+//                    self.showLoadingView()
+//                    var cmd = ""
+//
+//                    if(isSetAll){
+//                        cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "0\(i+1)0\(i+1)0\(i+1)0\(i+1)"
+//                        print(cmd)
+//                        cmd = cmd + self.calCheckSum(data: cmd)
+//
+//                        TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._9_cmd_set_all_mapping))
+//                    }else{
+//                        cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(screenNumber)0\(i+1)"
+//                        print(cmd)
+//                        cmd = cmd + self.calCheckSum(data: cmd)
+//                        TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
+//                    }
+//
+//                    //  self.startCheckFeedbackTimer()
+//                }
+//                )
+//            }
+//
+//            btArray.append(CancelButton(title: "Mute") {
+//                self.showLoadingView()
+//                var cmd = ""
+//                if(isSetAll){
+//                    cmd = CmdHelper.cmd_4_x_4_set_all_mapping + "00000000"
+//                    cmd = cmd + self.calCheckSum(data: cmd)
+//                    TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._9_cmd_set_all_mapping))
+//                }else{
+//                    cmd = CmdHelper.cmd_4_x_4_set_single_mapping + "0\(screenNumber)00"
+//                    cmd = cmd + self.calCheckSum(data: cmd)
+//                    TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._1_cmd_set_single_mapping))
+//                }
+//                // self.startCheckFeedbackTimer()
+//            }
+//            )
+//
+//
+//            popup.addButtons(btArray)
+//
+//            self.present(popup, animated: true, completion: nil)
+//        }else{
+//            self.view.makeToast("Please reconnect to device first !")
+//        }
+//    }
     
 }
 
@@ -340,6 +366,10 @@ extension Matrix4MappingViewController : TcpSocketClientDeleage{
     
     func onConnect() {
         print("Matrix4MappingViewController-onConnect")
+        Matrix4MappingViewController.inputName.removeAll()
+        Matrix4MappingViewController.outputName.removeAll()
+        self.collectionInput.reloadData()
+        self.collectionOutput.reloadData()
         TcpSocketClient.sharedInstance.sendCmd(cmd: CmdHelper.cmd_4_x_4_get_io_name, number: UInt8(CmdHelper._5_cmd_get_io_name))
     }
     
@@ -347,6 +377,10 @@ extension Matrix4MappingViewController : TcpSocketClientDeleage{
         print("Matrix4MappingViewController-disConnect ")
         DispatchQueue.main.async() {
             self.showToast(context: "Can't connect to device !")
+            Matrix4MappingViewController.inputName.removeAll()
+            Matrix4MappingViewController.outputName.removeAll()
+            self.collectionInput.reloadData()
+            self.collectionOutput.reloadData()
             self.dismissLoadingView()
         }
     }
