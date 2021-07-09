@@ -16,9 +16,9 @@ class BaseSocketViewController: BaseViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UINavigationBar.appearance().barTintColor = UIColor.black
+        UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0.168627451, green: 0.2078431373, blue: 0.2941176471, alpha: 1)
         self.tabBarController?.tabBar.tintColor = UIColor.white
-        self.tabBarController?.tabBar.barTintColor = UIColor.black
+        self.tabBarController?.tabBar.barTintColor = #colorLiteral(red: 0.168627451, green: 0.2078431373, blue: 0.2941176471, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {

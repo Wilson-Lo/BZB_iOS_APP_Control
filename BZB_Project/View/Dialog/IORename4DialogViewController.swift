@@ -10,15 +10,13 @@ import UIKit
 
 class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var dialogTitle: UILabel!
-    
+    @IBOutlet weak var dialog: UIView!
+    @IBOutlet weak var dialogTitleLabel: UILabel!
     @IBOutlet weak var editNewName: UITextField!
+    @IBOutlet weak var btSave: UIButton!
     
     static var userSelectedIndex = 0
     static var isInput = true
-    
-    @IBOutlet weak var btCancel: UIButton!
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // self.dismiss(animated: true, completion: nil)
@@ -38,9 +36,15 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
     override func viewDidLoad() {
         print("IORename4DialogViewController-viewDidLoad")
         super.viewDidLoad()
-        self.btCancel.layer.cornerRadius = 6
+        self.dialog.layer.cornerRadius = 10
+        self.dialogTitleLabel.layer.masksToBounds = true
+        self.dialogTitleLabel.layer.cornerRadius = 10
+        self.dialogTitleLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         editNewName.smartInsertDeleteType = UITextSmartInsertDeleteType.no
         editNewName.delegate = self
+        self.btSave.layer.cornerRadius = 10
+        self.btSave.layer.borderWidth = 1
+        self.btSave.layer.borderColor = UIColor.black.cgColor
     }
     
     

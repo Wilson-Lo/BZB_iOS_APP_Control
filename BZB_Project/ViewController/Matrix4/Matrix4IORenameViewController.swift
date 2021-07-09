@@ -9,7 +9,7 @@ class Matrix4IORenameViewController: BaseSocketViewController{
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var typeSegment: UISegmentedControl!
-    
+    var gradientLayer: CAGradientLayer!
     var isIntput = true
     
     override func viewDidLoad() {
@@ -19,6 +19,7 @@ class Matrix4IORenameViewController: BaseSocketViewController{
         if(!Matrix4IORenameViewController.isPhone){
             self.typeSegment.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 32) ], for: .normal)
         }
+        createCollectionGradientLayer()
         //Observer mode with IORename4DialogViewController
         NotificationCenter.default.addObserver(self, selector: #selector(reloadList), name: NSNotification.Name(rawValue: "IORename-reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLoading), name: NSNotification.Name(rawValue: "IORename-showLoading"), object: nil)
@@ -67,6 +68,25 @@ class Matrix4IORenameViewController: BaseSocketViewController{
  * Observer mode with IORename4DialogViewController
  */
 extension Matrix4IORenameViewController{
+    
+    //init collection area background color
+    func createCollectionGradientLayer() {
+        let bgView = UIView(frame: self.collectionView.bounds)
+        
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.frame
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.155182302, green: 0.207787931, blue: 0.2941000462, alpha: 1).cgColor ,#colorLiteral(red: 0.09019607843, green: 0.1254901961, blue: 0.1882352941, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        bgView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.collectionView?.backgroundView = bgView
+    }
     
     @objc func reloadList(notification: NSNotification){
         print("IORename4ViewController-reloadList")
@@ -119,13 +139,13 @@ extension Matrix4IORenameViewController : UICollectionViewDelegate {
         IORename4DialogViewController.userSelectedIndex = indexPath.item
         if(isIntput){
             IORename4DialogViewController.isInput = true
-            vc.dialogTitle.text =  "Input \(indexPath.item + 1)"
+            vc.dialogTitleLabel.text =  "Input \(indexPath.item + 1)"
             if(indexPath.item < Matrix4IORenameViewController.inputName.count){
                 vc.editNewName.text = Matrix4IORenameViewController.inputName[indexPath.item]
             }
         }else{
             IORename4DialogViewController.isInput = false
-            vc.dialogTitle.text =  "Output \(indexPath.item + 1)"
+            vc.dialogTitleLabel.text =  "Output \(indexPath.item + 1)"
             if(indexPath.item < Matrix4IORenameViewController.outputName.count){
                 vc.editNewName.text = Matrix4IORenameViewController.outputName[indexPath.item]
             }

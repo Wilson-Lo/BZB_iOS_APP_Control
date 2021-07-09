@@ -10,9 +10,11 @@ import UIKit
 class Matrix4PresetRenameViewController: BaseSocketViewController{
     
     @IBOutlet weak var collectionView: UICollectionView!
+    var gradientLayer: CAGradientLayer!
     
     override func viewDidLoad() {
         print("Matrix4PresetRenameViewController-viewDidLoad")
+        self.createCollectionGradientLayer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +67,27 @@ class Matrix4PresetRenameViewController: BaseSocketViewController{
     }
 }
 
+extension Matrix4PresetRenameViewController{
+    //init collection area background color
+    func createCollectionGradientLayer() {
+        let bgView = UIView(frame: self.collectionView.bounds)
+        
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.frame
+        
+        // gradientLayer.colors = [UIColor(rgb: 0x2E3E56F19), UIColor(rgb: 0x090F19)]
+        gradientLayer.colors = [#colorLiteral(red: 0.155182302, green: 0.207787931, blue: 0.2941000462, alpha: 1).cgColor ,#colorLiteral(red: 0.09019607843, green: 0.1254901961, blue: 0.1882352941, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
+        
+        bgView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.collectionView?.backgroundView = bgView
+    }
+}
+
 extension Matrix4PresetRenameViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("click")
@@ -73,7 +96,7 @@ extension Matrix4PresetRenameViewController : UICollectionViewDelegate {
         vc.modalPresentationStyle = .custom
         self.present(vc, animated: true, completion: nil)
         MappingRename4DialogViewController.userSelectedMappingIndex = indexPath.item
-        vc.dialogTitle.text =  "Mapping \(indexPath.item + 1)"
+        vc.dialogTitleLabel.text =  "Preset \(indexPath.item + 1)"
         if(indexPath.item < self.mappingName.count){
             vc.editNewName.text = self.mappingName[indexPath.item]
         }

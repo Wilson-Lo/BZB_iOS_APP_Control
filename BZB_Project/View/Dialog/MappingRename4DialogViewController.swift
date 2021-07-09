@@ -11,17 +11,26 @@ import UIKit
 
 class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldDelegate  {
     
-    @IBOutlet weak var dialogTitle: UILabel!
-    @IBOutlet weak var editNewName: UITextField!
+ 
+    @IBOutlet weak var dialog: UIView!
+    @IBOutlet weak var dialogTitleLabel: UILabel!
     static var userSelectedMappingIndex = 0
-    @IBOutlet weak var btCancel: UIButton!
+    @IBOutlet weak var btSave: UIButton!
+    @IBOutlet weak var editNewName: UITextField!
     
     override func viewDidLoad() {
         print("MappingRename4DialogViewController-viewDidLoad")
         super.viewDidLoad()
         editNewName.smartInsertDeleteType = UITextSmartInsertDeleteType.no
         editNewName.delegate = self
-        self.btCancel.layer.cornerRadius = 6
+      
+        self.dialogTitleLabel.layer.masksToBounds = true
+        self.dialogTitleLabel.layer.cornerRadius = 10
+        self.dialogTitleLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.dialog.layer.cornerRadius = 10
+        self.btSave.layer.cornerRadius = 10
+        self.btSave.layer.borderWidth = 1
+        self.btSave.layer.borderColor = UIColor.black.cgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
