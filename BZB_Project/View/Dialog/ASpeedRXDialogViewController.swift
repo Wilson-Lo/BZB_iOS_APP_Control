@@ -18,6 +18,7 @@ class ASpeedRXDialogViewController: BaseViewController {
     @IBOutlet weak var onVerticalDistance: NSLayoutConstraint!
     @IBOutlet weak var offVerticalDistance: NSLayoutConstraint!
     @IBOutlet weak var dialogHeight: NSLayoutConstraint!
+    @IBOutlet weak var dialogWidth: NSLayoutConstraint!
     @IBOutlet weak var btBlinkRedLight: UIButton!
     @IBOutlet weak var btSwitchChannel: UIButton!
     @IBOutlet weak var dialog: UIView!
@@ -51,14 +52,30 @@ extension ASpeedRXDialogViewController{
         self.btBlinkRedLight.layer.borderWidth = 1
         self.btBlinkRedLight.layer.borderColor = #colorLiteral(red: 0.8941176471, green: 0.262745098, blue: 0.2078431373, alpha: 1).cgColor
         
-        if(UIScreen.main.bounds.height < 700){
-            switchVerticalDistance.constant = 28
-            onVerticalDistance.constant = 28
-            offVerticalDistance.constant = 28
-            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.36)
+        if(ASpeedRXDialogViewController.isPhone){
+            
+            if(UIScreen.main.bounds.height < 700){
+                switchVerticalDistance.constant = 28
+                onVerticalDistance.constant = 28
+                offVerticalDistance.constant = 28
+                let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.36)
+                self.view.removeConstraint(dialogHeight)
+                self.view.addConstraint(newDialogHeightConstraint)
+            }
+            
+        }else{
+            
+            self.muteSwitch.set(width: 80, height: 36)
+            
+            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.28)
             self.view.removeConstraint(dialogHeight)
             self.view.addConstraint(newDialogHeightConstraint)
+            
+            let newDialogWidthConstraint = dialogWidth.constraintWithMultiplier(0.55)
+            self.view.removeConstraint(dialogWidth)
+            self.view.addConstraint(newDialogWidthConstraint)
         }
+        
     }
     
     @objc func switchChanged(mySwitch: UISwitch) {

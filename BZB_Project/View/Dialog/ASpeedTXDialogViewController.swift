@@ -16,6 +16,7 @@ class ASpeedTXDialogViewController: BaseViewController {
     @IBOutlet weak var btSwitchAll: UIButton!
     @IBOutlet weak var btBlinkredLight: UIButton!
     @IBOutlet weak var dialogHeight: NSLayoutConstraint!
+    @IBOutlet weak var dialogWidth: NSLayoutConstraint!
     static var deviceIP = ""
     static var deviceGroupId = ""
     static var deviceName = ""
@@ -37,16 +38,27 @@ extension ASpeedTXDialogViewController{
     
     func setupUI(){
         
-        if(UIScreen.main.bounds.height < 700){
-            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.26)
-            self.view.removeConstraint(dialogHeight)
-            self.view.addConstraint(newDialogHeightConstraint)
+        if(ASpeedTXDialogViewController.isPhone){
+            if(UIScreen.main.bounds.height < 700){
+                let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.26)
+                self.view.removeConstraint(dialogHeight)
+                self.view.addConstraint(newDialogHeightConstraint)
+            }else{
+                let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.2)
+                self.view.removeConstraint(dialogHeight)
+                self.view.addConstraint(newDialogHeightConstraint)
+            }
         }else{
-            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.2)
+            
+            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.16)
             self.view.removeConstraint(dialogHeight)
             self.view.addConstraint(newDialogHeightConstraint)
+            
+            let newDialogWidthConstraint = dialogWidth.constraintWithMultiplier(0.5)
+            self.view.removeConstraint(dialogWidth)
+            self.view.addConstraint(newDialogWidthConstraint)
         }
-        
+    
         self.dialog.layer.cornerRadius = 20
         self.btSwitchAll.layer.cornerRadius = 10
         self.btSwitchAll.layer.borderWidth = 1
