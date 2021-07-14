@@ -12,6 +12,8 @@ import UIKit
 class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldDelegate  {
     
  
+ 
+    @IBOutlet weak var dialogWidth: NSLayoutConstraint!
     @IBOutlet weak var dialog: UIView!
     @IBOutlet weak var dialogTitleLabel: UILabel!
     static var userSelectedMappingIndex = 0
@@ -23,7 +25,7 @@ class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldD
         super.viewDidLoad()
         editNewName.smartInsertDeleteType = UITextSmartInsertDeleteType.no
         editNewName.delegate = self
-      
+        self.setupUI()
         self.dialogTitleLabel.layer.masksToBounds = true
         self.dialogTitleLabel.layer.cornerRadius = 10
         self.dialogTitleLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -78,6 +80,14 @@ class MappingRename4DialogViewController: BaseSocketViewController, UITextFieldD
     }
 }
 
+extension MappingRename4DialogViewController {
+    
+    func setupUI(){
+        let newDialogWidthConstraint = dialogWidth.constraintWithMultiplier(0.6)
+        self.view.removeConstraint(dialogWidth)
+        self.view.addConstraint(newDialogWidthConstraint)
+    }
+}
 
 extension MappingRename4DialogViewController:TcpSocketClientDeleage{
     

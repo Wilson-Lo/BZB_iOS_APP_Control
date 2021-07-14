@@ -14,6 +14,7 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
     @IBOutlet weak var dialogTitleLabel: UILabel!
     @IBOutlet weak var editNewName: UITextField!
     @IBOutlet weak var btSave: UIButton!
+    @IBOutlet weak var dialogWidth: NSLayoutConstraint!
     
     static var userSelectedIndex = 0
     static var isInput = true
@@ -45,6 +46,7 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
         self.btSave.layer.cornerRadius = 10
         self.btSave.layer.borderWidth = 1
         self.btSave.layer.borderColor = UIColor.black.cgColor
+        self.setupUI()
     }
     
     
@@ -101,6 +103,15 @@ class IORename4DialogViewController: BaseSocketViewController, UITextFieldDelega
         TcpSocketClient.sharedInstance.delegate = self
         TcpSocketClient.sharedInstance.sendCmd(cmd: cmd, number: UInt8(CmdHelper._6_cmd_set_io_name))
         //  self.startCheckFeedbackTimer()
+    }
+}
+
+extension IORename4DialogViewController{
+    
+    func setupUI(){
+        let newDialogWidthConstraint = dialogWidth.constraintWithMultiplier(0.6)
+        self.view.removeConstraint(dialogWidth)
+        self.view.addConstraint(newDialogWidthConstraint)
     }
 }
 
