@@ -10,12 +10,19 @@ import UIKit
 
 class CustomDeviceListDialogViewController: BaseViewController {
     
-
+    @IBOutlet weak var cancelBtWidth: NSLayoutConstraint!
+    @IBOutlet weak var cancelBtHeight: NSLayoutConstraint!
+    @IBOutlet weak var dialogWidth: NSLayoutConstraint!
     @IBOutlet weak var dialogHeight: NSLayoutConstraint!
     @IBOutlet weak var dialogView: UIView!
     @IBOutlet weak var btMatrix4: UIButton!
     @IBOutlet weak var btDelete: UIButton!
     @IBOutlet weak var btControlBox: UIButton!
+
+    @IBOutlet weak var btControlBoxHeight: NSLayoutConstraint!
+    @IBOutlet weak var btMatrix4Height: NSLayoutConstraint!
+    @IBOutlet weak var btDeleteHeight: NSLayoutConstraint!
+    
     var gradientLayer: CAGradientLayer!
     static var userSelectedDeviceType = 0
     static var userSelectedDeviceIndex = 0 // device list index
@@ -36,11 +43,46 @@ extension CustomDeviceListDialogViewController{
     func setupUI(){
         
         print("height = \(UIScreen.main.bounds.height)")
-        if(UIScreen.main.bounds.height > 700){
-            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.28)
+        if(CustomDeviceListDialogViewController.isPhone){
+            if(UIScreen.main.bounds.height > 700){
+                let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.28)
+                self.view.removeConstraint(dialogHeight)
+                self.view.addConstraint(newDialogHeightConstraint)
+            }
+        }else{
+            //dialog size
+            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.23)
             self.view.removeConstraint(dialogHeight)
             self.view.addConstraint(newDialogHeightConstraint)
+
+            let newDialogWidthConstraint = dialogWidth.constraintWithMultiplier(0.6)
+            self.view.removeConstraint(dialogWidth)
+            self.view.addConstraint(newDialogWidthConstraint)
+
+
+            //cancel button size
+            let newCancelBtHeightConstraint = cancelBtHeight.constraintWithMultiplier(0.12)
+            self.view.removeConstraint(cancelBtHeight)
+            self.view.addConstraint(newCancelBtHeightConstraint)
+
+            let newCancelBtWidthConstraint = cancelBtWidth.constraintWithMultiplier(0.1)
+            self.view.removeConstraint(cancelBtWidth)
+            self.view.addConstraint(newCancelBtWidthConstraint)
+            
+            
+            let newToControlBoxBtHeightConstraint = btControlBoxHeight.constraintWithMultiplier(0.14)
+            self.view.removeConstraint(btControlBoxHeight)
+            self.view.addConstraint(newToControlBoxBtHeightConstraint)
+            
+            let newToMatrix4BtHeightConstraint = btMatrix4Height.constraintWithMultiplier(0.14)
+            self.view.removeConstraint(btMatrix4Height)
+            self.view.addConstraint(newToMatrix4BtHeightConstraint)
+            
+            let newToDeleteBtHeightConstraint = btDeleteHeight.constraintWithMultiplier(0.14)
+            self.view.removeConstraint(btDeleteHeight)
+            self.view.addConstraint(newToDeleteBtHeightConstraint)
         }
+ 
         
         self.dialogView.layer.cornerRadius = 20
         self.btDelete.layer.cornerRadius = 10

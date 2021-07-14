@@ -19,6 +19,9 @@ import RSSelectionMenu
 class SettingsViewController: BaseViewController{
     
     
+    @IBOutlet weak var btAddHeight: NSLayoutConstraint!
+    @IBOutlet weak var deviceNameHeight: NSLayoutConstraint!
+    @IBOutlet weak var deviceIPHeight: NSLayoutConstraint!
     @IBOutlet var uiView: UIView!
     @IBOutlet weak var btScanHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var btScanWidthConstraint: NSLayoutConstraint!
@@ -27,6 +30,7 @@ class SettingsViewController: BaseViewController{
     @IBOutlet weak var textFieldDeviceType: UITextField!
     @IBOutlet weak var appVerLabel: UILabel!
     @IBOutlet weak var btADD: UIButton!
+    
     var gradientLayer: CAGradientLayer!
     let preferences = UserDefaults.standard
     var queueReceiveUDP: DispatchQueue!
@@ -102,6 +106,25 @@ extension SettingsViewController{
             self.view.removeConstraint(btScanWidthConstraint)
             self.view.addConstraint(newbtScanWidthConstraint)
             self.view.layoutIfNeeded()
+            
+            if(UIScreen.main.bounds.height > 700){
+            }else{
+                let newEditTextDeviceNameHeightConstraint = deviceNameHeight.constraintWithMultiplier(0.05)
+                self.view.removeConstraint(deviceNameHeight)
+                self.view.addConstraint(newEditTextDeviceNameHeightConstraint)
+                self.view.layoutIfNeeded()
+                
+                let newEditTextDeviceIPHeightConstraint = deviceIPHeight.constraintWithMultiplier(0.05)
+                self.view.removeConstraint(deviceIPHeight)
+                self.view.addConstraint(newEditTextDeviceIPHeightConstraint)
+                self.view.layoutIfNeeded()
+                
+                let newBtAddHeightConstraint = btAddHeight.constraintWithMultiplier(0.05)
+                self.view.removeConstraint(btAddHeight)
+                self.view.addConstraint(newBtAddHeightConstraint)
+                self.view.layoutIfNeeded()
+            }
+            
         }else{
             //bt scan size
             let newbtScanHeightConstraint = btScanHeightConstraint.constraintWithMultiplier(0.05)
@@ -111,6 +134,16 @@ extension SettingsViewController{
             let newbtScanWidthConstraint = btScanWidthConstraint.constraintWithMultiplier(0.08)
             self.view.removeConstraint(btScanWidthConstraint)
             self.view.addConstraint(newbtScanWidthConstraint)
+            self.view.layoutIfNeeded()
+            
+            let newEditTextDeviceNameHeightConstraint = deviceNameHeight.constraintWithMultiplier(0.04)
+            self.view.removeConstraint(deviceNameHeight)
+            self.view.addConstraint(newEditTextDeviceNameHeightConstraint)
+            self.view.layoutIfNeeded()
+            
+            let newEditTextDeviceIPHeightConstraint = deviceIPHeight.constraintWithMultiplier(0.04)
+            self.view.removeConstraint(deviceIPHeight)
+            self.view.addConstraint(newEditTextDeviceIPHeightConstraint)
             self.view.layoutIfNeeded()
         }
 
