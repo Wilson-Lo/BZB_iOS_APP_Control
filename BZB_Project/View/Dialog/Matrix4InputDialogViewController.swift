@@ -20,6 +20,7 @@ class Matrix4InputDialogViewController: BaseSocketViewController {
     @IBOutlet weak var btOutput3: UIButton!
     @IBOutlet weak var btOutput4: UIButton!
     @IBOutlet weak var dialogHeight: NSLayoutConstraint!
+    @IBOutlet weak var dialogWidth: NSLayoutConstraint!
     
     override func viewDidLoad() {
         print("Matrix4InputDialogViewController-viewDidLoad")
@@ -64,10 +65,21 @@ extension Matrix4InputDialogViewController{
         self.btOutput4.layer.borderWidth = 1
         self.btOutput4.layer.borderColor = UIColor.white.cgColor
         
-        if(UIScreen.main.bounds.height < 700){
-            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.42)
+        if(Matrix4InputDialogViewController.isPhone){
+            if(UIScreen.main.bounds.height < 700){
+                let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.44)
+                self.view.removeConstraint(dialogHeight)
+                self.view.addConstraint(newDialogHeightConstraint)
+            }
+        }else{
+            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.25)
             self.view.removeConstraint(dialogHeight)
             self.view.addConstraint(newDialogHeightConstraint)
+            
+            let newDialogWidthConstraint = dialogWidth.constraintWithMultiplier(0.6)
+            self.view.removeConstraint(dialogWidth)
+            self.view.addConstraint(newDialogWidthConstraint)
+            
         }
     }
     

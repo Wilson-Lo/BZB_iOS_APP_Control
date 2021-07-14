@@ -13,6 +13,7 @@ class Matrix4AllDialogViewController: BaseSocketViewController {
     static var inputIndex = 0
     
     @IBOutlet weak var dialogHeight: NSLayoutConstraint!
+    @IBOutlet weak var dialogWidth: NSLayoutConstraint!
     @IBOutlet weak var dialog: UIView!
     @IBOutlet weak var btInput1: UIButton!
     @IBOutlet weak var btInput2: UIButton!
@@ -58,13 +59,23 @@ extension Matrix4AllDialogViewController{
         self.btMute.layer.cornerRadius = 10
         self.btMute.layer.borderWidth = 1
         self.btMute.layer.borderColor = #colorLiteral(red: 0.8941176471, green: 0.262745098, blue: 0.2078431373, alpha: 1).cgColor
-
-        if(UIScreen.main.bounds.height < 700){
-            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.52)
+        
+        if(Matrix4AllDialogViewController.isPhone){
+            if(UIScreen.main.bounds.height < 700){
+                let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.52)
+                self.view.removeConstraint(dialogHeight)
+                self.view.addConstraint(newDialogHeightConstraint)
+            }
+        }else{
+            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.3)
             self.view.removeConstraint(dialogHeight)
             self.view.addConstraint(newDialogHeightConstraint)
+            
+            let newDialogWidthConstraint = dialogWidth.constraintWithMultiplier(0.6)
+            self.view.removeConstraint(dialogWidth)
+            self.view.addConstraint(newDialogWidthConstraint)
         }
-        
+
         if(Matrix4OutputDialogViewController.inputName.count == 4){
             self.btInput1.setTitle(Matrix4OutputDialogViewController.inputName[0], for: .normal)
             self.btInput2.setTitle(Matrix4OutputDialogViewController.inputName[1], for: .normal)

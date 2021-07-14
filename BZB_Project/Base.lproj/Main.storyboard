@@ -223,21 +223,21 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-nT-0Ec">
-                                                                    <rect key="frame" x="40" y="52" width="48" height="24"/>
+                                                                    <rect key="frame" x="38" y="51" width="52" height="26.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPc-2m-oYc">
-                                                                    <rect key="frame" x="8" y="102" width="35.5" height="17"/>
+                                                                    <rect key="frame" x="8" y="97.5" width="44" height="21.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" red="1" green="0.24313725490196078" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     </variation>
                                                                 </label>
                                                             </subviews>
@@ -304,25 +304,25 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fK-aD-LJ8">
-                                                                    <rect key="frame" x="40" y="52" width="48" height="24"/>
+                                                                    <rect key="frame" x="38" y="51" width="52" height="26.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" systemColor="systemBackgroundColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjS-79-FNP">
-                                                                    <rect key="frame" x="8" y="102" width="35.5" height="17"/>
+                                                                    <rect key="frame" x="8" y="97.5" width="44" height="21.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" red="1" green="0.24313725489999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     </variation>
                                                                 </label>
                                                             </subviews>
@@ -1939,10 +1939,13 @@
                                 <rect key="frame" x="128" y="451" width="768" height="464"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N/A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5E-0F-Y5t">
-                                        <rect key="frame" x="192" y="20" width="384" height="21"/>
+                                        <rect key="frame" x="192" y="20" width="384" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUT-DI-kNR">
                                         <rect key="frame" x="21" y="12" width="20" height="22"/>
@@ -1954,41 +1957,53 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oC6-dC-cJe">
-                                        <rect key="frame" x="169" y="406" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="399" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="output4BtnPressed:" destination="9o1-Ed-nIA" eventType="touchUpInside" id="0Kn-vd-o4z"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRi-2w-EEh">
-                                        <rect key="frame" x="169" y="347" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="335" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="output3BtnPressed:" destination="9o1-Ed-nIA" eventType="touchUpInside" id="PRs-Ju-rim"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qJ-d9-bY4">
-                                        <rect key="frame" x="169" y="288" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="271" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="output2BtnPressed:" destination="9o1-Ed-nIA" eventType="touchUpInside" id="dYf-lh-IXq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSN-GQ-It7">
-                                        <rect key="frame" x="169" y="229" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="207" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="output1BtnPressed:" destination="9o1-Ed-nIA" eventType="touchUpInside" id="7kR-yP-hdk"/>
                                         </connections>
@@ -2004,7 +2019,9 @@
                                     <constraint firstItem="oC6-dC-cJe" firstAttribute="centerX" secondItem="tAc-tE-GsU" secondAttribute="centerX" id="aiu-ob-3QK"/>
                                     <constraint firstItem="oC6-dC-cJe" firstAttribute="width" secondItem="tAc-tE-GsU" secondAttribute="width" multiplier="0.56" id="b6K-lB-qA6"/>
                                     <constraint firstItem="u5E-0F-Y5t" firstAttribute="centerX" secondItem="tAc-tE-GsU" secondAttribute="centerX" id="bcq-uA-wo9"/>
-                                    <constraint firstAttribute="bottom" secondItem="oC6-dC-cJe" secondAttribute="bottom" constant="24" id="clq-wB-Z9M"/>
+                                    <constraint firstAttribute="bottom" secondItem="oC6-dC-cJe" secondAttribute="bottom" constant="24" id="clq-wB-Z9M">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="26"/>
+                                    </constraint>
                                     <constraint firstItem="lSN-GQ-It7" firstAttribute="centerX" secondItem="tAc-tE-GsU" secondAttribute="centerX" id="d85-Tu-T7k"/>
                                     <constraint firstItem="6qJ-d9-bY4" firstAttribute="centerX" secondItem="tAc-tE-GsU" secondAttribute="centerX" id="feY-36-sg3"/>
                                     <constraint firstItem="hRi-2w-EEh" firstAttribute="width" secondItem="tAc-tE-GsU" secondAttribute="width" multiplier="0.56" id="gBS-om-mnN"/>
@@ -2030,6 +2047,7 @@
                         <outlet property="btOutput4" destination="oC6-dC-cJe" id="d22-T2-yxk"/>
                         <outlet property="dialog" destination="tAc-tE-GsU" id="YzW-Ae-hgN"/>
                         <outlet property="dialogHeight" destination="iEt-UW-tjB" id="71A-tG-7mx"/>
+                        <outlet property="dialogWidth" destination="ati-jh-o0X" id="UWu-wr-a0C"/>
                         <outlet property="inputNameLabel" destination="u5E-0F-Y5t" id="SaA-Oa-5Q5"/>
                     </connections>
                 </viewController>
@@ -2049,10 +2067,13 @@
                                 <rect key="frame" x="128" y="396" width="768" height="574"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N/A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jcd-jZ-QKx">
-                                        <rect key="frame" x="192" y="20" width="384" height="21"/>
+                                        <rect key="frame" x="192" y="20" width="384" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mq4-DO-mi5">
                                         <rect key="frame" x="21" y="12" width="20" height="22"/>
@@ -2064,51 +2085,66 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgW-X8-LaA">
-                                        <rect key="frame" x="169" y="516" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="505" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Mute">
                                             <color key="titleColor" red="1" green="0.24313725489999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="muteBtnPressed:" destination="tKR-w9-1Di" eventType="touchUpInside" id="v4F-AW-Mhf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jV-ly-jTt">
-                                        <rect key="frame" x="169" y="457" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="441" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="input4BtnPressed:" destination="tKR-w9-1Di" eventType="touchUpInside" id="zlj-yu-tmd"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvl-Cb-sc1">
-                                        <rect key="frame" x="169" y="398" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="377" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="input3BtnPressed:" destination="tKR-w9-1Di" eventType="touchUpInside" id="kjM-Oq-9QQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8m6-Yf-KrW">
-                                        <rect key="frame" x="169" y="339" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="313" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="input2BtnPressed:" destination="tKR-w9-1Di" eventType="touchUpInside" id="va7-gA-nqq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovy-y0-nYB">
-                                        <rect key="frame" x="169" y="280" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="249" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="input1BtnPressed:" destination="tKR-w9-1Di" eventType="touchUpInside" id="9wC-IA-KqC"/>
                                         </connections>
@@ -2117,7 +2153,9 @@
                                 <color key="backgroundColor" red="0.10980392160000001" green="0.1529411765" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="9jV-ly-jTt" firstAttribute="top" secondItem="wvl-Cb-sc1" secondAttribute="bottom" constant="25" id="0dh-vu-JIj"/>
-                                    <constraint firstAttribute="bottom" secondItem="xgW-X8-LaA" secondAttribute="bottom" constant="24" id="5ct-13-VBg"/>
+                                    <constraint firstAttribute="bottom" secondItem="xgW-X8-LaA" secondAttribute="bottom" constant="24" id="5ct-13-VBg">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
                                     <constraint firstItem="8m6-Yf-KrW" firstAttribute="width" secondItem="7s0-RN-aVe" secondAttribute="width" multiplier="0.56" id="6VV-z7-imM"/>
                                     <constraint firstItem="xgW-X8-LaA" firstAttribute="centerX" secondItem="7s0-RN-aVe" secondAttribute="centerX" id="AxR-zt-g52"/>
                                     <constraint firstItem="wvl-Cb-sc1" firstAttribute="top" secondItem="8m6-Yf-KrW" secondAttribute="bottom" constant="25" id="DAp-KV-HPJ"/>
@@ -2127,10 +2165,10 @@
                                     <constraint firstItem="Ovy-y0-nYB" firstAttribute="width" secondItem="7s0-RN-aVe" secondAttribute="width" multiplier="0.56" id="Xbl-A5-PjF"/>
                                     <constraint firstItem="Jcd-jZ-QKx" firstAttribute="centerX" secondItem="7s0-RN-aVe" secondAttribute="centerX" id="ZvZ-4n-0VW"/>
                                     <constraint firstItem="8m6-Yf-KrW" firstAttribute="top" secondItem="Ovy-y0-nYB" secondAttribute="bottom" constant="25" id="c6q-YO-nUm"/>
+                                    <constraint firstItem="xgW-X8-LaA" firstAttribute="width" secondItem="7s0-RN-aVe" secondAttribute="width" multiplier="0.56" id="cNt-6Y-nWt"/>
                                     <constraint firstItem="Jcd-jZ-QKx" firstAttribute="top" secondItem="7s0-RN-aVe" secondAttribute="top" constant="20" id="djp-tP-tfh"/>
                                     <constraint firstItem="Ovy-y0-nYB" firstAttribute="centerX" secondItem="7s0-RN-aVe" secondAttribute="centerX" id="hwq-12-ebb"/>
                                     <constraint firstItem="wvl-Cb-sc1" firstAttribute="centerX" secondItem="7s0-RN-aVe" secondAttribute="centerX" id="iEI-kW-Y0Q"/>
-                                    <constraint firstItem="xgW-X8-LaA" firstAttribute="width" secondItem="7s0-RN-aVe" secondAttribute="width" multiplier="0.56" id="lbk-d0-Scu"/>
                                     <constraint firstItem="wvl-Cb-sc1" firstAttribute="width" secondItem="7s0-RN-aVe" secondAttribute="width" multiplier="0.56" id="mOo-ND-YHy"/>
                                     <constraint firstItem="Jcd-jZ-QKx" firstAttribute="width" secondItem="7s0-RN-aVe" secondAttribute="width" multiplier="0.5" id="suM-FR-M2X"/>
                                     <constraint firstItem="9jV-ly-jTt" firstAttribute="centerX" secondItem="7s0-RN-aVe" secondAttribute="centerX" id="xWE-gq-v4x"/>
@@ -2154,6 +2192,7 @@
                         <outlet property="btMute" destination="xgW-X8-LaA" id="ofr-JA-D41"/>
                         <outlet property="dialog" destination="7s0-RN-aVe" id="SAI-dt-9uE"/>
                         <outlet property="dialogHeight" destination="vTJ-Sg-LgU" id="EeR-7H-owS"/>
+                        <outlet property="dialogWidth" destination="9EC-hb-Tay" id="7Ad-py-Gh2"/>
                         <outlet property="nameLabel" destination="Jcd-jZ-QKx" id="AfY-wR-wZb"/>
                     </connections>
                 </viewController>
@@ -2173,10 +2212,13 @@
                                 <rect key="frame" x="128" y="396" width="768" height="574"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cj6-hf-0aF">
-                                        <rect key="frame" x="192" y="20" width="384" height="21"/>
+                                        <rect key="frame" x="192" y="20" width="384" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sK9-07-cHu">
                                         <rect key="frame" x="21" y="12" width="20" height="22"/>
@@ -2188,51 +2230,66 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58n-XU-IVP">
-                                        <rect key="frame" x="169" y="516" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="511" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Mute">
                                             <color key="titleColor" red="1" green="0.24313725489999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="muteBtnPressed:" destination="6bI-Kb-s48" eventType="touchUpInside" id="FEn-mf-epX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EEF-wo-2tJ">
-                                        <rect key="frame" x="169" y="457" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="447" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="input4BtnPressed:" destination="6bI-Kb-s48" eventType="touchUpInside" id="eec-eV-mkN"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pi0-ws-nbz">
-                                        <rect key="frame" x="169" y="398" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="383" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="input3BtnPressed:" destination="6bI-Kb-s48" eventType="touchUpInside" id="3al-bd-t9C"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTq-En-ar9">
-                                        <rect key="frame" x="169" y="339" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="319" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="input2BtnPressed:" destination="6bI-Kb-s48" eventType="touchUpInside" id="v5B-Ol-awO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Btq-vE-oIw">
-                                        <rect key="frame" x="169" y="280" width="430" height="34"/>
+                                        <rect key="frame" x="169" y="255" width="430" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="N/A">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                         <connections>
                                             <action selector="input1BtnPressed:" destination="6bI-Kb-s48" eventType="touchUpInside" id="jk6-5L-wZs"/>
                                         </connections>
@@ -2278,6 +2335,7 @@
                         <outlet property="btMute" destination="58n-XU-IVP" id="Vfb-jO-kOV"/>
                         <outlet property="dialog" destination="Ty2-Gz-EMo" id="zn4-ZY-vQp"/>
                         <outlet property="dialogHeight" destination="ttP-Ud-uOa" id="F8g-w0-eve"/>
+                        <outlet property="dialogWidth" destination="hCl-qF-WfI" id="WFz-zd-eP2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZwM-wd-rRt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

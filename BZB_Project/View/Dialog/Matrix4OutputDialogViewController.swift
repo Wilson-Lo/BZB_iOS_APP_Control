@@ -21,6 +21,7 @@ class Matrix4OutputDialogViewController: BaseSocketViewController {
     @IBOutlet weak var btMute: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dialogHeight: NSLayoutConstraint!
+    @IBOutlet weak var dialogWidth: NSLayoutConstraint!
     
     override func viewDidLoad() {
         print("Matrix4OutputDialogViewController - viewDidLoad")
@@ -68,8 +69,18 @@ extension Matrix4OutputDialogViewController{
         self.btMute.layer.borderWidth = 1
         self.btMute.layer.borderColor = #colorLiteral(red: 0.8941176471, green: 0.262745098, blue: 0.2078431373, alpha: 1).cgColor
         
-        if(UIScreen.main.bounds.height < 700){
-            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.52)
+        if(Matrix4OutputDialogViewController.isPhone){
+            if(UIScreen.main.bounds.height < 700){
+                let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.52)
+                self.view.removeConstraint(dialogHeight)
+                self.view.addConstraint(newDialogHeightConstraint)
+            }
+        }else{
+            let newDialogWidthConstraint = dialogWidth.constraintWithMultiplier(0.6)
+            self.view.removeConstraint(dialogWidth)
+            self.view.addConstraint(newDialogWidthConstraint)
+            
+            let newDialogHeightConstraint = dialogHeight.constraintWithMultiplier(0.3)
             self.view.removeConstraint(dialogHeight)
             self.view.addConstraint(newDialogHeightConstraint)
         }
