@@ -95,7 +95,7 @@
 		8605809C261F01F100B1E0AF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		860580A6261FF56C00B1E0AF /* Matrix4PresetRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4PresetRenameViewController.swift; sourceTree = "<group>"; };
 		860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRenameCollectionViewCell.swift; sourceTree = "<group>"; };
-		86320E2A261468BE007FE620 /* BZB_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BZB_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86320E2A261468BE007FE620 /* BG-AVoIP-CONTROL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BG-AVoIP-CONTROL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86320E2D261468BE007FE620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86320E2F261468BE007FE620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		86320E34261468BE007FE620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 		86320E2B261468BE007FE620 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				86320E2A261468BE007FE620 /* BZB_Project.app */,
+				86320E2A261468BE007FE620 /* BG-AVoIP-CONTROL.app */,
 				86320E40261468C2007FE620 /* BZB_ProjectTests.xctest */,
 				86320E4B261468C2007FE620 /* BZB_ProjectUITests.xctest */,
 			);
@@ -420,7 +420,7 @@
 			packageProductDependencies = (
 			);
 			productName = BZB_Project;
-			productReference = 86320E2A261468BE007FE620 /* BZB_Project.app */;
+			productReference = 86320E2A261468BE007FE620 /* BG-AVoIP-CONTROL.app */;
 			productType = "com.apple.product-type.application";
 		};
 		86320E3F261468C2007FE620 /* BZB_ProjectTests */ = {
@@ -875,7 +875,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bzb.control.BZB-Project";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "BG-AVoIP-CONTROL";
 				SWIFT_OBJC_BRIDGING_HEADER = "BZB_Project/EDID/BZB_Project-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -900,7 +900,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bzb.control.BZB-Project";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "BG-AVoIP-CONTROL";
 				SWIFT_OBJC_BRIDGING_HEADER = "BZB_Project/EDID/BZB_Project-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
