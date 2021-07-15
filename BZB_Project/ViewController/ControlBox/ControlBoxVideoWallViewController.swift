@@ -183,6 +183,11 @@ extension ControlBoxVideoWallViewController : UICollectionViewDataSource{
         if collectionView == self.collectionViewVideoWall {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxVideoWallCollectionViewCell", for: indexPath) as! ControlBoxVideoWallCollectionViewCell
             cell.labelIndex.text = String(indexPath.item + 1)
+            if(self.currentRowVideoWallSize > 3){
+                cell.labelScreen.text = ""
+            }else{
+                cell.labelScreen.text = "screen"
+            }
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxPresetCollectionViewCell", for: indexPath) as! ControlBoxPresetCollectionViewCell

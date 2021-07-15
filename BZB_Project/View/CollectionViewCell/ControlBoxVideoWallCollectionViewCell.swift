@@ -11,6 +11,7 @@ import UIKit
 class ControlBoxVideoWallCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var labelIndex: UILabel!
+    @IBOutlet weak var labelScreen: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

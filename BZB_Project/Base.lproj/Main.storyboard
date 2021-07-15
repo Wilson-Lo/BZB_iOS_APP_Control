@@ -1007,7 +1007,7 @@
                                                         <rect key="frame" x="0.0" y="68.5" width="248" height="39"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tc0-mz-3Cb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="107.5" height="39"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="99" height="39"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Enable"/>
@@ -1019,7 +1019,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOC-N2-ALV">
-                                                                <rect key="frame" x="140.5" y="0.0" width="107.5" height="39"/>
+                                                                <rect key="frame" x="149" y="0.0" width="99" height="39"/>
                                                                 <color key="backgroundColor" red="0.85799321439999998" green="0.41852889970000001" blue="0.39501171349999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1032,6 +1032,7 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
+                                                        <variation key="heightClass=regular-widthClass=regular" spacing="50"/>
                                                     </stackView>
                                                 </subviews>
                                                 <variation key="heightClass=regular-widthClass=compact" spacing="8"/>
@@ -1119,6 +1120,7 @@
                                                         </collectionViewCellContentView>
                                                         <connections>
                                                             <outlet property="labelIndex" destination="tIh-qr-F0E" id="DEB-JY-efI"/>
+                                                            <outlet property="labelScreen" destination="g8I-mR-TWu" id="QQ6-il-PW1"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
