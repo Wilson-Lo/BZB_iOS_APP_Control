@@ -14,6 +14,8 @@
 		8605809D261F01F100B1E0AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8605809C261F01F100B1E0AF /* String.swift */; };
 		860580A7261FF56C00B1E0AF /* Matrix4PresetRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860580A6261FF56C00B1E0AF /* Matrix4PresetRenameViewController.swift */; };
 		860580AF261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */; };
+		862518D727070D75008326D2 /* ControlBoxVWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862518D627070D75008326D2 /* ControlBoxVWViewController.swift */; };
+		862518D9270D92C5008326D2 /* ControlBoxVWCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862518D8270D92C4008326D2 /* ControlBoxVWCollectionViewCell.swift */; };
 		86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2D261468BE007FE620 /* AppDelegate.swift */; };
 		86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2F261468BE007FE620 /* SceneDelegate.swift */; };
 		86320E35261468BE007FE620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86320E33261468BE007FE620 /* Main.storyboard */; };
@@ -96,6 +98,8 @@
 		8605809C261F01F100B1E0AF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		860580A6261FF56C00B1E0AF /* Matrix4PresetRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4PresetRenameViewController.swift; sourceTree = "<group>"; };
 		860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRenameCollectionViewCell.swift; sourceTree = "<group>"; };
+		862518D627070D75008326D2 /* ControlBoxVWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVWViewController.swift; sourceTree = "<group>"; };
+		862518D8270D92C4008326D2 /* ControlBoxVWCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVWCollectionViewCell.swift; sourceTree = "<group>"; };
 		86320E2A261468BE007FE620 /* BG-AVoIP-CONTROL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BG-AVoIP-CONTROL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86320E2D261468BE007FE620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86320E2F261468BE007FE620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 			children = (
 				86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */,
 				86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */,
+				862518D627070D75008326D2 /* ControlBoxVWViewController.swift */,
 			);
 			path = ControlBox;
 			sourceTree = "<group>";
@@ -356,6 +361,7 @@
 				86B921EE26676DBA00FAB568 /* ListCollectionViewCell.swift */,
 				8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */,
 				8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */,
+				862518D8270D92C4008326D2 /* ControlBoxVWCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -471,6 +477,9 @@
 		86320E22261468BE007FE620 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					101,
+				);
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
@@ -655,6 +664,7 @@
 				86D8C67826565D20001E801B /* ControlBoxPresetCollectionViewCell.swift in Sources */,
 				8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */,
 				86C496BF2696D0F500D83378 /* Matrix4InputDialogViewController.swift in Sources */,
+				862518D9270D92C5008326D2 /* ControlBoxVWCollectionViewCell.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
 				86C496B9269546E900D83378 /* CustomDeviceListDialogViewController.swift in Sources */,
 				86C496B52694566E00D83378 /* DeviceListDialogViewController.swift in Sources */,
@@ -682,6 +692,7 @@
 				860580AF261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift in Sources */,
 				86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */,
 				8605809D261F01F100B1E0AF /* String.swift in Sources */,
+				862518D727070D75008326D2 /* ControlBoxVWViewController.swift in Sources */,
 				867FD799269ED5D3005CF83F /* UISwitch.swift in Sources */,
 				86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */,
 				86C496BD26959BDA00D83378 /* ASpeedRXDialogViewController.swift in Sources */,

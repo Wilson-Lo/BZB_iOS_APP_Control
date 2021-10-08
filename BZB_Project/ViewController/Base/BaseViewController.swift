@@ -183,5 +183,4 @@ extension BaseViewController  {
         }
         return type
     }
-    
 }

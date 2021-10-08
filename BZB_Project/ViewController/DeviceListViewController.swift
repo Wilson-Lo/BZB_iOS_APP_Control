@@ -17,6 +17,7 @@ import PopupDialog
 
 class DeviceListViewController: BaseViewController{
     
+    @IBOutlet weak var logoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var mainView: UIView!
     var gradientLayer: CAGradientLayer!
     @IBOutlet weak var btAddHeightConstraint: NSLayoutConstraint!
@@ -125,6 +126,13 @@ extension DeviceListViewController{
             let newbtScanWidthConstraint = btAddWidthConstraint.constraintWithMultiplier(0.052)
             self.view.removeConstraint(btAddWidthConstraint)
             self.view.addConstraint(newbtScanWidthConstraint)
+            self.view.layoutIfNeeded()
+        }
+        
+        if(!ControlBoxVWViewController.isPhone){
+            let newLogoHeightConstraint = logoHeightConstraint.constraintWithMultiplier(0.08)
+            self.view.removeConstraint(logoHeightConstraint)
+            self.view.addConstraint(newLogoHeightConstraint)
             self.view.layoutIfNeeded()
         }
     }

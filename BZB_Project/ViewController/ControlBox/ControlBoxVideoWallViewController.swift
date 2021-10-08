@@ -71,6 +71,7 @@ class ControlBoxVideoWallViewController : BaseViewController{
         let alive: String
     }
     
+
     override func viewDidLoad() {
         print("ControlBoxVideoWallViewController-viewDidLoad")
         super.viewDidLoad()
@@ -101,6 +102,7 @@ class ControlBoxVideoWallViewController : BaseViewController{
         print("ControlBoxVideoWallViewController-viewWillDisappear")
         
     }
+ 
     
 }
 

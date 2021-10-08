@@ -62,7 +62,7 @@ class SettingsViewController: BaseViewController{
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         
         gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
-        
+      
         self.uiView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
