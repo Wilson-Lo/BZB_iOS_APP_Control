@@ -59,9 +59,10 @@
 		86CCB3E82668AFC400CCA0F3 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */; };
 		86CCB4032668B6F700CCA0F3 /* DeviceDataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */; };
 		86CCB4822668E25100CCA0F3 /* Matrix4MappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */; };
-		86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */; };
 		86D8C67826565D20001E801B /* ControlBoxPresetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */; };
 		86D8C67D265794F6001E801B /* ControlBoxMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */; };
+		86DB122F271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB122E271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift */; };
+		86DB12312717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB12302717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift */; };
 		9CA02039A380A7DC709D1BCD /* Pods_BZB_Project_BZB_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299F1373CFD636EAED5926D /* Pods_BZB_Project_BZB_ProjectUITests.framework */; };
 		AFE1D58AA2F04BAE3D65BD58 /* Pods_BZB_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C2BE9FA26FA16B49782A008 /* Pods_BZB_Project.framework */; };
 /* End PBXBuildFile section */
@@ -152,9 +153,10 @@
 		86CCB3E72668AFC400CCA0F3 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		86CCB4022668B6F700CCA0F3 /* DeviceDataObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataObject.swift; sourceTree = "<group>"; };
 		86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4MappingViewController.swift; sourceTree = "<group>"; };
-		86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVideoWallViewController.swift; sourceTree = "<group>"; };
 		86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxPresetCollectionViewCell.swift; sourceTree = "<group>"; };
 		86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingViewController.swift; sourceTree = "<group>"; };
+		86DB122E271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingDisplayCollectionViewCell.swift; sourceTree = "<group>"; };
+		86DB12302717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxSourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		9C6FC59AC0AA853535CE026B /* Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -313,7 +315,6 @@
 		86320E9B261478A9007FE620 /* ControlBox */ = {
 			isa = PBXGroup;
 			children = (
-				86D8C66F26563FA6001E801B /* ControlBoxVideoWallViewController.swift */,
 				86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */,
 				862518D627070D75008326D2 /* ControlBoxVWViewController.swift */,
 			);
@@ -362,6 +363,8 @@
 				8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */,
 				8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */,
 				862518D8270D92C4008326D2 /* ControlBoxVWCollectionViewCell.swift */,
+				86DB122E271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift */,
+				86DB12302717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				866812E026203D3C0034D975 /* OCFile.mm in Sources */,
 				86058080261EFC5600B1E0AF /* IORename4DialogViewController.swift in Sources */,
 				86CCB4032668B6F700CCA0F3 /* DeviceDataObject.swift in Sources */,
+				86DB122F271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift in Sources */,
 				86CCB3E82668AFC400CCA0F3 /* DBHelper.swift in Sources */,
 				86D8C67826565D20001E801B /* ControlBoxPresetCollectionViewCell.swift in Sources */,
 				8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */,
@@ -668,6 +672,7 @@
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
 				86C496B9269546E900D83378 /* CustomDeviceListDialogViewController.swift in Sources */,
 				86C496B52694566E00D83378 /* DeviceListDialogViewController.swift in Sources */,
+				86DB12312717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
 				86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */,
 				86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */,
@@ -681,7 +686,6 @@
 				86B2820426808B82007BCE4C /* NSLayoutConstraint.swift in Sources */,
 				86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */,
 				86C496C12697181700D83378 /* Matrix4OutputDialogViewController.swift in Sources */,
-				86D8C67026563FA6001E801B /* ControlBoxVideoWallViewController.swift in Sources */,
 				86320F03261D63A7007FE620 /* Data.swift in Sources */,
 				86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */,
 				869B2F672697F13100F2B58B /* Matrix4AllDialogViewController.swift in Sources */,

@@ -31,6 +31,11 @@ class ASpeedTXDialogViewController: BaseViewController {
         labelName.text = ASpeedTXDialogViewController.deviceName
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        print("ASpeedTXDialogViewController-viewWillDisappear")
+       // NotificationCenter.default.post(name: NSNotification.Name(rawValue: UIEventHelper.ui_close_dialog), object: nil)
+    }
+    
 }
 
 

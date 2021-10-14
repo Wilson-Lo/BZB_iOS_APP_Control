@@ -24,4 +24,5 @@ struct UIEventHelper {
     static let ui_matrix4_switch_from_output = "ui_matrix4_switch_from_output"
     static let ui_matrix4_switch_from_all = "ui_matrix4_switch_from_all"
     static let ui_matrix4_mute_from_output = "ui_matrix4_mute_from_output"
+    static let ui_close_dialog = "ui_close_dialog"
 }

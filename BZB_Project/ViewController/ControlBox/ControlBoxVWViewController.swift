@@ -336,7 +336,7 @@ extension ControlBoxVWViewController {
         DispatchQueue.main.async() {
             
             self.txMenu = RSSelectionMenu(dataSource: self.txListForUI) { (cell, name, indexPath) in
-                if(!ControlBoxVideoWallViewController.isPhone){
+                if(!ControlBoxVWViewController.isPhone){
                     cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
                 }
                 cell.textLabel?.text = name
