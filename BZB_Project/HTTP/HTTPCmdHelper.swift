@@ -16,6 +16,7 @@ struct HTTPCmdHelper {
     static let cmd_video_wall_preset = "/api/video_wall_preset"
     static let cmd_set_video_wall = "/api/set_vw"
     static let cmd_get_mobile_preview = "/api/mobile/preview"
+    static let cmd_get_mapping_preset = "/api/list_preset"
 
     /******  Command number  ******/
     static let _1_cmd_get_node_info = 101
@@ -25,5 +26,7 @@ struct HTTPCmdHelper {
     static let _5_cmd_set_video_wall = 105
     static let _6_cmd_get_node_info_without_loading = 106
     static let _7_cmd_get_mobile_preview = 107
+    static let _8_cmd_get_node_info_for_preset = 108
+    static let _9_cmd_get_mapping_preset = 109
 }
 

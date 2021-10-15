@@ -41,15 +41,18 @@ class ControlBoxMappingViewController : BaseViewController{
     @IBOutlet weak var sourceCollectionView: UICollectionView!
     @IBOutlet weak var presetStack: UIStackView!
     var queueHTTP: DispatchQueue!
+    var btPresetArray = [UIButton]()
     var rxList: Array<Device> = []
-    var txAllList: Array<Device> = []
+    var rxForPreset: Array<Device> = []
+    //   var txAllList: Array<Device> = []
     var txOnlineList: Array<Device> = []
     var displayCellList: Array<ControlBoxMappingDisplayCollectionViewCell> = []
     var txMenu: RSSelectionMenu<String>!
     var gradientLayer: CAGradientLayer!
     var updateTimer: Timer!
-    var currentRxDeviceSize :Int = 0
+    var currentRxDeviceSize :Int = 0 //use to determine need to reload collection view or not
     var isDialogShowing:Bool = false
+    var currentPresetIndex = 0
     
     //device info structure
     struct Device {
@@ -69,6 +72,7 @@ class ControlBoxMappingViewController : BaseViewController{
     override func viewDidLoad() {
         print("ControlBoxMappingViewController-viewDidLoad")
         super.viewDidLoad()
+        self.btPresetArray = [self.presetBt1, self.presetBt2, self.presetBt3, self.presetBt4, self.presetBt5, self.presetBt6, self.presetBt7, self.presetBt8,  self.presetBt9]
         self.setupUI()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
         self.isDialogShowing = false
@@ -115,15 +119,9 @@ extension ControlBoxMappingViewController{
     
     func setupUI(){
         
-        self.presetBt1.layer.cornerRadius = 6
-        self.presetBt2.layer.cornerRadius = 6
-        self.presetBt3.layer.cornerRadius = 6
-        self.presetBt4.layer.cornerRadius = 6
-        self.presetBt5.layer.cornerRadius = 6
-        self.presetBt6.layer.cornerRadius = 6
-        self.presetBt7.layer.cornerRadius = 6
-        self.presetBt8.layer.cornerRadius = 6
-        self.presetBt9.layer.cornerRadius = 6
+        for index in 0...(self.btPresetArray.count-1) {
+            self.btPresetArray[index].layer.cornerRadius = 6
+        }
         
         self.presetTopStack.isLayoutMarginsRelativeArrangement = true
         self.presetMiddleStack.isLayoutMarginsRelativeArrangement = true
@@ -257,7 +255,7 @@ extension ControlBoxMappingViewController{
             for tx in self.txOnlineList{
                 txNameForUI.append(tx.name)
             }
-    
+            
             self.txMenu = RSSelectionMenu(dataSource: txNameForUI) { (cell, name, indexPath) in
                 if(!ControlBoxMappingViewController.isPhone){
                     cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
@@ -281,7 +279,7 @@ extension ControlBoxMappingViewController{
                         var tx_group_id = self.txOnlineList[index].group_id
                         var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
                         if(device_ip != nil){
-                          //  print(tx_group_id + "-" + ASpeedRXDialogViewController.deviceIP)
+                            //  print(tx_group_id + "-" + ASpeedRXDialogViewController.deviceIP)
                             var data  = ["ip": ASpeedRXDialogViewController.deviceIP,"switch_id":tx_group_id,"switch_type":"z"]
                             AF.upload(multipartFormData: { (multiFormData) in
                                 for (key, value) in data {
@@ -392,6 +390,72 @@ extension ControlBoxMappingViewController{
             //            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             //                self.dismiss(animated: false, completion: nil)
             //            }
+        }
+    }
+    
+    //Preset button click event (SegmentedControl)
+    @IBAction func btPreset(sender: UIButton) {
+        
+        DispatchQueue.main.async() {
+           self.showLoadingView()
+        }
+        
+        for index in 0...(self.btPresetArray.count-1) {
+            self.btPresetArray[index].setTitleColor(.opaqueSeparator, for: .normal)
+        }
+        
+        sender.setTitleColor(.orange, for: .normal)
+        
+        switch sender.tag{
+        
+        case 101:
+            self.currentPresetIndex = 1
+            break
+            
+        case 102:
+            self.currentPresetIndex = 2
+            break
+            
+        case 103:
+            self.currentPresetIndex = 3
+            break
+            
+        case 104:
+            self.currentPresetIndex = 4
+            break
+            
+        case 105:
+            self.currentPresetIndex = 5
+            break
+            
+        case 106:
+            self.currentPresetIndex = 6
+            break
+            
+        case 107:
+            self.currentPresetIndex = 7
+            break
+            
+        case 108:
+            self.currentPresetIndex = 8
+            break
+            
+        case 109:
+            self.currentPresetIndex = 9
+            break
+            
+        default:
+            
+            break
+        }
+        
+        self.queueHTTP.async {
+            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+            if(device_ip != nil){
+                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_node_info, cmdNumber: HTTPCmdHelper._8_cmd_get_node_info_for_preset)
+            }else{
+                self.dismissLoadingView()
+            }
         }
     }
 }
@@ -508,7 +572,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                             txMac = txDevice.mac
                         }
                     }
-
+                    
                     var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
                     if(device_ip != nil){
                         self.queueHTTP.async {
@@ -684,6 +748,83 @@ extension ControlBoxMappingViewController {
                     self.handleGetDevice(json: json)
                     break
                     
+                case HTTPCmdHelper._8_cmd_get_node_info_for_preset:
+                    print("_8_cmd_get_node_info_for_preset")
+                    self.rxForPreset.removeAll()
+                    if let deviceList = json.array {
+                        for deviceObject in deviceList {
+                            let ip = deviceObject["ip"].stringValue
+                            let name = deviceObject["host_name"].stringValue
+                            let pin = deviceObject["pin"].stringValue
+                            let alive = deviceObject["alive"].stringValue
+                            let group_id = deviceObject["id"].stringValue
+                            let mac = deviceObject["mac"].stringValue
+                            
+                            if(deviceObject["type"].stringValue != "r"){
+                            }else{
+                                print(ip, name, pin, mac)
+                                self.rxForPreset.append(Device(name: name, ip: ip, alive: alive, pin:pin, group_id: group_id, mac: mac))
+                            }
+                        }
+                        self.queueHTTP.async {
+                            var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                            if(device_ip != nil){
+                                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_get_mapping_preset, cmdNumber: HTTPCmdHelper._9_cmd_get_mapping_preset)
+                            }else{
+                                self.dismissLoadingView()
+                            }
+                        }
+                    }
+                    break
+                    
+                case HTTPCmdHelper._9_cmd_get_mapping_preset:
+                    print("_9_cmd_get_mapping_preset")
+                    var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                    if let presetList = json[0]["preset"].array {
+                        for presetObject in presetList{
+                            var index = presetObject["index"].stringValue
+                            print("index", index)
+                            if(self.currentPresetIndex == Int(index)){
+                                if let settingList = presetObject["setting"].array{
+                                    for settingObject in settingList{
+                                        if(settingObject["type"].stringValue != "t"){
+                                            for rxDevice in self.rxForPreset{
+                                                if(settingObject["mac"].stringValue == rxDevice.mac){
+                                                    if(rxDevice.alive != "n"){
+                                                        print("ip = ", rxDevice.ip)
+                                                        if(device_ip != nil){
+                                                            var data  = ["ip": rxDevice.ip,"switch_id": settingObject["id"].stringValue,"switch_type":"z"]
+                                                            AF.upload(multipartFormData: { (multiFormData) in
+                                                                for (key, value) in data {
+                                                                    multiFormData.append(Data(value.utf8), withName: key)
+                                                                }
+                                                            }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_switch_group_id).responseJSON { response in
+                                                                switch response.result {
+                                                                case .success(let JSON):
+                                                                    print("response is :\(response)")
+                                                                    self.refresh()
+                                                                case .failure(_):
+                                                                    print("fail")
+                                                                    self.showToast(context: "Switch channel failed !")
+                                                                }
+                                                            }
+                                                            
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.dismiss(animated: false, completion: nil)
+                    }
+                    break
+                    
+                    
                 default:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.dismiss(animated: false, completion: nil)
@@ -719,8 +860,7 @@ extension ControlBoxMappingViewController {
     func handleGetDevice(json: JSON){
         
         self.rxList.removeAll()
-        self.txAllList.removeAll()
-      //  self.txNameForUI.removeAll()
+        //  self.txAllList.removeAll()
         self.txOnlineList.removeAll()
         
         if let deviceList = json.array {
@@ -733,10 +873,10 @@ extension ControlBoxMappingViewController {
                 let mac = deviceObject["mac"].stringValue
                 
                 if(deviceObject["type"].stringValue != "r"){
-                    self.txAllList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id, mac: mac))
+                    //   self.txAllList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id, mac: mac))
                     if(alive == "y"){
                         self.txOnlineList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id, mac: mac))
-                   //     self.txNameForUI.append(name)
+                        //     self.txNameForUI.append(name)
                     }
                     
                 }else{
@@ -745,34 +885,14 @@ extension ControlBoxMappingViewController {
                 print(ip, name, pin, mac)
             }
         }
-//        self.txOnlineList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.txOnlineList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "8888", mac: "82F03074F28E"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "", mac: "2"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "8888", mac: "82F03074F28E"))
-//        self.rxList.append(Device(name: "tes", ip: "", alive: "y", pin:"", group_id: "8888", mac: "82F03074F28E"))
-        
-      //  self.txNameForUI.sorted()
         
         self.txOnlineList = self.txOnlineList.sorted { (lhs, rhs) -> Bool in
             return (lhs.name, lhs.ip, lhs.alive, lhs.pin, lhs.group_id) < (rhs.name, rhs.ip, rhs.alive, rhs.pin, rhs.group_id)
         }
         
-        self.txAllList = self.txAllList.sorted { (lhs, rhs) -> Bool in
-            return (lhs.name, lhs.ip, lhs.alive, lhs.pin, lhs.group_id) < (rhs.name, rhs.ip, rhs.alive, rhs.pin, rhs.group_id)
-        }
+        //        self.txAllList = self.txAllList.sorted { (lhs, rhs) -> Bool in
+        //            return (lhs.name, lhs.ip, lhs.alive, lhs.pin, lhs.group_id) < (rhs.name, rhs.ip, rhs.alive, rhs.pin, rhs.group_id)
+        //        }
         
         self.rxList = self.rxList.sorted { (lhs, rhs) -> Bool in
             return (lhs.name, lhs.ip, lhs.alive, lhs.pin, lhs.group_id) < (rhs.name, rhs.ip, rhs.alive, rhs.pin, rhs.group_id)
@@ -818,7 +938,7 @@ extension ControlBoxMappingViewController {
                             txMac = txDevice.mac
                         }
                     }
-
+                    
                     var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
                     if(device_ip != nil){
                         self.queueHTTP.async {
@@ -826,7 +946,7 @@ extension ControlBoxMappingViewController {
                                 urlRequest.timeoutInterval = 5
                                 urlRequest.allowsExpensiveNetworkAccess = false
                             }.response{ response in
-                              //  debugPrint(response)
+                                //  debugPrint(response)
                                 switch response.result{
                                 
                                 case .success(let value):

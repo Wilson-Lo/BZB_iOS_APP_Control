@@ -2437,7 +2437,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Mjy-yx-wT2">
                                                         <rect key="frame" x="0.0" y="0.0" width="145" height="60"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cM-Lj-W7V">
+                                                            <button opaque="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cM-Lj-W7V">
                                                                 <rect key="frame" x="0.0" y="12" width="44.5" height="48"/>
                                                                 <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="1">
@@ -2446,8 +2446,11 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                 </variation>
+                                                                <connections>
+                                                                    <action selector="btPresetWithSender:" destination="hWJ-cO-hj0" eventType="touchUpInside" id="oTr-e0-oRe"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gf5-A7-lfQ">
+                                                            <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gf5-A7-lfQ">
                                                                 <rect key="frame" x="50.5" y="12" width="44" height="48"/>
                                                                 <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="2">
@@ -2456,8 +2459,11 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                 </variation>
+                                                                <connections>
+                                                                    <action selector="btPresetWithSender:" destination="hWJ-cO-hj0" eventType="touchUpInside" id="ApW-rz-4kc"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90I-sN-Jq4">
+                                                            <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90I-sN-Jq4">
                                                                 <rect key="frame" x="100.5" y="12" width="44.5" height="48"/>
                                                                 <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="3">
@@ -2466,6 +2472,9 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                 </variation>
+                                                                <connections>
+                                                                    <action selector="btPresetWithSender:" destination="hWJ-cO-hj0" eventType="touchUpInside" id="kDR-Ir-5sh"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -2478,7 +2487,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="8TZ-Vw-grB">
                                                         <rect key="frame" x="0.0" y="60" width="145" height="60"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0r-c9-BNb">
+                                                            <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0r-c9-BNb">
                                                                 <rect key="frame" x="0.0" y="6" width="44.5" height="48"/>
                                                                 <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="4">
@@ -2487,8 +2496,11 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                 </variation>
+                                                                <connections>
+                                                                    <action selector="btPresetWithSender:" destination="hWJ-cO-hj0" eventType="touchUpInside" id="ktt-i0-LcK"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDr-le-8x5">
+                                                            <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDr-le-8x5">
                                                                 <rect key="frame" x="50.5" y="6" width="44" height="48"/>
                                                                 <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="5">
@@ -2497,8 +2509,11 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                 </variation>
+                                                                <connections>
+                                                                    <action selector="btPresetWithSender:" destination="hWJ-cO-hj0" eventType="touchUpInside" id="QJ3-23-xVk"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiS-3S-adW">
+                                                            <button opaque="NO" tag="106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiS-3S-adW">
                                                                 <rect key="frame" x="100.5" y="6" width="44.5" height="48"/>
                                                                 <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="6">
@@ -2507,6 +2522,9 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                 </variation>
+                                                                <connections>
+                                                                    <action selector="btPresetWithSender:" destination="hWJ-cO-hj0" eventType="touchUpInside" id="oRF-xv-dyg"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
@@ -2519,7 +2537,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="lastBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="gJY-bm-PvA">
                                                         <rect key="frame" x="0.0" y="120" width="145" height="60"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iaz-xi-ZMJ">
+                                                            <button opaque="NO" tag="107" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iaz-xi-ZMJ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="44.5" height="48"/>
                                                                 <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="7">
@@ -2528,8 +2546,11 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                 </variation>
+                                                                <connections>
+                                                                    <action selector="btPresetWithSender:" destination="hWJ-cO-hj0" eventType="touchUpInside" id="fbk-Fh-cun"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvm-z9-ELZ">
+                                                            <button opaque="NO" tag="108" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvm-z9-ELZ">
                                                                 <rect key="frame" x="50.5" y="0.0" width="44" height="48"/>
                                                                 <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="8">
@@ -2538,8 +2559,11 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                 </variation>
+                                                                <connections>
+                                                                    <action selector="btPresetWithSender:" destination="hWJ-cO-hj0" eventType="touchUpInside" id="nTP-1N-5gv"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3lx-EG-1xq">
+                                                            <button opaque="NO" tag="109" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3lx-EG-1xq">
                                                                 <rect key="frame" x="100.5" y="0.0" width="44.5" height="48"/>
                                                                 <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="9">
@@ -2548,6 +2572,9 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                 </variation>
+                                                                <connections>
+                                                                    <action selector="btPresetWithSender:" destination="hWJ-cO-hj0" eventType="touchUpInside" id="I0i-NH-rQS"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
