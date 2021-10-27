@@ -2180,20 +2180,32 @@
                                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                     </variation>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G21-Q7-fbo">
-                                                                    <rect key="frame" x="46.5" y="107" width="35.5" height="12"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G21-Q7-fbo">
+                                                                    <rect key="frame" x="29" y="104.5" width="70" height="14.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="70" id="FJl-6n-P28">
+                                                                            <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                                                        </constraint>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" systemColor="systemGray4Color"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=regular">
                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                     </variation>
                                                                 </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3Q-MV-7Lx">
+                                                                    <rect key="frame" x="0.0" y="98" width="0.0" height="0.0"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.19215686274509802" green="0.23529411764705882" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstItem="G21-Q7-fbo" firstAttribute="centerX" secondItem="JV5-ct-HoA" secondAttribute="centerX" id="08e-uO-xWf"/>
                                                                 <constraint firstItem="Egf-Tv-40x" firstAttribute="centerY" secondItem="JV5-ct-HoA" secondAttribute="centerY" id="PB6-MX-2Yq"/>
+                                                                <constraint firstItem="G21-Q7-fbo" firstAttribute="centerX" secondItem="JV5-ct-HoA" secondAttribute="centerX" id="Pho-fu-JQf"/>
                                                                 <constraint firstItem="Egf-Tv-40x" firstAttribute="centerX" secondItem="JV5-ct-HoA" secondAttribute="centerX" id="XeR-E3-MHA"/>
                                                                 <constraint firstAttribute="bottom" secondItem="G21-Q7-fbo" secondAttribute="bottom" constant="9" id="inX-fn-oL0">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="13"/>

@@ -440,16 +440,37 @@ extension ControlBoxVWViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxVWCollectionViewCell", for: indexPath) as! ControlBoxVWCollectionViewCell
         cell.numberLabel.text = String(indexPath.item + 1)
+        
+        var rx_name = ""
+        var rx_temp_name = "" //if live device not exist use this
+        
+        for rx in self.presetDataList{
+            if(String(indexPath.item + 1) != rx.pos){
+                
+            }else{
+                rx_temp_name = rx.name
+                if(self.rxIPProtocol[rx.mac] != nil){
+                    rx_name =  self.rxIPProtocol[rx.mac]!.name
+                }
+            }
+        }
+        
+        if(rx_name.length > 0){
+            
+        }else{
+            rx_name = rx_temp_name
+        }
+        
         if(self.currentTotalVideoWallSize > 20){
             cell.displayLabel.text = ""
         }else{
             if(UIScreen.main.bounds.height > 700){
-                cell.displayLabel.text = "Display"
+                cell.displayLabel.text = rx_name
             }else{
                 if(self.currentTotalVideoWallSize >= 16){
                     cell.displayLabel.text = ""
                 }else{
-                    cell.displayLabel.text = "Display"
+                    cell.displayLabel.text = rx_name
                 }
             }
         }
@@ -595,6 +616,10 @@ extension ControlBoxVWViewController{
                                 }
                             }
                         }
+                    }
+                    
+                    for index in 0...7 {
+                        self.btPresetArray[index].setTitle( self.presetNameForUI[index], for: .normal)
                     }
                     break
                     
