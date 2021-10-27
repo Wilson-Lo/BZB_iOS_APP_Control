@@ -18,6 +18,7 @@ import PopupDialog
 
 class ControlBoxVWViewController : BaseViewController{
     
+    
     @IBOutlet weak var btSelectSource: UIButton!
     @IBOutlet weak var videoWallLayoutlabel: UILabel!
     @IBOutlet weak var transmitterLabel: UILabel!
@@ -33,7 +34,7 @@ class ControlBoxVWViewController : BaseViewController{
     @IBOutlet weak var presetTopStack: UIStackView!
     @IBOutlet weak var presetBottomStack: UIStackView!
     @IBOutlet weak var segmentVideoWallTopConstraint: NSLayoutConstraint!
-
+    
     @IBOutlet weak var videoWallLayoutTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var videoWallPresetLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var btPreset1: UIButton!
@@ -54,7 +55,7 @@ class ControlBoxVWViewController : BaseViewController{
     var currentPresetTXGroupID = "" //TX group ID user select import than in preset
     var presetNameForUI: Array<String> = []
     var presetDataList: Array<Device> = []
-    var txListForUI: Array<String> = []
+    static var txListForUI: Array<String> = []
     var selectedPresetIndex = 1
     var queueHTTP: DispatchQueue!
     var rxIPProtocol = [String : RXDevice]() // [ mac & RXDevice ]
@@ -94,6 +95,7 @@ class ControlBoxVWViewController : BaseViewController{
         self.btPresetArray = [btPreset1, btPreset2, btPreset3, btPreset4, btPreset5, btPreset6, btPreset7, btPreset8]
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
         setupUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(txSwitch(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_vw_switch_source), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -266,6 +268,17 @@ class ControlBoxVWViewController : BaseViewController{
 
 extension ControlBoxVWViewController {
     
+    @objc func txSwitch(notification: NSNotification){
+        for (e, txObject) in self.txDeviceProtocol  {
+            if(txObject.name == ControlBoxVMSourceDialogViewController.userSelectSourceName){
+                self.currentPresetTXGroupID = txObject.group_id
+                break
+            }
+        }
+        self.txSourceLabel.text = ControlBoxVMSourceDialogViewController.userSelectSourceName
+        self.recursiveSwitchAllRX(currentIndex: 0, txGroupId: self.currentPresetTXGroupID)
+    }
+    
     func recursiveSwitchAllRX(currentIndex : Int, txGroupId : String){
         print("recursiveSwitchAllRX - \(currentIndex)" )
         if(currentIndex <= (self.presetDataList.count - 1)){
@@ -288,7 +301,9 @@ extension ControlBoxVWViewController {
                                     print("recursive response is :\(response)")
                                     
                                     if((currentIndex + 1) > (self.presetDataList.count - 1 )){
-                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                            self.showToast(context: "Switch source finish !")
+                                        }
                                     }else{
                                         self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
                                     }
@@ -298,7 +313,9 @@ extension ControlBoxVWViewController {
                                     print("recursive fail")
                                     
                                     if((currentIndex + 1) > (self.presetDataList.count - 1 )){
-                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                            self.showToast(context: "Switch source finish !")
+                                        }
                                     }else{
                                         self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
                                     }
@@ -307,7 +324,9 @@ extension ControlBoxVWViewController {
                             
                         }else{
                             if((currentIndex + 1) > (self.presetDataList.count - 1 )){
-                                
+                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                    self.showToast(context: "Switch source finish !")
+                                }
                             }else{
                                 self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
                             }
@@ -315,7 +334,9 @@ extension ControlBoxVWViewController {
                     }else{
                         
                         if((currentIndex + 1) > (self.presetDataList.count - 1 )){
-                            
+                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                self.showToast(context: "Switch source finish !")
+                            }
                         }else{
                             self.recursiveSwitchAllRX(currentIndex: (currentIndex + 1), txGroupId: txGroupId)
                         }
@@ -333,35 +354,11 @@ extension ControlBoxVWViewController {
     
     @IBAction func btPresetTX(sender: UIButton) {
         
-        DispatchQueue.main.async() {
-            
-            self.txMenu = RSSelectionMenu(dataSource: self.txListForUI) { (cell, name, indexPath) in
-                if(!ControlBoxVWViewController.isPhone){
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
-                }
-                cell.textLabel?.text = name
-            }
-            
-            self.txMenu.title = "Select TX"
-            
-            // provide selected items
-            var selectedNames: [String] = []
-            
-            self.txMenu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
-                
-                for (e, txObject) in self.txDeviceProtocol  {
-                    
-                    if(txObject.name == self.txListForUI[index]){
-                        self.currentPresetTXGroupID = txObject.group_id
-                        break
-                    }
-                }
-                self.txSourceLabel.text = self.txListForUI[index]
-                self.recursiveSwitchAllRX(currentIndex: 0, txGroupId: self.currentPresetTXGroupID)
-            }
-            self.txMenu.show(from: self)
-        }
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: ControlBoxVMSourceDialogViewController.typeName) as! ControlBoxVMSourceDialogViewController
+        vc.modalPresentationStyle = .custom
+        self.present(vc, animated: true, completion: nil)
+
     }
     
     
@@ -547,7 +544,7 @@ extension ControlBoxVWViewController{
                 case HTTPCmdHelper._1_cmd_get_node_info:
                     debugPrint("_1_cmd_get_node_info")
                     self.txDeviceProtocol.removeAll()
-                    self.txListForUI.removeAll()
+                    ControlBoxVWViewController.txListForUI.removeAll()
                     self.rxIPProtocol.removeAll()
                     
                     if let deviceList = json.array {
@@ -561,7 +558,7 @@ extension ControlBoxVWViewController{
                             
                             if(deviceObject["type"].stringValue != "r"){
                                 self.txDeviceProtocol[mac] = TXDevice(name: name, mac: mac, alive: alive, group_id: group_id)
-                                self.txListForUI.append(name)
+                                ControlBoxVWViewController.txListForUI.append(name)
                             }else{
                                 self.rxIPProtocol[mac] = RXDevice(name: name, ip: ip, alive: alive)
                             }
