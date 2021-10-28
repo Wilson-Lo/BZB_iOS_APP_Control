@@ -45,7 +45,7 @@ class ControlBoxMappingViewController : BaseViewController{
     var rxList: Array<Device> = []
     var rxForPreset: Array<Device> = []
     //   var txAllList: Array<Device> = []
-    var txOnlineList: Array<Device> = []
+    static var txOnlineList: Array<Device> = []
     var displayCellList: Array<ControlBoxMappingDisplayCollectionViewCell> = []
     var txMenu: RSSelectionMenu<String>!
     var gradientLayer: CAGradientLayer!
@@ -81,10 +81,11 @@ class ControlBoxMappingViewController : BaseViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(txSwitchAll(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_tx_switch_all), object: nil)
         //rx device
         NotificationCenter.default.addObserver(self, selector: #selector(rxSwitchChannel(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_rx_switch_channel), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(rxBlinkRedLight(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_rx_blink_red_light), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(rxMute(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_rx_mute), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(rxBlinkRedLight(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_rx_blink_red_light), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(rxMute(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_rx_mute), object: nil)
         //close dialog
         NotificationCenter.default.addObserver(self, selector: #selector(closeDialog(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_close_dialog), object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -248,61 +249,36 @@ extension ControlBoxMappingViewController{
      */
     @objc func rxSwitchChannel(notification: NSNotification){
         print("ControlBoxMappingViewController - ui_rx_switch_channel")
-        self.isDialogShowing = true
         DispatchQueue.main.async() {
-            
-            var txNameForUI: Array<String> = []
-            for tx in self.txOnlineList{
-                txNameForUI.append(tx.name)
-            }
-            
-            self.txMenu = RSSelectionMenu(dataSource: txNameForUI) { (cell, name, indexPath) in
-                if(!ControlBoxMappingViewController.isPhone){
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
-                }
-                cell.textLabel?.text = name
-            }
-            // on dissmis handler
-            self.txMenu.onDismiss = { selectedItems in
-                self.isDialogShowing = false
-            }
-            self.txMenu.title = "Select TX"
-            
-            // provide selected items
-            var selectedNames: [String] = []
-            
-            self.txMenu.setSelectedItems(items: selectedNames) { (name, index, selected, selectedItems) in
-                
-                self.queueHTTP.async {
-                    self.showLoadingView()
-                    if(self.txOnlineList[index] != nil){
-                        var tx_group_id = self.txOnlineList[index].group_id
-                        var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
-                        if(device_ip != nil){
-                            //  print(tx_group_id + "-" + ASpeedRXDialogViewController.deviceIP)
-                            var data  = ["ip": ASpeedRXDialogViewController.deviceIP,"switch_id":tx_group_id,"switch_type":"z"]
-                            AF.upload(multipartFormData: { (multiFormData) in
-                                for (key, value) in data {
-                                    multiFormData.append(Data(value.utf8), withName: key)
-                                }
-                            }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_switch_group_id).responseJSON { response in
-                                switch response.result {
-                                case .success(let JSON):
-                                    print("response is :\(response)")
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                        if(BaseViewController.isPhone){
-                                            self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
-                                        }else{
-                                            self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
-                                        }
-                                    }
-                                    self.refresh()
-                                case .failure(_):
-                                    print("fail")
-                                    self.showToast(context: "Switch channel failed !")
-                                }
+            self.showLoadingView()
+            self.queueHTTP.async {
+                if(ControlBoxMappingViewController.txOnlineList[ControlBoxMappingSourceDialogViewController.userSelectSourceIndex] != nil){
+                    var tx_group_id = ControlBoxMappingViewController.txOnlineList[ControlBoxMappingSourceDialogViewController.userSelectSourceIndex].group_id
+                    
+                    print("tx_group_id is :\(tx_group_id)")
+                    var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                    if(device_ip != nil){
+                        var data  = ["ip": ControlBoxMappingSourceDialogViewController.userSelectSourceIP,"switch_id":tx_group_id,"switch_type":"z"]
+                        AF.upload(multipartFormData: { (multiFormData) in
+                            for (key, value) in data {
+                                multiFormData.append(Data(value.utf8), withName: key)
                             }
-                            
+                        }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_switch_group_id).responseJSON { response in
+                            switch response.result {
+                            case .success(let JSON):
+                                print("response is :\(response)")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                    if(BaseViewController.isPhone){
+                                        self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
+                                    }else{
+                                        self.view.showToast(text: "Switch channel successful !", font_size: CGFloat(BaseViewController.textSizeForPad), isMenu: true)
+                                    }
+                                }
+                                self.refresh()
+                            case .failure(_):
+                                print("fail")
+                                self.showToast(context: "Switch channel failed !")
+                            }
                         }
                     }
                 }
@@ -310,7 +286,7 @@ extension ControlBoxMappingViewController{
                     self.dismiss(animated: false, completion: nil)
                 }
             }
-            self.txMenu.show(from: self)
+            
         }
     }
     
@@ -397,7 +373,7 @@ extension ControlBoxMappingViewController{
     @IBAction func btPreset(sender: UIButton) {
         
         DispatchQueue.main.async() {
-           self.showLoadingView()
+            self.showLoadingView()
         }
         
         for index in 0...(self.btPresetArray.count-1) {
@@ -466,18 +442,21 @@ extension ControlBoxMappingViewController : UICollectionViewDelegate {
         if collectionView == self.previewCollectionView {
             var deviceInfo = self.rxList[indexPath.item]
             if(deviceInfo.alive != "n"){
+                self.isDialogShowing = true
+//                ASpeedRXDialogViewController.deviceIP = deviceInfo.ip
+//                ASpeedRXDialogViewController.deviceGroupId = deviceInfo.group_id
+//                ASpeedRXDialogViewController.deviceName = deviceInfo.name
+                ControlBoxMappingSourceDialogViewController.userSelectSourceIP = deviceInfo.ip
+                ControlBoxMappingSourceDialogViewController.userSelectSourceName = deviceInfo.name
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: ASpeedRXDialogViewController.typeName) as! ASpeedRXDialogViewController
+                let vc = storyboard.instantiateViewController(withIdentifier: ControlBoxMappingSourceDialogViewController.typeName) as! ControlBoxMappingSourceDialogViewController
                 vc.modalPresentationStyle = .custom
                 self.present(vc, animated: true, completion: nil)
-                ASpeedRXDialogViewController.deviceIP = deviceInfo.ip
-                ASpeedRXDialogViewController.deviceGroupId = deviceInfo.group_id
-                ASpeedRXDialogViewController.deviceName = deviceInfo.name
             }else{
                 self.showToast(context: "This device is off-line !")
             }
         }else{
-            var deviceInfo = self.txOnlineList[indexPath.item]
+            var deviceInfo = ControlBoxMappingViewController.txOnlineList[indexPath.item]
             if(deviceInfo.alive != "n"){
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: ASpeedTXDialogViewController.typeName) as! ASpeedTXDialogViewController
@@ -565,7 +544,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                 }else{
                     
                     var txMac = "bzb"
-                    for txDevice in self.txOnlineList{
+                    for txDevice in ControlBoxMappingViewController.txOnlineList{
                         if(txDevice.group_id != rxDevice?.group_id){
                             
                         }else{
@@ -636,7 +615,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
         if collectionView == self.previewCollectionView {
             return self.rxList.count
         }else {
-            return self.txOnlineList.count
+            return ControlBoxMappingViewController.txOnlineList.count
         }
     }
     
@@ -657,8 +636,8 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxSourceCollectionViewCell", for: indexPath) as! ControlBoxSourceCollectionViewCell
             
-            cell.deviceName.text = self.txOnlineList[indexPath.item].name
-            cell.mac.text = self.txOnlineList[indexPath.item].mac
+            cell.deviceName.text = ControlBoxMappingViewController.txOnlineList[indexPath.item].name
+            cell.mac.text = ControlBoxMappingViewController.txOnlineList[indexPath.item].mac
             return cell
         }
         
@@ -861,7 +840,7 @@ extension ControlBoxMappingViewController {
         
         self.rxList.removeAll()
         //  self.txAllList.removeAll()
-        self.txOnlineList.removeAll()
+        ControlBoxMappingViewController.txOnlineList.removeAll()
         
         if let deviceList = json.array {
             for deviceObject in deviceList {
@@ -875,7 +854,7 @@ extension ControlBoxMappingViewController {
                 if(deviceObject["type"].stringValue != "r"){
                     //   self.txAllList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id, mac: mac))
                     if(alive == "y"){
-                        self.txOnlineList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id, mac: mac))
+                        ControlBoxMappingViewController.txOnlineList.append(Device(name: name, ip: ip, alive: alive, pin: pin, group_id: group_id, mac: mac))
                         //     self.txNameForUI.append(name)
                     }
                     
@@ -886,7 +865,7 @@ extension ControlBoxMappingViewController {
             }
         }
         
-        self.txOnlineList = self.txOnlineList.sorted { (lhs, rhs) -> Bool in
+        ControlBoxMappingViewController.txOnlineList = ControlBoxMappingViewController.txOnlineList.sorted { (lhs, rhs) -> Bool in
             return (lhs.name, lhs.ip, lhs.alive, lhs.pin, lhs.group_id) < (rhs.name, rhs.ip, rhs.alive, rhs.pin, rhs.group_id)
         }
         
@@ -931,7 +910,7 @@ extension ControlBoxMappingViewController {
                 }else{
                     
                     var txMac = "bzb"
-                    for txDevice in self.txOnlineList{
+                    for txDevice in ControlBoxMappingViewController.txOnlineList{
                         if(txDevice.group_id != rxDevice?.group_id){
                             
                         }else{

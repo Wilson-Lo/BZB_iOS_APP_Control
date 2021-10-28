@@ -18,6 +18,8 @@
 		862518D9270D92C5008326D2 /* ControlBoxVWCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862518D8270D92C4008326D2 /* ControlBoxVWCollectionViewCell.swift */; };
 		8629FDAF27293D980030892D /* ControlBoxVMSourceDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629FDAE27293D980030892D /* ControlBoxVMSourceDialogViewController.swift */; };
 		8629FDB1272944B10030892D /* ControlBoxVMSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629FDB0272944B10030892D /* ControlBoxVMSourceCollectionViewCell.swift */; };
+		8629FDB3272A927D0030892D /* ControlBoxMappingSourceDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629FDB2272A927D0030892D /* ControlBoxMappingSourceDialogViewController.swift */; };
+		8629FDB5272A97380030892D /* ControlBoxMappingSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629FDB4272A97380030892D /* ControlBoxMappingSourceCollectionViewCell.swift */; };
 		86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2D261468BE007FE620 /* AppDelegate.swift */; };
 		86320E30261468BE007FE620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320E2F261468BE007FE620 /* SceneDelegate.swift */; };
 		86320E35261468BE007FE620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86320E33261468BE007FE620 /* Main.storyboard */; };
@@ -105,6 +107,8 @@
 		862518D8270D92C4008326D2 /* ControlBoxVWCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVWCollectionViewCell.swift; sourceTree = "<group>"; };
 		8629FDAE27293D980030892D /* ControlBoxVMSourceDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVMSourceDialogViewController.swift; sourceTree = "<group>"; };
 		8629FDB0272944B10030892D /* ControlBoxVMSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVMSourceCollectionViewCell.swift; sourceTree = "<group>"; };
+		8629FDB2272A927D0030892D /* ControlBoxMappingSourceDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingSourceDialogViewController.swift; sourceTree = "<group>"; };
+		8629FDB4272A97380030892D /* ControlBoxMappingSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingSourceCollectionViewCell.swift; sourceTree = "<group>"; };
 		86320E2A261468BE007FE620 /* BG-AVoIP-CONTROL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BG-AVoIP-CONTROL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86320E2D261468BE007FE620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86320E2F261468BE007FE620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				86C496C02697181500D83378 /* Matrix4OutputDialogViewController.swift */,
 				869B2F662697F13100F2B58B /* Matrix4AllDialogViewController.swift */,
 				8629FDAE27293D980030892D /* ControlBoxVMSourceDialogViewController.swift */,
+				8629FDB2272A927D0030892D /* ControlBoxMappingSourceDialogViewController.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -371,6 +376,7 @@
 				86DB122E271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift */,
 				86DB12302717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift */,
 				8629FDB0272944B10030892D /* ControlBoxVMSourceCollectionViewCell.swift */,
+				8629FDB4272A97380030892D /* ControlBoxMappingSourceCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -673,6 +679,7 @@
 				86CCB3E82668AFC400CCA0F3 /* DBHelper.swift in Sources */,
 				86D8C67826565D20001E801B /* ControlBoxPresetCollectionViewCell.swift in Sources */,
 				8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */,
+				8629FDB5272A97380030892D /* ControlBoxMappingSourceCollectionViewCell.swift in Sources */,
 				86C496BF2696D0F500D83378 /* Matrix4InputDialogViewController.swift in Sources */,
 				862518D9270D92C5008326D2 /* ControlBoxVWCollectionViewCell.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
@@ -698,6 +705,7 @@
 				86CCB4822668E25100CCA0F3 /* Matrix4MappingViewController.swift in Sources */,
 				86320EB726147CB1007FE620 /* CmdHelper.swift in Sources */,
 				8629FDB1272944B10030892D /* ControlBoxVMSourceCollectionViewCell.swift in Sources */,
+				8629FDB3272A927D0030892D /* ControlBoxMappingSourceDialogViewController.swift in Sources */,
 				8629FDAF27293D980030892D /* ControlBoxVMSourceDialogViewController.swift in Sources */,
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,
 				86ADBDAF268D88BD00BE1983 /* UIColor.swift in Sources */,
