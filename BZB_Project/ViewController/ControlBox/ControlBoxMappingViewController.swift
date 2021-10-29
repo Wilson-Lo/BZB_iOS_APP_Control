@@ -103,7 +103,6 @@ class ControlBoxMappingViewController : BaseViewController{
                 self.dismissLoadingView()
             }
         }
-        
         //update device status timer, every 12 seconds
         self.updateTimer = Timer.scheduledTimer(timeInterval: 12, target: self, selector: #selector(updateDevice), userInfo: nil, repeats: true)
     }

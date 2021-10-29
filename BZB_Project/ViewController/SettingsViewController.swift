@@ -19,6 +19,8 @@ import RSSelectionMenu
 class SettingsViewController: BaseViewController{
     
     
+    @IBOutlet weak var textFieldDeviceName: UITextField!
+    @IBOutlet weak var segmentType: UISegmentedControl!
     @IBOutlet weak var btAddHeight: NSLayoutConstraint!
     @IBOutlet weak var deviceNameHeight: NSLayoutConstraint!
     @IBOutlet weak var deviceIPHeight: NSLayoutConstraint!
@@ -27,7 +29,6 @@ class SettingsViewController: BaseViewController{
     @IBOutlet weak var btScanWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var btScan: UIButton!
     @IBOutlet weak var textFieldDeviceIP: UITextField!
-    @IBOutlet weak var textFieldDeviceType: UITextField!
     @IBOutlet weak var appVerLabel: UILabel!
     @IBOutlet weak var btADD: UIButton!
     
@@ -41,6 +42,8 @@ class SettingsViewController: BaseViewController{
     var menu: RSSelectionMenu<String>!
     var menuList: Array<String> = []
     let db = DBHelper()
+    var userSelectDeviceType = 0
+    
     //device info structure (mac & ip)
     struct Device {
         let name: String
@@ -53,7 +56,6 @@ class SettingsViewController: BaseViewController{
         super.viewDidLoad()
         initialUI()
         let bgView = UIView(frame: self.uiView.bounds)
-        
         gradientLayer = CAGradientLayer()
         
         gradientLayer.frame = self.view.frame
@@ -69,6 +71,7 @@ class SettingsViewController: BaseViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("SettingsViewController-viewWillAppear")
+        self.userSelectDeviceType = self.DEVICE_CONTROL_BOX
         objectInitial()
     }
     
@@ -92,6 +95,7 @@ extension SettingsViewController{
     //initial UI
     func initialUI(){
         
+        self.segmentType.addTarget(self, action: #selector(deviceTypeChanged(_:)), for: .valueChanged)
         self.btADD.layer.cornerRadius = 5
         self.btADD.layer.borderWidth = 1
         self.btADD.layer.borderColor = UIColor.black.cgColor
@@ -126,6 +130,8 @@ extension SettingsViewController{
             }
             
         }else{
+            let font = UIFont.systemFont(ofSize: 22)
+            self.segmentType.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
             //bt scan size
             let newbtScanHeightConstraint = btScanHeightConstraint.constraintWithMultiplier(0.05)
             self.view.removeConstraint(btScanHeightConstraint)
@@ -162,13 +168,13 @@ extension SettingsViewController{
             heightConstraint.constant = 10
             
             self.textFieldDeviceIP.frame.size.height = 500
-            self.textFieldDeviceType.frame.size.height = 500
+            self.textFieldDeviceName.frame.size.height = 500
         }
         
         //setup keyboard type only allow number
         self.textFieldDeviceIP.keyboardType = .decimalPad
         self.textFieldDeviceIP.placeholder = "Device IP"
-        self.textFieldDeviceType.placeholder = "Device Name"
+        self.textFieldDeviceName.placeholder = "Device Name"
     }
     
     func objectInitial(){
@@ -205,7 +211,7 @@ extension SettingsViewController{
             self.showLoadingView()
         }
         
-        if(!(self.textFieldDeviceType.text!.count > 0)){
+        if(!(self.textFieldDeviceName.text!.count > 0)){
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.dismissLoadingView()
                 self.showToast(context: "Device Name can't be empty !")
@@ -228,8 +234,6 @@ extension SettingsViewController{
             }
             return
         }
-        
-        var type = 0;
 
         var dbSize = self.db.getDBSize()
         print("db size = \(dbSize)")
@@ -247,21 +251,33 @@ extension SettingsViewController{
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 if(!feedback){
-                    if(self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!) > 0){
-                        var feedback = self.db.insert(type: self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceType.text!), ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceType.text!)
+                   // if(self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceName.text!) > 0){
+                        var feedback = self.db.insert(type: self.userSelectDeviceType, ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceName.text!)
                         if(feedback){
                             self.showToast(context: "Add successfull !")
                         }else{
                             self.showToast(context: "Add failed !")
                         }
-                    }else{
-                       self.showToast(context: "Please check device info again !")
-                    }
+                  //  }else{
+                     //  self.showToast(context: "Please check device info again !")
+                   // }
                 }else{
                     self.showToast(context: "This IP is exist !")
                 }
                 self.dismissLoadingView()
             }
+        }
+    }
+    
+    //device type (SegmentedControl)
+    @objc func deviceTypeChanged(_ sender: UISegmentedControl){
+        print(sender.selectedSegmentIndex)
+        if(sender.selectedSegmentIndex == 0){
+            self.userSelectDeviceType = self.DEVICE_CONTROL_BOX
+            print("Control Box")
+        }else if(sender.selectedSegmentIndex == 1){
+            self.userSelectDeviceType = self.DEVICE_MATRIX_4_X_4_HDR
+            print("Matrix 4 x 4 HDR")
         }
     }
 }
@@ -307,7 +323,7 @@ extension SettingsViewController{
                             
                             let selectedDevice   = self.deviceList[index]
                             self.textFieldDeviceIP.text = selectedDevice.ip
-                            self.textFieldDeviceType.text = selectedDevice.name
+                            self.textFieldDeviceName.text = selectedDevice.name
                             self.preferences.set(selectedDevice.ip, forKey: CmdHelper.key_server_ip)
                         }
                         self.menu.show(from: self)

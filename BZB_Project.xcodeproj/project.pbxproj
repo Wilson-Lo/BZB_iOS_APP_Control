@@ -55,7 +55,6 @@
 		86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */; };
 		86C496B52694566E00D83378 /* DeviceListDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B42694566E00D83378 /* DeviceListDialogViewController.swift */; };
 		86C496B7269478A500D83378 /* UIEventHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B6269478A500D83378 /* UIEventHelper.swift */; };
-		86C496B9269546E900D83378 /* CustomDeviceListDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B8269546E800D83378 /* CustomDeviceListDialogViewController.swift */; };
 		86C496BB26957D5100D83378 /* ASpeedTXDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496BA26957D5000D83378 /* ASpeedTXDialogViewController.swift */; };
 		86C496BD26959BDA00D83378 /* ASpeedRXDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496BC26959BDA00D83378 /* ASpeedRXDialogViewController.swift */; };
 		86C496BF2696D0F500D83378 /* Matrix4InputDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496BE2696D0F300D83378 /* Matrix4InputDialogViewController.swift */; };
@@ -153,7 +152,6 @@
 		86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxTXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86C496B42694566E00D83378 /* DeviceListDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListDialogViewController.swift; sourceTree = "<group>"; };
 		86C496B6269478A500D83378 /* UIEventHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEventHelper.swift; sourceTree = "<group>"; };
-		86C496B8269546E800D83378 /* CustomDeviceListDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDeviceListDialogViewController.swift; sourceTree = "<group>"; };
 		86C496BA26957D5000D83378 /* ASpeedTXDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASpeedTXDialogViewController.swift; sourceTree = "<group>"; };
 		86C496BC26959BDA00D83378 /* ASpeedRXDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASpeedRXDialogViewController.swift; sourceTree = "<group>"; };
 		86C496BE2696D0F300D83378 /* Matrix4InputDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4InputDialogViewController.swift; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 				86681294262029330034D975 /* MappingRename4DialogViewController.swift */,
 				86C496B42694566E00D83378 /* DeviceListDialogViewController.swift */,
 				86C496B6269478A500D83378 /* UIEventHelper.swift */,
-				86C496B8269546E800D83378 /* CustomDeviceListDialogViewController.swift */,
 				86C496BA26957D5000D83378 /* ASpeedTXDialogViewController.swift */,
 				86C496BC26959BDA00D83378 /* ASpeedRXDialogViewController.swift */,
 				86C496BE2696D0F300D83378 /* Matrix4InputDialogViewController.swift */,
@@ -683,7 +680,6 @@
 				86C496BF2696D0F500D83378 /* Matrix4InputDialogViewController.swift in Sources */,
 				862518D9270D92C5008326D2 /* ControlBoxVWCollectionViewCell.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
-				86C496B9269546E900D83378 /* CustomDeviceListDialogViewController.swift in Sources */,
 				86C496B52694566E00D83378 /* DeviceListDialogViewController.swift in Sources */,
 				86DB12312717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,

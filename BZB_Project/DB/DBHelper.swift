@@ -97,7 +97,7 @@ class DBHelper{
                 device.ip = String(describing: String(cString: sqlite3_column_text(statement, 2)))
                 device.name = String(describing: String(cString: sqlite3_column_text(statement, 3)))
                 deviceList.append(device)
-                print("id = \(device.id) name = \(device.name)")
+                print("id = \(device.id) name = \(device.name) type = \(device.type)")
             }
         }
         sqlite3_finalize(statement)

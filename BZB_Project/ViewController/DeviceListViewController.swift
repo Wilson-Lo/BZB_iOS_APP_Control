@@ -15,7 +15,7 @@ import SVProgressHUD
 import RSSelectionMenu
 import PopupDialog
 
-class DeviceListViewController: BaseViewController{
+class DeviceListViewController: BaseViewController, UIGestureRecognizerDelegate{
     
     @IBOutlet weak var logoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var mainView: UIView!
@@ -32,14 +32,8 @@ class DeviceListViewController: BaseViewController{
         super.viewDidLoad()
         print("DeviceListViewController-viewDidLoad")
         self.setupUI()
-        
-        //scan device
-        NotificationCenter.default.addObserver(self, selector: #selector(goToDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_go_to_device), object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(deleteDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_delete_device), object: nil)
-        
-        //custom device
-        NotificationCenter.default.addObserver(self, selector: #selector(goToCustomDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_go_to_custom_device), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteCustomDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_delete_custom_device), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +101,11 @@ extension DeviceListViewController{
         self.queueDB = DispatchQueue(label: "com.bzb.db", qos: DispatchQoS.userInitiated)
         self.navigationController?.navigationBar.barTintColor = UIColor(cgColor: #colorLiteral(red: 0.08523575506, green: 0.1426764978, blue: 0.2388794571, alpha: 1).cgColor )
         
+        let longPressedGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
+        longPressedGesture.minimumPressDuration = 0.5
+        longPressedGesture.delegate = self
+        longPressedGesture.delaysTouchesBegan = true
+        self.collectionView?.addGestureRecognizer(longPressedGesture)
         if(DeviceListViewController.isPhone){
             //bt add size
             let newbtScanHeightConstraint = btAddHeightConstraint.constraintWithMultiplier(0.0479911)
@@ -137,72 +136,29 @@ extension DeviceListViewController{
         }
     }
     
+    @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+        if (gestureRecognizer.state != .began) {
+            return
+        }
+        
+        let p = gestureRecognizer.location(in: collectionView)
+        
+        if let indexPath = collectionView?.indexPathForItem(at: p) {
+            print("Long press at item: \(indexPath.row)")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: DeviceListDialogViewController.typeName) as! DeviceListDialogViewController
+            vc.modalPresentationStyle = .custom
+            self.present(vc, animated: true, completion: nil)
+            DeviceListDialogViewController.userSelectedDeviceIndex = indexPath.item
+        }
+    }
+    
     @IBAction func btAdd(sender: UIButton) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SettingsViewController") as! UIViewController
         self.navigationController!.pushViewController(nextViewController, animated: true)
     }
     
-    /**
-     * Recevie ui_event_go_to_device NSNotification
-     */
-    @objc func goToDevice(notification: NSNotification){
-        print("DeviceListViewController - ui_event_go_to_device")
-        
-        self.queueDB.async {
-            self.preferences.set(self.deviceList[DeviceListDialogViewController.userSelectedDeviceIndex].ip, forKey: CmdHelper.key_server_ip)
-        }
-        
-        DispatchQueue.main.async() {
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
-            switch(DeviceListDialogViewController.userSelectedDeviceType){
-            
-            case self.DEVICE_CONTROL_BOX:
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
-                self.navigationController!.pushViewController(nextViewController, animated: true)
-                break
-                
-            case self.DEVICE_MATRIX_4_X_4_HDR:
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
-                self.navigationController!.pushViewController(nextViewController, animated: true)
-                break
-                
-            default:
-                
-                break
-            }
-        }
-    }
-    
-    @objc func goToCustomDevice(notification: NSNotification){
-        print("DeviceListViewController - ui_event_go_to_device")
-        
-        self.queueDB.async {
-            self.preferences.set(self.deviceList[CustomDeviceListDialogViewController.userSelectedDeviceIndex].ip, forKey: CmdHelper.key_server_ip)
-        }
-        
-        DispatchQueue.main.async() {
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
-            switch(CustomDeviceListDialogViewController.userSelectedDeviceType){
-            
-            case self.DEVICE_CONTROL_BOX:
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
-                self.navigationController!.pushViewController(nextViewController, animated: true)
-                break
-                
-            case self.DEVICE_MATRIX_4_X_4_HDR:
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
-                self.navigationController!.pushViewController(nextViewController, animated: true)
-                break
-                
-            default:
-                
-                break
-            }
-        }
-    }
     
     /**
      * Recevie ui_event_delete_device NSNotification
@@ -240,43 +196,6 @@ extension DeviceListViewController{
             }
         }
     }
-    
-    /**
-     * Recevie ui_event_delete_custom_device NSNotification
-     */
-    @objc func deleteCustomDevice(notification: NSNotification){
-        
-        print("DeviceListViewController - ui_event_delete_custom_device")
-        
-        var feedback = false
-        self.queueDB.async {
-            feedback = self.db.delete(id: self.deviceList[CustomDeviceListDialogViewController.userSelectedDeviceIndex].id!)
-        }
-        
-        DispatchQueue.main.async() {
-            self.showLoadingView()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            if(feedback){
-                self.queueDB.async {
-                    self.deviceList.removeAll()
-                    self.deviceList = self.db.read()
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.collectionView.reloadData()
-                    self.dismissLoadingView()
-                    self.showToast(context: "Delete successful !")
-                }
-            }else{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.showToast(context: "Delete failed !")
-                    self.dismissLoadingView()
-                }
-            }
-        }
-    }
 }
 
 extension DeviceListViewController : UICollectionViewDelegate {
@@ -284,38 +203,30 @@ extension DeviceListViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print("click ")
+        self.queueDB.async {
+            self.preferences.set(self.deviceList[indexPath.item].ip, forKey: CmdHelper.key_server_ip)
+        }
         
-        if(self.deviceList[indexPath.item].type != self.DEVICE_CUSTOMER){
+        DispatchQueue.main.async() {
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: DeviceListDialogViewController.typeName) as! DeviceListDialogViewController
-            vc.modalPresentationStyle = .custom
-            self.present(vc, animated: true, completion: nil)
-            
-            DeviceListDialogViewController.userSelectedDeviceIndex = indexPath.item
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             
             switch(self.deviceList[indexPath.item].type){
             
             case self.DEVICE_CONTROL_BOX:
-                DeviceListDialogViewController.userSelectedDeviceType = self.DEVICE_CONTROL_BOX
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
+                self.navigationController!.pushViewController(nextViewController, animated: true)
                 break
                 
             case self.DEVICE_MATRIX_4_X_4_HDR:
-                DeviceListDialogViewController.userSelectedDeviceType = self.DEVICE_MATRIX_4_X_4_HDR
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
+                self.navigationController!.pushViewController(nextViewController, animated: true)
                 break
                 
             default:
                 
                 break
             }
-            
-        }else{
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: CustomDeviceListDialogViewController.typeName) as! CustomDeviceListDialogViewController
-            vc.modalPresentationStyle = .custom
-            self.present(vc, animated: true, completion: nil)
-            CustomDeviceListDialogViewController.userSelectedDeviceIndex = indexPath.item
         }
     }
 }

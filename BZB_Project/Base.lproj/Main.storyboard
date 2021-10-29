@@ -929,6 +929,18 @@
                                     <action selector="btAddWithSender:" destination="EvX-d5-hYa" eventType="touchUpInside" id="aBl-50-unX"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sM5-E7-4ka">
+                                <rect key="frame" x="114.5" y="293" width="185" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="xLM-A6-AGE">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="55"/>
+                                    </constraint>
+                                </constraints>
+                                <segments>
+                                    <segment title="Control Box"/>
+                                    <segment title="Matrix 4 x 4"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rt8-5v-Wv1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -945,12 +957,14 @@
                             <constraint firstItem="O2g-cy-O56" firstAttribute="top" secondItem="7wv-PD-cYz" secondAttribute="bottom" constant="28.5" id="RO6-pf-ItA"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="a8P-jh-Fut"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="top" secondItem="Qq6-Nc-yuF" secondAttribute="bottom" constant="40" id="aPr-1D-R4W"/>
+                            <constraint firstItem="sM5-E7-4ka" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="aiK-2L-8VF"/>
                             <constraint firstItem="Qq6-Nc-yuF" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.0379464" id="bI9-Pf-9kp"/>
                             <constraint firstItem="Qq6-Nc-yuF" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="blb-GN-hTK"/>
                             <constraint firstItem="7wv-PD-cYz" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="cTv-3f-3PE"/>
                             <constraint firstItem="Qq6-Nc-yuF" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="h0s-na-eVg"/>
                             <constraint firstItem="Rt8-5v-Wv1" firstAttribute="bottom" secondItem="O2g-cy-O56" secondAttribute="bottom" constant="36" id="lcq-hJ-FVt"/>
                             <constraint firstItem="ewk-U5-Ob9" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.06" id="neV-nH-uf0"/>
+                            <constraint firstItem="Qq6-Nc-yuF" firstAttribute="top" secondItem="sM5-E7-4ka" secondAttribute="bottom" constant="28" id="qW8-cW-RHd"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="t0D-Yb-ene"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="txl-GO-vl3"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.04" id="xfU-8b-lN4"/>
@@ -966,8 +980,9 @@
                         <outlet property="btScanWidthConstraint" destination="0vM-cB-owc" id="Zaw-kY-Rdi"/>
                         <outlet property="deviceIPHeight" destination="R4F-VN-5iy" id="ZsT-Mz-WAh"/>
                         <outlet property="deviceNameHeight" destination="bI9-Pf-9kp" id="9AA-YY-pDO"/>
+                        <outlet property="segmentType" destination="sM5-E7-4ka" id="YzP-Tu-Mbr"/>
                         <outlet property="textFieldDeviceIP" destination="cGP-Pc-VYa" id="3NU-Uc-EL5"/>
-                        <outlet property="textFieldDeviceType" destination="Qq6-Nc-yuF" id="fVW-hg-G8E"/>
+                        <outlet property="textFieldDeviceName" destination="Qq6-Nc-yuF" id="fwe-TF-etB"/>
                         <outlet property="uiView" destination="Upq-YY-P50" id="utv-N7-FIu"/>
                     </connections>
                 </viewController>
@@ -996,7 +1011,7 @@
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="llS-OF-XnV">
-                                        <rect key="frame" x="181" y="143.5" width="93.5" height="25.5"/>
+                                        <rect key="frame" x="108.5" y="143.5" width="93" height="25.5"/>
                                         <color key="backgroundColor" red="0.89411764709999997" green="0.26274509800000001" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Delete">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1006,18 +1021,6 @@
                                         </variation>
                                         <connections>
                                             <action selector="deleteBtnPressed:" destination="uUz-5G-ZOU" eventType="touchUpInside" id="zR6-mh-bDA"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4i-vr-wFk">
-                                        <rect key="frame" x="36" y="143.5" width="93" height="25.5"/>
-                                        <state key="normal" title="To Device">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="goToDeviceBtnPressed:" destination="uUz-5G-ZOU" eventType="touchUpInside" id="8Eo-dC-uiz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qpd-57-Wwe">
@@ -1033,19 +1036,14 @@
                                 <color key="backgroundColor" red="0.10980392156862745" green="0.15294117647058825" blue="0.21568627450980393" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="p6r-yW-Jhy" firstAttribute="width" secondItem="ns4-6w-476" secondAttribute="width" multiplier="0.8" id="4Ro-T2-ifD"/>
-                                    <constraint firstAttribute="trailing" secondItem="llS-OF-XnV" secondAttribute="trailing" constant="36" id="4tt-XD-yCE"/>
-                                    <constraint firstItem="U4i-vr-wFk" firstAttribute="height" secondItem="ns4-6w-476" secondAttribute="height" multiplier="0.129568" id="67R-gg-8q5"/>
                                     <constraint firstItem="p6r-yW-Jhy" firstAttribute="top" secondItem="ns4-6w-476" secondAttribute="top" constant="32" id="AWC-Gq-vKt"/>
-                                    <constraint firstItem="U4i-vr-wFk" firstAttribute="leading" secondItem="ns4-6w-476" secondAttribute="leading" constant="36" id="LLa-zP-4PP"/>
-                                    <constraint firstItem="U4i-vr-wFk" firstAttribute="width" secondItem="ns4-6w-476" secondAttribute="width" multiplier="0.3" id="aBA-K6-r7c"/>
+                                    <constraint firstItem="llS-OF-XnV" firstAttribute="centerX" secondItem="ns4-6w-476" secondAttribute="centerX" id="JJf-Vn-1TJ"/>
                                     <constraint firstAttribute="bottom" secondItem="llS-OF-XnV" secondAttribute="bottom" constant="28" id="aPV-wo-Pu2">
                                         <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                     </constraint>
                                     <constraint firstItem="llS-OF-XnV" firstAttribute="width" secondItem="ns4-6w-476" secondAttribute="width" multiplier="0.3" id="dfL-cM-2sU"/>
                                     <constraint firstItem="llS-OF-XnV" firstAttribute="height" secondItem="ns4-6w-476" secondAttribute="height" multiplier="0.129568" id="gbL-AQ-iqH"/>
                                     <constraint firstItem="p6r-yW-Jhy" firstAttribute="centerX" secondItem="ns4-6w-476" secondAttribute="centerX" id="iV9-tI-go0"/>
-                                    <constraint firstAttribute="bottom" secondItem="U4i-vr-wFk" secondAttribute="bottom" constant="28" id="nwg-al-Jui"/>
-                                    <constraint firstItem="llS-OF-XnV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ns4-6w-476" secondAttribute="leading" constant="20" symbolic="YES" id="uHq-U7-aMx"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1062,8 +1060,6 @@
                         <outlet property="btCancel" destination="Qpd-57-Wwe" id="9ie-b2-BO5"/>
                         <outlet property="btDelete" destination="llS-OF-XnV" id="D5z-Y3-fgu"/>
                         <outlet property="btDeleteHeight" destination="gbL-AQ-iqH" id="3AP-qm-zTK"/>
-                        <outlet property="btToDevice" destination="U4i-vr-wFk" id="B1v-GZ-AIx"/>
-                        <outlet property="btToDeviceHeight" destination="67R-gg-8q5" id="RUH-cd-j09"/>
                         <outlet property="dialogHeightConstraint" destination="2Vm-GA-EIb" id="DZJ-bK-Thq"/>
                         <outlet property="dialogView" destination="ns4-6w-476" id="7By-w2-NJr"/>
                         <outlet property="dialogWidthConstraint" destination="0fF-ga-fE2" id="i99-UQ-1wG"/>
@@ -1072,130 +1068,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3n-9D-MFv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2930" y="704"/>
-        </scene>
-        <!--Custom Device List Dialog View Controller-->
-        <scene sceneID="ISp-Fo-BbJ">
-            <objects>
-                <viewController storyboardIdentifier="CustomDeviceListDialogViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wgR-io-l61" customClass="CustomDeviceListDialogViewController" customModule="BG_AVoIP_CONTROL" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="KIL-hX-7gK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOm-8d-Ldw">
-                                <rect key="frame" x="52" y="278" width="310.5" height="340"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECT ACTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z67-X2-pug">
-                                        <rect key="frame" x="31" y="32" width="248" height="21.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        </variation>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mu-Al-W9V">
-                                        <rect key="frame" x="21" y="12" width="18.5" height="20"/>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="x.circle" catalog="system"/>
-                                        <connections>
-                                            <action selector="closeBtnPressed:" destination="wgR-io-l61" eventType="touchUpInside" id="ZGh-b6-zOR"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXI-FC-vZ9">
-                                        <rect key="frame" x="62" y="144.5" width="186" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="To Matrix 4 x 4 HDR">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="goToMatrix4BtnPressed:" destination="wgR-io-l61" eventType="touchUpInside" id="iCY-1k-Uyc"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6e-R3-UbY">
-                                        <rect key="frame" x="62" y="202.5" width="186" height="41"/>
-                                        <color key="backgroundColor" red="0.89411764709999997" green="0.26274509800000001" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Delete">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="deleteBtnPressed:" destination="wgR-io-l61" eventType="touchUpInside" id="s1O-wT-mDv"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6av-X6-Ry8">
-                                        <rect key="frame" x="62" y="87" width="186" height="40.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="To Control-Box">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="goToControlBoxBtnPressed:" destination="wgR-io-l61" eventType="touchUpInside" id="l9T-Gn-eYh"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.10980392160000001" green="0.1529411765" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="J6e-R3-UbY" firstAttribute="height" secondItem="jOm-8d-Ldw" secondAttribute="height" multiplier="0.12" id="8RC-m5-Qtj"/>
-                                    <constraint firstItem="UXI-FC-vZ9" firstAttribute="top" secondItem="6av-X6-Ry8" secondAttribute="bottom" constant="17" id="9pv-hp-BFH">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="26"/>
-                                    </constraint>
-                                    <constraint firstItem="6av-X6-Ry8" firstAttribute="width" secondItem="jOm-8d-Ldw" secondAttribute="width" multiplier="0.6" id="A5X-MW-6je"/>
-                                    <constraint firstItem="Z67-X2-pug" firstAttribute="top" secondItem="jOm-8d-Ldw" secondAttribute="top" constant="32" id="BK5-qM-YFe"/>
-                                    <constraint firstItem="J6e-R3-UbY" firstAttribute="top" secondItem="UXI-FC-vZ9" secondAttribute="bottom" constant="17" id="C4p-cN-6TL">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="26"/>
-                                    </constraint>
-                                    <constraint firstItem="6mu-Al-W9V" firstAttribute="top" secondItem="jOm-8d-Ldw" secondAttribute="top" constant="12" id="L0F-tV-oXs"/>
-                                    <constraint firstItem="UXI-FC-vZ9" firstAttribute="centerX" secondItem="jOm-8d-Ldw" secondAttribute="centerX" id="QvQ-Fh-c6D"/>
-                                    <constraint firstItem="6mu-Al-W9V" firstAttribute="height" secondItem="jOm-8d-Ldw" secondAttribute="height" multiplier="0.06" id="TfJ-uY-gxc"/>
-                                    <constraint firstItem="6av-X6-Ry8" firstAttribute="centerX" secondItem="jOm-8d-Ldw" secondAttribute="centerX" id="WOO-sW-c2G"/>
-                                    <constraint firstItem="6mu-Al-W9V" firstAttribute="width" secondItem="jOm-8d-Ldw" secondAttribute="width" multiplier="0.06" id="a5m-Rc-Ajm"/>
-                                    <constraint firstItem="J6e-R3-UbY" firstAttribute="centerX" secondItem="jOm-8d-Ldw" secondAttribute="centerX" id="aaY-3O-jon"/>
-                                    <constraint firstItem="J6e-R3-UbY" firstAttribute="width" secondItem="jOm-8d-Ldw" secondAttribute="width" multiplier="0.6" id="gGM-f5-Rud"/>
-                                    <constraint firstItem="Z67-X2-pug" firstAttribute="width" secondItem="jOm-8d-Ldw" secondAttribute="width" multiplier="0.8" id="gK5-8Y-qzv"/>
-                                    <constraint firstItem="6av-X6-Ry8" firstAttribute="top" secondItem="jOm-8d-Ldw" secondAttribute="top" constant="87" id="hPj-wA-pdr"/>
-                                    <constraint firstItem="UXI-FC-vZ9" firstAttribute="height" secondItem="jOm-8d-Ldw" secondAttribute="height" multiplier="0.12" id="iE6-Ak-qfZ"/>
-                                    <constraint firstItem="UXI-FC-vZ9" firstAttribute="width" secondItem="jOm-8d-Ldw" secondAttribute="width" multiplier="0.6" id="j7Z-48-uyk"/>
-                                    <constraint firstItem="Z67-X2-pug" firstAttribute="centerX" secondItem="jOm-8d-Ldw" secondAttribute="centerX" id="knY-LD-DhR"/>
-                                    <constraint firstItem="6mu-Al-W9V" firstAttribute="leading" secondItem="jOm-8d-Ldw" secondAttribute="leading" constant="21" id="nvF-cQ-sxE"/>
-                                    <constraint firstItem="6av-X6-Ry8" firstAttribute="height" secondItem="jOm-8d-Ldw" secondAttribute="height" multiplier="0.12" id="x49-7q-mwZ"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="aKF-gW-RG2"/>
-                        <color key="backgroundColor" white="0.67000000000000004" alpha="0.41785567330000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="jOm-8d-Ldw" firstAttribute="height" secondItem="KIL-hX-7gK" secondAttribute="height" multiplier="0.38" id="2G3-Lb-6S0"/>
-                            <constraint firstItem="jOm-8d-Ldw" firstAttribute="centerY" secondItem="KIL-hX-7gK" secondAttribute="centerY" id="mpk-3u-es4"/>
-                            <constraint firstItem="jOm-8d-Ldw" firstAttribute="centerX" secondItem="KIL-hX-7gK" secondAttribute="centerX" id="p8N-rq-j0w"/>
-                            <constraint firstItem="jOm-8d-Ldw" firstAttribute="width" secondItem="KIL-hX-7gK" secondAttribute="width" multiplier="0.75" id="zYu-PB-6Kn"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="btControlBox" destination="6av-X6-Ry8" id="TLv-vo-LuC"/>
-                        <outlet property="btControlBoxHeight" destination="x49-7q-mwZ" id="Tc8-9K-jLi"/>
-                        <outlet property="btDelete" destination="J6e-R3-UbY" id="HJk-FO-iiB"/>
-                        <outlet property="btDeleteHeight" destination="8RC-m5-Qtj" id="CaY-Fv-zSf"/>
-                        <outlet property="btMatrix4" destination="UXI-FC-vZ9" id="xxP-Zu-EFP"/>
-                        <outlet property="btMatrix4Height" destination="iE6-Ak-qfZ" id="sIA-Jv-DFM"/>
-                        <outlet property="cancelBtHeight" destination="TfJ-uY-gxc" id="PIM-mG-c0k"/>
-                        <outlet property="cancelBtWidth" destination="a5m-Rc-Ajm" id="nFs-gi-RE3"/>
-                        <outlet property="dialogHeight" destination="2G3-Lb-6S0" id="6OV-P4-MMK"/>
-                        <outlet property="dialogView" destination="jOm-8d-Ldw" id="GUE-ZS-xcI"/>
-                        <outlet property="dialogWidth" destination="zYu-PB-6Kn" id="Ntg-h4-T8q"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5mE-aW-SYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3604.347826086957" y="703.79464285714278"/>
         </scene>
         <!--ASpeedTXDialogViewController-->
         <scene sceneID="XGK-3b-3q4">
@@ -1291,7 +1163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c9B-0S-hWJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4322" y="704"/>
+            <point key="canvasLocation" x="-3604" y="704"/>
         </scene>
         <!--ASpeedRXDialogViewController-->
         <scene sceneID="eFu-n6-car">
@@ -1428,7 +1300,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aqF-3O-PmI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5090" y="704"/>
+            <point key="canvasLocation" x="-4323" y="704"/>
         </scene>
         <!--Matrix4InputDialogViewController-->
         <scene sceneID="MR1-A1-wcn">
