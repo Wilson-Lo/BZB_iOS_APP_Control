@@ -51,6 +51,7 @@ class ControlBoxMappingViewController : BaseViewController{
     var gradientLayer: CAGradientLayer!
     var updateTimer: Timer!
     var currentRxDeviceSize :Int = 0 //use to determine need to reload collection view or not
+    var currentTxDeviceSize :Int = 0 //use to determine need to reload collection view or not
     var isDialogShowing:Bool = false
     var currentPresetIndex = 0
     
@@ -955,11 +956,14 @@ extension ControlBoxMappingViewController {
             
         }
         
-        DispatchQueue.main.async() {
-            self.sourceCollectionView.reloadData()
+        if(self.currentTxDeviceSize != ControlBoxMappingViewController.txOnlineList.count){
+            DispatchQueue.main.async() {
+                self.sourceCollectionView.reloadData()
+            }
         }
-        
+
         self.currentRxDeviceSize = self.rxList.count
+        self.currentTxDeviceSize = ControlBoxMappingViewController.txOnlineList.count
         
         //update device preview
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
