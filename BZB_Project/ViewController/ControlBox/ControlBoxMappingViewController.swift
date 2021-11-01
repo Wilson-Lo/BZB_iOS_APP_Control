@@ -603,7 +603,75 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
             }
             break
             
-            
+        case self.sourceCollectionView:
+            for cell in self.sourceCollectionView.visibleCells as [ControlBoxSourceCollectionViewCell]{
+                var currentCell = cell
+                var mac = currentCell.mac.text
+                var txDevice: Device? = nil
+                
+                for device in ControlBoxMappingViewController.txOnlineList{
+                    if(device.mac != mac ){
+                    }else{
+                        txDevice = device
+                        break
+                    }
+                }
+                
+                if(txDevice!.alive != "y"){
+                    currentCell.preview.image =  UIImage(named: "offline")
+                }else{
+                
+                    var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                    if(device_ip != nil){
+                        self.queueHTTP.async {
+                            AF.request("http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_get_mobile_preview + "/" + mac! , method: .get){ urlRequest in
+                                urlRequest.timeoutInterval = 5
+                                urlRequest.allowsExpensiveNetworkAccess = false
+                            }.response{ response in
+                                debugPrint(response)
+                                switch response.result{
+                                
+                                case .success(let value):
+                                    
+                                    do {
+                                        let responseDecoded = try JSONDecoder().decode(previewStruct.self, from: value!)
+                                        print("on name  = " , currentCell.deviceName.text)
+                                        if(responseDecoded.result != "ok"){
+                                            DispatchQueue.main.async() {
+                                                currentCell.preview.image =  UIImage(named: "nosignal")
+                                            }
+                                        }else{
+                                            //check tx is not plug source
+                                            if(responseDecoded.base64.length < 50){
+                                                DispatchQueue.main.async() {
+                                                    currentCell.preview.image =  UIImage(named: "nosignal")
+                                                }
+                                            }else{
+                                                if let decodedData = Data(base64Encoded: responseDecoded.base64, options: .ignoreUnknownCharacters) {
+                                                    let image = UIImage( data: decodedData)
+                                                    DispatchQueue.main.async() {
+                                                        currentCell.preview.image = image
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }catch let error as NSError{
+                                        print(error)
+                                    }
+                                    break
+                                    
+                                case .failure(let error):
+                                    debugPrint("HTTP GET request failed")
+                                    break
+                                }
+                                
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            break
         default:
             break
         }
@@ -635,8 +703,12 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxSourceCollectionViewCell", for: indexPath) as! ControlBoxSourceCollectionViewCell
             
+            cell.preview.image = nil
             cell.deviceName.text = ControlBoxMappingViewController.txOnlineList[indexPath.item].name
             cell.mac.text = ControlBoxMappingViewController.txOnlineList[indexPath.item].mac
+            if(ControlBoxMappingViewController.txOnlineList[indexPath.item].alive != "y"){
+                cell.preview.image = UIImage(named: "offline")
+            }
             return cell
         }
         
@@ -662,9 +734,9 @@ extension ControlBoxMappingViewController: UICollectionViewDelegateFlowLayout {
         }
         else {
             if(ControlBoxMappingViewController.isPhone){
-                return CGSize(width: (self.view.frame.size.width)/4.2 , height: (self.view.frame.size.width) / 6)
+                return CGSize(width: (self.view.frame.size.width)/2.2 , height: (self.view.frame.size.width) / 6)
             }else{
-                return CGSize(width: (self.view.frame.size.width) / 5.8 , height: (self.view.frame.size.height) / 10)
+                return CGSize(width: (self.view.frame.size.width) / 3.6 , height: (self.view.frame.size.height) / 10)
             }
         }
         
@@ -888,8 +960,11 @@ extension ControlBoxMappingViewController {
         }
         
         self.currentRxDeviceSize = self.rxList.count
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        
+        //update device preview
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
             
+            //update rx preview
             for cell in self.previewCollectionView.visibleCells as [ControlBoxMappingDisplayCollectionViewCell] {
                 
                 var currentCell = cell
@@ -925,6 +1000,75 @@ extension ControlBoxMappingViewController {
                                 urlRequest.allowsExpensiveNetworkAccess = false
                             }.response{ response in
                                 //  debugPrint(response)
+                                switch response.result{
+                                
+                                case .success(let value):
+                                    
+                                    do {
+                                        let responseDecoded = try JSONDecoder().decode(previewStruct.self, from: value!)
+                                        print("on name  = " , currentCell.deviceName.text)
+                                        if(responseDecoded.result != "ok"){
+                                            DispatchQueue.main.async() {
+                                                currentCell.preview.image =  UIImage(named: "nosignal")
+                                            }
+                                        }else{
+                                            //check tx is not plug source
+                                            if(responseDecoded.base64.length < 50){
+                                                DispatchQueue.main.async() {
+                                                    currentCell.preview.image =  UIImage(named: "nosignal")
+                                                }
+                                            }else{
+                                                if let decodedData = Data(base64Encoded: responseDecoded.base64, options: .ignoreUnknownCharacters) {
+                                                    let image = UIImage( data: decodedData)
+                                                    DispatchQueue.main.async() {
+                                                        currentCell.preview.image = image
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }catch let error as NSError{
+                                        print(error)
+                                    }
+                                    break
+                                    
+                                case .failure(let error):
+                                    debugPrint("HTTP GET request failed")
+                                    break
+                                }
+                                
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            
+            //update TX preview
+            for cell in self.sourceCollectionView.visibleCells as [ControlBoxSourceCollectionViewCell]{
+                var currentCell = cell
+                var mac = currentCell.mac.text
+                var txDevice: Device? = nil
+                
+                for device in ControlBoxMappingViewController.txOnlineList{
+                    if(device.mac != mac ){
+                    }else{
+                        txDevice = device
+                        break
+                    }
+                }
+                
+                if(txDevice!.alive != "y"){
+                    currentCell.preview.image =  UIImage(named: "offline")
+                }else{
+                
+                    var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                    if(device_ip != nil){
+                        self.queueHTTP.async {
+                            AF.request("http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_get_mobile_preview + "/" + mac! , method: .get){ urlRequest in
+                                urlRequest.timeoutInterval = 5
+                                urlRequest.allowsExpensiveNetworkAccess = false
+                            }.response{ response in
+                                debugPrint(response)
                                 switch response.result{
                                 
                                 case .success(let value):

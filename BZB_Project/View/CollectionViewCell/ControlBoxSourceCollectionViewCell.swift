@@ -12,6 +12,8 @@ class ControlBoxSourceCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var mac: UILabel!
+    @IBOutlet weak var preview: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.layer.cornerRadius = 5
