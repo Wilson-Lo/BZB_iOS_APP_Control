@@ -188,7 +188,7 @@ extension BaseViewController  {
     /**
         Add BZB logo in the navigation bar
      */
-    func addNavBarLogoImage() {
+    func addNavBarLogoImage(isTabViewController : Bool) {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "bzb_logo_white"))
         let titleView: UIView
         if(BaseViewController.isPhone){
@@ -203,8 +203,46 @@ extension BaseViewController  {
 
         titleView.addSubview(imageView)
         titleView.backgroundColor = .clear
-        self.navigationItem.titleView = titleView
-        self.navigationController?.navigationBar.barTintColor = UIColor(cgColor: #colorLiteral(red: 0.08523575506, green: 0.1426764978, blue: 0.2388794571, alpha: 1).cgColor )
+        if(isTabViewController){
+            self.tabBarController?.navigationItem.titleView = titleView
+            self.tabBarController?.navigationController?.navigationBar.barTintColor = UIColor(cgColor: #colorLiteral(red: 0.08523575506, green: 0.1426764978, blue: 0.2388794571, alpha: 1).cgColor )
+        }else{
+            self.navigationItem.titleView = titleView
+            self.navigationController?.navigationBar.barTintColor = UIColor(cgColor: #colorLiteral(red: 0.08523575506, green: 0.1426764978, blue: 0.2388794571, alpha: 1).cgColor )
+        }
     }
- 
+    
+    func setupBackButton(isTabViewController : Bool){
+        let backBt = UIButton(type: .custom)
+        //set image for button
+        backBt.setImage(UIImage(named: "back.png"), for: .normal)
+        //add function for button
+        backBt.addTarget(self, action: #selector(BackButtonTapped), for: .touchUpInside)
+        
+        let yourBackImage = UIImage(named: "back")
+        if(BaseViewController.isPhone){
+            backBt.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            backBt.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        }else{
+            backBt.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            backBt.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        }
+        let barButton = UIBarButtonItem(customView: backBt)
+        if(isTabViewController){
+            self.tabBarController?.navigationItem.leftBarButtonItem = barButton
+        }else{
+            self.navigationItem.leftBarButtonItem = barButton
+        }
+    }
+    
+    
+    @objc func BackButtonTapped(isTabViewController : Bool){
+        print("BackButton Tapped")
+        self.navigationController?.popToRootViewController(animated: true)
+        if(isTabViewController){
+            self.tabBarController?.navigationController?.popToRootViewController(animated: true)
+        }else{
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
 }

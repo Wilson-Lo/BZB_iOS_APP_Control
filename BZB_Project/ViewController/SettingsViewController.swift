@@ -55,6 +55,7 @@ class SettingsViewController: BaseViewController{
         print("SettingsViewController-viewDidLoad")
         super.viewDidLoad()
         initialUI()
+        self.setupBackButton(isTabViewController: false)
         let bgView = UIView(frame: self.uiView.bounds)
         gradientLayer = CAGradientLayer()
         
@@ -64,13 +65,14 @@ class SettingsViewController: BaseViewController{
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         
         gradientLayer.endPoint = CGPoint(x: 0.1, y: 0.5)
-      
+
         self.uiView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("SettingsViewController-viewWillAppear")
+        
         self.userSelectDeviceType = self.DEVICE_CONTROL_BOX
         objectInitial()
     }

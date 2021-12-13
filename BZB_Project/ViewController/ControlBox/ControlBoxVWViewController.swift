@@ -92,6 +92,7 @@ class ControlBoxVWViewController : BaseViewController{
     override func viewDidLoad() {
         print("ControlBoxVWViewController-viewDidLoad")
         super.viewDidLoad()
+        self.setupBackButton(isTabViewController: true)
         self.btPresetArray = [btPreset1, btPreset2, btPreset3, btPreset4, btPreset5, btPreset6, btPreset7, btPreset8]
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
         setupUI()

@@ -29,7 +29,7 @@ class DeviceListViewController: BaseViewController, UIGestureRecognizerDelegate{
         super.viewDidLoad()
         print("DeviceListViewController-viewDidLoad")
         self.setupUI()
-        addNavBarLogoImage()
+        self.addNavBarLogoImage(isTabViewController: false)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_delete_device), object: nil)
     }
     
@@ -142,12 +142,6 @@ extension DeviceListViewController{
             self.present(vc, animated: true, completion: nil)
             DeviceListDialogViewController.userSelectedDeviceIndex = indexPath.item
         }
-    }
-    
-    @IBAction func btAdd(sender: UIButton) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SettingsViewController") as! UIViewController
-        self.navigationController!.pushViewController(nextViewController, animated: true)
     }
     
     

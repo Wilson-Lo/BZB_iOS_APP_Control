@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-5Z-kW7">
-                                <rect key="frame" x="0.0" y="186" width="414" height="676"/>
+                                <rect key="frame" x="0.0" y="177.5" width="414" height="684.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hfT-zu-aUg">
                                     <size key="itemSize" width="383" height="74"/>
@@ -93,7 +93,7 @@
                         <viewLayoutGuide key="safeArea" id="ziO-h4-sIm"/>
                         <color key="backgroundColor" red="0.15518230199813843" green="0.20778793096542358" blue="0.29410004615783691" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Qfk-5Z-kW7" firstAttribute="top" secondItem="IVd-ih-3PL" secondAttribute="bottom" constant="8.5" id="8Sd-1Z-Ymf"/>
+                            <constraint firstItem="Qfk-5Z-kW7" firstAttribute="top" secondItem="IVd-ih-3PL" secondAttribute="bottom" id="8Sd-1Z-Ymf"/>
                             <constraint firstItem="Qfk-5Z-kW7" firstAttribute="width" secondItem="L4W-iP-ai0" secondAttribute="width" id="IG0-Na-VPp"/>
                             <constraint firstItem="ziO-h4-sIm" firstAttribute="bottom" secondItem="Qfk-5Z-kW7" secondAttribute="bottom" id="MSu-Rh-FZq"/>
                             <constraint firstItem="IVd-ih-3PL" firstAttribute="centerX" secondItem="L4W-iP-ai0" secondAttribute="centerX" id="NDk-u9-Amg"/>
