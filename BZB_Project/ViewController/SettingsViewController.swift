@@ -94,7 +94,6 @@ extension SettingsViewController{
     
     //initial UI
     func initialUI(){
-        
         self.segmentType.addTarget(self, action: #selector(deviceTypeChanged(_:)), for: .valueChanged)
         self.btADD.layer.cornerRadius = 5
         self.btADD.layer.borderWidth = 1
