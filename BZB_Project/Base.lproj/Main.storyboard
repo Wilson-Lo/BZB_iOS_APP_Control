@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-5Z-kW7">
-                                <rect key="frame" x="0.0" y="269.5" width="414" height="592.5"/>
+                                <rect key="frame" x="0.0" y="186" width="414" height="676"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hfT-zu-aUg">
                                     <size key="itemSize" width="383" height="74"/>
@@ -79,16 +79,8 @@
                                     <outlet property="delegate" destination="Qli-gC-SAK" id="iMW-mc-xGp"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8I-35-ACp" userLabel="btAdd">
-                                <rect key="frame" x="351" y="117" width="43" height="43"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" backgroundImage="add"/>
-                                <connections>
-                                    <action selector="btAddWithSender:" destination="Qli-gC-SAK" eventType="touchUpInside" id="sr2-uJ-hMg"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DEVICE LIST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVd-ih-3PL">
-                                <rect key="frame" x="0.0" y="180" width="414" height="89.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="89.5"/>
                                 <color key="backgroundColor" red="0.095827259123325348" green="0.16492527723312378" blue="0.2458246648311615" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <color key="textColor" red="0.92549019610000005" green="0.25490196079999999" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -97,38 +89,23 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 </variation>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bzb_logo_white" translatesAutoresizingMaskIntoConstraints="NO" id="GPk-Sm-dSo">
-                                <rect key="frame" x="83" y="88" width="248" height="89.5"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ziO-h4-sIm"/>
                         <color key="backgroundColor" red="0.15518230199813843" green="0.20778793096542358" blue="0.29410004615783691" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ziO-h4-sIm" firstAttribute="trailing" secondItem="y8I-35-ACp" secondAttribute="trailing" constant="20" id="3Gd-V7-7Bl"/>
-                            <constraint firstItem="y8I-35-ACp" firstAttribute="width" secondItem="L4W-iP-ai0" secondAttribute="width" multiplier="0.103865" id="A1t-5w-nrQ"/>
-                            <constraint firstItem="IVd-ih-3PL" firstAttribute="top" secondItem="y8I-35-ACp" secondAttribute="bottom" constant="20" id="Bd6-8M-rDd"/>
+                            <constraint firstItem="Qfk-5Z-kW7" firstAttribute="top" secondItem="IVd-ih-3PL" secondAttribute="bottom" constant="8.5" id="8Sd-1Z-Ymf"/>
                             <constraint firstItem="Qfk-5Z-kW7" firstAttribute="width" secondItem="L4W-iP-ai0" secondAttribute="width" id="IG0-Na-VPp"/>
-                            <constraint firstItem="y8I-35-ACp" firstAttribute="height" secondItem="L4W-iP-ai0" secondAttribute="height" multiplier="0.0479911" id="JoJ-yN-HYN"/>
-                            <constraint firstItem="Qfk-5Z-kW7" firstAttribute="top" secondItem="IVd-ih-3PL" secondAttribute="bottom" id="L7G-Tr-off"/>
                             <constraint firstItem="ziO-h4-sIm" firstAttribute="bottom" secondItem="Qfk-5Z-kW7" secondAttribute="bottom" id="MSu-Rh-FZq"/>
-                            <constraint firstItem="GPk-Sm-dSo" firstAttribute="height" secondItem="L4W-iP-ai0" secondAttribute="height" multiplier="0.1" id="Mjw-r0-IOK"/>
                             <constraint firstItem="IVd-ih-3PL" firstAttribute="centerX" secondItem="L4W-iP-ai0" secondAttribute="centerX" id="NDk-u9-Amg"/>
                             <constraint firstItem="IVd-ih-3PL" firstAttribute="width" secondItem="L4W-iP-ai0" secondAttribute="width" id="Pxe-GD-TdQ"/>
-                            <constraint firstItem="GPk-Sm-dSo" firstAttribute="top" secondItem="ziO-h4-sIm" secondAttribute="top" id="QXo-my-3wY"/>
-                            <constraint firstItem="GPk-Sm-dSo" firstAttribute="centerX" secondItem="IVd-ih-3PL" secondAttribute="centerX" id="Tjx-AW-lO4"/>
-                            <constraint firstItem="y8I-35-ACp" firstAttribute="top" secondItem="ziO-h4-sIm" secondAttribute="top" constant="29" id="cWE-Fs-M0n"/>
-                            <constraint firstItem="GPk-Sm-dSo" firstAttribute="width" secondItem="L4W-iP-ai0" secondAttribute="width" multiplier="0.6" id="cak-WA-syl"/>
+                            <constraint firstItem="IVd-ih-3PL" firstAttribute="top" secondItem="ziO-h4-sIm" secondAttribute="top" id="kLh-BV-0BU"/>
                             <constraint firstItem="Qfk-5Z-kW7" firstAttribute="centerX" secondItem="L4W-iP-ai0" secondAttribute="centerX" id="trb-7f-M61"/>
-                            <constraint firstItem="GPk-Sm-dSo" firstAttribute="centerX" secondItem="L4W-iP-ai0" secondAttribute="centerX" id="ygj-Bs-z9B"/>
                             <constraint firstItem="IVd-ih-3PL" firstAttribute="height" secondItem="L4W-iP-ai0" secondAttribute="height" multiplier="0.1" id="ypS-Fb-q3R"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wdq-DS-taZ"/>
                     <connections>
-                        <outlet property="btAddHeightConstraint" destination="JoJ-yN-HYN" id="PUw-au-Yc4"/>
-                        <outlet property="btAddWidthConstraint" destination="A1t-5w-nrQ" id="fu8-M8-qFg"/>
                         <outlet property="collectionView" destination="Qfk-5Z-kW7" id="c4A-SV-Xos"/>
-                        <outlet property="logoHeightConstraint" destination="Mjw-r0-IOK" id="g9C-ff-Jep"/>
                         <outlet property="mainView" destination="L4W-iP-ai0" id="SeO-dI-hIe"/>
                     </connections>
                 </viewController>
@@ -473,10 +450,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="aOc-bC-3qG">
-                                                    <rect key="frame" x="40" y="24" width="32" height="32"/>
+                                                    <rect key="frame" x="40" y="-24" width="128" height="128"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I/O Rename" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEt-UE-H8r">
-                                                    <rect key="frame" x="92" y="29.5" width="93" height="21.5"/>
+                                                    <rect key="frame" x="188" y="29.5" width="93" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -504,10 +481,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="xDu-eD-9VS">
-                                                    <rect key="frame" x="40" y="24" width="32" height="32"/>
+                                                    <rect key="frame" x="40" y="-24" width="128" height="128"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preset Rename" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW2-wj-OzS">
-                                                    <rect key="frame" x="92" y="29.5" width="121.5" height="21.5"/>
+                                                    <rect key="frame" x="188" y="29.5" width="121.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2920,9 +2897,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add" width="128" height="128"/>
         <image name="bzb_logo_white" width="2000" height="1000"/>
-        <image name="edit" width="32" height="32"/>
+        <image name="edit" width="128" height="128"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="offline" width="240" height="135"/>
         <image name="pip" catalog="system" width="128" height="96"/>

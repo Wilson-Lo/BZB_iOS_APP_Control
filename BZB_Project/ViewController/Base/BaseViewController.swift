@@ -101,7 +101,7 @@ extension BaseViewController  {
             loadingIndicator.hidesWhenStopped = true
             loadingIndicator.style = UIActivityIndicatorView.Style.gray
             loadingIndicator.startAnimating();
-     
+            
             self.alert.view.addSubview(loadingIndicator)
             self.present(self.alert, animated: true, completion: nil)
         }
@@ -184,4 +184,27 @@ extension BaseViewController  {
         }
         return type
     }
+    
+    /**
+        Add BZB logo in the navigation bar
+     */
+    func addNavBarLogoImage() {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "bzb_logo_white"))
+        let titleView: UIView
+        if(BaseViewController.isPhone){
+           imageView.frame = CGRect(x: 0, y: -20, width: 170, height:80)
+           imageView.contentMode = .scaleAspectFit
+           titleView = UIView(frame: CGRect(x: 0, y: 0, width: 170, height: 80))
+        }else{
+            imageView.frame = CGRect(x: 0, y: -40, width: 230, height:120)
+            imageView.contentMode = .scaleAspectFit
+            titleView = UIView(frame: CGRect(x: 0, y: 0, width: 230, height: 120))
+        }
+
+        titleView.addSubview(imageView)
+        titleView.backgroundColor = .clear
+        self.navigationItem.titleView = titleView
+        self.navigationController?.navigationBar.barTintColor = UIColor(cgColor: #colorLiteral(red: 0.08523575506, green: 0.1426764978, blue: 0.2388794571, alpha: 1).cgColor )
+    }
+ 
 }

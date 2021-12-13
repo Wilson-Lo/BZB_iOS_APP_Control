@@ -31,6 +31,7 @@ class Matrix4MappingViewController: BaseSocketViewController{
         initialUI()
         createInputGradientLayer()
         createOutputGradientLayer()
+       
         
         NotificationCenter.default.addObserver(self, selector: #selector(switchFromInput(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_matrix4_switch_from_input), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(switchFromOutput(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_matrix4_switch_from_output), object: nil)
@@ -521,7 +522,6 @@ extension Matrix4MappingViewController : UICollectionViewDataSource{
         }
     }
 }
-
 
 extension Matrix4MappingViewController: UICollectionViewDelegateFlowLayout {
     

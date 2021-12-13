@@ -67,4 +67,6 @@ extension UIView{
         print(gradientLayer.frame)
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
+    
+
 }

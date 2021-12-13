@@ -17,11 +17,8 @@ import PopupDialog
 
 class DeviceListViewController: BaseViewController, UIGestureRecognizerDelegate{
     
-    @IBOutlet weak var logoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var mainView: UIView!
     var gradientLayer: CAGradientLayer!
-    @IBOutlet weak var btAddHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var btAddWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     let db = DBHelper()
     var deviceList: Array<DeviceDataObject>!
@@ -32,7 +29,7 @@ class DeviceListViewController: BaseViewController, UIGestureRecognizerDelegate{
         super.viewDidLoad()
         print("DeviceListViewController-viewDidLoad")
         self.setupUI()
-
+        addNavBarLogoImage()
         NotificationCenter.default.addObserver(self, selector: #selector(deleteDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_delete_device), object: nil)
     }
     
@@ -99,41 +96,35 @@ extension DeviceListViewController{
     
     func setupUI(){
         self.queueDB = DispatchQueue(label: "com.bzb.db", qos: DispatchQoS.userInitiated)
-        self.navigationController?.navigationBar.barTintColor = UIColor(cgColor: #colorLiteral(red: 0.08523575506, green: 0.1426764978, blue: 0.2388794571, alpha: 1).cgColor )
-        
+        //    self.navigationController?.navigationBar.barTintColor = UIColor(cgColor: #colorLiteral(red: 0.08523575506, green: 0.1426764978, blue: 0.2388794571, alpha: 1).cgColor )
+        let settingBt = UIButton(type: .custom)
+        //set image for button
+        settingBt.setImage(UIImage(named: "setting.png"), for: .normal)
+        //add function for button
+        settingBt.addTarget(self, action: #selector(SettingButtonTapped), for: .touchUpInside)
+
+        //assign button to navigationbar
         let longPressedGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
         longPressedGesture.minimumPressDuration = 0.5
         longPressedGesture.delegate = self
         longPressedGesture.delaysTouchesBegan = true
         self.collectionView?.addGestureRecognizer(longPressedGesture)
         if(DeviceListViewController.isPhone){
-            //bt add size
-            let newbtScanHeightConstraint = btAddHeightConstraint.constraintWithMultiplier(0.0479911)
-            self.view.removeConstraint(btAddHeightConstraint)
-            self.view.addConstraint(newbtScanHeightConstraint)
-            // self.view.layoutIfNeeded()
-            let newbtScanWidthConstraint = btAddWidthConstraint.constraintWithMultiplier(0.103865)
-            self.view.removeConstraint(btAddWidthConstraint)
-            self.view.addConstraint(newbtScanWidthConstraint)
-            self.view.layoutIfNeeded()
+            settingBt.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            settingBt.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }else{
-            //bt add size
-            let newbtScanHeightConstraint = btAddHeightConstraint.constraintWithMultiplier(0.032)
-            self.view.removeConstraint(btAddHeightConstraint)
-            self.view.addConstraint(newbtScanHeightConstraint)
-            //self.view.layoutIfNeeded()
-            let newbtScanWidthConstraint = btAddWidthConstraint.constraintWithMultiplier(0.052)
-            self.view.removeConstraint(btAddWidthConstraint)
-            self.view.addConstraint(newbtScanWidthConstraint)
-            self.view.layoutIfNeeded()
+            settingBt.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            settingBt.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
-        
-        if(!ControlBoxVWViewController.isPhone){
-            let newLogoHeightConstraint = logoHeightConstraint.constraintWithMultiplier(0.08)
-            self.view.removeConstraint(logoHeightConstraint)
-            self.view.addConstraint(newLogoHeightConstraint)
-            self.view.layoutIfNeeded()
-        }
+        let barButton = UIBarButtonItem(customView: settingBt)
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    @objc func SettingButtonTapped() {
+        print("Button Tapped")
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SettingsViewController") as! UIViewController
+        self.navigationController!.pushViewController(nextViewController, animated: true)
     }
     
     @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
