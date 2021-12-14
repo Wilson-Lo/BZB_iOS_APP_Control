@@ -20,6 +20,7 @@ target 'BZB_Project' do
   pod 'RSSelectionMenu'
   pod 'Alamofire', '~> 5.2'  
   pod 'sqlite3'
+  pod 'lottie-ios'
   target 'BZB_ProjectTests' do
     inherit! :search_paths
     # Pods for testing

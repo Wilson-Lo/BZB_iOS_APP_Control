@@ -17,8 +17,9 @@ class BaseViewController : UIViewController{
     static var textSizeForPhone = 16
     static var textSizeForPad = 32
     final let SERVER_PORT = "8080" //Server listening port ( Control Box )
-    
+    static var loadingIndicator :UIActivityIndicatorView!
     override func viewDidLoad() {
+ 
         self.alert = UIAlertController(title: nil, message: "Please wait ...", preferredStyle: .alert)
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
@@ -37,6 +38,14 @@ class BaseViewController : UIViewController{
         // Uh, oh! What could it be?
         }
         
+        if(!BaseViewController.isPhone){
+            BaseViewController.loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: -32, y: -12, width: 120, height: 80))
+            let messageAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 24)!, NSAttributedString.Key.foregroundColor: UIColor.black]
+            let messageString = NSAttributedString(string: "Please wait ...", attributes: messageAttributes)
+            self.alert.setValue(messageString, forKey: "attributedMessage")
+        }else{
+            BaseViewController.loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,21 +97,10 @@ extension BaseViewController  {
     //show waiting dialog
     public func showLoadingView() {
         DispatchQueue.main.async() {
-            var loadingIndicator :UIActivityIndicatorView!
-            if(!BaseViewController.isPhone){
-                loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: -32, y: -12, width: 120, height: 80))
-                let messageAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 24)!, NSAttributedString.Key.foregroundColor: UIColor.black]
-                let messageString = NSAttributedString(string: "Please wait ...", attributes: messageAttributes)
-                self.alert.setValue(messageString, forKey: "attributedMessage")
-            }else{
-                loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-            }
-            
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.style = UIActivityIndicatorView.Style.gray
-            loadingIndicator.startAnimating();
-            
-            self.alert.view.addSubview(loadingIndicator)
+            BaseViewController.loadingIndicator.hidesWhenStopped = true
+            BaseViewController.loadingIndicator.style = UIActivityIndicatorView.Style.gray
+            BaseViewController.loadingIndicator.startAnimating();
+            self.alert.view.addSubview(BaseViewController.loadingIndicator)
             self.present(self.alert, animated: true, completion: nil)
         }
     }
@@ -110,8 +108,15 @@ extension BaseViewController  {
     //close waiting dailog
     public func dismissLoadingView() {
         DispatchQueue.main.async() {
-            self.dismiss(animated: false, completion: nil)
+            if(BaseViewController.loadingIndicator.isAnimating){
+                BaseViewController.loadingIndicator.stopAnimating()
+                self.dismiss(animated: false, completion: nil)
+            }
         }
+    }
+    
+    public func isLoadingShowing() -> Bool{
+        return BaseViewController.loadingIndicator.isAnimating
     }
     
     //show toast

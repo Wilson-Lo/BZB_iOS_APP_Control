@@ -532,18 +532,18 @@ extension ControlBoxVWViewController{
             urlRequest.timeoutInterval = 5
             urlRequest.allowsExpensiveNetworkAccess = false
         }.response{ response in
-            debugPrint(response)
+           // print(response)
             
             switch response.result{
             
             case .success(let value):
                 let json = JSON(value)
                 
-                debugPrint(json)
+               // print(json)
                 switch(cmdNumber){
                 
                 case HTTPCmdHelper._1_cmd_get_node_info:
-                    debugPrint("_1_cmd_get_node_info")
+                    print("_1_cmd_get_node_info")
                     self.txDeviceProtocol.removeAll()
                     ControlBoxVWViewController.txListForUI.removeAll()
                     self.rxIPProtocol.removeAll()
@@ -576,7 +576,7 @@ extension ControlBoxVWViewController{
                     
                     
                 case HTTPCmdHelper._4_cmd_video_wall_preset:
-                    debugPrint("_4_cmd_video_wall_preset")
+                    print("_4_cmd_video_wall_preset")
                     self.presetDataList.removeAll()
                     self.presetNameForUI.removeAll()
                     
@@ -623,7 +623,7 @@ extension ControlBoxVWViewController{
                     
                 default:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self.dismiss(animated: false, completion: nil)
+                        self.dismissLoadingView()
                     }
                     break
                 }
@@ -631,9 +631,9 @@ extension ControlBoxVWViewController{
                 break
                 
             case .failure(let error):
-                debugPrint("HTTP GET request failed")
+                print("HTTP GET request failed")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.dismiss(animated: false, completion: nil)
+                    self.dismissLoadingView()
                     
                     if(ControlBoxVWViewController.isPhone){
                         self.view.showToast(text: "Can't connect to device !", font_size: CGFloat(ControlBoxVWViewController.textSizeForPhone), isMenu: true)

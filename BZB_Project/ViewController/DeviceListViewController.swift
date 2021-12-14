@@ -203,10 +203,10 @@ extension DeviceListViewController : UICollectionViewDelegate {
                 self.navigationController!.pushViewController(nextViewController, animated: true)
                 break
                 
-            case self.DEVICE_MATRIX_4_X_4_HDR:
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
-                self.navigationController!.pushViewController(nextViewController, animated: true)
-                break
+//            case self.DEVICE_MATRIX_4_X_4_HDR:
+//                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
+//                self.navigationController!.pushViewController(nextViewController, animated: true)
+//                break
                 
             default:
                 

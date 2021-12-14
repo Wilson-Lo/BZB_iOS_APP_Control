@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qj1-ue-0m5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DQS-62-Hj9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -13,7 +13,7 @@
         <!--Device List View Controller-->
         <scene sceneID="d4d-kE-Bm1">
             <objects>
-                <viewController id="Qli-gC-SAK" customClass="DeviceListViewController" customModule="BG_AVoIP_CONTROL" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeviceListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qli-gC-SAK" customClass="DeviceListViewController" customModule="BG_AVoIP_CONTROL" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L4W-iP-ai0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -116,7 +116,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Qnv-Aw-7aP">
             <objects>
-                <navigationController id="qj1-ue-0m5" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="UINavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qj1-ue-0m5" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LYc-e4-aNo">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2216,6 +2216,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bya-EE-kkD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="459" y="-202"/>
+        </scene>
+        <!--Opening View Controller-->
+        <scene sceneID="jiM-It-3Yp">
+            <objects>
+                <viewController storyboardIdentifier="OpeningViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DQS-62-Hj9" customClass="OpeningViewController" customModule="BG_AVoIP_CONTROL" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2U1-17-ldn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="f5T-x8-TWc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="mainView" destination="2U1-17-ldn" id="ier-ec-7z8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEm-gS-gfG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2857" y="-930"/>
         </scene>
         <!--Mapping-->
         <scene sceneID="X67-jx-pre">

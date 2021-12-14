@@ -73,7 +73,7 @@ class ControlBoxMappingViewController : BaseViewController{
     override func viewDidLoad() {
         print("ControlBoxMappingViewController-viewDidLoad")
         super.viewDidLoad()
-       // addNavBarLogoImage(isTabViewController: true)
+        // addNavBarLogoImage(isTabViewController: true)
         self.setupBackButton(isTabViewController: true)
         self.btPresetArray = [self.presetBt1, self.presetBt2, self.presetBt3, self.presetBt4, self.presetBt5, self.presetBt6, self.presetBt7, self.presetBt8,  self.presetBt9]
         self.setupUI()
@@ -91,26 +91,26 @@ class ControlBoxMappingViewController : BaseViewController{
         let imageView = UIImageView(image: #imageLiteral(resourceName: "bzb_logo_white"))
         let titleView: UIView
         if(BaseViewController.isPhone){
-           imageView.frame = CGRect(x: 0, y: -20, width: 170, height:80)
-           imageView.contentMode = .scaleAspectFit
-           titleView = UIView(frame: CGRect(x: 0, y: 0, width: 170, height: 80))
+            imageView.frame = CGRect(x: 0, y: -20, width: 170, height:80)
+            imageView.contentMode = .scaleAspectFit
+            titleView = UIView(frame: CGRect(x: 0, y: 0, width: 170, height: 80))
         }else{
             imageView.frame = CGRect(x: 0, y: -40, width: 230, height:120)
             imageView.contentMode = .scaleAspectFit
             titleView = UIView(frame: CGRect(x: 0, y: 0, width: 230, height: 120))
         }
-
+        
         titleView.addSubview(imageView)
         titleView.backgroundColor = .clear
-  
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print("ControlBoxMappingViewController-viewWillAppear")
-        //        DispatchQueue.main.async() {
-        //            self.showLoadingView()
-        //        }
+        DispatchQueue.main.async() {
+            self.showLoadingView()
+        }
         
         self.queueHTTP.async {
             var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
@@ -227,7 +227,7 @@ extension ControlBoxMappingViewController{
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
-                    self.dismiss(animated: false, completion: nil)
+                    self.dismissLoadingView()
                 }
             }
         }
@@ -252,7 +252,7 @@ extension ControlBoxMappingViewController{
         }
         self.recursiveSwitchAllRX(currentIndex: 0, txGroupId: ASpeedTXDialogViewController.deviceGroupId)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.dismiss(animated: false, completion: nil)
+            self.dismissLoadingView()
             self.showToast(context: "Switch for All RX finish!")
             self.queueHTTP.async {
                 self.refresh()
@@ -299,7 +299,7 @@ extension ControlBoxMappingViewController{
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.dismiss(animated: false, completion: nil)
+                    self.dismissLoadingView()
                 }
             }
             
@@ -338,7 +338,7 @@ extension ControlBoxMappingViewController{
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
-            self.dismiss(animated: false, completion: nil)
+            self.dismissLoadingView()
         }
     }
     
@@ -459,9 +459,9 @@ extension ControlBoxMappingViewController : UICollectionViewDelegate {
             var deviceInfo = self.rxList[indexPath.item]
             if(deviceInfo.alive != "n"){
                 self.isDialogShowing = true
-//                ASpeedRXDialogViewController.deviceIP = deviceInfo.ip
-//                ASpeedRXDialogViewController.deviceGroupId = deviceInfo.group_id
-//                ASpeedRXDialogViewController.deviceName = deviceInfo.name
+                //                ASpeedRXDialogViewController.deviceIP = deviceInfo.ip
+                //                ASpeedRXDialogViewController.deviceGroupId = deviceInfo.group_id
+                //                ASpeedRXDialogViewController.deviceName = deviceInfo.name
                 ControlBoxMappingSourceDialogViewController.userSelectSourceIP = deviceInfo.ip
                 ControlBoxMappingSourceDialogViewController.userSelectSourceName = deviceInfo.name
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -608,7 +608,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                                     break
                                     
                                 case .failure(let error):
-                                    debugPrint("HTTP GET request failed")
+                                    print("HTTP GET request failed")
                                     break
                                 }
                                 
@@ -637,7 +637,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                 if(txDevice!.alive != "y"){
                     currentCell.preview.image =  UIImage(named: "offline")
                 }else{
-                
+                    
                     var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
                     if(device_ip != nil){
                         self.queueHTTP.async {
@@ -645,7 +645,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                                 urlRequest.timeoutInterval = 5
                                 urlRequest.allowsExpensiveNetworkAccess = false
                             }.response{ response in
-                                debugPrint(response)
+                                //debugPrint(response)
                                 switch response.result{
                                 
                                 case .success(let value):
@@ -678,7 +678,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                                     break
                                     
                                 case .failure(let error):
-                                    debugPrint("HTTP GET request failed")
+                                    print("HTTP GET request failed")
                                     break
                                 }
                                 
@@ -806,7 +806,7 @@ extension ControlBoxMappingViewController {
                     self.handleGetDevice(json: json)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self.dismiss(animated: false, completion: nil)
+                        self.dismissLoadingView()
                     }
                     break
                     
@@ -887,14 +887,14 @@ extension ControlBoxMappingViewController {
                         }
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self.dismiss(animated: false, completion: nil)
+                        self.dismissLoadingView()
                     }
                     break
                     
                     
                 default:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self.dismiss(animated: false, completion: nil)
+                        self.dismissLoadingView()
                     }
                     break
                 }
@@ -902,9 +902,16 @@ extension ControlBoxMappingViewController {
                 break
                 
             case .failure(let error):
-                debugPrint("HTTP GET request failed")
+                print("HTTP GET request failed !!!")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.dismiss(animated: false, completion: nil)
+                    //    self.dismiss(animated: false, completion: nil)
+                    
+                    if(self.isLoadingShowing()){
+                        print("is loading showing")
+                        self.dismissLoadingView()
+                    }else{
+                        print("is not loading showing")
+                    }
                     
                     if(BaseViewController.isPhone){
                         self.view.showToast(text: "Can't connect to device !", font_size: CGFloat(BaseViewController.textSizeForPhone), isMenu: true)
@@ -926,6 +933,8 @@ extension ControlBoxMappingViewController {
     // Handle get device json & update UI
     func handleGetDevice(json: JSON){
         
+        
+        print("Valid Json")
         self.rxList.removeAll()
         //  self.txAllList.removeAll()
         ControlBoxMappingViewController.txOnlineList.removeAll()
@@ -977,7 +986,7 @@ extension ControlBoxMappingViewController {
                 self.sourceCollectionView.reloadData()
             }
         }
-
+        
         self.currentRxDeviceSize = self.rxList.count
         self.currentTxDeviceSize = ControlBoxMappingViewController.txOnlineList.count
         
@@ -1052,7 +1061,7 @@ extension ControlBoxMappingViewController {
                                     break
                                     
                                 case .failure(let error):
-                                    debugPrint("HTTP GET request failed")
+                                    print("HTTP GET request failed")
                                     break
                                 }
                                 
@@ -1080,7 +1089,7 @@ extension ControlBoxMappingViewController {
                 if(txDevice!.alive != "y"){
                     currentCell.preview.image =  UIImage(named: "offline")
                 }else{
-                
+                    
                     var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
                     if(device_ip != nil){
                         self.queueHTTP.async {
@@ -1121,7 +1130,7 @@ extension ControlBoxMappingViewController {
                                     break
                                     
                                 case .failure(let error):
-                                    debugPrint("HTTP GET request failed")
+                                    print("HTTP GET request failed!!!!!!!")
                                     break
                                 }
                                 
