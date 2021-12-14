@@ -9,9 +9,6 @@ import UIKit
 
 class BaseViewController : UIViewController{
     
-    var DEVICE_CONTROL_BOX = 1
-    var DEVICE_MATRIX_4_X_4_HDR = 2
-    var DEVICE_CUSTOMER = 3
     var alert: UIAlertController!
     static var isPhone: Bool!
     static var textSizeForPhone = 16
@@ -176,15 +173,15 @@ extension BaseViewController  {
         switch(deviceName){
         
         case "Control-Box":
-            type = self.DEVICE_CONTROL_BOX
+            type = DBHelper.DEVICE_CONTROL_BOX
             break
             
         case "Matrix 4x4 HDR  ":
-            type = self.DEVICE_MATRIX_4_X_4_HDR
+            type = DBHelper.DEVICE_MATRIX_4_X_4_HDR
             break
             
         default:
-            type = self.DEVICE_CUSTOMER
+            type = DBHelper.DEVICE_CUSTOMER
             break
         }
         return type

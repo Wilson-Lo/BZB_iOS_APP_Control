@@ -906,18 +906,6 @@
                                     <action selector="btAddWithSender:" destination="EvX-d5-hYa" eventType="touchUpInside" id="aBl-50-unX"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sM5-E7-4ka">
-                                <rect key="frame" x="114.5" y="293" width="185" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="xLM-A6-AGE">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="55"/>
-                                    </constraint>
-                                </constraints>
-                                <segments>
-                                    <segment title="Control Box"/>
-                                    <segment title="Matrix 4 x 4"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rt8-5v-Wv1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -934,14 +922,12 @@
                             <constraint firstItem="O2g-cy-O56" firstAttribute="top" secondItem="7wv-PD-cYz" secondAttribute="bottom" constant="28.5" id="RO6-pf-ItA"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="a8P-jh-Fut"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="top" secondItem="Qq6-Nc-yuF" secondAttribute="bottom" constant="40" id="aPr-1D-R4W"/>
-                            <constraint firstItem="sM5-E7-4ka" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="aiK-2L-8VF"/>
                             <constraint firstItem="Qq6-Nc-yuF" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.0379464" id="bI9-Pf-9kp"/>
                             <constraint firstItem="Qq6-Nc-yuF" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="blb-GN-hTK"/>
                             <constraint firstItem="7wv-PD-cYz" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="cTv-3f-3PE"/>
                             <constraint firstItem="Qq6-Nc-yuF" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="h0s-na-eVg"/>
                             <constraint firstItem="Rt8-5v-Wv1" firstAttribute="bottom" secondItem="O2g-cy-O56" secondAttribute="bottom" constant="36" id="lcq-hJ-FVt"/>
                             <constraint firstItem="ewk-U5-Ob9" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.06" id="neV-nH-uf0"/>
-                            <constraint firstItem="Qq6-Nc-yuF" firstAttribute="top" secondItem="sM5-E7-4ka" secondAttribute="bottom" constant="28" id="qW8-cW-RHd"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="t0D-Yb-ene"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="txl-GO-vl3"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.04" id="xfU-8b-lN4"/>
@@ -957,7 +943,6 @@
                         <outlet property="btScanWidthConstraint" destination="0vM-cB-owc" id="Zaw-kY-Rdi"/>
                         <outlet property="deviceIPHeight" destination="R4F-VN-5iy" id="ZsT-Mz-WAh"/>
                         <outlet property="deviceNameHeight" destination="bI9-Pf-9kp" id="9AA-YY-pDO"/>
-                        <outlet property="segmentType" destination="sM5-E7-4ka" id="YzP-Tu-Mbr"/>
                         <outlet property="textFieldDeviceIP" destination="cGP-Pc-VYa" id="3NU-Uc-EL5"/>
                         <outlet property="textFieldDeviceName" destination="Qq6-Nc-yuF" id="fwe-TF-etB"/>
                         <outlet property="uiView" destination="Upq-YY-P50" id="utv-N7-FIu"/>
@@ -2119,9 +2104,13 @@
                                             <constraint firstItem="xOc-lB-62c" firstAttribute="top" secondItem="SDt-Jj-hyD" secondAttribute="bottom" constant="30" id="6VB-zX-g8s">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="57"/>
                                             </constraint>
-                                            <constraint firstItem="wb1-Nj-UsZ" firstAttribute="top" secondItem="pm8-fg-Q3k" secondAttribute="top" constant="30" id="6c2-ad-oGN"/>
+                                            <constraint firstItem="wb1-Nj-UsZ" firstAttribute="top" secondItem="pm8-fg-Q3k" secondAttribute="top" constant="30" id="6c2-ad-oGN">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
                                             <constraint firstItem="CmP-ct-jCz" firstAttribute="centerX" secondItem="xOc-lB-62c" secondAttribute="centerX" id="EYa-6i-DG3"/>
-                                            <constraint firstItem="Wpe-hW-g62" firstAttribute="top" secondItem="pm8-fg-Q3k" secondAttribute="top" constant="30" id="IJ4-XC-ZhR"/>
+                                            <constraint firstItem="Wpe-hW-g62" firstAttribute="top" secondItem="pm8-fg-Q3k" secondAttribute="top" constant="30" id="IJ4-XC-ZhR">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                            </constraint>
                                             <constraint firstItem="8Hf-ZS-gB9" firstAttribute="leading" secondItem="xOc-lB-62c" secondAttribute="trailing" constant="8" symbolic="YES" id="JsH-Gb-cKw">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                                             </constraint>
@@ -2134,7 +2123,9 @@
                                             <constraint firstItem="wb1-Nj-UsZ" firstAttribute="leading" secondItem="pm8-fg-Q3k" secondAttribute="leading" constant="32" id="Wj1-Bf-Oou">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="50"/>
                                             </constraint>
-                                            <constraint firstItem="SDt-Jj-hyD" firstAttribute="top" secondItem="pm8-fg-Q3k" secondAttribute="top" constant="80" id="cr0-K5-N2w"/>
+                                            <constraint firstItem="SDt-Jj-hyD" firstAttribute="top" secondItem="pm8-fg-Q3k" secondAttribute="top" constant="80" id="cr0-K5-N2w">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="120"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="Wpe-hW-g62" secondAttribute="trailing" constant="22" id="eQB-r0-yJY">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="83"/>
                                             </constraint>

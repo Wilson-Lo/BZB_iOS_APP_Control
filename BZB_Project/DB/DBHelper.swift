@@ -12,6 +12,10 @@ import sqlite3
 
 class DBHelper{
     
+    static var DEVICE_CONTROL_BOX = 1
+    static var DEVICE_MATRIX_4_X_4_HDR = 2
+    static var DEVICE_CUSTOMER = 3
+    
     var db : OpaquePointer?
     var path : String = "BZBDevicesDataBase.sqlite"
     var tableName = "BZBDevices"

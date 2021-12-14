@@ -20,7 +20,6 @@ class SettingsViewController: BaseViewController{
     
     
     @IBOutlet weak var textFieldDeviceName: UITextField!
-    @IBOutlet weak var segmentType: UISegmentedControl!
     @IBOutlet weak var btAddHeight: NSLayoutConstraint!
     @IBOutlet weak var deviceNameHeight: NSLayoutConstraint!
     @IBOutlet weak var deviceIPHeight: NSLayoutConstraint!
@@ -42,7 +41,7 @@ class SettingsViewController: BaseViewController{
     var menu: RSSelectionMenu<String>!
     var menuList: Array<String> = []
     let db = DBHelper()
-    var userSelectDeviceType = 0
+   // var userSelectDeviceType = 0
     
     //device info structure (mac & ip)
     struct Device {
@@ -72,8 +71,6 @@ class SettingsViewController: BaseViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("SettingsViewController-viewWillAppear")
-        
-        self.userSelectDeviceType = self.DEVICE_CONTROL_BOX
         objectInitial()
     }
     
@@ -96,7 +93,7 @@ extension SettingsViewController{
     
     //initial UI
     func initialUI(){
-        self.segmentType.addTarget(self, action: #selector(deviceTypeChanged(_:)), for: .valueChanged)
+
         self.btADD.layer.cornerRadius = 5
         self.btADD.layer.borderWidth = 1
         self.btADD.layer.borderColor = UIColor.black.cgColor
@@ -132,7 +129,6 @@ extension SettingsViewController{
             
         }else{
             let font = UIFont.systemFont(ofSize: 22)
-            self.segmentType.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
             //bt scan size
             let newbtScanHeightConstraint = btScanHeightConstraint.constraintWithMultiplier(0.05)
             self.view.removeConstraint(btScanHeightConstraint)
@@ -253,7 +249,7 @@ extension SettingsViewController{
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 if(!feedback){
                    // if(self.getDeviceTypeNumberByName(deviceName: self.textFieldDeviceName.text!) > 0){
-                        var feedback = self.db.insert(type: self.userSelectDeviceType, ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceName.text!)
+                    var feedback = self.db.insert(type: DBHelper.DEVICE_CONTROL_BOX, ip: self.textFieldDeviceIP.text!, name: self.textFieldDeviceName.text!)
                         if(feedback){
                             self.showToast(context: "Add successfull !")
                         }else{
@@ -270,17 +266,17 @@ extension SettingsViewController{
         }
     }
     
-    //device type (SegmentedControl)
-    @objc func deviceTypeChanged(_ sender: UISegmentedControl){
-        print(sender.selectedSegmentIndex)
-        if(sender.selectedSegmentIndex == 0){
-            self.userSelectDeviceType = self.DEVICE_CONTROL_BOX
-            print("Control Box")
-        }else if(sender.selectedSegmentIndex == 1){
-            self.userSelectDeviceType = self.DEVICE_MATRIX_4_X_4_HDR
-            print("Matrix 4 x 4 HDR")
-        }
-    }
+//    //device type (SegmentedControl)
+//    @objc func deviceTypeChanged(_ sender: UISegmentedControl){
+//        print(sender.selectedSegmentIndex)
+//        if(sender.selectedSegmentIndex == 0){
+//            self.userSelectDeviceType = self.DEVICE_CONTROL_BOX
+//            print("Control Box")
+//        }else if(sender.selectedSegmentIndex == 1){
+//            self.userSelectDeviceType = self.DEVICE_MATRIX_4_X_4_HDR
+//            print("Matrix 4 x 4 HDR")
+//        }
+//    }
 }
 
 extension SettingsViewController{

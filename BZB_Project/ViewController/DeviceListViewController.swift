@@ -31,20 +31,59 @@ class DeviceListViewController: BaseViewController, UIGestureRecognizerDelegate{
         self.setupUI()
         self.addNavBarLogoImage(isTabViewController: false)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteDevice(notification:)), name: NSNotification.Name(rawValue: UIEventHelper.ui_event_delete_device), object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        print("DeviceListViewController-viewWillAppear")
-        self.createGradientLayer()
         self.queueDB.async {
             self.deviceList = self.db.read()
+            print("Device list = ", self.deviceList.count)
+            
+            switch(self.deviceList.count){
+            
+            case 0:
+                DispatchQueue.main.async() {
+                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SettingsViewController") as! UIViewController
+                    self.navigationController!.pushViewController(nextViewController, animated: true)
+                }
+                break
+                
+            case 1:
+                self.preferences.set(self.deviceList[0].ip, forKey: CmdHelper.key_server_ip)
+                DispatchQueue.main.async() {
+                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
+                    self.navigationController!.pushViewController(nextViewController, animated: true)
+                }
+                break
+                
+            default:
+                break
+            }
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("DeviceListViewController-viewWillAppear")
+        super.viewWillAppear(true)
+        if(self.deviceList != nil){
+            if(self.deviceList.count > 0){
+                
+            }else{
+                self.queueDB.async {
+                    self.deviceList = self.db.read()
+                }
+            }
+        }
+        self.createGradientLayer()
+    }
+    
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("DeviceListViewController-viewDidDisappear")
+        self.deviceList.removeAll()
+    }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         print("DeviceListViewController-viewDidAppear")
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             if(self.deviceList != nil){
                 if(self.deviceList.count > 0){
@@ -102,7 +141,7 @@ extension DeviceListViewController{
         settingBt.setImage(UIImage(named: "setting.png"), for: .normal)
         //add function for button
         settingBt.addTarget(self, action: #selector(SettingButtonTapped), for: .touchUpInside)
-
+        
         //assign button to navigationbar
         let longPressedGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
         longPressedGesture.minimumPressDuration = 0.5
@@ -198,16 +237,16 @@ extension DeviceListViewController : UICollectionViewDelegate {
             
             switch(self.deviceList[indexPath.item].type){
             
-            case self.DEVICE_CONTROL_BOX:
+            case DBHelper.DEVICE_CONTROL_BOX:
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ControlBoxUITabBarController") as! UITabBarController
                 self.navigationController!.pushViewController(nextViewController, animated: true)
                 break
                 
-//            case self.DEVICE_MATRIX_4_X_4_HDR:
-//                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
-//                self.navigationController!.pushViewController(nextViewController, animated: true)
-//                break
-                
+            //            case self.DEVICE_MATRIX_4_X_4_HDR:
+            //                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Matrix4UITabBarController") as! UITabBarController
+            //                self.navigationController!.pushViewController(nextViewController, animated: true)
+            //                break
+            
             default:
                 
                 break
