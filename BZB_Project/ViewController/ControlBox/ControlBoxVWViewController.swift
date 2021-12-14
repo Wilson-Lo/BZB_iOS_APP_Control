@@ -33,10 +33,8 @@ class ControlBoxVWViewController : BaseViewController{
     @IBOutlet weak var presetMainStack: UIStackView!
     @IBOutlet weak var presetTopStack: UIStackView!
     @IBOutlet weak var presetBottomStack: UIStackView!
-    @IBOutlet weak var segmentVideoWallTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var videoWallLayoutTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var videoWallPresetLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var btPreset1: UIButton!
     @IBOutlet weak var btPreset2: UIButton!
     @IBOutlet weak var btPreset3: UIButton!
@@ -160,14 +158,11 @@ class ControlBoxVWViewController : BaseViewController{
                 self.transmitterLabel.layer.cornerRadius = 10
             }else{
                 self.transmitterLabel.layer.cornerRadius = 6
-                self.videoWallPresetLabelTopConstraint.constant = 16.3
-                self.segmentVideoWallTopConstraint.constant = 15.6
                 self.videoWallLayoutTopConstraint.constant = 13.4
             }
+            
         }else{
             self.transmitterLabel.layer.cornerRadius = 10
-            self.segmentVideoWallTopConstraint.constant = 12
-            self.videoWallLayoutTopConstraint.constant = 40
             self.presetTopStack.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
             self.presetBottomStack.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
             let font = UIFont.systemFont(ofSize: 18)
