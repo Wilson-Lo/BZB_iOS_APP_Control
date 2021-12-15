@@ -711,13 +711,9 @@ extension ControlBoxMappingViewController: UICollectionViewDelegateFlowLayout {
         }
         else {
             if(ControlBoxMappingViewController.isPhone){
-                if(ControlBoxMappingViewController.txOnlineList.count > 1){
-                    return CGSize(width: (self.view.frame.size.width)/2.2 , height: (self.view.frame.size.width) / 6)
-                }else{
-                    return CGSize(width: (self.view.frame.size.width)/2.4 , height: (self.view.frame.size.width) / 6)
-                }
+                return CGSize(width: (self.view.frame.size.width)/2.5 , height: (self.view.frame.size.width) / 3.3)
             }else{
-                return CGSize(width: (self.view.frame.size.width) / 3.6 , height: (self.view.frame.size.height) / 10)
+                return CGSize(width: (self.view.frame.size.width) / 3.4 , height: (self.view.frame.size.height) / 6.8)
             }
         }
         

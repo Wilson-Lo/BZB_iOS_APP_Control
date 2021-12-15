@@ -870,7 +870,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewk-U5-Ob9">
-                                <rect key="frame" x="318" y="75" width="62" height="54"/>
+                                <rect key="frame" x="330.5" y="75" width="49.5" height="45"/>
                                 <state key="normal" backgroundImage="radar"/>
                                 <connections>
                                     <action selector="sendUDPWithSender:" destination="EvX-d5-hYa" eventType="touchUpInside" id="r93-hu-Vor"/>
@@ -910,7 +910,7 @@
                         <viewLayoutGuide key="safeArea" id="Rt8-5v-Wv1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ewk-U5-Ob9" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.149533" id="0vM-cB-owc"/>
+                            <constraint firstItem="ewk-U5-Ob9" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.12" id="0vM-cB-owc"/>
                             <constraint firstItem="ewk-U5-Ob9" firstAttribute="top" secondItem="Rt8-5v-Wv1" secondAttribute="top" constant="31" id="1Rs-iW-eKQ"/>
                             <constraint firstItem="O2g-cy-O56" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.837681" id="6cS-VS-Jdm"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="85t-ba-sY4"/>
@@ -927,7 +927,7 @@
                             <constraint firstItem="7wv-PD-cYz" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="cTv-3f-3PE"/>
                             <constraint firstItem="Qq6-Nc-yuF" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="h0s-na-eVg"/>
                             <constraint firstItem="Rt8-5v-Wv1" firstAttribute="bottom" secondItem="O2g-cy-O56" secondAttribute="bottom" constant="36" id="lcq-hJ-FVt"/>
-                            <constraint firstItem="ewk-U5-Ob9" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.06" id="neV-nH-uf0"/>
+                            <constraint firstItem="ewk-U5-Ob9" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.05" id="neV-nH-uf0"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="t0D-Yb-ene"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="txl-GO-vl3"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.04" id="xfU-8b-lN4"/>
