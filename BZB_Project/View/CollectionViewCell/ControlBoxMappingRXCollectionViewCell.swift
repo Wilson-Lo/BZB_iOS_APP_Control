@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ControlBoxMappingDisplayCollectionViewCell: UICollectionViewCell {
+class ControlBoxMappingRXCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var preview: UIImageView!
     @IBOutlet weak var deviceName: UILabel!

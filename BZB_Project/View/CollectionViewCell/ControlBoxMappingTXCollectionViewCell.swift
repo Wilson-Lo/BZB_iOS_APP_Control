@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ControlBoxSourceCollectionViewCell: UICollectionViewCell {
+class ControlBoxMappingTXCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var mac: UILabel!

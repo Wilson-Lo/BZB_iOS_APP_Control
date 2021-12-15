@@ -42,7 +42,6 @@
 		8643BA012669B9DB00150087 /* MappingInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */; };
 		8643BA6F266DF43100150087 /* ControlBoxVideoWallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */; };
 		86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */; };
-		86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */; };
 		86681295262029330034D975 /* MappingRename4DialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86681294262029330034D975 /* MappingRename4DialogViewController.swift */; };
 		866812E026203D3C0034D975 /* OCFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866812DF26203D3C0034D975 /* OCFile.mm */; };
 		866812EA26203D660034D975 /* Edid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866812E826203D660034D975 /* Edid.cpp */; };
@@ -52,7 +51,6 @@
 		86B2820426808B82007BCE4C /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B2820326808B82007BCE4C /* NSLayoutConstraint.swift */; };
 		86B921EA26676B7600FAB568 /* DeviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B921E926676B7600FAB568 /* DeviceListViewController.swift */; };
 		86B921EF26676DBA00FAB568 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B921EE26676DBA00FAB568 /* ListCollectionViewCell.swift */; };
-		86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */; };
 		86C496B52694566E00D83378 /* DeviceListDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B42694566E00D83378 /* DeviceListDialogViewController.swift */; };
 		86C496B7269478A500D83378 /* UIEventHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496B6269478A500D83378 /* UIEventHelper.swift */; };
 		86C496BB26957D5100D83378 /* ASpeedTXDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C496BA26957D5000D83378 /* ASpeedTXDialogViewController.swift */; };
@@ -64,8 +62,8 @@
 		86CCB4822668E25100CCA0F3 /* Matrix4MappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */; };
 		86D8C67826565D20001E801B /* ControlBoxPresetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */; };
 		86D8C67D265794F6001E801B /* ControlBoxMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */; };
-		86DB122F271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB122E271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift */; };
-		86DB12312717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB12302717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift */; };
+		86DB122F271679AF00155C7C /* ControlBoxMappingRXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB122E271679AF00155C7C /* ControlBoxMappingRXCollectionViewCell.swift */; };
+		86DB12312717CE5200155C7C /* ControlBoxMappingTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB12302717CE5200155C7C /* ControlBoxMappingTXCollectionViewCell.swift */; };
 		86FE541E276764D20006E6FE /* lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 86FE541D276764D20006E6FE /* lottie.json */; };
 		86FE5420276764F60006E6FE /* OpeningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FE541F276764F60006E6FE /* OpeningViewController.swift */; };
 		9CA02039A380A7DC709D1BCD /* Pods_BZB_Project_BZB_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299F1373CFD636EAED5926D /* Pods_BZB_Project_BZB_ProjectUITests.framework */; };
@@ -138,7 +136,6 @@
 		8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVideoWallCollectionViewCell.swift; sourceTree = "<group>"; };
 		86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCmdHelper.swift; sourceTree = "<group>"; };
-		86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxRXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86681294262029330034D975 /* MappingRename4DialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingRename4DialogViewController.swift; sourceTree = "<group>"; };
 		866812DF26203D3C0034D975 /* OCFile.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OCFile.mm; sourceTree = "<group>"; };
 		866812E726203D570034D975 /* OCFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCFile.h; sourceTree = "<group>"; };
@@ -151,7 +148,6 @@
 		86B2820326808B82007BCE4C /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		86B921E926676B7600FAB568 /* DeviceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewController.swift; sourceTree = "<group>"; };
 		86B921EE26676DBA00FAB568 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
-		86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxTXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86C496B42694566E00D83378 /* DeviceListDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListDialogViewController.swift; sourceTree = "<group>"; };
 		86C496B6269478A500D83378 /* UIEventHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEventHelper.swift; sourceTree = "<group>"; };
 		86C496BA26957D5000D83378 /* ASpeedTXDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASpeedTXDialogViewController.swift; sourceTree = "<group>"; };
@@ -163,8 +159,8 @@
 		86CCB4812668E25100CCA0F3 /* Matrix4MappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4MappingViewController.swift; sourceTree = "<group>"; };
 		86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxPresetCollectionViewCell.swift; sourceTree = "<group>"; };
 		86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingViewController.swift; sourceTree = "<group>"; };
-		86DB122E271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingDisplayCollectionViewCell.swift; sourceTree = "<group>"; };
-		86DB12302717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxSourceCollectionViewCell.swift; sourceTree = "<group>"; };
+		86DB122E271679AF00155C7C /* ControlBoxMappingRXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingRXCollectionViewCell.swift; sourceTree = "<group>"; };
+		86DB12302717CE5200155C7C /* ControlBoxMappingTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingTXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86FE541D276764D20006E6FE /* lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie.json; sourceTree = "<group>"; };
 		86FE541F276764F60006E6FE /* OpeningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningViewController.swift; sourceTree = "<group>"; };
 		9C6FC59AC0AA853535CE026B /* Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -369,15 +365,13 @@
 				86320F08261D9402007FE620 /* MappingOutputCollectionViewCell.swift */,
 				86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */,
 				860580AE261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift */,
-				86663A2B26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift */,
-				86BB53AD26270C490044E52D /* ControlBoxTXCollectionViewCell.swift */,
 				86D8C67726565D20001E801B /* ControlBoxPresetCollectionViewCell.swift */,
 				86B921EE26676DBA00FAB568 /* ListCollectionViewCell.swift */,
 				8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */,
 				8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */,
 				862518D8270D92C4008326D2 /* ControlBoxVWCollectionViewCell.swift */,
-				86DB122E271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift */,
-				86DB12302717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift */,
+				86DB122E271679AF00155C7C /* ControlBoxMappingRXCollectionViewCell.swift */,
+				86DB12302717CE5200155C7C /* ControlBoxMappingTXCollectionViewCell.swift */,
 				8629FDB0272944B10030892D /* ControlBoxVMSourceCollectionViewCell.swift */,
 				8629FDB4272A97380030892D /* ControlBoxMappingSourceCollectionViewCell.swift */,
 			);
@@ -679,7 +673,7 @@
 				866812E026203D3C0034D975 /* OCFile.mm in Sources */,
 				86058080261EFC5600B1E0AF /* IORename4DialogViewController.swift in Sources */,
 				86CCB4032668B6F700CCA0F3 /* DeviceDataObject.swift in Sources */,
-				86DB122F271679AF00155C7C /* ControlBoxMappingDisplayCollectionViewCell.swift in Sources */,
+				86DB122F271679AF00155C7C /* ControlBoxMappingRXCollectionViewCell.swift in Sources */,
 				86CCB3E82668AFC400CCA0F3 /* DBHelper.swift in Sources */,
 				86D8C67826565D20001E801B /* ControlBoxPresetCollectionViewCell.swift in Sources */,
 				8605808B261EFE7A00B1E0AF /* UIViewController.swift in Sources */,
@@ -688,7 +682,7 @@
 				862518D9270D92C5008326D2 /* ControlBoxVWCollectionViewCell.swift in Sources */,
 				86320EAD261479AB007FE620 /* TcpSocketClient.swift in Sources */,
 				86C496B52694566E00D83378 /* DeviceListDialogViewController.swift in Sources */,
-				86DB12312717CE5200155C7C /* ControlBoxSourceCollectionViewCell.swift in Sources */,
+				86DB12312717CE5200155C7C /* ControlBoxMappingTXCollectionViewCell.swift in Sources */,
 				86320EDB26156CFA007FE620 /* SettingsViewController.swift in Sources */,
 				86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */,
 				86320E2E261468BE007FE620 /* AppDelegate.swift in Sources */,
@@ -713,11 +707,9 @@
 				86320EE12615A357007FE620 /* ImageButton.swift in Sources */,
 				86ADBDAF268D88BD00BE1983 /* UIColor.swift in Sources */,
 				860580AF261FFD2E00B1E0AF /* MappingRenameCollectionViewCell.swift in Sources */,
-				86BB53AE26270C490044E52D /* ControlBoxTXCollectionViewCell.swift in Sources */,
 				8605809D261F01F100B1E0AF /* String.swift in Sources */,
 				862518D727070D75008326D2 /* ControlBoxVWViewController.swift in Sources */,
 				867FD799269ED5D3005CF83F /* UISwitch.swift in Sources */,
-				86663A2C26259CDB002D3CC8 /* ControlBoxRXCollectionViewCell.swift in Sources */,
 				86C496BD26959BDA00D83378 /* ASpeedRXDialogViewController.swift in Sources */,
 				8643BA012669B9DB00150087 /* MappingInputCollectionViewCell.swift in Sources */,
 				86B921EF26676DBA00FAB568 /* ListCollectionViewCell.swift in Sources */,

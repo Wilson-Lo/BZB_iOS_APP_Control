@@ -20,33 +20,19 @@ import PopupDialog
 class ControlBoxMappingViewController : BaseViewController{
     
     
-    @IBOutlet weak var displayAreaHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var displayAreaWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var sourceAreaWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var presetAreaWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var mainView: UIView!
+    @IBOutlet weak var txLabel: UILabel!
+    @IBOutlet weak var rxLabel: UILabel!
+    @IBOutlet weak var txCollectionView: UICollectionView!
+    @IBOutlet weak var rxCollectionView: UICollectionView!
     
-    @IBOutlet weak var presetBt1: UIButton!
-    @IBOutlet weak var presetBt2: UIButton!
-    @IBOutlet weak var presetBt3: UIButton!
-    @IBOutlet weak var presetBt4: UIButton!
-    @IBOutlet weak var presetBt5: UIButton!
-    @IBOutlet weak var presetBt6: UIButton!
-    @IBOutlet weak var presetBt7: UIButton!
-    @IBOutlet weak var presetBt8: UIButton!
-    @IBOutlet weak var presetBt9: UIButton!
-    @IBOutlet weak var presetTopStack: UIStackView!
-    @IBOutlet weak var presetMiddleStack: UIStackView!
-    @IBOutlet weak var presetBottomStack: UIStackView!
-    @IBOutlet weak var previewCollectionView: UICollectionView!
-    @IBOutlet weak var sourceCollectionView: UICollectionView!
-    @IBOutlet weak var presetStack: UIStackView!
     var queueHTTP: DispatchQueue!
     var btPresetArray = [UIButton]()
     var rxList: Array<Device> = []
     var rxForPreset: Array<Device> = []
-    //   var txAllList: Array<Device> = []
+    //var txAllList: Array<Device> = []
     static var txOnlineList: Array<Device> = []
-    var displayCellList: Array<ControlBoxMappingDisplayCollectionViewCell> = []
+    var displayCellList: Array<ControlBoxMappingRXCollectionViewCell> = []
     var txMenu: RSSelectionMenu<String>!
     var gradientLayer: CAGradientLayer!
     var updateTimer: Timer!
@@ -73,9 +59,8 @@ class ControlBoxMappingViewController : BaseViewController{
     override func viewDidLoad() {
         print("ControlBoxMappingViewController-viewDidLoad")
         super.viewDidLoad()
-        // addNavBarLogoImage(isTabViewController: true)
+        self.addNavBarLogoImage(isTabViewController: true)
         self.setupBackButton(isTabViewController: true)
-        self.btPresetArray = [self.presetBt1, self.presetBt2, self.presetBt3, self.presetBt4, self.presetBt5, self.presetBt6, self.presetBt7, self.presetBt8,  self.presetBt9]
         self.setupUI()
         self.queueHTTP = DispatchQueue(label: "com.bzb.http", qos: DispatchQoS.userInitiated)
         self.isDialogShowing = false
@@ -135,47 +120,18 @@ class ControlBoxMappingViewController : BaseViewController{
 extension ControlBoxMappingViewController{
     
     func setupUI(){
+        self.mainView.bringSubviewToFront(self.rxLabel)
+        self.mainView.bringSubviewToFront(self.txLabel)
+        self.txCollectionView.layer.cornerRadius = 6
+        self.txCollectionView.layer.borderWidth = 0.4
+        self.txCollectionView.layer.borderColor = UIColor.white.cgColor
         
-        for index in 0...(self.btPresetArray.count-1) {
-            self.btPresetArray[index].layer.cornerRadius = 6
-        }
-        
-        self.presetTopStack.isLayoutMarginsRelativeArrangement = true
-        self.presetMiddleStack.isLayoutMarginsRelativeArrangement = true
-        self.presetBottomStack.isLayoutMarginsRelativeArrangement = true
-        
-        self.presetTopStack.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        self.presetMiddleStack.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right:    10)
-        self.presetBottomStack.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        
-        self.sourceCollectionView.layer.cornerRadius = 6
-        self.sourceCollectionView.layer.borderWidth = 0.4
-        self.sourceCollectionView.layer.borderColor = UIColor.white.cgColor
-        
-        self.presetStack.layer.cornerRadius = 6
-        self.presetStack.layer.borderWidth = 0.4
-        self.presetStack.layer.borderColor = UIColor.white.cgColor
-        
-        self.previewCollectionView.layer.cornerRadius = 6
-        self.previewCollectionView.layer.borderWidth = 0.4
-        self.previewCollectionView.layer.borderColor = UIColor.white.cgColor
-        
-        if(!ControlBoxMappingViewController.isPhone){
-            let newSourceAreaWidthConstraint = sourceAreaWidthConstraint.constraintWithMultiplier(0.59)
-            self.view.removeConstraint(sourceAreaWidthConstraint)
-            self.view.addConstraint(newSourceAreaWidthConstraint)
-            self.view.layoutIfNeeded()
-            let newPresetAreaWidthConstraint = presetAreaWidthConstraint.constraintWithMultiplier(0.36)
-            self.view.removeConstraint(presetAreaWidthConstraint)
-            self.view.addConstraint(newPresetAreaWidthConstraint)
-            self.view.layoutIfNeeded()
-            
-            let newDisplayAreaWidthConstraint = displayAreaWidthConstraint.constraintWithMultiplier(0.97)
-            self.view.removeConstraint(displayAreaWidthConstraint)
-            self.view.addConstraint(newDisplayAreaWidthConstraint)
-            self.view.layoutIfNeeded()
-        }
-        
+        self.rxCollectionView.layer.cornerRadius = 6
+        self.rxCollectionView.layer.borderWidth = 0.4
+        self.rxCollectionView.layer.borderColor = UIColor.white.cgColor
+        //        for index in 0...(self.btPresetArray.count-1) {
+        //            self.btPresetArray[index].layer.cornerRadius = 6
+        //        }
     }
 }
 
@@ -455,7 +411,7 @@ extension ControlBoxMappingViewController{
 extension ControlBoxMappingViewController : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.previewCollectionView {
+        if collectionView == self.rxCollectionView {
             var deviceInfo = self.rxList[indexPath.item]
             if(deviceInfo.alive != "n"){
                 self.isDialogShowing = true
@@ -541,8 +497,8 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         switch scrollView {
-        case self.previewCollectionView:
-            for cell in self.previewCollectionView.visibleCells as [ControlBoxMappingDisplayCollectionViewCell]{
+        case self.rxCollectionView:
+            for cell in self.rxCollectionView.visibleCells as [ControlBoxMappingRXCollectionViewCell]{
                 var currentCell = cell
                 var mac = currentCell.mac.text
                 var rxDevice: Device? = nil
@@ -556,7 +512,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                 }
                 
                 if(rxDevice!.alive != "y"){
-                    currentCell.preview.image =  UIImage(named: "offline")
+                    currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "offline")!)
                 }else{
                     
                     var txMac = "bzb"
@@ -585,19 +541,21 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                                         print("on name  = " , currentCell.deviceName.text)
                                         if(responseDecoded.result != "ok"){
                                             DispatchQueue.main.async() {
-                                                currentCell.preview.image =  UIImage(named: "nosignal")
+                                                currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "nosignal")!)
                                             }
                                         }else{
                                             //check tx is not plug source
                                             if(responseDecoded.base64.length < 50){
                                                 DispatchQueue.main.async() {
-                                                    currentCell.preview.image =  UIImage(named: "nosignal")
+                                                    currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "nosignal")!)
                                                 }
                                             }else{
                                                 if let decodedData = Data(base64Encoded: responseDecoded.base64, options: .ignoreUnknownCharacters) {
                                                     let image = UIImage( data: decodedData)
                                                     DispatchQueue.main.async() {
-                                                        currentCell.preview.image = image
+                                                        if(image != nil){
+                                                            currentCell.preview.image = self.CreatePreview(previewImage: image!)
+                                                        }
                                                     }
                                                 }
                                             }
@@ -620,8 +578,8 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
             }
             break
             
-        case self.sourceCollectionView:
-            for cell in self.sourceCollectionView.visibleCells as [ControlBoxSourceCollectionViewCell]{
+        case self.txCollectionView:
+            for cell in self.txCollectionView.visibleCells as [ControlBoxMappingTXCollectionViewCell]{
                 var currentCell = cell
                 var mac = currentCell.mac.text
                 var txDevice: Device? = nil
@@ -635,7 +593,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                 }
                 
                 if(txDevice!.alive != "y"){
-                    currentCell.preview.image =  UIImage(named: "offline")
+                    currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "offline")!)
                 }else{
                     
                     var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
@@ -655,19 +613,21 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
                                         print("on name  = " , currentCell.deviceName.text)
                                         if(responseDecoded.result != "ok"){
                                             DispatchQueue.main.async() {
-                                                currentCell.preview.image =  UIImage(named: "nosignal")
+                                                currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "nosignal")!)
                                             }
                                         }else{
                                             //check tx is not plug source
                                             if(responseDecoded.base64.length < 50){
                                                 DispatchQueue.main.async() {
-                                                    currentCell.preview.image =  UIImage(named: "nosignal")
+                                                    currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "nosignal")!)
                                                 }
                                             }else{
                                                 if let decodedData = Data(base64Encoded: responseDecoded.base64, options: .ignoreUnknownCharacters) {
                                                     let image = UIImage( data: decodedData)
                                                     DispatchQueue.main.async() {
-                                                        currentCell.preview.image = image
+                                                        if(image != nil){
+                                                            currentCell.preview.image = self.CreatePreview(previewImage: image!)
+                                                        }
                                                     }
                                                 }
                                             }
@@ -696,7 +656,7 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if collectionView == self.previewCollectionView {
+        if collectionView == self.rxCollectionView {
             return self.rxList.count
         }else {
             return ControlBoxMappingViewController.txOnlineList.count
@@ -705,26 +665,26 @@ extension ControlBoxMappingViewController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if collectionView == self.previewCollectionView {
+        if collectionView == self.rxCollectionView {
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxMappingDisplayCollectionViewCell", for: indexPath) as! ControlBoxMappingDisplayCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxMappingRXCollectionViewCell", for: indexPath) as! ControlBoxMappingRXCollectionViewCell
             
             cell.preview.image = nil
             cell.deviceName.text = self.rxList[indexPath.item].name
             cell.mac.text = self.rxList[indexPath.item].mac
             if(self.rxList[indexPath.item].alive != "y"){
-                cell.preview.image = UIImage(named: "offline")
+                cell.preview.image = self.CreatePreview(previewImage: UIImage(named: "offline")!)
             }
             return cell
         }else{
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxSourceCollectionViewCell", for: indexPath) as! ControlBoxSourceCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ControlBoxMappingTXCollectionViewCell", for: indexPath) as! ControlBoxMappingTXCollectionViewCell
             
             cell.preview.image = nil
             cell.deviceName.text = ControlBoxMappingViewController.txOnlineList[indexPath.item].name
             cell.mac.text = ControlBoxMappingViewController.txOnlineList[indexPath.item].mac
             if(ControlBoxMappingViewController.txOnlineList[indexPath.item].alive != "y"){
-                cell.preview.image = UIImage(named: "offline")
+                cell.preview.image = self.CreatePreview(previewImage: UIImage(named: "offline")!)
             }
             return cell
         }
@@ -742,7 +702,7 @@ extension ControlBoxMappingViewController: UICollectionViewDelegateFlowLayout {
     //setup CollectionViewCell width, height
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if collectionView == self.previewCollectionView {
+        if collectionView == self.rxCollectionView {
             if(ControlBoxMappingViewController.isPhone){
                 return CGSize(width: (self.view.frame.size.width)/2.5 , height: (self.view.frame.size.width) / 3.3)
             }else{
@@ -751,7 +711,11 @@ extension ControlBoxMappingViewController: UICollectionViewDelegateFlowLayout {
         }
         else {
             if(ControlBoxMappingViewController.isPhone){
-                return CGSize(width: (self.view.frame.size.width)/2.2 , height: (self.view.frame.size.width) / 6)
+                if(ControlBoxMappingViewController.txOnlineList.count > 1){
+                    return CGSize(width: (self.view.frame.size.width)/2.2 , height: (self.view.frame.size.width) / 6)
+                }else{
+                    return CGSize(width: (self.view.frame.size.width)/2.4 , height: (self.view.frame.size.width) / 6)
+                }
             }else{
                 return CGSize(width: (self.view.frame.size.width) / 3.6 , height: (self.view.frame.size.height) / 10)
             }
@@ -976,14 +940,14 @@ extension ControlBoxMappingViewController {
         
         if(self.currentRxDeviceSize != self.rxList.count){
             DispatchQueue.main.async() {
-                self.previewCollectionView.reloadData()
+                self.rxCollectionView.reloadData()
             }
             
         }
         
         if(self.currentTxDeviceSize != ControlBoxMappingViewController.txOnlineList.count){
             DispatchQueue.main.async() {
-                self.sourceCollectionView.reloadData()
+                self.txCollectionView.reloadData()
             }
         }
         
@@ -994,7 +958,7 @@ extension ControlBoxMappingViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
             
             //update rx preview
-            for cell in self.previewCollectionView.visibleCells as [ControlBoxMappingDisplayCollectionViewCell] {
+            for cell in self.rxCollectionView.visibleCells as [ControlBoxMappingRXCollectionViewCell] {
                 
                 var currentCell = cell
                 var mac = currentCell.mac.text
@@ -1009,7 +973,7 @@ extension ControlBoxMappingViewController {
                 }
                 
                 if(rxDevice!.alive != "y"){
-                    currentCell.preview.image =  UIImage(named: "offline")
+                    currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "offline")!)
                 }else{
                     
                     var txMac = "bzb"
@@ -1038,19 +1002,21 @@ extension ControlBoxMappingViewController {
                                         print("on name  = " , currentCell.deviceName.text)
                                         if(responseDecoded.result != "ok"){
                                             DispatchQueue.main.async() {
-                                                currentCell.preview.image =  UIImage(named: "nosignal")
+                                                currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "nosignal")!)
                                             }
                                         }else{
                                             //check tx is not plug source
                                             if(responseDecoded.base64.length < 50){
                                                 DispatchQueue.main.async() {
-                                                    currentCell.preview.image =  UIImage(named: "nosignal")
+                                                    currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "nosignal")!)
                                                 }
                                             }else{
                                                 if let decodedData = Data(base64Encoded: responseDecoded.base64, options: .ignoreUnknownCharacters) {
                                                     let image = UIImage( data: decodedData)
                                                     DispatchQueue.main.async() {
-                                                        currentCell.preview.image = image
+                                                        if(image != nil){
+                                                            currentCell.preview.image = self.CreatePreview(previewImage: image!)
+                                                        }
                                                     }
                                                 }
                                             }
@@ -1073,7 +1039,7 @@ extension ControlBoxMappingViewController {
             }
             
             //update TX preview
-            for cell in self.sourceCollectionView.visibleCells as [ControlBoxSourceCollectionViewCell]{
+            for cell in self.txCollectionView.visibleCells as [ControlBoxMappingTXCollectionViewCell]{
                 var currentCell = cell
                 var mac = currentCell.mac.text
                 var txDevice: Device? = nil
@@ -1087,7 +1053,7 @@ extension ControlBoxMappingViewController {
                 }
                 
                 if(txDevice!.alive != "y"){
-                    currentCell.preview.image =  UIImage(named: "offline")
+                    currentCell.preview.image = self.CreatePreview(previewImage: UIImage(named: "offline")!)
                 }else{
                     
                     var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
@@ -1107,19 +1073,21 @@ extension ControlBoxMappingViewController {
                                         print("on name  = " , currentCell.deviceName.text)
                                         if(responseDecoded.result != "ok"){
                                             DispatchQueue.main.async() {
-                                                currentCell.preview.image =  UIImage(named: "nosignal")
+                                                currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "nosignal")!)
                                             }
                                         }else{
                                             //check tx is not plug source
                                             if(responseDecoded.base64.length < 50){
                                                 DispatchQueue.main.async() {
-                                                    currentCell.preview.image =  UIImage(named: "nosignal")
+                                                    currentCell.preview.image =  self.CreatePreview(previewImage: UIImage(named: "nosignal")!)
                                                 }
                                             }else{
                                                 if let decodedData = Data(base64Encoded: responseDecoded.base64, options: .ignoreUnknownCharacters) {
                                                     let image = UIImage( data: decodedData)
                                                     DispatchQueue.main.async() {
-                                                        currentCell.preview.image = image
+                                                        if(image != nil){
+                                                            currentCell.preview.image = self.CreatePreview(previewImage: image!)
+                                                        }
                                                     }
                                                 }
                                             }

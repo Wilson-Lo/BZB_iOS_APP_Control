@@ -247,4 +247,15 @@ extension BaseViewController  {
             self.navigationController?.popToRootViewController(animated: true)
         }
     }
+    
+    func CreatePreview(previewImage : UIImage) -> UIImage{
+        
+        if(BaseViewController.isPhone){
+            let size = CGSize(width: 240.0, height: 172.0)
+            return previewImage.imageResized(to: size)
+        }else{
+            let size = CGSize(width: 330.0, height: 220.0)
+            return previewImage.imageResized(to: size)
+        }
+    }
 }
