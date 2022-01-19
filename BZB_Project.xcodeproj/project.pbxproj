@@ -39,6 +39,8 @@
 		86320F09261D9403007FE620 /* MappingOutputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F08261D9402007FE620 /* MappingOutputCollectionViewCell.swift */; };
 		86320F20261ED549007FE620 /* Matrix4IORenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */; };
 		86320F2B261EE137007FE620 /* IORenameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */; };
+		863C61232797BCAB00BF30B3 /* pad.json in Resources */ = {isa = PBXBuildFile; fileRef = 863C61222797BCAB00BF30B3 /* pad.json */; };
+		863C61252797BCE700BF30B3 /* phone.json in Resources */ = {isa = PBXBuildFile; fileRef = 863C61242797BCE700BF30B3 /* phone.json */; };
 		8643BA012669B9DB00150087 /* MappingInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */; };
 		8643BA6F266DF43100150087 /* ControlBoxVideoWallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */; };
 		86663A0326258C3A002D3CC8 /* HTTPCmdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */; };
@@ -64,7 +66,6 @@
 		86D8C67D265794F6001E801B /* ControlBoxMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */; };
 		86DB122F271679AF00155C7C /* ControlBoxMappingRXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB122E271679AF00155C7C /* ControlBoxMappingRXCollectionViewCell.swift */; };
 		86DB12312717CE5200155C7C /* ControlBoxMappingTXCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DB12302717CE5200155C7C /* ControlBoxMappingTXCollectionViewCell.swift */; };
-		86FE541E276764D20006E6FE /* lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 86FE541D276764D20006E6FE /* lottie.json */; };
 		86FE5420276764F60006E6FE /* OpeningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FE541F276764F60006E6FE /* OpeningViewController.swift */; };
 		9CA02039A380A7DC709D1BCD /* Pods_BZB_Project_BZB_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299F1373CFD636EAED5926D /* Pods_BZB_Project_BZB_ProjectUITests.framework */; };
 		AFE1D58AA2F04BAE3D65BD58 /* Pods_BZB_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C2BE9FA26FA16B49782A008 /* Pods_BZB_Project.framework */; };
@@ -133,6 +134,8 @@
 		86320F08261D9402007FE620 /* MappingOutputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingOutputCollectionViewCell.swift; sourceTree = "<group>"; };
 		86320F1F261ED548007FE620 /* Matrix4IORenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4IORenameViewController.swift; sourceTree = "<group>"; };
 		86320F2A261EE137007FE620 /* IORenameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IORenameCollectionViewCell.swift; sourceTree = "<group>"; };
+		863C61222797BCAB00BF30B3 /* pad.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pad.json; sourceTree = "<group>"; };
+		863C61242797BCE700BF30B3 /* phone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = phone.json; sourceTree = "<group>"; };
 		8643BA002669B9DB00150087 /* MappingInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		8643BA6E266DF43000150087 /* ControlBoxVideoWallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxVideoWallCollectionViewCell.swift; sourceTree = "<group>"; };
 		86663A0226258C3A002D3CC8 /* HTTPCmdHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCmdHelper.swift; sourceTree = "<group>"; };
@@ -161,7 +164,6 @@
 		86D8C67C265794F6001E801B /* ControlBoxMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingViewController.swift; sourceTree = "<group>"; };
 		86DB122E271679AF00155C7C /* ControlBoxMappingRXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingRXCollectionViewCell.swift; sourceTree = "<group>"; };
 		86DB12302717CE5200155C7C /* ControlBoxMappingTXCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBoxMappingTXCollectionViewCell.swift; sourceTree = "<group>"; };
-		86FE541D276764D20006E6FE /* lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie.json; sourceTree = "<group>"; };
 		86FE541F276764F60006E6FE /* OpeningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningViewController.swift; sourceTree = "<group>"; };
 		9C6FC59AC0AA853535CE026B /* Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BZB_Project-BZB_ProjectUITests/Pods-BZB_Project-BZB_ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -247,7 +249,8 @@
 		86320E2C261468BE007FE620 /* BZB_Project */ = {
 			isa = PBXGroup;
 			children = (
-				86FE541D276764D20006E6FE /* lottie.json */,
+				863C61222797BCAB00BF30B3 /* pad.json */,
+				863C61242797BCE700BF30B3 /* phone.json */,
 				86CCB3E62668AFB100CCA0F3 /* DB */,
 				86663A0126258C1A002D3CC8 /* HTTP */,
 				866812DE26203D1F0034D975 /* EDID */,
@@ -536,9 +539,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86FE541E276764D20006E6FE /* lottie.json in Resources */,
 				86320E3A261468C1007FE620 /* LaunchScreen.storyboard in Resources */,
+				863C61252797BCE700BF30B3 /* phone.json in Resources */,
 				86320E37261468C1007FE620 /* Assets.xcassets in Resources */,
+				863C61232797BCAB00BF30B3 /* pad.json in Resources */,
 				86320E35261468BE007FE620 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,18 +11,19 @@ import Lottie
 
 class OpeningViewController: UIViewController{
     
-    
     @IBOutlet var mainView: UIView!
     var animationView: AnimationView!
     
     override func viewDidLoad() {
         print("OpeningViewController-viewDidLoad")
         super.viewDidLoad()
+      
         let screenSize: CGRect = UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
-        animationView = AnimationView(name: "lottie")
-        animationView.frame = CGRect(x: 50, y: 0, width: screenWidth * 1 , height: screenHeight * 0.7)
+        print("OpeningViewController-width = ",screenWidth)
+        animationView = AnimationView(name: "pad")
+        animationView.frame = CGRect(x: 50, y: 0, width: screenWidth * 1 , height: screenHeight * 0.4)
         animationView.center = self.view.center
         animationView.contentMode = .scaleAspectFill
         mainView.addSubview(animationView)
@@ -38,4 +39,5 @@ class OpeningViewController: UIViewController{
                             })
     }
     
+
 }
