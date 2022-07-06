@@ -410,7 +410,7 @@ extension ControlBoxVWViewController {
             }
             var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
             if(device_ip != nil){
-                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_video_wall_preset, cmdNumber: HTTPCmdHelper._4_cmd_video_wall_preset)
+                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_video_wall_preset, cmdNumber: HTTPCmdHelper._10_cmd_set_click_video_wall_preset)
             }
         }
     }
@@ -620,6 +620,85 @@ extension ControlBoxVWViewController{
                     for index in 0...7 {
                         self.btPresetArray[index].setTitle( self.presetNameForUI[index], for: .normal)
                     }
+                    
+                    
+                    
+                    break
+                    
+                case HTTPCmdHelper._10_cmd_set_click_video_wall_preset:
+                    print("_10_cmd_set_click_video_wall_preset")
+                    self.presetDataList.removeAll()
+                    self.presetNameForUI.removeAll()
+                    
+                    if let deviceList = json.array {
+                        for deviceObject in deviceList {
+                            
+                            let tx_mac = deviceObject["tx_mac"].stringValue
+                            let row = deviceObject["row"].stringValue
+                            let col = deviceObject["col"].stringValue
+                            let index = deviceObject["index"].stringValue
+                            let name = deviceObject["name"].stringValue
+                            self.presetNameForUI.append(name)
+                            
+                            if(index ==  String(self.selectedPresetIndex)){
+                                self.currentPresetTXMac = tx_mac
+                                //  self.btPreset.setTitle(name, for: .normal)
+                                self.currentTotalVideoWallSize = Int(row)! * Int(col)!
+                                self.currentRowVideoWallSize = Int(row)!
+                                self.currentColVideoWallSize = Int(col)!
+                                if let rxList = deviceObject["rx_list"].array {
+                                    for rxObject in rxList {
+                                        let mac = rxObject["mac"].stringValue
+                                        let he_shift = Int(rxObject["he_shift"].stringValue)! * (-1)
+                                        let hs_shift = Int(rxObject["hs_shift"].stringValue)! * (-1)
+                                        
+                                        self.presetDataList.append(Device(row: row, col:col, name: rxObject["name"].stringValue, pos: rxObject["pos"].stringValue, mac: rxObject["mac"].stringValue, he_shift: String(he_shift), ve_shift: rxObject["ve_shift"].stringValue, vs_shift: rxObject["vs_shift"].stringValue, hs_shift: String(hs_shift)))
+                                        
+                                        var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
+                                        if(device_ip != nil){
+                                            
+                                            var data  = ["mac": rxObject["mac"].stringValue, "vwh": col, "vwv": row, "vwp": rxObject["pos"].stringValue, "vwl": String(hs_shift), "vwr":String(he_shift), "vwu": rxObject["vs_shift"].stringValue, "vwb": rxObject["ve_shift"].stringValue]
+                                            
+                                            AF.upload(multipartFormData: { (multiFormData) in
+                                                for (key, value) in data {
+                                                    multiFormData.append(Data(value.utf8), withName: key)
+                                                }
+                                            }, to: "http://" + device_ip! + ":" + self.SERVER_PORT + HTTPCmdHelper.cmd_set_video_wall).responseJSON { response in
+                                                switch response.result {
+                                                case .success(let JSON):
+                                                    print("response is :\(response)")
+                                                case .failure(_):
+                                                    print("fail")
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                                
+                                self.collectionView.reloadData()
+                                if(self.txDeviceProtocol.count > 0){
+                                    if(self.txDeviceProtocol[self.currentPresetTXMac] != nil){
+                                        self.currentPresetTXGroupID = self.txDeviceProtocol[self.currentPresetTXMac]!.group_id
+                                        self.txSourceLabel.text = self.txDeviceProtocol[self.currentPresetTXMac]?.name
+                                    }else{
+                                        self.txSourceLabel.text = "N/A"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    if(self.currentPresetTXGroupID.length > 0){
+                        self.recursiveSwitchAllRX(currentIndex: 0, txGroupId: self.currentPresetTXGroupID)
+                    }
+                    
+                    for index in 0...7 {
+                        self.btPresetArray[index].setTitle( self.presetNameForUI[index], for: .normal)
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.showToast(context: "Enable finish !")
+                    }
                     break
                     
                 default:
@@ -630,6 +709,11 @@ extension ControlBoxVWViewController{
                 }
                 
                 break
+                
+                
+          
+                
+                
                 
             case .failure(let error):
                 print("HTTP GET request failed")

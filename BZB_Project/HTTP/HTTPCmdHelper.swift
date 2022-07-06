@@ -28,5 +28,6 @@ struct HTTPCmdHelper {
     static let _7_cmd_get_mobile_preview = 107
     static let _8_cmd_get_node_info_for_preset = 108
     static let _9_cmd_get_mapping_preset = 109
+    static let _10_cmd_set_click_video_wall_preset = 110
 }
 
