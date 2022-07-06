@@ -535,6 +535,7 @@ extension ControlBoxVWViewController{
             case .success(let value):
                 let json = JSON(value)
                 
+                
                // print(json)
                 switch(cmdNumber){
                 
@@ -595,7 +596,11 @@ extension ControlBoxVWViewController{
                                 if let rxList = deviceObject["rx_list"].array {
                                     for rxObject in rxList {
                                         let mac = rxObject["mac"].stringValue
-                                        self.presetDataList.append(Device(row: row, col:col, name: rxObject["name"].stringValue, pos: rxObject["pos"].stringValue, mac: rxObject["mac"].stringValue, he_shift: rxObject["mac"].stringValue, ve_shift: rxObject["ve_shift"].stringValue, vs_shift: rxObject["vs_shift"].stringValue, hs_shift: rxObject["hs_shift"].stringValue))
+                                        let he_shift = Int(rxObject["he_shift"].stringValue)! * (-1)
+                                        let hs_shift = Int(rxObject["hs_shift"].stringValue)! * (-1)
+                                        
+                                        
+                                        self.presetDataList.append(Device(row: row, col:col, name: rxObject["name"].stringValue, pos: rxObject["pos"].stringValue, mac: rxObject["mac"].stringValue, he_shift: String(he_shift), ve_shift: rxObject["ve_shift"].stringValue, vs_shift: rxObject["vs_shift"].stringValue, hs_shift: String(hs_shift)))
                                     }
                                 }
                                 
