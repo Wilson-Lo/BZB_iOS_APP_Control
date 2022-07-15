@@ -43,6 +43,8 @@ class ControlBoxVWViewController : BaseViewController{
     @IBOutlet weak var btPreset6: UIButton!
     @IBOutlet weak var btPreset7: UIButton!
     @IBOutlet weak var btPreset8: UIButton!
+    static let SEGMENT_VIDEO_WALL_ENABLE = 0
+    static let SEGMENT_VIDEO_WALL_DISENABLE = 1
     
     var gradientLayer: CAGradientLayer!
     var txMenu: RSSelectionMenu<String>!
@@ -409,8 +411,14 @@ extension ControlBoxVWViewController {
                 break
             }
             var device_ip = UserDefaults.standard.string(forKey: CmdHelper.key_server_ip)
-            if(device_ip != nil){
-                self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_video_wall_preset, cmdNumber: HTTPCmdHelper._10_cmd_set_click_video_wall_preset)
+            
+            if(self.segmentVideoWall.selectedSegmentIndex == ControlBoxVWViewController.SEGMENT_VIDEO_WALL_ENABLE){
+                print("segmentVideoWall enable")
+                if(device_ip != nil){
+                    self.sendHTTPGET(ip: device_ip!, cmd: HTTPCmdHelper.cmd_video_wall_preset, cmdNumber: HTTPCmdHelper._10_cmd_set_click_video_wall_preset)
+                }
+            }else if(self.segmentVideoWall.selectedSegmentIndex == ControlBoxVWViewController.SEGMENT_VIDEO_WALL_DISENABLE){
+                print("segmentVideoWall = disable")
             }
         }
     }
