@@ -26,10 +26,10 @@ class SettingsViewController: BaseViewController{
     @IBOutlet var uiView: UIView!
     @IBOutlet weak var btScanHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var btScanWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var btScan: UIButton!
     @IBOutlet weak var textFieldDeviceIP: UITextField!
     @IBOutlet weak var appVerLabel: UILabel!
     @IBOutlet weak var btADD: UIButton!
+    @IBOutlet weak var btScan: UIButton!
     
     var gradientLayer: CAGradientLayer!
     let preferences = UserDefaults.standard
@@ -98,20 +98,24 @@ extension SettingsViewController{
         self.btADD.layer.borderWidth = 1
         self.btADD.layer.borderColor = UIColor.black.cgColor
         
+        self.btScan.layer.cornerRadius = 5
+        self.btScan.layer.borderWidth = 1
+        self.btScan.layer.borderColor = UIColor.black.cgColor
+        
         if(SettingsViewController.isPhone){
             //bt scan size
-            let newbtScanHeightConstraint = btScanHeightConstraint.constraintWithMultiplier(0.05)
+            let newbtScanHeightConstraint = btScanHeightConstraint.constraintWithMultiplier(0.04)
             self.view.removeConstraint(btScanHeightConstraint)
             self.view.addConstraint(newbtScanHeightConstraint)
            // self.view.layoutIfNeeded()
-            let newbtScanWidthConstraint = btScanWidthConstraint.constraintWithMultiplier(0.12)
+            let newbtScanWidthConstraint = btScanWidthConstraint.constraintWithMultiplier(0.6343)
             self.view.removeConstraint(btScanWidthConstraint)
             self.view.addConstraint(newbtScanWidthConstraint)
             self.view.layoutIfNeeded()
             
             if(UIScreen.main.bounds.height > 700){
             }else{
-                let newEditTextDeviceNameHeightConstraint = deviceNameHeight.constraintWithMultiplier(0.05)
+                let newEditTextDeviceNameHeightConstraint = deviceNameHeight.constraintWithMultiplier(0.04)
                 self.view.removeConstraint(deviceNameHeight)
                 self.view.addConstraint(newEditTextDeviceNameHeightConstraint)
                 self.view.layoutIfNeeded()
@@ -130,11 +134,11 @@ extension SettingsViewController{
         }else{
             let font = UIFont.systemFont(ofSize: 22)
             //bt scan size
-            let newbtScanHeightConstraint = btScanHeightConstraint.constraintWithMultiplier(0.05)
+            let newbtScanHeightConstraint = btScanHeightConstraint.constraintWithMultiplier(0.04)
             self.view.removeConstraint(btScanHeightConstraint)
             self.view.addConstraint(newbtScanHeightConstraint)
             //self.view.layoutIfNeeded()
-            let newbtScanWidthConstraint = btScanWidthConstraint.constraintWithMultiplier(0.08)
+            let newbtScanWidthConstraint = btScanWidthConstraint.constraintWithMultiplier(0.6343)
             self.view.removeConstraint(btScanWidthConstraint)
             self.view.addConstraint(newbtScanWidthConstraint)
             self.view.layoutIfNeeded()

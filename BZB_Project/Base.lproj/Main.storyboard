@@ -869,13 +869,6 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewk-U5-Ob9">
-                                <rect key="frame" x="330.5" y="75" width="49.5" height="45"/>
-                                <state key="normal" backgroundImage="radar"/>
-                                <connections>
-                                    <action selector="sendUDPWithSender:" destination="EvX-d5-hYa" eventType="touchUpInside" id="r93-hu-Vor"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wv-PD-cYz">
                                 <rect key="frame" x="186.5" y="743.5" width="41.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -906,17 +899,30 @@
                                     <action selector="btAddWithSender:" destination="EvX-d5-hYa" eventType="touchUpInside" id="aBl-50-unX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCd-he-LdK">
+                                <rect key="frame" x="75.5" y="286" width="263" height="36"/>
+                                <color key="backgroundColor" red="0.13725490200000001" green="0.64705882349999999" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="SCAN">
+                                    <color key="titleColor" systemColor="tertiarySystemBackgroundColor"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                </variation>
+                                <connections>
+                                    <action selector="sendUDPWithSender:" destination="EvX-d5-hYa" eventType="touchUpInside" id="EVm-r4-f3T"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rt8-5v-Wv1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ewk-U5-Ob9" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.12" id="0vM-cB-owc"/>
-                            <constraint firstItem="ewk-U5-Ob9" firstAttribute="top" secondItem="Rt8-5v-Wv1" secondAttribute="top" constant="31" id="1Rs-iW-eKQ"/>
+                            <constraint firstItem="Qq6-Nc-yuF" firstAttribute="top" secondItem="TCd-he-LdK" secondAttribute="bottom" constant="35" id="3OA-bu-6YG"/>
                             <constraint firstItem="O2g-cy-O56" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.837681" id="6cS-VS-Jdm"/>
+                            <constraint firstItem="TCd-he-LdK" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="7VR-vR-bZ2"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="85t-ba-sY4"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="top" secondItem="cGP-Pc-VYa" secondAttribute="bottom" constant="51" id="BpG-9E-hXQ"/>
+                            <constraint firstItem="TCd-he-LdK" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="Cv0-o3-F5I"/>
                             <constraint firstItem="O2g-cy-O56" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="Ory-gt-eot"/>
-                            <constraint firstItem="Rt8-5v-Wv1" firstAttribute="trailing" secondItem="ewk-U5-Ob9" secondAttribute="trailing" constant="34" id="QMH-4a-Vfr"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="centerY" secondItem="Upq-YY-P50" secondAttribute="centerY" id="Qa4-LR-pHY"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.0379464" id="R4F-VN-5iy"/>
                             <constraint firstItem="O2g-cy-O56" firstAttribute="top" secondItem="7wv-PD-cYz" secondAttribute="bottom" constant="28.5" id="RO6-pf-ItA"/>
@@ -927,9 +933,9 @@
                             <constraint firstItem="7wv-PD-cYz" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="cTv-3f-3PE"/>
                             <constraint firstItem="Qq6-Nc-yuF" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="h0s-na-eVg"/>
                             <constraint firstItem="Rt8-5v-Wv1" firstAttribute="bottom" secondItem="O2g-cy-O56" secondAttribute="bottom" constant="36" id="lcq-hJ-FVt"/>
-                            <constraint firstItem="ewk-U5-Ob9" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.05" id="neV-nH-uf0"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="centerX" secondItem="Upq-YY-P50" secondAttribute="centerX" id="t0D-Yb-ene"/>
                             <constraint firstItem="cGP-Pc-VYa" firstAttribute="width" secondItem="Upq-YY-P50" secondAttribute="width" multiplier="0.6343" id="txl-GO-vl3"/>
+                            <constraint firstItem="TCd-he-LdK" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.04" id="vKW-Gr-7l2"/>
                             <constraint firstItem="JTd-k3-7TA" firstAttribute="height" secondItem="Upq-YY-P50" secondAttribute="height" multiplier="0.04" id="xfU-8b-lN4"/>
                         </constraints>
                     </view>
@@ -938,9 +944,9 @@
                         <outlet property="appVerLabel" destination="7wv-PD-cYz" id="EXu-AD-vEm"/>
                         <outlet property="btADD" destination="JTd-k3-7TA" id="S8g-Xg-KGq"/>
                         <outlet property="btAddHeight" destination="xfU-8b-lN4" id="z2o-Qu-sC2"/>
-                        <outlet property="btScan" destination="ewk-U5-Ob9" id="gbH-kt-Wi4"/>
-                        <outlet property="btScanHeightConstraint" destination="neV-nH-uf0" id="muC-y7-hzE"/>
-                        <outlet property="btScanWidthConstraint" destination="0vM-cB-owc" id="Zaw-kY-Rdi"/>
+                        <outlet property="btScan" destination="TCd-he-LdK" id="CvC-3k-Yyp"/>
+                        <outlet property="btScanHeightConstraint" destination="vKW-Gr-7l2" id="AeM-M3-gOc"/>
+                        <outlet property="btScanWidthConstraint" destination="Cv0-o3-F5I" id="1NB-3R-Txf"/>
                         <outlet property="deviceIPHeight" destination="R4F-VN-5iy" id="ZsT-Mz-WAh"/>
                         <outlet property="deviceNameHeight" destination="bI9-Pf-9kp" id="9AA-YY-pDO"/>
                         <outlet property="textFieldDeviceIP" destination="cGP-Pc-VYa" id="3NU-Uc-EL5"/>
@@ -3069,9 +3075,8 @@
         <image name="bzb_logo_white" width="2000" height="1000"/>
         <image name="edit" width="128" height="128"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="offline" width="240" height="135"/>
+        <image name="offline" width="1000" height="420"/>
         <image name="pip" catalog="system" width="128" height="96"/>
-        <image name="radar" width="64" height="64"/>
         <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
         <image name="square.grid.3x3.fill" catalog="system" width="128" height="112"/>
         <image name="x.circle" catalog="system" width="128" height="121"/>
